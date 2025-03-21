@@ -2,7 +2,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import LandingPage from "./Components/Landingpage/LandingPage";
 import ForgotPassword from "./Components/ForgotPassword/Forgotpassword";
 import ChangePassword from "./Components/ChangePassword.js/ChangePassword";
@@ -26,6 +26,8 @@ import TopRatedProperties from "./Components/TopRatedProperties/TopRatedProperti
 import Profile from "./Components/Profile/Profile";
 import LoyaltyPoints from "./Components/LoyaltyPoints/LoyaltyPoints";
 import SearchResults from "./Components/SearchResults/SearchResults";
+import Admin from "./Components/Admin/AdminLogin";
+import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -115,15 +117,43 @@ const App = () => {
 
   return (
     <Router>
-      <Header
-        setIsLoggedIn={setIsLoggedIn}
+      <Content
         isLoggedIn={isLoggedIn}
-        onLogout={handleLogout}
+        setIsLoggedIn={setIsLoggedIn}
+        handleLogout={handleLogout}
+        savedProperties={savedProperties}
+        setSavedProperties={setSavedProperties}
+        notifications={notifications}
+        handleClose={handleClose}
       />
+      <ToastContainer />
+    </Router>
+  );
+};
+
+const Content = ({
+  isLoggedIn,
+  setIsLoggedIn,
+  handleLogout,
+  savedProperties,
+  setSavedProperties,
+  notifications,
+  handleClose,
+}) => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  return (
+    <>
+      {isAdminRoute && (
+        <Header
+          setIsLoggedIn={setIsLoggedIn}
+          isLoggedIn={isLoggedIn}
+          onLogout={handleLogout}
+        />
+      )}
       <div style={{ flex: 1 }}>
-        {/* Routes */}
         <Routes>
-          {/* Route for Landing Page */}
           <Route
             path="/"
             element={
@@ -257,11 +287,12 @@ const App = () => {
               />
             }
           />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Routes>
       </div>
-      <Footer />
-      <ToastContainer />
-    </Router>
+      {isAdminRoute && <Footer />}
+    </>
   );
 };
 
