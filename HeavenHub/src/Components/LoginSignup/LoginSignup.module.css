@@ -1,0 +1,167 @@
+/* Backdrop */
+.backdrop {
+  @apply fixed top-0 left-0 w-full h-full bg-gray-500 bg-opacity-50 flex justify-center items-center;
+}
+
+/* Modal Box */
+.modal {
+  @apply bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative;
+}
+
+/* Close Button */
+.closeButton {
+  @apply absolute top-4 right-4 text-2xl text-gray-600 hover:text-gray-900;
+}
+
+/* Heading */
+h2 {
+  @apply text-2xl font-semibold text-center mb-6;
+}
+
+/* Form */
+.form {
+  @apply space-y-4;
+}
+
+/* Input Group */
+.inputGroup {
+  @apply flex flex-col;
+}
+
+/* Input Wrapper */
+.inputWrapper {
+  @apply flex items-center border border-gray-300 rounded-lg;
+}
+
+/* Input Styles */
+.inputWrapper input,
+.inputWrapper select {
+  @apply w-full p-2 text-sm outline-none rounded-lg;
+  box-sizing: border-box;
+}
+
+/* Forgot Password */
+.forgotPassword {
+  @apply text-right mt-4;
+}
+
+.forgotPasswordLink {
+  @apply text-blue-500 cursor-pointer hover:underline;
+}
+
+/* Third party*/
+.divider {
+  @apply flex items-center justify-center my-4; /* Center and space */
+}
+
+.divider::before,
+.divider::after {
+  @apply content-[""] flex-grow border-t border-gray-300 mx-2; /* Horizontal line */
+}
+
+.googleText {
+  @apply font-bold text-gray-600 text-center;
+}
+
+/* Google button */
+.googleButton {
+  @apply bg-[#4285f4] rounded-full w-12 h-12 flex items-center justify-center cursor-pointer mx-auto; /* Circle and center */
+}
+
+.googleButton:hover {
+  @apply bg-[#357ae8];
+}
+
+/* Google icon */
+.googleIcon {
+  @apply w-6 h-auto;
+}
+
+/* Country Selection Wrapper */
+.countryWrapper {
+  @apply flex items-center border border-gray-300 rounded-lg p-2;
+}
+
+/* Country Flag */
+.flagIcon {
+  @apply w-6 h-4 mr-2; /* Adjust the flag size */
+}
+
+/* Country Selection Wrapper */
+.countrySelector {
+  @apply relative;
+}
+
+.dropdownToggle {
+  @apply flex items-center border border-gray-300 rounded-lg p-2 cursor-pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.flagIcon {
+  @apply w-5 h-3 mr-2; /* Reduced size of flag */
+}
+
+.dropdownMenu {
+  @apply absolute z-10 bg-white border border-gray-300 shadow-lg w-full max-w-[250px] mt-1 rounded-lg overflow-y-auto max-h-60;
+}
+
+.searchInput {
+  @apply w-full p-2 border-b border-gray-300 text-sm;
+}
+
+.dropdownList {
+  @apply list-none p-0 m-0 max-h-60 overflow-auto;
+}
+
+.dropdownItem {
+  @apply flex items-center p-2 hover:bg-gray-100 cursor-pointer;
+}
+
+.dropdownItem:hover {
+  @apply bg-gray-100;
+}
+
+.flagIconSmall {
+  @apply w-4 h-3 mr-2; /* Reduced flag size in list */
+}
+
+span {
+  @apply text-sm;
+}
+
+
+/* Label Styling */
+.inputGroup label {
+  @apply text-sm font-medium text-gray-700 mb-1;
+}
+
+/* Icon Styling */
+.icon {
+  @apply text-gray-500 mx-2;
+}
+
+/* Submit Button */
+.submitButton {
+  @apply w-full py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 focus:outline-none;
+}
+
+/* Toggle Text */
+.toggleText {
+  @apply text-center text-sm text-gray-600;
+}
+
+/* Toggle Link */
+.toggleLink {
+  @apply text-blue-500 cursor-pointer hover:underline;
+}
+
+/* Flex layout for first name and last name in the same row */
+.nameFields {
+  @apply flex space-x-4;
+}
+
+.nameFields .inputGroup {
+  @apply flex-1;
+}
+

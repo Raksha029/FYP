@@ -1,0 +1,145 @@
+.chatbotContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 400px;
+    height: 600px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chatLogo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.chatLogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.chatTitle {
+    flex-grow: 1;
+    font-weight: bold;
+    margin-top: 15px;
+
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.closeButton:hover {
+    color: #333;
+}
+
+.chatMessages {
+    max-height: 450px;
+    overflow-y: auto;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.userMessage {
+    text-align: right;
+    background-color: #d1e7dd;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 5px 0;
+    align-self: flex-end;
+}
+
+.botMessage {
+    text-align: left;
+    background-color: #f8d7da;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 5px 0;
+    align-self: flex-start;
+}
+
+.chatInput {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.inputField {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.inputField::placeholder {
+    color: #aaa;
+}
+
+.inputField:focus {
+    border-color: #0056b3;
+}
+
+.sendButton {
+    margin-left: 5px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.emojiButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.quickResponses {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.quickButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+}
+

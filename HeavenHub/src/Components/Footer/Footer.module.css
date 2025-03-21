@@ -1,0 +1,22 @@
+/* Footer */
+.footer {
+    @apply py-6 text-white text-center;
+    background: linear-gradient(to right, rgba(0, 51, 102, 0.8), rgba(0, 153, 204, 0.8));
+    font-family: 'Poppins', sans-serif;
+}
+  
+.footer p {
+    @apply mb-4;
+}
+  
+.footer nav {
+    @apply flex justify-center space-x-6;
+}
+  
+.footer a {
+    @apply text-white text-sm;
+}
+  
+.footer a:hover {
+    @apply text-blue-200;
+}

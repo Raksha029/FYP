@@ -1,0 +1,98 @@
+.topRatedSection {
+  @apply py-4 sm:py-6 lg:py-8 px-2 sm:px-4 bg-gray-50;
+}
+
+.sectionTitle {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4 sm:mb-6;
+}
+
+.scrollContainer {
+  @apply flex overflow-x-scroll gap-3 sm:gap-4 lg:gap-6 w-full py-2 sm:py-4 px-2;
+  scroll-snap-type: x mandatory;
+  max-width: 95%; /* Wider on mobile */
+  @apply sm:max-w-[85%] lg:max-w-[70%]; /* Gradually decrease width on larger screens */
+  margin: 0 auto;
+  
+  /* Hide scrollbar for all browsers */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.propertyCard {
+  @apply flex-shrink-0 rounded-lg shadow-lg bg-white transition-all duration-300 ease-in-out;
+  /* Responsive card widths */
+  width: calc(80% - 12px); /* Show 1.25 cards on mobile */
+  @apply sm:w-[calc(45%-16px)] /* Show ~2 cards on tablet */
+         md:w-[calc(33.333%-16px)] /* Show 3 cards on medium screens */
+         lg:w-[calc(25%-16px)]; /* Show 4 cards on large screens */
+  
+  /* Hover effects */
+  transform: scale(1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.propertyCard:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12); /* Enhanced shadow on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.propertyCard:hover .propertyDetails {
+  @apply bg-gray-50; /* Subtle background change on hover */
+}
+
+.imageContainer {
+  @apply relative h-32 sm:h-40 lg:h-48;
+}
+
+.propertyImage {
+  @apply w-full h-full object-cover rounded-t-lg;
+}
+
+.savedIcon {
+  @apply absolute top-2 right-2 cursor-pointer;
+}
+
+.heartIcon {
+  @apply text-gray-300 text-xl;
+}
+
+.heartIcon.saved {
+  @apply text-red-500;
+}
+
+.propertyDetails {
+  @apply p-3;
+}
+
+.propertyName {
+  @apply text-base font-semibold mb-1;
+}
+
+.propertyInfo {
+  @apply flex justify-between mb-1;
+}
+
+.location {
+  @apply text-gray-600;
+}
+
+.rating {
+  @apply text-yellow-500;
+}
+
+.priceContainer {
+  @apply flex justify-between items-baseline;
+}
+
+.price {
+  @apply font-bold text-green-600;
+}
+
+.perNight {
+  @apply text-gray-500 text-sm;
+}

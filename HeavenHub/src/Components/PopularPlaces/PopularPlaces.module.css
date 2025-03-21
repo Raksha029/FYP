@@ -1,0 +1,54 @@
+.popularPlacesSection {
+  @apply py-4 sm:py-6 lg:py-8 px-2 sm:px-4 bg-gray-50;
+}
+
+.placeCard {
+  @apply flex flex-col items-center text-center bg-white border border-gray-200 
+         shadow-lg w-full transition-all duration-300 ease-in-out;
+  transform: scale(1);
+}
+
+.placeCard:hover {
+  transform: scale(1.05); /* Slightly enlarge the card */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12); /* Enhanced shadow on hover */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+
+.placeImage {
+  @apply w-full h-32 sm:h-40 lg:h-48 rounded-t-lg object-cover;
+}
+
+.placeName {
+  @apply text-base sm:text-lg font-medium mt-2 mb-2 sm:mb-4 px-2;
+}
+
+.sectionTitle {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4 sm:mb-6;
+}
+
+.scrollContainer {
+  @apply flex overflow-x-scroll gap-3 sm:gap-4 lg:gap-6 w-full py-2 sm:py-4 px-2;
+  scroll-snap-type: x mandatory;
+  max-width: 95%; /* Wider on mobile */
+  @apply sm:max-w-[85%] lg:max-w-[70%]; /* Gradually decrease width on larger screens */
+  margin: 0 auto;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollContainer .placeCard,
+.scrollContainer .activityCard {
+  @apply flex-shrink-0 rounded-lg shadow-lg bg-white;
+  /* Responsive card widths */
+  width: calc(80% - 12px); /* Show 1.25 cards on mobile */
+  @apply sm:w-[calc(45%-16px)] /* Show ~2 cards on tablet */
+         md:w-[calc(33.333%-16px)] /* Show 3 cards on medium screens */
+         lg:w-[calc(25%-16px)]; /* Show 4 cards on large screens */
+}
+
+.scrollContainer img {
+  @apply w-full h-32 sm:h-36 lg:h-40 rounded-t-lg object-cover;
+}

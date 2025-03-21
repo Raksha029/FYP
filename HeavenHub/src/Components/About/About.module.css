@@ -1,0 +1,154 @@
+.pageContainer {
+  @apply flex flex-col lg:flex-row min-h-screen bg-white mt-16;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sidebar {
+  @apply w-full lg:w-64 bg-gray-50 border-b lg:border-r border-gray-200 p-4 
+         mx-4 lg:mx-0 lg:ml-60 lg:min-h-screen;
+}
+
+.sidebar nav ul {
+  @apply space-y-2;
+}
+
+.sidebar nav ul li {
+  @apply px-4 py-2 rounded-md cursor-pointer text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors;
+}
+
+
+.sidebar nav ul li.active {
+  @apply bg-blue-100 text-blue-600 font-medium;
+}
+
+.mainContent {
+  @apply flex-1 p-4 lg:p-8 mx-4 lg:mr-60;
+}
+
+.contentSection {
+  @apply space-y-4;
+}
+
+.contentSection h2 {
+  @apply text-3xl font-bold text-gray-900 mb-4;
+}
+
+.contentSection p {
+  @apply text-lg text-gray-700 leading-relaxed text-justify;
+}
+
+/* ... existing styles ... */
+
+.policyList {
+  @apply space-y-8 mt-6;
+}
+
+.policyList > li {
+  @apply bg-white rounded-lg p-6 shadow-sm border border-gray-100;
+}
+
+.policyList > li > strong {
+  @apply text-xl text-blue-600 font-semibold block mb-3;
+}
+
+.subPolicyList {
+  @apply mt-2 space-y-2 ml-4;
+}
+
+.subPolicyList li {
+  @apply text-gray-700 flex items-center before:content-['•'] before:mr-2 before:text-blue-600;
+}
+
+/* Optional hover effect */
+.policyList > li:hover {
+  @apply shadow-md transition-shadow duration-300;
+}
+
+.teamMembers {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mt-6;
+}
+
+/* Keep your existing team member styles */
+.teamImage {
+  @apply block mx-auto rounded-full object-cover;
+  width: 150px !important;
+  height: 150px !important;
+}
+
+.memberInfo {
+  @apply text-center;
+}
+.aboutContainer h1 {
+  @apply text-4xl mb-5 mt-16 text-center text-blue-600 font-bold;
+}
+
+.aboutSection {
+  @apply mb-10;
+}
+
+.aboutSection h2 {
+  @apply text-4xl mb-2 text-blue-600 mt-5;
+}
+
+.aboutContainer p {
+  @apply text-lg text-gray-700 text-center;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.aboutContainer img {
+  @apply w-full h-auto rounded-lg mt-5;
+}
+
+.testimonials {
+  @apply bg-gray-100 p-4 rounded-lg shadow-md;
+}
+
+.teamMembers {
+  @apply flex justify-around mt-5;
+}
+
+.memberInfo {
+    text-align: center; /* Center the text */
+  }
+
+.teamImage {
+  @apply block mx-auto rounded-full object-cover; /* Use @apply for Tailwind utilities */
+  width: 150px !important; /* Set a fixed width for the image */
+  height: 150px !important; /* Set a fixed height for the image */
+}
+
+.aboutContainer h2 {
+  @apply text-4xl mb-2 text-blue-600 font-bold;
+}
+
+/* ... existing styles ... */
+
+.teamGrid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 mt-8;
+}
+
+.teamCard {
+  @apply bg-white rounded-lg shadow-md p-4 lg:p-6 flex flex-col items-center 
+         transition-transform duration-300 hover:transform hover:scale-105;
+}
+
+.teamImage {
+  @apply w-32 h-32 lg:w-40 lg:h-40 rounded-full object-cover mb-4 border-4 border-blue-100;
+}
+
+.teamInfo {
+  @apply text-center;
+}
+
+.teamInfo h3 {
+  @apply text-xl font-semibold text-gray-800 mb-2;
+}
+
+.role {
+  @apply text-blue-600 font-medium mb-2;
+}
+
+.contact {
+  @apply text-gray-600 text-sm mb-1;
+}

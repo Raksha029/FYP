@@ -1,0 +1,262 @@
+.pageContainer {
+  @apply px-4 sm:px-16 md:px-24 lg:px-60 pt-24;
+}
+
+.container {
+  @apply flex flex-col lg:flex-row gap-4 pt-6;
+}
+
+.headerSection {
+  @apply flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b pb-4;
+}
+  
+  .pageTitle {
+    @apply text-2xl font-bold;
+  }
+  
+  .searchBar {
+    @apply flex flex-wrap items-center gap-3 sm:gap-4 w-full mt-4 sm:mt-0;
+  }
+  
+  .searchInput,
+  .dateInput,
+  .guestInput {
+    @apply p-2 border border-[#071524] rounded-md 
+           w-full sm:w-auto min-w-[10px] 
+           bg-[#343a40] text-white;
+  }
+  
+  .searchButton {
+    @apply px-8 py-3 bg-blue-500 text-white rounded-md cursor-pointer text-lg font-medium;
+  }
+  
+  .searchButton:hover {
+    @apply bg-blue-600;
+  }
+  
+  .sidebar {
+    @apply w-full lg:w-1/3 flex flex-col gap-4;
+  }
+  
+  .map {
+    position: relative;
+    z-index: 1;
+    height: 400px;
+    width: 100%;
+  }
+  
+  .filters {
+    @apply flex flex-col gap-4;
+  }
+  
+  .filterTitle {
+    @apply font-bold text-lg;
+  }
+  
+  .filterGroup {
+    @apply flex flex-col;
+    margin-bottom: 1rem;
+  }
+  
+  .filterLabel {
+    @apply font-bold text-sm;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .filterInput {
+    @apply w-full;
+    margin: 0.5rem 0;
+  }
+  
+  .filterSelect {
+    @apply p-2 border border-gray-300 rounded;
+  }
+  
+  .hotelsList {
+    @apply flex flex-col gap-4 flex-grow mb-4 w-full lg:w-2/3;
+  }
+  
+  .hotelCard {
+    @apply flex flex-col sm:flex-row gap-4 
+           border border-gray-300 rounded-lg p-4 
+           shadow-md hover:shadow-lg transition-shadow mb-4;
+  }
+  
+  .hotelImage {
+    @apply w-full sm:w-[320px] h-[200px] sm:h-[320px] object-cover rounded-lg;
+  }
+  
+  .hotelInfo {
+    @apply flex flex-col gap-2;
+  }
+  
+  .hotelName {
+    @apply font-bold text-lg;
+  }
+  
+  .hotelLocation,
+  .hotelPrice,
+  .hotelRating,
+  .hotelAmenities,
+  .hotelDistance {
+    @apply text-sm text-gray-700;
+  }
+  
+  .hotelButton {
+    @apply self-start bg-blue-500 text-white px-4 py-2 rounded transition hover:bg-blue-600;
+  }
+  
+  .hotelReviews {
+    @apply text-sm text-white font-medium;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .container {
+      @apply flex-col;
+    }
+  
+    .sidebar {
+      @apply w-full;
+    }
+  
+    .filters {
+      @apply w-full;
+    }
+  
+    .map {
+      @apply h-[200px];
+    }
+  
+    .hotelCard {
+      @apply flex-col;
+    }
+  
+    .hotelImage {
+      @apply w-full h-[200px];
+    }
+  
+    .searchBar {
+      @apply w-full;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .searchButton {
+      @apply w-full mt-3;
+    }
+  }
+
+  /* Adjustments for larger screens */
+  @media (min-width: 768px) {
+    .hotelCard {
+      @apply flex-row;
+    }
+    
+    .hotelImage {
+      @apply w-[320px] h-[320px];
+    }
+    
+    .hotelInfo {
+      @apply flex-grow;
+    }
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .hotelCard {
+      @apply bg-gray-800 border-gray-700;
+    }
+  
+    .hotelName {
+      @apply text-white;
+    }
+  
+    .hotelLocation,
+    .hotelPrice,
+    .hotelRating,
+    .hotelAmenities,
+    .hotelDistance {
+      @apply text-gray-300;
+    }
+  
+    .filterSelect,
+    .searchInput {
+      @apply bg-gray-700 border-gray-600 text-white;
+    }
+  }
+  
+  .mapModal {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50;
+  }
+  
+  .mapModalContent {
+    @apply relative bg-white p-0 rounded-lg shadow-lg 
+           w-[95%] sm:w-[85%] lg:w-1/2 max-w-[800px] z-20;
+  }
+  
+  .close {
+    @apply cursor-pointer text-xl font-bold absolute top-2 right-4 z-20 bg-blue-500 rounded-full p-2;
+    color: white;
+    background-color: #007bff;
+    border-radius: 50%;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border: 2px solid white;
+  }
+  
+  .close:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+  
+  .showOnMapButton {
+    @apply bg-green-500 text-white py-1 px-4 rounded-lg mt-2 transition-colors duration-300;
+    transition: background-color 0.3s ease;
+  }
+  
+  .showOnMapButton:hover {
+    @apply bg-green-600;
+  }
+  
+  .mapContainer {
+    @apply rounded-lg;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    height: calc(50vh - 50px);
+    margin-top: 50px;
+  }
+
+  .header {
+    @apply relative z-50 bg-white bg-opacity-80 p-2;
+  }
+
+  span {
+    @apply text-sm; /* Adjust font size as needed */
+  }
+
+  .imageContainer {
+    @apply relative; /* Position relative for absolute positioning of heart */
+  }
+
+  .savedIcon {
+    @apply absolute; /* Use absolute positioning */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    @apply cursor-pointer; /* Change cursor on hover */
+  }
+
+  .heartIcon {
+    @apply transition-colors; /* Smooth transition for hover effect */
+    @apply text-white; /* Default color */
+    @apply text-[28px]; /* Increase size as needed */
+  }
+
+  .saved {
+    @apply text-red-500; /* Color when saved */
+  }

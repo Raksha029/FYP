@@ -1,0 +1,97 @@
+.landingContainer {
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Hero Section */
+.heroSection {
+  @apply relative w-full h-screen flex items-center justify-center;
+}
+
+.heroImage {
+  @apply w-full h-full relative;
+}
+
+.heroImage img {
+  @apply object-cover w-full h-full;
+}
+
+.heroOverlay {
+  @apply absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-white text-center p-6 z-10;
+}
+
+.heroOverlay h2 {
+  @apply text-4xl font-bold mb-4;
+}
+
+.heroOverlay p {
+  @apply text-xl mb-6;
+}
+
+/* Search Form */
+
+.searchForm {
+  @apply flex items-center justify-center space-x-4 mt-6;
+}
+
+.searchFields {
+  @apply flex flex-wrap justify-center gap-6;
+}
+
+.searchInput {
+  @apply p-3 rounded-lg border border-gray-300 w-48 bg-white text-gray-900 placeholder-gray-500;
+  font-size: 16px;
+}
+
+.searchInput:focus {
+  @apply outline-none ring-2 ring-blue-500;
+}
+
+.searchButton {
+  @apply bg-blue-500 text-white py-2 px-6 rounded-lg text-lg cursor-pointer;
+}
+
+.searchButton:hover {
+  @apply bg-blue-600;
+}
+
+/* Why Choose Us Section */
+.whyChooseUsSection {
+  @apply relative w-full h-96; /* Adjust the height as needed */
+}
+
+.whyChooseUsBackground {
+  @apply bg-cover bg-center h-full flex justify-center items-center text-center text-white;
+  background-image: url('../Assets/hotel1.png'); 
+}
+
+.textContainer {
+  @apply flex flex-col justify-center items-center text-center;
+}
+
+.whyChooseUsHeading {
+  @apply text-4xl font-bold mb-4;
+}
+
+.whyChooseUsDescription {
+  @apply text-xl max-w-2xl mx-auto leading-relaxed opacity-90;
+}
+
+.floatingChatIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff; /* Background color for the icon */
+  border-radius: 50%; /* Circular shape */
+  padding: 10px; /* Padding around the icon */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.chatIconStyle {
+  color: white; /* Icon color */
+  font-size: 24px; /* Icon size */
+}
+
+

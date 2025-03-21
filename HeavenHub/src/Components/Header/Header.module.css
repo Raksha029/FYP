@@ -1,0 +1,152 @@
+.header {
+    @apply fixed top-0 left-0 w-full flex justify-between items-center p-2 sm:p-3 lg:p-4 z-50;
+    background: linear-gradient(to right, rgba(0, 51, 102, 0.8), rgba(0, 153, 204, 0.8)); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    @apply text-xl sm:text-2xl lg:text-3xl font-bold text-white 
+           ml-4 sm:ml-16 md:ml-24 lg:ml-60;
+}
+
+.nav {
+    @apply flex space-x-2 sm:space-x-3 md:space-x-4 lg:space-x-6;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.navLink {
+    @apply text-white text-sm sm:text-base lg:text-lg cursor-pointer hover:underline;
+}
+
+.authButtons {
+    @apply flex items-center justify-center mt-2 sm:mt-3 lg:mt-4 
+           mr-4 sm:mr-16 md:mr-24 lg:mr-60;
+    display: flex;
+    align-items: center;
+}
+
+.signInButton {
+    @apply flex items-center gap-1 sm:gap-2 
+           px-2 sm:px-3 lg:px-4 
+           py-1 sm:py-1.5 lg:py-2 
+           border border-gray-300 
+           text-gray-700 bg-white rounded-md 
+           text-xs sm:text-sm lg:text-base 
+           font-medium shadow-sm 
+           hover:bg-gray-100 hover:border-gray-400 
+           transition duration-300 ease-in-out;
+    line-height: 1;
+}
+
+.icon {
+    @apply text-base sm:text-lg text-gray-700;
+    vertical-align: middle;
+}
+
+.appicon {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+}
+
+.userIconWrapper {
+    @apply relative cursor-pointer;
+}
+
+.dropdownMenu {
+    @apply absolute top-full right-0 bg-white 
+           border border-gray-300 rounded-lg shadow-lg z-50 
+           w-[160px] sm:w-[180px] lg:min-w-[200px];
+}
+
+.dropdownItem {
+    @apply px-3 sm:px-4 lg:px-6 
+           py-2 sm:py-2.5 lg:py-3 
+           w-full text-left cursor-pointer 
+           hover:bg-gray-100 
+           text-sm sm:text-base lg:text-lg;
+}
+
+.dropdownHeading {
+    @apply block px-3 sm:px-4 lg:px-6 
+           py-2 sm:py-2.5 lg:py-3 
+           text-left text-sm sm:text-base lg:text-lg 
+           font-bold text-gray-700;
+}
+
+.languageCurrencyContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.languageCurrencyContainer > * {
+    margin-right: 5px;
+}
+
+.authButtons > * {
+    margin-left: 10px;
+}
+
+.chatIcon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.chatIconStyle {
+    font-size: 24px;
+    color:white;
+}
+
+.authSection {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between elements if needed */
+}
+
+/* Styling for Sign In button */
+.authSection button {
+    padding: 8px 16px;
+    background-color: #007bff; /* Bootstrap primary blue, adjust as needed */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.authSection button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Styling for User Icon Wrapper */
+.userIconWrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.userIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1; /* Placeholder background */
+}
+
+/* Optional: Dropdown menu styling */
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+

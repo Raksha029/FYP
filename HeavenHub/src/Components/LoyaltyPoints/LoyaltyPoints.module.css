@@ -1,0 +1,177 @@
+.loyaltyContainer {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 85px;;
+}
+
+.sidebar {
+  width: 300px; /* Adjust width as needed */
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.card {
+  background: linear-gradient(135deg, #f9e79f, #f1c40f); /* Card background */
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.availableCoins {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.coinDisplay {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.nav {
+  margin-top: 20px;
+}
+
+.nav h2 {
+  cursor: pointer;
+  margin: 10px 0;
+  color: #007bff; /* Change color for links */
+}
+
+.content {
+  flex: 1; /* Take remaining space */
+  padding: 20px;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tabButton {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.tabButton:hover {
+  color: #0056b3; /* Darker shade on hover */
+}
+
+.activeTab {
+  color: red; /* Change text color to red */
+  border-bottom: 2px solid red; /* Add a red line below the active tab */
+  font-weight: bold; /* Make the active tab bold */
+  background-color: #f8d7da; /* Light pink background for active tab */
+}
+
+.activeTabs {
+  color: red;
+  border-bottom: 2px solid red; /* Add a red line below the active tab */
+  font-weight: bold; /* Make the active tab bold */
+
+}
+
+.emptyState {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emptyState img {
+  width: 100px; /* Adjust size as needed */
+}
+
+.rewardsSection,
+.faqSection {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+
+.centeredImage {
+  display: block;
+  margin: 0 auto; /* Centers the image */
+  width: 300px!important; /* Increased width for a larger image */
+  height: auto; /* Maintains aspect ratio */
+}
+
+.centeredText {
+  text-align: center; /* Centers the text horizontally */
+}
+
+.separator {
+  border: none; /* Remove default border */
+  height: 1px; /* Set height of the line */
+  background-color: black; /* Set color of the line */
+  margin: 10px 0; /* Add some space above and below the line */
+}
+
+.activeSection {
+  background-color: #f0f0f0; /* Light background for active section */
+  padding: 10px; /* Add some padding */
+  border-radius: 5px; /* Rounded corners */
+  border-bottom: 2px solid red; /* Add a red line at the bottom */
+}
+
+.navList li {
+  cursor: pointer; /* Change cursor to pointer for clickable items */
+  padding: 10px; /* Add some padding for better click area */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navList li:hover {
+  background-color: #f0c0c0; /* Light red background on hover */
+}
+
+.rewardItem {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between content and button */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 20px; /* Space between reward items */
+  border: 1px solid #ccc; /* Border around each reward item */
+  padding: 10px; /* Padding inside each reward item */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.redeemButton {
+  background-color: red; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Padding for button */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.redeemButton:hover {
+  background-color: darkred; /* Darker red on hover */
+}
+
+.faqItem {
+  margin-bottom: 15px; /* Space between FAQ items */
+  border: 1px solid #ccc; /* Border around each FAQ item */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px; /* Padding inside each FAQ item */
+}
+
+.faqQuestion {
+  cursor: pointer; /* Pointer cursor for clickable question */
+  font-weight: bold; /* Bold text for question */
+}
+
+.faqAnswer {
+  margin-top: 10px; /* Space above the answer */
+  color: #555; /* Color for the answer text */
+}

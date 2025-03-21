@@ -1,0 +1,38 @@
+
+
+.contactContainer {
+  @apply flex items-center justify-between p-5 w-full max-w-[1200px] mx-auto font-sans text-gray-800 bg-[#f0f4ff] rounded-lg shadow-md; /* Use Tailwind utilities */
+}
+
+.contactImage {
+  @apply flex-1 bg-cover bg-center h-[400px] rounded-l-lg; /* Use Tailwind utilities */
+  background-image: url("../Assets/contact_us.png"); /* Replace with your image path */
+}
+
+.contactForm {
+  @apply flex-1 p-5; /* Use Tailwind utilities */
+}
+
+.contactContainer h1 {
+  @apply text-2xl mb-5 text-center text-[#0056b3]; /* Use Tailwind utilities */
+}
+
+.contactContainer form {
+  @apply flex flex-col; /* Use Tailwind utilities */
+}
+
+.contactContainer input,
+.contactContainer textarea {
+  @apply p-2.5 mb-3 border border-gray-300 rounded; /* Use Tailwind utilities */
+  font-size: 1em;
+}
+
+.contactContainer button {
+  @apply p-2.5 bg-[#ff6f20] text-white border-none rounded cursor-pointer text-base transition-colors duration-300; /* Use Tailwind utilities */
+}
+
+.contactContainer button:hover {
+  @apply bg-[#e65c1b]; /* Use Tailwind utilities */
+}
+
+

@@ -1,0 +1,578 @@
+.pageContainer {
+  @apply flex flex-col min-h-screen;
+  font-family: 'Poppins', sans-serif;
+}
+
+.content {
+  @apply flex-grow mx-4 sm:mx-16 md:mx-24 lg:mx-60;
+}
+
+.topSection {
+  @apply flex gap-6 mb-6 pt-20;
+}
+
+.searchBar {
+  @apply flex items-center gap-4 mt-24 mb-6;
+  width: 100%; /* Make search bar full width */
+}
+
+.searchInput {
+  @apply p-3 border border-gray-300 rounded-md 
+         focus:outline-none focus:ring-2 focus:ring-blue-500;
+  width: 30%; /* Increase width for location input */
+}
+
+
+.dateInput {
+  @apply p-3 border border-gray-300 rounded-md 
+         focus:outline-none focus:ring-2 focus:ring-blue-500;
+  width: 20%; /* Increase width for date inputs */
+}
+
+.searchButton {
+  @apply bg-blue-500 text-white rounded-md 
+         text-lg font-medium cursor-pointer 
+         hover:bg-blue-600 transition-colors;
+  width: 20%; /* Set width for button */
+  padding: 12px 24px; /* Increase padding for larger button */
+}
+
+.headerPart {
+  @apply flex-grow;
+}
+
+.header {
+  @apply mb-4;
+}
+
+.hotelDetails {
+  @apply mb-6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10px;
+}
+
+.hotelName {
+  @apply text-3xl font-bold;
+}
+
+.hotelLocation {
+  @apply text-gray-600;
+}
+
+.ratingContainer {
+  @apply flex items-center mt-2;
+}
+
+.rating {
+  @apply text-yellow-500 text-lg;
+}
+
+.reviewCount {
+  @apply text-gray-500 ml-2;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 16px;
+  margin: 0 15px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+}
+
+.tabButton:hover {
+  border-bottom: 2px solid blue;
+}
+
+.active {
+  font-weight: bold;
+  border-bottom: 2px solid blue; /* Example active tab style */
+}
+
+.activeTab {
+  border-bottom: 2px solid blue; /* Change color for the active tab */
+}
+
+.photosSection {
+  @apply mb-6;
+}
+
+.photosTitle {
+  @apply text-xl font-semibold mb-2;
+}
+
+.photosGallery {
+  @apply flex overflow-x-auto gap-4;
+}
+
+.photoItem {
+  @apply w-48 h-32 object-cover rounded-lg;
+}
+
+.amenitiesSection {
+  margin: 20px 0; /* Space above and below the amenities section */
+}
+
+.amenitiesList {
+  @apply grid grid-cols-2 gap-2;
+}
+
+.amenityItem {
+  @apply text-gray-700;
+}
+
+.roomOptionsSection {
+  @apply mb-6;
+}
+
+.roomOptionsTitle {
+  @apply text-xl font-semibold mb-2;
+}
+
+.roomCard {
+  @apply flex justify-between items-center p-4 border rounded-lg border-gray-200;
+}
+
+.roomInfo {
+  @apply font-semibold;
+}
+
+.roomPrice {
+  @apply text-gray-600;
+}
+
+.bookButton {
+  @apply bg-blue-500 text-white px-4 py-2 rounded;
+}
+
+.infoSection,
+.houseRulesSection,
+.reviewsSection {
+  @apply w-full my-8;
+}
+
+.reviewsTitle {
+  margin-bottom: 20px; /* Space below the title */
+  font-size: 24px; /* Increase font size for better visibility */
+  font-weight: bold; /* Make the title bold */
+}
+
+.reviewCard {
+  @apply p-4 border rounded-lg border-gray-200 mb-2;
+}
+
+.reviewerName {
+  @apply font-semibold;
+}
+
+.reviewRating {
+  @apply text-yellow-500;
+}
+
+.reviewComment {
+  @apply text-gray-700;
+}
+
+/* New Booking Summary Styles */
+.bookingSummary {
+  @apply mt-8 p-4 border rounded-lg border-gray-300 bg-gray-50;
+}
+
+.bookingTitle {
+  @apply text-2xl font-bold mb-4;
+}
+
+.bookingDetails {
+  @apply text-lg mb-2;
+}
+
+.confirmBookingButton {
+  @apply bg-green-500 text-white px-4 py-2 rounded mt-4;
+}
+
+/* New See More Button Styles */
+.seeMoreButton {
+  @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer; /* Button styling */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  margin-right: 10px; /* Add margin to the right for spacing */
+}
+
+.writeReviewButton {
+  @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer; /* Button styling */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.mapTitle {
+  @apply text-xl font-semibold mb-2;
+}
+
+.imageGallery {
+  @apply flex gap-2 mb-6; /* Reduced gap from gap-4 to gap-2 */
+}
+
+.largeImageContainer {
+  flex: 2;
+  margin-right: 8px; /* Reduced from 20px to 8px */
+}
+
+.largeImage {
+  width: 100%;
+  height: 100%; /* Added to ensure full height coverage */
+  object-fit: cover; /* Ensures image maintains aspect ratio while filling container */
+}
+
+.smallImages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Added explicit gap between small images */
+}
+
+.galleryImage {
+  width: 100%; /* Changed from 75% to 100% to fill container */
+  height: 35%; /* This will make each small image take up roughly 1/3 of the container height */
+  object-fit: cover; /* Ensures image maintains aspect ratio while filling container */
+  margin-bottom: 0; /* Removed margin-bottom since we're using gap */
+}
+
+.morePhotos {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.amenities {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.amenityItem {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  flex: 1;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.locationTitle {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mapContainerWrapper {
+  @apply w-full my-8;
+}
+
+.mapContainer {
+  @apply w-full h-[400px];
+  z-index: 1;
+}
+
+.listedBy {
+  @apply text-gray-600;
+}
+
+.priceRange {
+  @apply text-lg font-semibold;
+}
+
+.address {
+  @apply text-gray-600;
+}
+
+.detailsContainer {
+  @apply flex flex-col lg:flex-row justify-between gap-8 mt-6;
+}
+
+.priceBox {
+  @apply flex-1 p-6 bg-gray-50 rounded-lg shadow-sm;
+  margin-left: 0; /* Remove the previous fixed margin */
+}
+
+.amenitiesBox {
+  @apply flex-1 p-6 bg-gray-50 rounded-lg shadow-sm;
+  margin-left: 0; /* Remove the previous fixed margin */
+}
+.priceRange {
+  font-size: 24px; /* Font size for the price */
+  font-weight: bold; /* Make the price bold */
+}
+
+.descriptionText {
+  margin: 10px 0; /* Space above and below the description text */
+}
+
+.reserveButton {
+  background-color: #007bff; /* Button color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding for the button */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; /* Make the button full width */
+}
+
+.reserveButton:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}
+
+.amenities {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between amenities */
+  margin-top: 10px; /* Space above amenities */
+}
+
+.apartmentDescription {
+  margin-top: 20px; /* Space above the apartment description */
+  font-weight: bold; /* Make the heading bold */
+  font-size: 24px; /* Adjust font size if needed */
+}
+
+.apartmentDetails {
+  margin-top: 10px; /* Space above the detailed description */
+  font-size: 16px; /* Adjust font size for the description */
+  line-height: 1.5; /* Improve readability */
+}
+
+.roomsSection, .rulesSection {
+  margin-top: 20px; /* Space above the sections */
+}
+
+.roomsTitle, .rulesTitle {
+  font-size: 24px; /* Title font size */
+  margin-bottom: 10px; /* Space below the title */
+}
+
+.roomsTable, .rulesTable {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Collapse borders */
+}
+
+.roomsTable th, .rulesTable th,
+.roomsTable td, .rulesTable td {
+  border: 1px solid #ddd; /* Border for table cells */
+  padding: 8px; /* Padding inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+.roomsTable th, .rulesTable th {
+  background-color: #f2f2f2; /* Header background color */
+  font-weight: bold; /* Bold header text */
+}
+
+.roomsTable tr:nth-child(even), .rulesTable tr:nth-child(even) {
+  background-color: #f9f9f9; /* Zebra striping for rows */
+}
+
+.roomsTable tr:hover, .rulesTable tr:hover {
+  background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+.roomsTable td {
+  text-align: center; /* Center align for the new columns */
+}
+
+.roomsTable input {
+  margin-right: 10px; /* Space between input and button */
+  padding: 5px; /* Padding for the input */
+  width: 60px; /* Fixed width for the input */
+}
+
+.roomsTable button {
+  padding: 5px 10px; /* Padding for the button */
+  background-color: #007bff; /* Button color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.roomsTable button:disabled {
+  background-color: #ccc; /* Disabled button color */
+  cursor: not-allowed; /* Not allowed cursor */
+}
+
+.servicesSection {
+  margin-top: 20px; /* Space above the services section */
+}
+
+.servicesTitle {
+  font-size: 24px; /* Title font size */
+  margin-bottom: 10px; /* Space below the title */
+}
+
+.servicesContainer {
+  display: flex; /* Use flexbox for horizontal layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between; /* Space between items */
+}
+
+.serviceItem {
+  flex: 0 0 calc(33.33% - 10px); /* Each item takes up 1/3 of the row minus some margin */
+  padding: 10px; /* Padding for each service item */
+  background-color: #f9f9f9; /* Background color for service items */
+  border: 1px solid #ddd; /* Border for service items */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center; /* Center text */
+  margin: 5px; /* Space between items */
+}
+
+/* Optional: Limit the number of visible items */
+.servicesContainer > .serviceItem:nth-child(n+8) {
+  display: none; /* Hide items beyond the first three */
+}
+
+.offersSection {
+  
+  margin-top: 20px; /* Add space above the offers section */
+}
+
+.offersTitle {
+  font-size: 24px; /* Title font size */
+  margin-bottom: 10px; /* Space below the title */
+}
+
+.servicesContainer {
+  display: flex; /* Use flexbox for horizontal layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: center; /* Center items horizontally */
+  margin: 0 auto; /* Center the container itself */
+}
+
+
+.serviceItem:last-child {
+  margin-right: 0; /* Remove margin for the last item */
+}
+
+.additionalServicesContainer {
+  display: flex; /* Use flexbox for horizontal layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between; /* Space between items */
+}
+
+.serviceItem {
+  flex: 0 0 calc(33.33% - 10px); /* Each item takes up 1/3 of the row minus some margin */
+  padding: 10px; /* Padding for each service item */
+  background-color: #f9f9f9; /* Background color for service items */
+  border: 1px solid #ddd; /* Border for service items */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center; /* Center text */
+  margin: 5px; /* Space between items */
+}
+
+.roomsSection {
+  @apply mb-6 w-full overflow-x-auto; /* Added overflow-x-auto for horizontal scrolling on small screens */
+}
+
+.roomsTitle {
+  @apply text-xl font-semibold mb-4;
+}
+
+.roomsTable {
+  @apply w-full min-w-[800px] border-collapse; /* Added min-width to prevent squishing */
+}
+
+.roomsTable th,
+.roomsTable td {
+  @apply border border-gray-200 p-3 text-left; /* Added consistent padding */
+}
+
+.roomsTable th {
+  @apply bg-gray-50 font-semibold;
+}
+
+.roomsTable tr:hover {
+  @apply bg-gray-50;
+}
+
+.roomsTable td {
+  @apply align-middle; /* Vertically center content */
+}
+
+/* Style the number input and button in the table */
+.roomsTable input[type="number"] {
+  @apply w-20 p-2 border border-gray-300 rounded-md mr-2;
+}
+
+.roomsTable button {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-md
+         hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed;
+}
+
+/* Make the description column wrap text nicely */
+.roomsTable td:nth-child(5) {
+  @apply max-w-[200px] whitespace-normal;
+}
+
+/* Responsive container */
+.roomsContainer {
+  @apply w-full overflow-x-auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.reviewForm {
+  @apply flex flex-col mt-4; /* Flex column layout with margin on top */
+}
+
+.reviewForm input,
+.reviewForm textarea {
+  @apply p-2 border border-gray-300 rounded-md mb-2; /* Padding, border, and margin for inputs */
+  width: 100%; /* Full width for inputs */
+}
+
+.reviewForm input[type="number"] {
+  @apply w-20; /* Fixed width for rating input */
+}
+
+.reviewForm textarea {
+  @apply h-24; /* Fixed height for the comment textarea */
+}
+
+.submitReviewButton {
+  @apply bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer; /* Button styling */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.submitReviewButton:hover {
+  @apply bg-blue-600; /* Darker blue on hover */
+}
+
+.writeReviewButton {
+  @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer; /* Button styling */
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.writeReviewButton:hover {
+  @apply bg-blue-600; /* Darker blue on hover */
+}

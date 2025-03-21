@@ -1,0 +1,185 @@
+.reservationContainer {
+  padding: 100px 200px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+ 
+}
+
+.reservationHeader {
+  background-color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap; /* Added to allow wrapping */
+}
+
+
+
+.reservationHeader h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+  flex-grow: 1; /* Allow the header to take available space */
+  margin-bottom: 10px; /* Add some space if wrapping occurs */
+}
+.reservationContent {
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tabContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.tabButton {
+  padding: 8px 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #666;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.tabButton:hover {
+  background-color: #f0f0f0;
+}
+
+.activeTab {
+  color: #007bff;
+  background-color: #e6f2ff;
+}
+
+/* Rest of the previous CSS remains the same */
+
+.bookingList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bookingItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+
+.bookingDetails {
+  flex: 1;
+}
+
+.bookingDetails h3 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.bookingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.viewDetailsBtn, .cancelBookingBtn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.viewDetailsBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+.cancelBookingBtn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 768px) {
+  .reservationContainer {
+    padding: 10px 5%;
+  }
+
+  .reservationHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* Add gap between header and tab container */
+  }
+
+  .reservationHeader h1 {
+    width: 100%; /* Ensure full width */
+    text-align: center; /* Center the header text */
+    margin-bottom: 5px;
+    margin-top: 30px;
+  }
+
+  .tabContainer {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .tabButton {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .bookingItem {
+    flex-direction: column;
+  }
+
+  .bookingDetails h3 {
+    font-size: 1rem;
+  }
+
+  .bookingDetails p {
+    font-size: 0.9rem;
+  }
+
+  .bookingActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .viewDetailsBtn, 
+  .cancelBookingBtn {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .reservationContainer {
+    padding: 20px 3%;
+  }
+
+  .reservationHeader h1 {
+    font-size: 1.2rem;
+  }
+
+  .tabButton {
+    font-size: 0.7rem;
+    padding: 6px 8px;
+  }
+}

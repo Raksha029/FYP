@@ -1,0 +1,27 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+HeavenHub/node_modules
+HeavenHub/.pnp
+HeavenHub/.pnp.js
+
+# testing
+HeavenHub/coverage
+
+# production
+HeavenHub/build
+
+# misc
+HeavenHub/.DS_Store
+HeavenHub/.env.local
+HeavenHub/.env.development.local
+HeavenHub/.env.test.local
+HeavenHub/.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+Server/.env
+Server/node_modules
