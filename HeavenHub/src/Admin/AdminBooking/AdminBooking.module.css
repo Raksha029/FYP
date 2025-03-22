@@ -1,0 +1,30 @@
+.bookingContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+  }
+  
+  .bookingTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #e0e0e0;
+    border: 1px solid #007bff;
+  }
+  
+  .bookingTable th,
+  .bookingTable td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .bookingTable th {
+    background-color: #007bff;
+    color: white;
+  }

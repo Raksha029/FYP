@@ -26,8 +26,15 @@ import TopRatedProperties from "./Components/TopRatedProperties/TopRatedProperti
 import Profile from "./Components/Profile/Profile";
 import LoyaltyPoints from "./Components/LoyaltyPoints/LoyaltyPoints";
 import SearchResults from "./Components/SearchResults/SearchResults";
-import Admin from "./Components/Admin/AdminLogin";
-import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
+import Admin from "./Admin/Admin/AdminLogin";
+import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
+import AdminProfile from "./Admin/AdminProfile/AdminProfile";
+import AdminLayout from './Admin/AdminLayout/AdminLayout';
+import AdminUser from './Admin/AdminUser/AdminUser';
+import AdminHotel from './Admin/AdminHotel/AdminHotel';
+import AdminRoom from './Admin/AdminRoom/AdminRoom';
+import AdminBooking from './Admin/AdminBooking/AdminBooking';
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -145,7 +152,7 @@ const Content = ({
 
   return (
     <>
-      {isAdminRoute && (
+      {!isAdminRoute && (
         <Header
           setIsLoggedIn={setIsLoggedIn}
           isLoggedIn={isLoggedIn}
@@ -288,10 +295,17 @@ const Content = ({
             }
           />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/*" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="profile" element={<AdminProfile />} />
+            <Route path="users" element={<AdminUser />} />
+            <Route path="hotels" element={<AdminHotel />} />
+            <Route path="rooms" element={<AdminRoom />} />
+            <Route path="booking" element={<AdminBooking />} />
+          </Route>
         </Routes>
       </div>
-      {isAdminRoute && <Footer />}
+      {!isAdminRoute && <Footer />}
     </>
   );
 };
