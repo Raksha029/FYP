@@ -7,6 +7,7 @@ import hotelbackground_icon from "../Assets/hotelbackground.png";
 import TopRatedProperties from "../TopRatedProperties/TopRatedProperties";
 import PopularPlaces from "../PopularPlaces/PopularPlaces";
 import Chatbot from "../Chatbot/Chatbot";
+import hotel1 from "../Assets/hotel1.png";
 
 const LandingPage = ({ savedProperties, setSavedProperties }) => {
   const [searchParams, setSearchParams] = useState({
@@ -187,14 +188,21 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
       />
 
       {/* Why Choose Us Section */}
-      <section className={styles.whyChooseUsSection}>
-        <div className={styles.whyChooseUsBackground}>
-          <div className={styles.textContainer}>
-            <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
-            <p className={styles.whyChooseUsDescription}>
-              Discover the reasons why HeavenHub is the best choice for your
-              stay. We offer unbeatable deals, a wide selection of hotels, and
-              exclusive experiences tailored to your needs.
+<section className={styles.whyChooseUsSection}>
+  <div className={styles.whyChooseUsContainer}>
+    {/* Image on the Left */}
+    <div className={styles.whyChooseUsImage}>
+      <img src={hotel1} alt="Why Choose Us" />
+    </div>
+
+    {/* Text on the Right */}
+    <div className={styles.textContainer}>
+      <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
+      <p className={styles.whyChooseUsDescription}>
+        Discover why HeavenHub is your perfect choice. We offer unbeatable 
+        deals, a vast selection of hotels, and exclusive experiences tailored 
+        to your needs. Enjoy seamless booking, 24/7 support, and personalized 
+        recommendations for a memorable stay.
             </p>
           </div>
         </div>
