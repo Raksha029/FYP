@@ -76,7 +76,7 @@ import Hyatt1 from "../Assets/Hyatt 1.jpg";
 import Hyatt2 from "../Assets/Hyatt 2.jpg";
 import Hyatt3 from "../Assets/Hyatt 3.jpeg";
 import Hyatt4 from "../Assets/Hyatt 4.jpeg";
-import Hyatt5 from "../Assets/Hyatt 5.jfif";
+import Hyatt5 from "../Assets/Hyatt 5.jpg";
 import Hyatt6 from "../Assets/Hyatt 6.jpg";
 import Hyatt7 from "../Assets/Hyatt 7.jpg";
 import Hyatt8 from "../Assets/Hyatt 8.jpg";
@@ -147,6 +147,91 @@ import Himalaya1 from "../Assets/Himalaya 1.png";
 import Himalaya2 from "../Assets/Himalaya 2.jpg";
 import Himalaya3 from "../Assets/Himalaya 3.png";
 import Himalaya4 from "../Assets/Himalaya 4.jpg";
+
+import FishTail1 from "../Assets/FishTail 1.jpg";
+import FishTail2 from "../Assets/FishTail 2.jpg";
+import FishTail3 from "../Assets/FishTail 3.jpg";
+import FishTail4 from "../Assets/FishTail 4.jpg";
+import FishTail5 from "../Assets/FishTail 5.jpg";
+import FishTail6 from "../Assets/FishTail 6.jpg";
+import FishTail7 from "../Assets/FishTail 7.jpg";
+import FishTail8 from "../Assets/FishTail 8.jpg";
+import FishTail9 from "../Assets/FishTail 9.jpg";
+
+import TempleTree1 from "../Assets/TempleTree 1.jpg";
+import TempleTree2 from "../Assets/TempleTree 2.jpg";
+import TempleTree3 from "../Assets/TempleTree 3.jpg";
+import TempleTree4 from "../Assets/TempleTree 4.jpg";
+import TempleTree5 from "../Assets/TempleTree 5.jpg";
+import TempleTree6 from "../Assets/TempleTree 6.jpg";
+import TempleTree7 from "../Assets/TempleTree 7.jpg";
+import TempleTree8 from "../Assets/TempleTree 8.jpg";
+
+import Waterfront1 from "../Assets/Waterfront 1.jpg";
+import Waterfront2 from "../Assets/Waterfront 2.jpg";
+import Waterfront3 from "../Assets/Waterfront 3.jpg";
+import Waterfront4 from "../Assets/Waterfront 4.jpg";
+import Waterfront5 from "../Assets/Waterfront 5.jpg";
+import Waterfront6 from "../Assets/Waterfront 6.jpg";
+import Waterfront7 from "../Assets/Waterfront 7.jpg";
+import Waterfront8 from "../Assets/Waterfront 8.jpg";
+
+import HotelBarahi1 from "../Assets/HotelBarahi 1.jpg";
+import HotelBarahi2 from "../Assets/HotelBarahi 2.jpg";
+import HotelBarahi3 from "../Assets/HotelBarahi 3.jpg";
+import HotelBarahi4 from "../Assets/HotelBarahi 4.jpg";
+import HotelBarahi5 from "../Assets/HotelBarahi 5.jpg";
+import HotelBarahi6 from "../Assets/HotelBarahi 6.jpg";
+import HotelBarahi7 from "../Assets/HotelBarahi 7.jpg";
+import HotelBarahi8 from "../Assets/HotelBarahi 8.jpg";
+import HotelBarahi9 from "../Assets/HotelBarahi 9.jpg";
+
+import Atithi1 from "../Assets/Atithi 1.jpg";
+import Atithi2 from "../Assets/Atithi 2.jpg";
+import Atithi3 from "../Assets/Atithi 3.jpg";
+import Atithi4 from "../Assets/Atithi 4.jpg";
+import Atithi5 from "../Assets/Atithi 5.jpg";
+import Atithi6 from "../Assets/Atithi 6.jpg";
+import Atithi7 from "../Assets/Atithi 7.jpg";
+import Atithi8 from "../Assets/Atithi 8.jpg";
+
+import HotelGrande1 from "../Assets/HotelGrande 1.jpg";
+import HotelGrande2 from "../Assets/HotelGrande 2.jpg";
+import HotelGrande3 from "../Assets/HotelGrande 3.jpg";
+import HotelGrande4 from "../Assets/HotelGrande 4.jpg";
+import HotelGrande5 from "../Assets/HotelGrande 5.jpg";
+import HotelGrande6 from "../Assets/HotelGrande 6.jpg";
+import HotelGrande7 from "../Assets/HotelGrande 7.jpg";
+
+import HotelMiddle1 from "../Assets/HotelMiddle 1.jpg";
+import HotelMiddle2 from "../Assets/HotelMiddle 2.jpg";
+import HotelMiddle3 from "../Assets/HotelMiddle 3.jpg";
+import HotelMiddle4 from "../Assets/HotelMiddle 4.jpg";
+import HotelMiddle5 from "../Assets/HotelMiddle 5.jpg";
+import HotelMiddle6 from "../Assets/HotelMiddle 6.jpg";
+import HotelMiddle7 from "../Assets/HotelMiddle 7.jpg";
+
+import HotelMountain1 from "../Assets/HotelMountain 1.jpg";
+import HotelMountain2 from "../Assets/HotelMountain 2.jpg";
+import HotelMountain3 from "../Assets/HotelMountain 3.jpg";
+import HotelMountain4 from "../Assets/HotelMountain 4.jpg";
+import HotelMountain5 from "../Assets/HotelMountain 5.jpg";
+import HotelMountain6 from "../Assets/HotelMountain 6.jpg";
+
+import Grande1 from "../Assets/Grande 1.jpg";
+import Grande2 from "../Assets/Grande 2.jpg";
+import Grande3 from "../Assets/Grande 3.jpg";
+import Grande4 from "../Assets/Grande 4.jpg";
+import Grande5 from "../Assets/Grande 5.jpg";
+import Grande6 from "../Assets/Grande 6.jpg";
+import Grande7 from "../Assets/Grande 7.jpg";
+
+import HotelLake1 from "../Assets/HotelLake 1.jpg";
+import HotelLake2 from "../Assets/HotelLake 2.jpg";
+import HotelLake3 from "../Assets/HotelLake 3.jpg";
+import HotelLake4 from "../Assets/HotelLake 4.jpg";
+import HotelLake5 from "../Assets/HotelLake 5.jpg";
+import HotelLake6 from "../Assets/HotelLake 6.jpg";
 
 // Helper function to generate random reviews
 const generateRandomReviews = () => {
@@ -750,7 +835,7 @@ export const citiesData = {
         image: [pI9],
         coords: [28.2096, 83.9856],
         reviews: generateRandomReviews(),
-        detailsImage: [pI9, pI1, pI2, pI3],
+        detailsImage: [FishTail1, FishTail2,FishTail3,FishTail4,FishTail5,FishTail6,FishTail7,FishTail8,FishTail9],
         description:
           "Enjoy breathtaking views of the lake from this cozy lodge, perfect for a peaceful retreat.",
         rooms: [
@@ -797,7 +882,7 @@ export const citiesData = {
         image: [pI2],
         coords: [28.2099, 83.9859],
         reviews: generateRandomReviews(),
-        detailsImage: [pI2],
+        detailsImage: [TempleTree1,TempleTree2,TempleTree3,TempleTree4,TempleTree5,TempleTree6,TempleTree7,TempleTree8],
         description:
           "Relax in this serene resort that offers stunning mountain views and luxurious amenities.",
         rooms: [
@@ -844,7 +929,7 @@ export const citiesData = {
         image: [pI3],
         coords: [28.2093, 83.9853],
         reviews: generateRandomReviews(),
-        detailsImage: [pI3],
+        detailsImage: [Waterfront1,Waterfront2,Waterfront3,Waterfront4,Waterfront5,Waterfront6,Waterfront7,Waterfront8],
         description:
           "This resort features direct access to the lake, making it ideal for water sports enthusiasts.",
         rooms: [
@@ -891,7 +976,7 @@ export const citiesData = {
         image: [pI4],
         coords: [28.2097, 83.9857],
         reviews: generateRandomReviews(),
-        detailsImage: [pI4],
+        detailsImage: [HotelBarahi1,HotelBarahi2,HotelBarahi3,HotelBarahi4,HotelBarahi5,HotelBarahi6,HotelBarahi7,HotelBarahi8,HotelBarahi9],
         description:
           "Experience luxury in this hotel with a beautiful pool and stunning views of the surrounding mountains.",
         rooms: [
@@ -938,7 +1023,7 @@ export const citiesData = {
         image: [pI5],
         coords: [28.21, 83.986],
         reviews: generateRandomReviews(),
-        detailsImage: [pI5],
+        detailsImage: [Atithi1,Atithi2,Atithi3,Atithi4,Atithi5,Atithi6,Atithi7,Atithi8],
         description:
           "This resort offers a perfect blend of relaxation and adventure, with a full-service spa and outdoor activities.",
         rooms: [
@@ -985,7 +1070,7 @@ export const citiesData = {
         image: [pI6],
         coords: [28.2095, 83.9855],
         reviews: generateRandomReviews(),
-        detailsImage: [pI6],
+        detailsImage: [HotelGrande1,HotelGrande2,HotelGrande3,HotelGrande4,HotelGrande5,HotelGrande6,HotelGrande7],
         description:
           "Ideal for business travelers, this hotel combines comfort with modern amenities and excellent service.",
         rooms: [
@@ -1032,7 +1117,7 @@ export const citiesData = {
         image: [pI7],
         coords: [28.2098, 83.9858],
         reviews: generateRandomReviews(),
-        detailsImage: [pI7],
+        detailsImage: [HotelMiddle1,HotelMiddle2,HotelMiddle3,HotelMiddle4,HotelMiddle5,HotelMiddle6,HotelMiddle7],
         description:
           "This hotel features a rooftop bar with stunning views, perfect for enjoying the sunset over the lake.",
         rooms: [
@@ -1079,7 +1164,7 @@ export const citiesData = {
         image: [pI8],
         coords: [28.2092, 83.9852],
         reviews: generateRandomReviews(),
-        detailsImage: [pI8],
+        detailsImage: [HotelMountain1,HotelMountain2,HotelMountain3,HotelMountain4,HotelMountain5,HotelMountain5,HotelMountain6],
         description:
           "Enjoy breathtaking mountain views from this hotel, which is also a great base for trekking adventures.",
         rooms: [
@@ -1126,7 +1211,7 @@ export const citiesData = {
         image: [pI1],
         coords: [28.2101, 83.9861],
         reviews: generateRandomReviews(),
-        detailsImage: [pI1],
+        detailsImage: [Grande1,Grande2,Grande3,Grande4,Grande5,Grande6,Grande7],
         description:
           "This luxury hotel offers spacious rooms and top-notch amenities, ensuring a memorable stay.",
         rooms: [
@@ -1173,7 +1258,7 @@ export const citiesData = {
         image: [pI10],
         coords: [28.2094, 83.9854],
         reviews: generateRandomReviews(),
-        detailsImage: [pI10],
+        detailsImage: [HotelLake1,HotelLake2,HotelLake3,HotelLake4,HotelLake5,HotelLake6],
         description:
           "With direct lake access, this hotel is perfect for those looking to enjoy water sports and relaxation.",
         rooms: [
