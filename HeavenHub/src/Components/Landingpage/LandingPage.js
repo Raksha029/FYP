@@ -7,16 +7,16 @@ import hotelbackground_icon from "../Assets/hotelbackground.png";
 import TopRatedProperties from "../TopRatedProperties/TopRatedProperties";
 import PopularPlaces from "../PopularPlaces/PopularPlaces";
 import Chatbot from "../Chatbot/Chatbot";
-import hotel1 from "../Assets/hotel1.png";
 
 const LandingPage = ({ savedProperties, setSavedProperties }) => {
   const [searchParams, setSearchParams] = useState({
     location: "",
-    checkIn: "",
-    checkOut: "",
     adults: 1,
     children: 0,
     rooms: 1,
+    priceRange: [0, 5000],
+    amenities: [],
+    rating: 0,
   });
 
   const [showChatbot, setShowChatbot] = useState(false);
@@ -25,58 +25,33 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
 
-    // Add comprehensive logging
-    console.log("Search Parameters:", {
-      location: searchParams.location,
-      checkIn: searchParams.checkIn,
-      checkOut: searchParams.checkOut,
-      adults: searchParams.adults,
-      children: searchParams.children,
-      rooms: searchParams.rooms,
-    });
-
-    // Validate dates
-    const checkIn = new Date(searchParams.checkIn);
-    const checkOut = new Date(searchParams.checkOut);
-
-    if (checkIn >= checkOut) {
-      toast.error("Check-out date must be after check-in date");
-      return;
-    }
-
     try {
-      const response = await fetch("http://localhost:4000/api/search-hotels", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...searchParams,
-          checkIn: checkIn.toISOString(),
-          checkOut: checkOut.toISOString(),
-        }),
+      const queryParams = new URLSearchParams({
+        name: searchParams.location.toLowerCase(),
+        adults: searchParams.adults,
+        children: searchParams.children,
+        rooms: searchParams.rooms,
       });
 
-      // Log raw response
-      const responseText = await response.text();
-      console.log("Raw Response:", responseText);
+      const response = await fetch(
+        `http://localhost:4000/api/cities/search?${queryParams}`
+      );
+      const data = await response.json();
 
-      // Parse JSON after logging
-      const data = JSON.parse(responseText);
-
-      if (data.length > 0) {
-        navigate("/search-results", {
-          state: {
-            searchParams,
-            availableHotels: data,
-          },
-        });
-      } else {
-        toast.info("No hotels available for selected parameters");
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to search hotels");
       }
+
+      // Navigate to results page with the filtered data
+      navigate(`/${searchParams.location.toLowerCase()}`, {
+        state: {
+          searchParams,
+          cityData: data,
+        },
+      });
     } catch (error) {
       console.error("Search Error:", error);
-      toast.error("Search failed. Please try again.");
+      toast.error(error.message || "Failed to search hotels");
     }
   };
 
@@ -105,30 +80,6 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
                     setSearchParams({
                       ...searchParams,
                       location: e.target.value,
-                    })
-                  }
-                  className={styles.searchInput}
-                />
-                <input
-                  type="date"
-                  name="checkIn"
-                  value={searchParams.checkIn}
-                  onChange={(e) =>
-                    setSearchParams({
-                      ...searchParams,
-                      checkIn: e.target.value,
-                    })
-                  }
-                  className={styles.searchInput}
-                />
-                <input
-                  type="date"
-                  name="checkOut"
-                  value={searchParams.checkOut}
-                  onChange={(e) =>
-                    setSearchParams({
-                      ...searchParams,
-                      checkOut: e.target.value,
                     })
                   }
                   className={styles.searchInput}
@@ -188,21 +139,14 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
       />
 
       {/* Why Choose Us Section */}
-<section className={styles.whyChooseUsSection}>
-  <div className={styles.whyChooseUsContainer}>
-    {/* Image on the Left */}
-    <div className={styles.whyChooseUsImage}>
-      <img src={hotel1} alt="Why Choose Us" />
-    </div>
-
-    {/* Text on the Right */}
-    <div className={styles.textContainer}>
-      <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
-      <p className={styles.whyChooseUsDescription}>
-        Discover why HeavenHub is your perfect choice. We offer unbeatable 
-        deals, a vast selection of hotels, and exclusive experiences tailored 
-        to your needs. Enjoy seamless booking, 24/7 support, and personalized 
-        recommendations for a memorable stay.
+      <section className={styles.whyChooseUsSection}>
+        <div className={styles.whyChooseUsBackground}>
+          <div className={styles.textContainer}>
+            <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
+            <p className={styles.whyChooseUsDescription}>
+              Discover the reasons why HeavenHub is the best choice for your
+              stay. We offer unbeatable deals, a wide selection of hotels, and
+              exclusive experiences tailored to your needs.
             </p>
           </div>
         </div>

@@ -1,37 +1,35 @@
 import React from 'react';
 import styles from './AdminUser.module.css';
 
-const AdminUser = () => {
+const AdminHotel = () => {
   return (
-    <div className={styles.userContainer}>
+    <div className={styles.hotelContainer}>
       <div className={styles.header}>
-        <h2>Users</h2>
+        <h2>User</h2>
         <div className={styles.actions}>
           <button className={styles.addButton}>Add New</button>
           <button className={styles.editButton}>Edit</button>
-          <button className={styles.editButton}>Delete</button>
+          <button className={styles.deleteButton}>Delete</button>
         </div>
       </div>
       <div className={styles.tableContainer}>
-        <table className={styles.userTable}>
+        <table className={styles.hotelTable}>
           <thead>
             <tr>
               <th>Id</th>
               <th>User</th>
-              <th>Email</th>
               <th>City</th>
-              <th>Phone no</th>
-              
+              <th>phone no</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>1</td>
-              <td>John Doe</td>
-              <td>john@example.com</td>
+              <td>Hotel Paradise</td>
               <td>New York</td>
-              <td>9847751958</td>
-             
+              <td>$200</td>
+              <td>5-Star</td>
+              <td>123-456-7890</td>
             </tr>
             {/* Add more rows as needed */}
           </tbody>
@@ -41,4 +39,4 @@ const AdminUser = () => {
   );
 };
 
-export default AdminUser;
+export default AdminHotel;

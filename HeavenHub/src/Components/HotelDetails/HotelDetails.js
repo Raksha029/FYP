@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { citiesData } from "../data/citiesData"; // Import citiesData
 import styles from "./HotelDetails.module.css";
 import { FaHeart, FaShareAlt } from "react-icons/fa"; // Import icons
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
@@ -17,14 +16,12 @@ L.Icon.Default.mergeOptions({
 });
 
 function HotelDetails({ savedProperties, setSavedProperties }) {
-  const { city, id } = useParams(); // Get city from URL
-  const hotel = citiesData[city]?.hotels.find((h) => h.id === id); // Find hotel by ID
-
+  const { city, id } = useParams();
+  const [hotel, setHotel] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showAllReviews, setShowAllReviews] = useState(false); // State to manage review visibility
-  const [selectedRooms, setSelectedRooms] = useState({});
-  const [isFavorited, setIsFavorited] = useState(
-    savedProperties[hotel.id] !== undefined
-  );
+  const [isFavorited, setIsFavorited] = useState(false);
   const [showReservationForm, setShowReservationForm] = useState(false); // State to manage reservation form visibility
   const [userDetails, setUserDetails] = useState({
     firstName: "",
@@ -35,45 +32,126 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     paperlessConfirmation: false,
     bookingFor: "mainGuest", // Default value
   }); // State for user details
+  const [mapContainerRef, setMapContainerRef] = useState(null);
+  const mapInstanceRef = useRef(null);
+
+  // For future review functionality
+  // eslint-disable-next-line no-unused-vars
   const [newReview, setNewReview] = useState({
-    reviewer: "",
-    rating: 0,
+    rating: 5,
     comment: "",
-  }); // State for new review
-  const [isReviewFormVisible, setIsReviewFormVisible] = useState(false); // State to manage review form visibility
+  });
 
-  // Create refs for each section
-  const infoRef = useRef(null);
-  const houseRulesRef = useRef(null);
-  const reviewsRef = useRef(null);
-  const mapRef = useRef(null); // Ref for the map
-  const mapInstance = useRef(null); // Ref to store the map instance
-  const roomsRef = useRef(null); // Create a ref for the rooms section
+  // For future user authentication
+  // eslint-disable-next-line no-unused-vars
+  const currentUser = null; // Will be implemented with auth
 
-  const initMap = useCallback(() => {
-    if (mapInstance.current) {
-      return; // If the map is already initialized, do nothing
-    }
-    mapInstance.current = L.map(mapRef.current).setView(hotel.coords, 13); // Set the view to the hotel's coordinates
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: "© OpenStreetMap",
-    }).addTo(mapInstance.current);
-    L.marker(hotel.coords).addTo(mapInstance.current); // Add a marker for the hotel
-  }, [hotel.coords]);
+  // Image handling component
+  const ImageWithFallback = ({ src, alt, className }) => {
+    const handleError = (e) => {
+      console.error(` Image load error for: ${src}`);
+      e.target.src = "/logo192.png";
+    };
+
+    return (
+      <img src={src} alt={alt} className={className} onError={handleError} />
+    );
+  };
 
   useEffect(() => {
-    if (hotel) {
-      initMap(); // Call the function
-    }
-  }, [hotel, initMap]); // Add hotel and initMap as dependencies
+    const fetchHotelDetails = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/api/cities/${city}/hotels/${id}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch hotel details");
+        const data = await response.json();
 
-  const handleRoomChange = (roomType, count) => {
-    setSelectedRooms((prev) => ({
-      ...prev,
-      [roomType]: count,
-    }));
-  };
+        console.log("Original hotel data:", data);
+        console.log("Coordinates:", data.coords); // Debug the coordinates
+
+        const transformImagePaths = (images) => {
+          if (!images) return [];
+          return images
+            .map((img) => {
+              if (!img) return null;
+              if (img.startsWith("http")) return img;
+              if (img.startsWith("/images"))
+                return `http://localhost:4000${img}`;
+              return `http://localhost:4000/images/${img}`;
+            })
+            .filter(Boolean);
+        };
+
+        const transformedData = {
+          ...data,
+          detailsImage: transformImagePaths(data.detailsImage),
+          image: transformImagePaths(data.image),
+        };
+
+        console.log("Transformed hotel data:", transformedData);
+
+        setHotel(transformedData);
+        setIsFavorited(savedProperties && savedProperties[id] !== undefined);
+
+        // Replace missing coordinates with default ones for testing
+        if (!transformedData.coords || transformedData.coords.length !== 2) {
+          console.log("Using default coordinates for testing");
+          const defaultCoords = [27.7172, 85.324]; // Example coordinates for Kathmandu
+          transformedData.coords = defaultCoords;
+        }
+      } catch (error) {
+        console.error("Error fetching hotel details:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotelDetails();
+  }, [city, id, savedProperties]);
+
+  // Add this eslint-disable-next-line comment before the useEffect
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    console.log("Map container ref:", mapContainerRef);
+
+    if (hotel && hotel.coords && mapContainerRef) {
+      // Check if a map instance already exists
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+      }
+
+      // Create a new map instance
+      const newMap = L.map(mapContainerRef).setView(hotel.coords, 15);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(newMap);
+
+      // Add a marker for the hotel location
+      L.marker(hotel.coords)
+        .addTo(newMap)
+        .bindPopup(`<b>${hotel.name}</b><br>${hotel.location}`)
+        .openPopup();
+
+      // Save the map instance to the ref
+      mapInstanceRef.current = newMap;
+
+      // Force a resize for any layout issues
+      setTimeout(() => {
+        newMap.invalidateSize();
+      }, 100);
+    }
+
+    // Cleanup function
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, [hotel, mapContainerRef]); // Add mapContainerRef to dependencies
 
   const handleReserve = (roomType) => {
     setShowReservationForm(true); // Show reservation form
@@ -85,38 +163,20 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     setShowReservationForm(false); // Close the form after submission
   };
 
-  const handleReserveNow = () => {
-    if (roomsRef.current) {
-      const headerOffset = 80; // Adjust this value based on your header height
-      const elementPosition = roomsRef.current.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
   const toggleFavorite = async () => {
     try {
       const token = localStorage.getItem("token");
-      const currentUser = JSON.parse(localStorage.getItem("userData"));
 
       if (!token) {
         toast.error("Please log in to add favorites");
         return;
       }
 
-      const method = savedProperties[hotel.id] ? "DELETE" : "POST";
+      const method = savedProperties[id] ? "DELETE" : "POST";
       const url =
         method === "DELETE"
-          ? `http://localhost:4000/api/favorites/remove/${hotel.id}`
+          ? `http://localhost:4000/api/favorites/remove/${id}`
           : "http://localhost:4000/api/favorites/add";
-
-      const imageUrl = Array.isArray(hotel.detailsImage)
-        ? hotel.detailsImage[0]
-        : hotel.detailsImage || "";
 
       const response = await fetch(url, {
         method,
@@ -127,384 +187,230 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
         body:
           method === "POST"
             ? JSON.stringify({
-                propertyId: hotel.id,
+                propertyId: id,
                 name: hotel.name,
-                city: city,
-                image: imageUrl,
+                city: city.toLowerCase(),
+                image: Array.isArray(hotel.image)
+                  ? hotel.image[0]
+                  : hotel.image,
                 rating: hotel.rating || 0,
               })
             : null,
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(
-          `HTTP error! status: ${response.status}, message: ${errorText}`
-        );
+        throw new Error("Failed to update favorites");
       }
 
-      const responseData = await response.json();
-      console.log("Favorite operation response:", responseData);
-
-      setSavedProperties((prev) => {
-        const newSavedProperties = { ...prev };
-        if (method === "DELETE") {
-          delete newSavedProperties[hotel.id];
-          setIsFavorited(false);
-        } else {
-          newSavedProperties[hotel.id] = {
+      // Update saved properties state
+      if (method === "DELETE") {
+        const { [id]: removed, ...rest } = savedProperties;
+        setSavedProperties(rest);
+        setIsFavorited(false);
+      } else {
+        setSavedProperties({
+          ...savedProperties,
+          [id]: {
             ...hotel,
-            city: city,
             isFavorite: true,
-          };
-          setIsFavorited(true);
-        }
-
-        // Save to localStorage for the current user
-        if (currentUser) {
-          localStorage.setItem(
-            `favorites_${currentUser.id}`,
-            JSON.stringify(newSavedProperties)
-          );
-        }
-
-        return newSavedProperties;
-      });
+            propertyId: id,
+            city: city.toLowerCase(),
+          },
+        });
+        setIsFavorited(true);
+      }
 
       toast.success(
-        method === "DELETE"
-          ? `${hotel.name} removed from favorites`
-          : `${hotel.name} added to favorites`
+        method === "DELETE" ? "Removed from favorites" : "Added to favorites"
       );
     } catch (error) {
-      console.error("Detailed error:", error);
-      toast.error(`Failed to update favorites: ${error.message}`);
+      console.error("Error updating favorites:", error);
+      toast.error("Failed to update favorites");
     }
   };
 
-  const handleReviewSubmit = (e) => {
-    e.preventDefault();
-    // Add the new review to the hotel reviews
-    hotel.reviews.push(newReview);
-    setNewReview({ reviewer: "", rating: 0, comment: "" }); // Reset the review form
+  // Render images function
+  const renderImages = () => {
+    if (!hotel?.detailsImage?.length) return null;
+
+    return (
+      <div className={styles.imageGallery}>
+        {hotel.detailsImage.map((image, index) => (
+          <ImageWithFallback
+            key={index}
+            src={image}
+            alt={`${hotel.name} - Image ${index + 1}`}
+            className={styles.galleryImage}
+          />
+        ))}
+      </div>
+    );
   };
 
-  // Use hotel's rooms if available, otherwise fallback to default
-  const roomData = hotel?.rooms || [
-    {
-      type: "Default Room",
-      price: 100,
-      capacity: "2 Adults",
-      available: 5,
-      description: "A standard room with basic amenities.",
-    },
-  ];
+  // eslint-disable-next-line no-unused-vars
+  const handleReviewSubmit = () => {
+    // Implementation coming soon
+  };
 
-  // Check if hotel exists
+  if (loading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (error) {
+    return <div className={styles.error}>Error: {error}</div>;
+  }
+
   if (!hotel) {
-    return <div>Hotel not found</div>; // Handle case where hotel is not found
+    return <div className={styles.notFound}>Hotel not found</div>;
   }
 
-  // Check if amenities exist
-  if (!hotel.amenities || !Array.isArray(hotel.amenities)) {
-    return <div>No facilities available for this hotel.</div>; // Handle case where amenities are undefined or not an array
-  }
-
-  // Check if reviews exist
-  if (!hotel.reviews || !Array.isArray(hotel.reviews)) {
-    return <div>No reviews available for this hotel.</div>; // Handle case where reviews are undefined or not an array
-  }
-
-  // Check if detailsImage exists
-  if (!hotel.detailsImage || !Array.isArray(hotel.detailsImage)) {
-    return <div>No images available for this hotel.</div>; // Handle case where images are undefined or not an array
-  }
-
-  // Check if rooms exist
-  if (!hotel.rooms || !Array.isArray(hotel.rooms)) {
-    return <div>No rooms available for this hotel.</div>;
-  }
+  // Remove detailsImage from destructuring since we're accessing it via hotel.detailsImage
+  const {
+    name = "",
+    location = "",
+    coords = null,
+    rooms = [],
+    amenities = [],
+    reviews = [],
+    rating = 0,
+    description = "",
+    price = 0,
+  } = hotel;
 
   return (
     <div className={styles.pageContainer}>
       <div className={styles.content}>
-        {/* Search Bar */}
-        <div className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="Location"
-            className={styles.searchInput}
-            defaultValue={hotel.location} // Set default value to hotel location
-          />
-          <input type="date" className={styles.dateInput} />
-          <input type="date" className={styles.dateInput} />
-          <button className={styles.searchButton}>Search</button>
+        {/* Header Section */}
+        <div className={styles.header}>
+          <div className={styles.titleSection}>
+            <h1 className={styles.title}>{name}</h1>
+            <div className={styles.location}>{location}</div>
+            <div className={styles.rating}>Rating: {rating} ★</div>
+          </div>
+          <div className={styles.actions}>
+            <FaHeart
+              className={`${styles.icon} ${
+                isFavorited ? styles.favorited : ""
+              }`}
+              onClick={toggleFavorite}
+            />
+            <FaShareAlt className={styles.icon} />
+          </div>
         </div>
 
-        {/* Hotel Details */}
-        <div className={styles.hotelDetails}>
-          <div className={styles.header}>
-            <h1 className={styles.hotelName}>{hotel.name}</h1>
-            <div className={styles.actions}>
-              <FaHeart
-                className={styles.icon}
-                style={{ color: isFavorited ? "red" : "Black" }} // Change color based on favorite status
-                onClick={toggleFavorite} // Add click handler
-              />
-              <FaShareAlt className={styles.icon} />
-            </div>
-          </div>
+        {/* Image Gallery */}
+        {renderImages()}
 
-          <div className={styles.imageGallery}>
-            <div className={styles.largeImageContainer}>
-              <img
-                src={hotel.detailsImage[0]}
-                alt="Hotel Large"
-                className={styles.largeImage}
-              />
-            </div>
-            <div className={styles.smallImages}>
-              {hotel.detailsImage.slice(1, 4).map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Hotel Small ${index + 1}`}
-                  className={styles.galleryImage}
-                />
-              ))}
-            </div>
-          </div>
+        {/* Main Content */}
+        <div className={styles.mainContent}>
+          {/* Left Column */}
+          <div className={styles.leftColumn}>
+            {/* Description */}
+            <section className={styles.section}>
+              <h2>About this hotel</h2>
+              <p className={styles.description}>{description}</p>
+            </section>
 
-          {/* Container for Amenities and Details Below Image */}
-          <div className={styles.detailsContainer}>
-            {/* Amenities Section on Left Side */}
-            <div className={styles.amenitiesBox}>
-              <h2 className={styles.amenitiesTitle}>Amenities</h2>
-              <div className={styles.amenities}>
-                {hotel.amenities.map((amenity, index) => (
+            {/* Amenities */}
+            <section className={styles.section}>
+              <h2>Popular amenities</h2>
+              <div className={styles.amenitiesGrid}>
+                {amenities.map((amenity, index) => (
                   <div key={index} className={styles.amenityItem}>
                     {amenity}
                   </div>
                 ))}
               </div>
-            </div>
+            </section>
 
-            {/* Price Box with Details on Right Side */}
-            <div className={styles.priceBox}>
-              <p className={styles.descriptionText}>Perfect for night stay</p>
-              <button
-                className={styles.reserveButton}
-                onClick={handleReserveNow}
-              >
-                Reserve Now
-              </button>
-            </div>
+            {/* Map */}
+            <section className={styles.section}>
+              <h2>Location</h2>
+              {coords && (
+                <div
+                  ref={(el) => {
+                    setMapContainerRef(el);
+                  }}
+                  className={styles.mapContainer}
+                  style={{ height: "400px", width: "100%" }}
+                >
+                  {/* Map will be initialized here */}
+                </div>
+              )}
+              {!coords && <p>Map location not available</p>}
+            </section>
+
+            {/* Reviews */}
+            <section className={styles.section}>
+              <h2>Guest Reviews</h2>
+              <div className={styles.reviewsContainer}>
+                {reviews
+                  .slice(0, showAllReviews ? undefined : 3)
+                  .map((review, index) => (
+                    <div key={index} className={styles.reviewCard}>
+                      <div className={styles.reviewHeader}>
+                        <span className={styles.reviewer}>
+                          {review.reviewer}
+                        </span>
+                        <span className={styles.rating}>{review.rating} ★</span>
+                      </div>
+                      <p className={styles.comment}>{review.comment}</p>
+                    </div>
+                  ))}
+                {reviews.length > 3 && (
+                  <button
+                    className={styles.seeMoreButton}
+                    onClick={() => setShowAllReviews(!showAllReviews)}
+                  >
+                    {showAllReviews ? "Show Less" : "See More Reviews"}
+                  </button>
+                )}
+              </div>
+            </section>
           </div>
 
-          {/* Apartment Description Below Amenities */}
-          <p className={styles.apartmentDescription}>
-            <strong>Apartment Description</strong>
-          </p>
-          <p className={styles.apartmentDetails}>{hotel.description}</p>
-        </div>
+          {/* Right Column - Booking Section */}
+          <div className={styles.rightColumn}>
+            <div className={styles.bookingCard}>
+              <div className={styles.priceSection}>
+                <span className={styles.priceLabel}>Starting from</span>
+                <h2 className={styles.price}>${price}</h2>
+                <span className={styles.perNight}>per night</span>
+              </div>
 
-        {/* Map Container at the Bottom */}
-        <div className={styles.mapContainerWrapper}>
-          <div ref={mapRef} className={styles.mapContainer}></div>
-        </div>
-
-        {/* Additional Sections Below Location and Map */}
-        <div ref={infoRef} className={styles.infoSection}>
-          <div className={styles.infoContainer}>
-            {/* Services Offered Section */}
-            <div className={styles.servicesSection}>
-              <h2 className={styles.servicesTitle}>Services Offered</h2>
-              <div className={styles.servicesContainer}>
-                {hotel.servicesOffered.map((service, index) => (
-                  <div key={index} className={styles.serviceItem}>
-                    {service}
+              <div className={styles.roomsSection}>
+                <h3>Available Rooms</h3>
+                {rooms.map((room, index) => (
+                  <div key={index} className={styles.roomCard}>
+                    <div className={styles.roomInfo}>
+                      <h4>{room.type}</h4>
+                      <p>{room.description}</p>
+                      <p>Capacity: {room.capacity}</p>
+                      <p className={styles.roomPrice}>${room.price}/night</p>
+                    </div>
+                    <button
+                      className={styles.reserveButton}
+                      onClick={() => handleReserve(room.type)}
+                    >
+                      Reserve
+                    </button>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* All Available Rooms Section */}
-            <div ref={roomsRef} className={styles.roomsSection}>
-              <h2 className={styles.roomsTitle}>All Available Rooms</h2>
-              <table className={styles.roomsTable}>
-                <thead>
-                  <tr>
-                    <th>Room Type</th>
-                    <th>Price for Rooms</th>
-                    <th>Capacity</th>
-                    <th>Availability</th>
-                    <th>Description</th>
-                    <th>Select Rooms</th>
-                    <th>Total Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {roomData.map(
-                    ({ type, price, capacity, available, description }) => (
-                      <tr key={type}>
-                        <td>{type}</td>
-                        <td>${price}</td>
-                        <td>{capacity}</td>
-                        <td>{available} available</td>
-                        <td>{description}</td>
-                        <td>
-                          <input
-                            type="number"
-                            min="0"
-                            max={available}
-                            value={selectedRooms[type] || 0}
-                            onChange={(e) =>
-                              handleRoomChange(type, e.target.value)
-                            }
-                            style={{ width: "60px" }}
-                          />
-                          <button
-                            onClick={() => handleReserve(type)}
-                            disabled={
-                              !selectedRooms[type] ||
-                              selectedRooms[type] > available
-                            }
-                          >
-                            Reserve
-                          </button>
-                        </td>
-                        <td>
-                          $
-                          {selectedRooms[type]
-                            ? selectedRooms[type] * price
-                            : 0}
-                        </td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
-
-        <div ref={houseRulesRef} className={styles.houseRulesSection}>
-          <h2 className={styles.houseRulesTitle}>House Rules</h2>
-          <div className={styles.rulesSection}>
-            <table className={styles.rulesTable}>
-              <thead>
-                <tr>
-                  <th>Rule</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Check-in</td>
-                  <td>From 3 PM</td>
-                </tr>
-                <tr>
-                  <td>Check-out</td>
-                  <td>Until 11 AM</td>
-                </tr>
-                <tr>
-                  <td>Pets</td>
-                  <td>No pets allowed</td>
-                </tr>
-                {/* Add more rules as needed */}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div ref={reviewsRef} className={styles.reviewsSection}>
-          <h2 className={styles.reviewsTitle}>Guest Reviews</h2>
-          <div className={styles.reviewsContainer}>
-            {hotel.reviews
-              .slice(0, showAllReviews ? hotel.reviews.length : 2)
-              .map((review, index) => (
-                <div key={index} className={styles.reviewCard}>
-                  <h3 className={styles.reviewerName}>{review.reviewer}</h3>
-                  <p className={styles.reviewRating}>
-                    {"★".repeat(review.rating)}
-                  </p>
-                  <p className={styles.reviewComment}>{review.comment}</p>
-                </div>
-              ))}
-          </div>
-          {hotel.reviews.length > 2 && !showAllReviews && (
-            <button
-              onClick={() => setShowAllReviews(true)}
-              className={styles.seeMoreButton}
-            >
-              See More
-            </button>
-          )}
-          {showAllReviews && (
-            <button
-              onClick={() => setShowAllReviews(false)}
-              className={styles.seeMoreButton}
-            >
-              See Less
-            </button>
-          )}
-
-          {/* Write Review Button */}
-          <button
-            onClick={() => setIsReviewFormVisible((prev) => !prev)} // Toggle review form visibility
-            className={styles.writeReviewButton}
-          >
-            {isReviewFormVisible ? "Cancel" : "Write Review"}
-          </button>
-
-          {/* Review Submission Form */}
-          {isReviewFormVisible && (
-            <form onSubmit={handleReviewSubmit} className={styles.reviewForm}>
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={newReview.reviewer}
-                onChange={(e) =>
-                  setNewReview({ ...newReview, reviewer: e.target.value })
-                }
-                required
-              />
-              <input
-                type="number"
-                min="1"
-                max="5"
-                placeholder="Rating (1-5)"
-                value={newReview.rating}
-                onChange={(e) =>
-                  setNewReview({ ...newReview, rating: e.target.value })
-                }
-                required
-              />
-              <textarea
-                placeholder="Write your review"
-                value={newReview.comment}
-                onChange={(e) =>
-                  setNewReview({ ...newReview, comment: e.target.value })
-                }
-                required
-              />
-              <button type="submit" className={styles.submitReviewButton}>
-                Submit Review
-              </button>
-            </form>
-          )}
-        </div>
-
-        {/* Reservation Form Modal */}
-        {showReservationForm && (
-          <Reserve
-            userDetails={userDetails}
-            setUserDetails={setUserDetails}
-            handleSubmit={handleSubmit}
-            setShowReservationForm={setShowReservationForm}
-          />
-        )}
       </div>
+
+      {/* Reservation Form Modal */}
+      {showReservationForm && (
+        <Reserve
+          onClose={() => setShowReservationForm(false)}
+          onSubmit={handleSubmit}
+          userDetails={userDetails}
+          setUserDetails={setUserDetails}
+        />
+      )}
     </div>
   );
 }

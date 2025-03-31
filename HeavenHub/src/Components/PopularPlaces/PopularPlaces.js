@@ -1,53 +1,135 @@
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import styles from "./PopularPlaces.module.css";
-import place1 from "../Assets/place1.png";
-import place2 from "../Assets/place2.png";
-import place3 from "../Assets/place3.png";
-import place4 from "../Assets/place4.png";
-import place5 from "../Assets/place5.png";
-import place6 from "../Assets/place6.png";
-import place7 from "../Assets/place7.png";
-import place8 from "../Assets/place8.png";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const PopularPlaces = () => {
-  const scrollContainerRef1 = useRef(null);
-  const navigate = useNavigate(); // Initialize navigate
+  const [places, setPlaces] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const scrollContainerRef = useRef(null);
 
-  const popularPlaces = [
-    { img: place1, name: "Kathmandu", route: "/kathmandu" },
-    { img: place2, name: "Pokhara", route: "/pokhara" }, // Example for additional places
-    { img: place3, name: "Baktapur", route: "/baktapur" },
-    { img: place4, name: "Lalitpur", route: "/lalitpur" },
-    { img: place5, name: "Lumbini", route: "/lumbini" },
-    { img: place6, name: "Janakpur", route: "/janakpur" },
-    { img: place7, name: "Nagarkot", route: "/nagarkot" },
-    { img: place8, name: "Dharan", route: "/dharan" },
-  ];
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        console.log("Fetching popular places...");
+        const response = await fetch(
+          "http://localhost:4000/api/cities/popular/places"
+        );
+
+        if (!response.ok) {
+          console.error(`API error: ${response.status} ${response.statusText}`);
+          throw new Error("Failed to fetch places");
+        }
+
+        const text = await response.text();
+        console.log("Raw response:", text);
+
+        let data;
+        try {
+          data = JSON.parse(text);
+          console.log("Parsed places data:", data);
+        } catch (e) {
+          console.error("Failed to parse JSON:", e);
+          throw new Error("Invalid response format");
+        }
+
+        setPlaces(data);
+      } catch (error) {
+        console.error("Error fetching places:", error);
+        toast.error("Could not load popular places");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlaces();
+  }, []);
+
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 300;
+      const newScrollPosition =
+        scrollContainerRef.current.scrollLeft +
+        (direction === "left" ? -scrollAmount : scrollAmount);
+      scrollContainerRef.current.scrollTo({
+        left: newScrollPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  // Add error handling for images
+  const ImageWithFallback = ({ src, alt, className }) => {
+    const [imgError, setImgError] = useState(false);
+
+    // Transform image path
+    const transformedSrc = !src
+      ? "/logo192.png"
+      : src.startsWith("http")
+      ? src
+      : src.startsWith("/images")
+      ? `http://localhost:4000${src}`
+      : `http://localhost:4000/images/${src}`;
+
+    return (
+      <img
+        src={imgError ? "/logo192.png" : transformedSrc}
+        alt={alt}
+        className={className}
+        onError={(e) => {
+          console.error(`Image load error: ${transformedSrc}`);
+          setImgError(true);
+        }}
+      />
+    );
+  };
+
+  if (loading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (!places || places.length === 0) {
+    return <div className={styles.noPlaces}>No popular places available</div>;
+  }
 
   return (
     <section className={styles.popularPlacesSection}>
-      <h3 className={styles.sectionTitle}>Popular Places</h3>
-      <div className="relative">
-        <div ref={scrollContainerRef1} className={styles.scrollContainer}>
-          {popularPlaces.map((place, index) => (
-            <div
-              key={index}
-              className={`${styles.placeCard} ${
-                index < 4 ? styles.static : styles.scrollable
-              }`}
-              onClick={() => navigate(place.route)} // Navigate on click
-              style={{ cursor: "pointer" }} // Add pointer cursor for better UX
-            >
-              <img
-                src={place.img}
-                alt={place.name}
-                className={styles.placeImage}
-              />
-              <p className={styles.placeName}>{place.name}</p>
+      <h2 className={styles.sectionTitle}>Popular Places</h2>
+      <div className={styles.carouselContainer}>
+        <button
+          className={`${styles.scrollButton} ${styles.leftButton}`}
+          onClick={() => handleScroll("left")}
+        >
+          <FaChevronLeft />
+        </button>
+        <div className={styles.scrollContainer} ref={scrollContainerRef}>
+          {places.map((place, index) => (
+            <div key={index} className={styles.placeCard}>
+              <Link
+                to={place.route || `/${place.name.toLowerCase()}`}
+                className={styles.imageLink}
+              >
+                <div className={styles.imageContainer}>
+                  <ImageWithFallback
+                    src={place.image}
+                    alt={place.name}
+                    className={styles.placeImage}
+                  />
+                  <div className={styles.placeName}>
+                    <h3>{place.name}</h3>
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
+        <button
+          className={`${styles.scrollButton} ${styles.rightButton}`}
+          onClick={() => handleScroll("right")}
+        >
+          <FaChevronRight />
+        </button>
       </div>
     </section>
   );

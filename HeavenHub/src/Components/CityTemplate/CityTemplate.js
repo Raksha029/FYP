@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -31,7 +31,9 @@ L.Icon.Default.mergeOptions({
 });
 
 const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
-  const { name, hotels, referencePoint, centerName } = cityData;
+  const { name, referencePoint, centerName } = cityData;
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
@@ -47,6 +49,37 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
   const [sortBy, setSortBy] = useState("");
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [showMapModal, setShowMapModal] = useState(false);
+
+  // Add useEffect to fetch hotels dynamically
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        setLoading(true);
+        console.log(`Fetching hotels for ${name}...`);
+
+        const response = await fetch(
+          `http://localhost:4000/api/cities/${name.toLowerCase()}/hotels`
+        );
+
+        if (!response.ok) {
+          console.error(`API error: ${response.status} ${response.statusText}`);
+          throw new Error(`Failed to fetch hotels for ${name}`);
+        }
+
+        const data = await response.json();
+        console.log(`Received ${data.length} hotels for ${name}:`, data);
+
+        setHotels(data);
+      } catch (error) {
+        console.error("Error fetching hotels:", error);
+        toast.error(`Could not load hotels for ${name}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHotels();
+  }, [name]);
 
   const handleSearch = () => {
     console.log("Searching for:", {
@@ -162,20 +195,51 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
     }
   };
 
-  const filteredHotels = hotels
-    .filter((hotel) => hotel.name.toLowerCase().includes(searchTerm))
-    .filter(
-      (hotel) =>
+  const filterHotels = (hotels) => {
+    return hotels.filter((hotel) => {
+      // Price filter
+      const withinPrice =
         hotel.price >= filter.priceRange[0] &&
-        hotel.price <= filter.priceRange[1]
-    )
-    .filter((hotel) => hotel.rating >= filter.rating);
+        hotel.price <= filter.priceRange[1];
 
-  const sortedHotels = [...filteredHotels].sort((a, b) => {
-    if (sortBy === "price") return a.price - b.price;
-    if (sortBy === "rating") return b.rating - a.rating;
-    return 0;
-  });
+      // Rating filter
+      const meetsRating = hotel.rating >= filter.rating;
+
+      // Amenities filter
+      const hasAmenities =
+        filter.amenities.length === 0 ||
+        filter.amenities.every((amenity) => hotel.amenities.includes(amenity));
+
+      // Name search
+      const matchesSearch = hotel.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      return withinPrice && meetsRating && hasAmenities && matchesSearch;
+    });
+  };
+
+  // Sort functionality
+  const sortHotels = (hotels) => {
+    switch (sortBy) {
+      case "price-low":
+        return [...hotels].sort((a, b) => a.price - b.price);
+      case "price-high":
+        return [...hotels].sort((a, b) => b.price - a.price);
+      case "rating":
+        return [...hotels].sort((a, b) => b.rating - a.rating);
+      default:
+        return hotels;
+    }
+  };
+
+  const filteredHotels = filterHotels(hotels);
+  const sortedHotels = sortHotels(filteredHotels);
+
+  // Add loading state
+  if (loading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -313,7 +377,8 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                   className={styles.filterSelect}
                 >
                   <option value="">None</option>
-                  <option value="price">Price (Low to High)</option>
+                  <option value="price-low">Price (Low to High)</option>
+                  <option value="price-high">Price (High to Low)</option>
                   <option value="rating">Rating (High to Low)</option>
                 </select>
               </div>
@@ -360,7 +425,11 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                 <div key={hotel.id} className={styles.hotelCard}>
                   <div className={styles.imageContainer}>
                     <img
-                      src={hotel.image}
+                      src={
+                        Array.isArray(hotel.image)
+                          ? hotel.image[0]
+                          : hotel.image
+                      }
                       alt={hotel.name}
                       className={styles.hotelImage}
                     />
@@ -385,18 +454,16 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                       Rating: <span>{hotel.rating} ★</span>
                     </p>
                     <p className={styles.hotelAmenities}>
-                      {hotel.amenities.join(", ")}
+                      {hotel.amenities?.join(", ")}
                     </p>
                     <p className={styles.hotelDistance}>
                       Distance from {centerName}: {distance} km
                     </p>
                     <div className={styles.hotelReviews}>
-                      <p>{hotel.reviews.length} reviews</p>
+                      <p>{hotel.reviews?.length || 0} reviews</p>
                     </div>
                     <Link
-                      to={`/hotel-details/${cityData.name.toLowerCase()}/${
-                        hotel.id
-                      }`}
+                      to={`/hotel-details/${name.toLowerCase()}/${hotel.id}`}
                       className={styles.hotelButton}
                     >
                       View Details

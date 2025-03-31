@@ -2,7 +2,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import LandingPage from "./Components/Landingpage/LandingPage";
 import ForgotPassword from "./Components/ForgotPassword/Forgotpassword";
 import ChangePassword from "./Components/ChangePassword.js/ChangePassword";
@@ -25,35 +30,24 @@ import Favourites from "./Components/Favourites/Favourites";
 import TopRatedProperties from "./Components/TopRatedProperties/TopRatedProperties";
 import Profile from "./Components/Profile/Profile";
 import LoyaltyPoints from "./Components/LoyaltyPoints/LoyaltyPoints";
-import SearchResults from "./Components/SearchResults/SearchResults";
 import Admin from "./Admin/Admin/AdminLogin";
 import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
-import AdminProfile from "./Admin/AdminProfile/AdminProfile";
-import AdminLayout from './Admin/AdminLayout/AdminLayout';
-import AdminUser from './Admin/AdminUser/AdminUser';
-import AdminHotel from './Admin/AdminHotel/AdminHotel';
-import AdminRoom from './Admin/AdminRoom/AdminRoom';
-import AdminBooking from './Admin/AdminBooking/AdminBooking';
-
+import AdminLayout from "./Admin/AdminLayout/AdminLayout";
+import AdminUser from "./Admin/AdminUser/AdminUser";
+import AdminHotel from "./Admin/AdminHotel/AdminHotel";
+import AdminRoom from "./Admin/AdminRoom/AdminRoom";
+import AdminBooking from "./Admin/AdminBooking/AdminBooking";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [, setCurrentUser] = useState(null);
   const [notifications, setNotifications] = useState([
     { message: "Successfully booking", date: "12 Mar 2021" },
     { message: "Shared successfully", date: "12 Mar 2021" },
     { message: "Get discount offer", date: "12 Mar 2021" },
   ]);
-  const [savedProperties, setSavedProperties] = useState(() => {
-    const currentUser = JSON.parse(localStorage.getItem("userData"));
-    if (currentUser) {
-      const savedPropertiesFromStorage = JSON.parse(
-        localStorage.getItem(`favorites_${currentUser.id}`) || "{}"
-      );
-      return savedPropertiesFromStorage;
-    }
-    return {};
-  });
+  const [savedProperties, setSavedProperties] = useState({});
 
   const handleClose = (index) => {
     const newNotifications = notifications.filter((_, i) => i !== index);
@@ -71,9 +65,10 @@ const App = () => {
   }, []);
 
   // Load user-specific favorites from backend
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchFavorites = async () => {
-      if (currentUser && isLoggedIn) {
+      if (isLoggedIn) {
         try {
           const token = localStorage.getItem("token");
           const response = await fetch("http://localhost:4000/api/favorites", {
@@ -94,6 +89,11 @@ const App = () => {
             }, {});
 
             setSavedProperties(favoritesMap);
+            // Save to localStorage for persistence
+            localStorage.setItem(
+              "savedProperties",
+              JSON.stringify(favoritesMap)
+            );
           }
         } catch (error) {
           console.error("Error fetching favorites:", error);
@@ -102,17 +102,7 @@ const App = () => {
     };
 
     fetchFavorites();
-  }, [currentUser, isLoggedIn]);
-
-  // Additional effect to save favorites to localStorage
-  useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem(
-        `favorites_${currentUser.id}`,
-        JSON.stringify(savedProperties)
-      );
-    }
-  }, [savedProperties, currentUser]);
+  }, [isLoggedIn]);
 
   // Logout handler to clear current user
   const handleLogout = () => {
@@ -285,19 +275,9 @@ const Content = ({
           />
           <Route path="/profile" element={<Profile />} />
           <Route path="/loyalty-points" element={<LoyaltyPoints />} />
-          <Route
-            path="/search-results"
-            element={
-              <SearchResults
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/*" element={<AdminLayout />}>
             <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="profile" element={<AdminProfile />} />
             <Route path="users" element={<AdminUser />} />
             <Route path="hotels" element={<AdminHotel />} />
             <Route path="rooms" element={<AdminRoom />} />

@@ -1,54 +1,169 @@
 .popularPlacesSection {
-  @apply py-4 sm:py-6 lg:py-8 px-2 sm:px-4 bg-gray-50;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+  position: relative;
 }
 
 .placeCard {
-  @apply flex flex-col items-center text-center bg-white border border-gray-200 
-         shadow-lg w-full transition-all duration-300 ease-in-out;
-  transform: scale(1);
+  flex: 0 0 calc(25% - 1rem); /* Show exactly 4 cards */
+  min-width: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  margin: 10px;
 }
 
 .placeCard:hover {
-  transform: scale(1.05); /* Slightly enlarge the card */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12); /* Enhanced shadow on hover */
-  cursor: pointer; /* Change cursor to pointer */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-
 .placeImage {
-  @apply w-full h-32 sm:h-40 lg:h-48 rounded-t-lg object-cover;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 .placeName {
-  @apply text-base sm:text-lg font-medium mt-2 mb-2 sm:mb-4 px-2;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
 }
 
 .sectionTitle {
-  @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4 sm:mb-6;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
 }
 
-.scrollContainer {
-  @apply flex overflow-x-scroll gap-3 sm:gap-4 lg:gap-6 w-full py-2 sm:py-4 px-2;
-  scroll-snap-type: x mandatory;
-  max-width: 95%; /* Wider on mobile */
-  @apply sm:max-w-[85%] lg:max-w-[70%]; /* Gradually decrease width on larger screens */
+.carouselContainer {
+  position: relative;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
+.scrollContainer {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 0 2rem;
+}
+
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.leftButton {
+  left: 0;
+}
+
+.rightButton {
+  right: 0;
+}
+
+.scrollButton:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hide scrollbar for different browsers */
+.scrollContainer {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .scrollContainer::-webkit-scrollbar {
-  display: none;
+  display: none;  /* Chrome, Safari and Opera */
 }
 
-.scrollContainer .placeCard,
-.scrollContainer .activityCard {
-  @apply flex-shrink-0 rounded-lg shadow-lg bg-white;
-  /* Responsive card widths */
-  width: calc(80% - 12px); /* Show 1.25 cards on mobile */
-  @apply sm:w-[calc(45%-16px)] /* Show ~2 cards on tablet */
-         md:w-[calc(33.333%-16px)] /* Show 3 cards on medium screens */
-         lg:w-[calc(25%-16px)]; /* Show 4 cards on large screens */
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .placeCard {
+    flex: 0 0 calc(33.333% - 1rem); /* 3 cards on medium screens */
+  }
 }
 
-.scrollContainer img {
-  @apply w-full h-32 sm:h-36 lg:h-40 rounded-t-lg object-cover;
+@media (max-width: 768px) {
+  .placeCard {
+    flex: 0 0 calc(50% - 1rem); /* 2 cards on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .placeCard {
+    flex: 0 0 calc(100% - 1rem); /* 1 card on very small screens */
+  }
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.placeImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.imageLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+
+.placeName {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  padding: 15px 0 10px;
+  text-align: center;
+}
+
+.placeName h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
+
+.placeCard:hover .placeImage {
+  transform: scale(1.05);
+}
+
+.placeCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }

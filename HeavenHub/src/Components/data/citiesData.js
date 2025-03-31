@@ -1,238 +1,3 @@
-//import images
-import kathmanduImage from "../Assets/kathmandu1.png";
-import kathmanduImage2 from "../Assets/kathmandu2.png";
-import kathmanduImage3 from "../Assets/kathmandu3.png";
-import kathmanduImage4 from "../Assets/kathmandu4.png";
-import kathmanduImage5 from "../Assets/kathmandu5.png";
-import kathmanduImage6 from "../Assets/kathmandu6.png";
-import kathmanduImage7 from "../Assets/kathmandu7.png";
-import kathmanduImage8 from "../Assets/kathmandu8.png";
-import kathmanduImage9 from "../Assets/kathmandu9.png";
-import kathmanduImage10 from "../Assets/kathmandu10.png";
-
-import pI1 from "../Assets/p1.jpg";
-import pI2 from "../Assets/p2.jpg";
-import pI3 from "../Assets/p3.jpg";
-import pI4 from "../Assets/p4.jpg";
-import pI5 from "../Assets/p5.jpg";
-import pI6 from "../Assets/p6.jpg";
-import pI7 from "../Assets/p7.jpg";
-import pI8 from "../Assets/p8.jpg";
-import pI9 from "../Assets/p9.jpg";
-import pI10 from "../Assets/p10.jpg";
-
-import bI1 from "../Assets/b1.jpg";
-import bI2 from "../Assets/b2.jpg";
-import bI3 from "../Assets/b3.jpg";
-import bI4 from "../Assets/b4.jpg";
-import bI5 from "../Assets/b5.jpg";
-import bI6 from "../Assets/b6.jpg";
-import bI7 from "../Assets/b7.jpg";
-import bI8 from "../Assets/b8.jpg";
-import bI9 from "../Assets/b9.jpg";
-import bI10 from "../Assets/b10.jpg";
-
-import liI1 from "../Assets/li1.jpg";
-import liI2 from "../Assets/li2.jpg";
-import liI3 from "../Assets/li3.jpg";
-import liI4 from "../Assets/li4.jpg";
-import liI5 from "../Assets/li5.jpg";
-import liI6 from "../Assets/li6.jpg";
-import liI7 from "../Assets/li7.jpg";
-
-import lI1 from "../Assets/l1.jpg";
-import lI2 from "../Assets/l2.jpg";
-import lI3 from "../Assets/l3.jpg";
-import lI4 from "../Assets/l4.jpg";
-import lI5 from "../Assets/l5.jpg";
-import lI6 from "../Assets/l6.jpg";
-import lI7 from "../Assets/l7.jpg";
-
-import jI1 from "../Assets/j1.jpg";
-import jI2 from "../Assets/j2.jpg";
-import jI3 from "../Assets/j3.jpg";
-import jI4 from "../Assets/j4.jpg";
-import jI5 from "../Assets/j5.jpg";
-import jI6 from "../Assets/j6.jpg";
-import jI7 from "../Assets/j7.jpg";
-
-import nI1 from "../Assets/n1.jpg";
-import nI2 from "../Assets/n2.jpg";
-import nI3 from "../Assets/n3.jpg";
-import nI4 from "../Assets/n4.jpg";
-import nI5 from "../Assets/n5.jpg";
-import nI6 from "../Assets/n6.jpg";
-import nI7 from "../Assets/n7.jpg";
-
-import dI1 from "../Assets/d1.jpg";
-import dI2 from "../Assets/d2.jpg";
-import dI3 from "../Assets/d3.jpg";
-import dI4 from "../Assets/d4.jpg";
-import dI5 from "../Assets/d5.jpg";
-import dI6 from "../Assets/d6.jpg";
-import dI7 from "../Assets/d7.jpg";
-
-import Hyatt1 from "../Assets/Hyatt 1.jpg";
-import Hyatt2 from "../Assets/Hyatt 2.jpg";
-import Hyatt3 from "../Assets/Hyatt 3.jpeg";
-import Hyatt4 from "../Assets/Hyatt 4.jpeg";
-import Hyatt5 from "../Assets/Hyatt 5.jpg";
-import Hyatt6 from "../Assets/Hyatt 6.jpg";
-import Hyatt7 from "../Assets/Hyatt 7.jpg";
-import Hyatt8 from "../Assets/Hyatt 8.jpg";
-import Hyatt9 from "../Assets/Hyatt 9.jpeg";
-import Hyatt10 from "../Assets/Hyatt 10.jpg";
-
-import Dwarik1 from "../Assets/Dwarik 1.jpg";
-import Dwarik2 from "../Assets/Dwarik 2.jpg";
-import Dwarik3 from "../Assets/Dwarik 3.jpg";
-import Dwarik4 from "../Assets/Dwarik 4.jpg";
-import Dwarik5 from "../Assets/Dwarik 5.jpg";
-import Dwarik6 from "../Assets/Dwarik 6.jpg";
-import Dwarik7 from "../Assets/Dwarik 7.jpg";
-import Dwarik8 from "../Assets/Dwarik 8.jpeg";
-import Dwarik9 from "../Assets/Dwarik 9.jpg";
-import Dwarik10 from "../Assets/Dwarik 10.jpg";
-
-import Yak1 from "../Assets/Yak 1.png";
-import Yak2 from "../Assets/Yak 2.jpg";
-import Yak3 from "../Assets/Yak 3.jpg";
-import Yak4 from "../Assets/Yak 4.jpg";
-import Yak5 from "../Assets/Yak 5.jpg";
-import Yak6 from "../Assets/Yak 6.jpeg";
-import Yak7 from "../Assets/Yak 7.jpg";
-import Yak8 from "../Assets/Yak 8.jpg";
-import Yak9 from "../Assets/Yak 9.jpg";
-import Yak10 from "../Assets/Yak 10.png";
-import Yak11 from "../Assets/Yak 11.png";
-
-import Marriott1 from "../Assets/Marriott 1.jpg";
-import Marriott2 from "../Assets/Marriott 2.jpg";
-import Marriott3 from "../Assets/Marriott 3.jpg";
-import Marriott4 from "../Assets/Marriott 4.jpg";
-import Marriott5 from "../Assets/Marriott 5.jpg";
-import Marriott6 from "../Assets/Marriott 6.jpg";
-import Marriott7 from "../Assets/Marriott 7.jpg";
-import Marriott8 from "../Assets/Marriott 8.jpg";
-import Marriott9 from "../Assets/Marriott 9.jpg";
-import Marriott10 from "../Assets/Marriott 10.jpg";
-import Marriott11 from "../Assets/Marriott 11.jpg";
-
-import Aloft1 from "../Assets/Aloft 1.jpg";
-import Aloft2 from "../Assets/Aloft 2.jpg";
-import Aloft3 from "../Assets/Aloft 3.jpg";
-import Aloft4 from "../Assets/Aloft 4.jpg";
-
-import Soaltee1 from "../Assets/Soaltee 1.jpg";
-import Soaltee2 from "../Assets/Soaltee 2.png";
-import Soaltee3 from "../Assets/Soaltee 3.jpg";
-import Soaltee4 from "../Assets/Soaltee 4.jpg";
-
-import Shangri1 from "../Assets/Shangri 1.png";
-import Shangri2 from "../Assets/Shangri 2.jpg";
-import Shangri3 from "../Assets/Shangri 3.jpg";
-import Shangri4 from "../Assets/Shangri 4.png";
-
-import Annapurna1 from "../Assets/Annapurna 1.jpg";
-import Annapurna2 from "../Assets/Annapurna 2.jpg";
-import Annapurna3 from "../Assets/Annapurna 3.jpg";
-import Annapurna4 from "../Assets/Annapurna 4.jpg";
-
-import Mulberry1 from "../Assets/Mulberry 1.png";
-import Mulberry2 from "../Assets/Mulberry 2.jpg";
-import Mulberry3 from "../Assets/Mulberry 3.jpg";
-import Mulberry4 from "../Assets/Mulberry 4.jpg";
-
-import Himalaya1 from "../Assets/Himalaya 1.png";
-import Himalaya2 from "../Assets/Himalaya 2.jpg";
-import Himalaya3 from "../Assets/Himalaya 3.png";
-import Himalaya4 from "../Assets/Himalaya 4.jpg";
-
-import FishTail1 from "../Assets/FishTail 1.jpg";
-import FishTail2 from "../Assets/FishTail 2.jpg";
-import FishTail3 from "../Assets/FishTail 3.jpg";
-import FishTail4 from "../Assets/FishTail 4.jpg";
-import FishTail5 from "../Assets/FishTail 5.jpg";
-import FishTail6 from "../Assets/FishTail 6.jpg";
-import FishTail7 from "../Assets/FishTail 7.jpg";
-import FishTail8 from "../Assets/FishTail 8.jpg";
-import FishTail9 from "../Assets/FishTail 9.jpg";
-
-import TempleTree1 from "../Assets/TempleTree 1.jpg";
-import TempleTree2 from "../Assets/TempleTree 2.jpg";
-import TempleTree3 from "../Assets/TempleTree 3.jpg";
-import TempleTree4 from "../Assets/TempleTree 4.jpg";
-import TempleTree5 from "../Assets/TempleTree 5.jpg";
-import TempleTree6 from "../Assets/TempleTree 6.jpg";
-import TempleTree7 from "../Assets/TempleTree 7.jpg";
-import TempleTree8 from "../Assets/TempleTree 8.jpg";
-
-import Waterfront1 from "../Assets/Waterfront 1.jpg";
-import Waterfront2 from "../Assets/Waterfront 2.jpg";
-import Waterfront3 from "../Assets/Waterfront 3.jpg";
-import Waterfront4 from "../Assets/Waterfront 4.jpg";
-import Waterfront5 from "../Assets/Waterfront 5.jpg";
-import Waterfront6 from "../Assets/Waterfront 6.jpg";
-import Waterfront7 from "../Assets/Waterfront 7.jpg";
-import Waterfront8 from "../Assets/Waterfront 8.jpg";
-
-import HotelBarahi1 from "../Assets/HotelBarahi 1.jpg";
-import HotelBarahi2 from "../Assets/HotelBarahi 2.jpg";
-import HotelBarahi3 from "../Assets/HotelBarahi 3.jpg";
-import HotelBarahi4 from "../Assets/HotelBarahi 4.jpg";
-import HotelBarahi5 from "../Assets/HotelBarahi 5.jpg";
-import HotelBarahi6 from "../Assets/HotelBarahi 6.jpg";
-import HotelBarahi7 from "../Assets/HotelBarahi 7.jpg";
-import HotelBarahi8 from "../Assets/HotelBarahi 8.jpg";
-import HotelBarahi9 from "../Assets/HotelBarahi 9.jpg";
-
-import Atithi1 from "../Assets/Atithi 1.jpg";
-import Atithi2 from "../Assets/Atithi 2.jpg";
-import Atithi3 from "../Assets/Atithi 3.jpg";
-import Atithi4 from "../Assets/Atithi 4.jpg";
-import Atithi5 from "../Assets/Atithi 5.jpg";
-import Atithi6 from "../Assets/Atithi 6.jpg";
-import Atithi7 from "../Assets/Atithi 7.jpg";
-import Atithi8 from "../Assets/Atithi 8.jpg";
-
-import HotelGrande1 from "../Assets/HotelGrande 1.jpg";
-import HotelGrande2 from "../Assets/HotelGrande 2.jpg";
-import HotelGrande3 from "../Assets/HotelGrande 3.jpg";
-import HotelGrande4 from "../Assets/HotelGrande 4.jpg";
-import HotelGrande5 from "../Assets/HotelGrande 5.jpg";
-import HotelGrande6 from "../Assets/HotelGrande 6.jpg";
-import HotelGrande7 from "../Assets/HotelGrande 7.jpg";
-
-import HotelMiddle1 from "../Assets/HotelMiddle 1.jpg";
-import HotelMiddle2 from "../Assets/HotelMiddle 2.jpg";
-import HotelMiddle3 from "../Assets/HotelMiddle 3.jpg";
-import HotelMiddle4 from "../Assets/HotelMiddle 4.jpg";
-import HotelMiddle5 from "../Assets/HotelMiddle 5.jpg";
-import HotelMiddle6 from "../Assets/HotelMiddle 6.jpg";
-import HotelMiddle7 from "../Assets/HotelMiddle 7.jpg";
-
-import HotelMountain1 from "../Assets/HotelMountain 1.jpg";
-import HotelMountain2 from "../Assets/HotelMountain 2.jpg";
-import HotelMountain3 from "../Assets/HotelMountain 3.jpg";
-import HotelMountain4 from "../Assets/HotelMountain 4.jpg";
-import HotelMountain5 from "../Assets/HotelMountain 5.jpg";
-import HotelMountain6 from "../Assets/HotelMountain 6.jpg";
-
-import Grande1 from "../Assets/Grande 1.jpg";
-import Grande2 from "../Assets/Grande 2.jpg";
-import Grande3 from "../Assets/Grande 3.jpg";
-import Grande4 from "../Assets/Grande 4.jpg";
-import Grande5 from "../Assets/Grande 5.jpg";
-import Grande6 from "../Assets/Grande 6.jpg";
-import Grande7 from "../Assets/Grande 7.jpg";
-
-import HotelLake1 from "../Assets/HotelLake 1.jpg";
-import HotelLake2 from "../Assets/HotelLake 2.jpg";
-import HotelLake3 from "../Assets/HotelLake 3.jpg";
-import HotelLake4 from "../Assets/HotelLake 4.jpg";
-import HotelLake5 from "../Assets/HotelLake 5.jpg";
-import HotelLake6 from "../Assets/HotelLake 6.jpg";
-
 // Helper function to generate random reviews
 const generateRandomReviews = () => {
   return Array.from(
@@ -261,7 +26,7 @@ const generateRandomReviews = () => {
   );
 };
 
-export const citiesData = {
+const citiesData = {
   kathmandu: {
     name: "Kathmandu",
     referencePoint: { lat: 27.7172, lon: 85.324 },
@@ -287,20 +52,20 @@ export const citiesData = {
           "Fitness Center",
           "Business Center",
         ],
-        image: [kathmanduImage],
+        image: ["/images/kathmandu1.png"],
         coords: [27.7172, 85.324],
         reviews: generateRandomReviews(),
         detailsImage: [
-          Hyatt1,
-          Hyatt2,
-          Hyatt3,
-          Hyatt4,
-          Hyatt5,
-          Hyatt6,
-          Hyatt7,
-          Hyatt8,
-          Hyatt9,
-          Hyatt10,
+          "/images/Hyatt1.jpg",
+          "/images/Hyatt2.jpg",
+          "/images/Hyatt3.jpeg",
+          "/images/Hyatt4.jpeg",
+          "/images/Hyatt5.jpeg",
+          "/images/Hyatt6.jpg",
+          "/images/Hyatt7.jpg",
+          "/images/Hyatt8.jpg",
+          "/images/Hyatt9.jpeg",
+          "/images/Hyatt10.jpg",
         ],
         description:
           "This luxurious room offers stunning views of the Himalayas, perfect for a relaxing getaway.",
@@ -350,21 +115,20 @@ export const citiesData = {
           "Fine Dining",
           "Yoga Classes",
         ],
-        image: [kathmanduImage2],
-
+        image: ["/images/kathmandu2.png"],
         coords: [27.7175, 85.3245],
         reviews: generateRandomReviews(),
         detailsImage: [
-          Dwarik1,
-          Dwarik2,
-          Dwarik3,
-          Dwarik4,
-          Dwarik5,
-          Dwarik6,
-          Dwarik7,
-          Dwarik8,
-          Dwarik9,
-          Dwarik10,
+          "/images/Dwarik1.jpg",
+          "/images/Dwarik2.jpg",
+          "/images/Dwarik3.jpg",
+          "/images/Dwarik4.jpg",
+          "/images/Dwarik5.jpg",
+          "/images/Dwarik6.jpg",
+          "/images/Dwarik7.jpg",
+          "/images/Dwarik8.jpeg",
+          "/images/Dwarik9.jpg",
+          "/images/Dwarik10.jpg",
         ],
         description:
           "Experience heritage and luxury in this beautifully designed suite with traditional decor.",
@@ -414,21 +178,21 @@ export const citiesData = {
           "Fitness Center",
           "Airport Transfers",
         ],
-        image: [kathmanduImage3],
+        image: ["/images/kathmandu3.png"],
         coords: [27.7168, 85.3235],
         reviews: generateRandomReviews(),
         detailsImage: [
-          Yak1,
-          Yak2,
-          Yak3,
-          Yak4,
-          Yak5,
-          Yak6,
-          Yak7,
-          Yak8,
-          Yak9,
-          Yak10,
-          Yak11,
+          "/images/Yak1.png",
+          "/images/Yak2.jpg",
+          "/images/Yak3.jpg",
+          "/images/Yak4.jpg",
+          "/images/Yak5.jpg",
+          "/images/Yak6.jpeg",
+          "/images/Yak7.jpg",
+          "/images/Yak8.jpg",
+          "/images/Yak9.jpg",
+          "/images/Yak10.png",
+          "/images/Yak11.png",
         ],
         description:
           "Enjoy a modern stay in this spacious room equipped with all the amenities for a comfortable experience.",
@@ -473,10 +237,15 @@ export const citiesData = {
           "Free Wi-Fi",
           "Laundry Service",
         ],
-        image: [kathmanduImage4],
+        image: ["/images/kathmandu4.png"],
         coords: [27.717, 85.3238],
         reviews: generateRandomReviews(),
-        detailsImage: [Aloft1, Aloft2, Aloft3, Aloft4],
+        detailsImage: [
+          "/images/Aloft1.jpg",
+          "/images/Aloft2.jpg",
+          "/images/Aloft3.jpg",
+          "/images/Aloft4.jpg",
+        ],
         description:
           "This contemporary room features a rooftop view and is ideal for both leisure and business travelers.",
         rooms: [
@@ -520,10 +289,15 @@ export const citiesData = {
           "Kids Club",
           "Airport Shuttle",
         ],
-        image: [kathmanduImage5],
+        image: ["/images/kathmandu5.png"],
         coords: [27.7165, 85.323],
         reviews: generateRandomReviews(),
-        detailsImage: [Soaltee1, Soaltee2, Soaltee3, Soaltee4],
+        detailsImage: [
+          "/images/Soaltee1.jpg",
+          "/images/Soaltee2.png",
+          "/images/Soaltee3.jpg",
+          "/images/Soaltee4.jpg",
+        ],
         description:
           "Relax in this cozy room that combines comfort with modern amenities, perfect for families.",
         rooms: [
@@ -567,10 +341,15 @@ export const citiesData = {
           "Room Service",
           "Free Parking",
         ],
-        image: [kathmanduImage6],
+        image: ["/images/kathmandu6.png"],
         coords: [27.7177, 85.3248],
         reviews: generateRandomReviews(),
-        detailsImage: [Shangri1, Shangri2, Shangri3, Shangri4],
+        detailsImage: [
+          "/images/Shangri1.png",
+          "/images/Shangri2.jpg",
+          "/images/Shangri3.jpg",
+          "/images/Shangri4.png",
+        ],
         description:
           "This elegant room offers a serene atmosphere with access to the hotel's beautiful garden.",
         rooms: [
@@ -619,21 +398,21 @@ export const citiesData = {
           "Room Service",
           "Fitness Classes",
         ],
-        image: [kathmanduImage7],
+        image: ["/images/kathmandu7.png"],
         coords: [27.7173, 85.3242],
         reviews: generateRandomReviews(),
         detailsImage: [
-          Marriott1,
-          Marriott2,
-          Marriott3,
-          Marriott4,
-          Marriott5,
-          Marriott6,
-          Marriott7,
-          Marriott8,
-          Marriott9,
-          Marriott10,
-          Marriott11,
+          "/images/Marriott1.jpg",
+          "/images/Marriott2.jpg",
+          "/images/Marriott3.jpg",
+          "/images/Marriott4.jpg",
+          "/images/Marriott5.jpg",
+          "/images/Marriott6.jpg",
+          "/images/Marriott7.jpg",
+          "/images/Marriott8.jpg",
+          "/images/Marriott9.jpg",
+          "/images/Marriott10.jpg",
+          "/images/Marriott11.jpg",
         ],
         description:
           "Indulge in luxury with this spacious suite that includes a private balcony and premium services.",
@@ -678,10 +457,15 @@ export const citiesData = {
           "Room Service",
           "Event Hosting",
         ],
-        image: [kathmanduImage8],
+        image: ["/images/kathmandu8.png"],
         coords: [27.7169, 85.3237],
         reviews: generateRandomReviews(),
-        detailsImage: [Annapurna1, Annapurna2, Annapurna3, Annapurna4],
+        detailsImage: [
+          "/images/Annapurna1.jpg",
+          "/images/Annapurna2.jpg",
+          "/images/Annapurna3.jpg",
+          "/images/Annapurna4.jpg",
+        ],
         description:
           "This charming room provides a perfect blend of comfort and style, ideal for a romantic getaway.",
         rooms: [
@@ -725,10 +509,15 @@ export const citiesData = {
           "Room Service",
           "Free Wi-Fi",
         ],
-        image: [kathmanduImage9],
+        image: ["/images/kathmandu9.png"],
         coords: [27.7171, 85.3239],
         reviews: generateRandomReviews(),
-        detailsImage: [Mulberry1, Mulberry2, Mulberry3, Mulberry4],
+        detailsImage: [
+          "/images/Mulberry1.png",
+          "/images/Mulberry2.jpg",
+          "/images/Mulberry3.jpg",
+          "/images/Mulberry4.jpg",
+        ],
         description:
           "Experience tranquility in this well-appointed room with modern furnishings and a relaxing ambiance.",
         rooms: [
@@ -777,10 +566,15 @@ export const citiesData = {
           "Tennis Courts",
           "Airport Shuttle",
         ],
-        image: [kathmanduImage10],
+        image: ["/images/kathmandu10.png"],
         coords: [27.7167, 85.3233],
         reviews: generateRandomReviews(),
-        detailsImage: [Himalaya1, Himalaya2, Himalaya3, Himalaya4],
+        detailsImage: [
+          "/images/Himalaya1.png",
+          "/images/Himalaya2.jpg",
+          "/images/Himalaya3.png",
+          "/images/Himalaya4.jpg",
+        ],
         description:
           "This room offers a unique blend of traditional and modern design, ensuring a memorable stay.",
         rooms: [
@@ -832,10 +626,15 @@ export const citiesData = {
           "Spa Services",
           "Airport Transfers",
         ],
-        image: [pI9],
+        image: ["/images/p9.jpg"],
         coords: [28.2096, 83.9856],
         reviews: generateRandomReviews(),
-        detailsImage: [FishTail1, FishTail2,FishTail3,FishTail4,FishTail5,FishTail6,FishTail7,FishTail8,FishTail9],
+        detailsImage: [
+          "/images/p9.jpg",
+          "/images/p1.jpg",
+          "/images/p2.jpg",
+          "/images/p3.jpg",
+        ],
         description:
           "Enjoy breathtaking views of the lake from this cozy lodge, perfect for a peaceful retreat.",
         rooms: [
@@ -879,10 +678,10 @@ export const citiesData = {
           "Free Wi-Fi",
           "Laundry Service",
         ],
-        image: [pI2],
+        image: ["/images/p2.jpg"],
         coords: [28.2099, 83.9859],
         reviews: generateRandomReviews(),
-        detailsImage: [TempleTree1,TempleTree2,TempleTree3,TempleTree4,TempleTree5,TempleTree6,TempleTree7,TempleTree8],
+        detailsImage: ["/images/p2.jpg"],
         description:
           "Relax in this serene resort that offers stunning mountain views and luxurious amenities.",
         rooms: [
@@ -926,10 +725,10 @@ export const citiesData = {
           "Spa Services",
           "Airport Shuttle",
         ],
-        image: [pI3],
+        image: ["/images/p3.jpg"],
         coords: [28.2093, 83.9853],
         reviews: generateRandomReviews(),
-        detailsImage: [Waterfront1,Waterfront2,Waterfront3,Waterfront4,Waterfront5,Waterfront6,Waterfront7,Waterfront8],
+        detailsImage: ["/images/p3.jpg"],
         description:
           "This resort features direct access to the lake, making it ideal for water sports enthusiasts.",
         rooms: [
@@ -973,10 +772,10 @@ export const citiesData = {
           "Airport Transfers",
           "Cultural Tours",
         ],
-        image: [pI4],
+        image: ["/images/p4.jpg"],
         coords: [28.2097, 83.9857],
         reviews: generateRandomReviews(),
-        detailsImage: [HotelBarahi1,HotelBarahi2,HotelBarahi3,HotelBarahi4,HotelBarahi5,HotelBarahi6,HotelBarahi7,HotelBarahi8,HotelBarahi9],
+        detailsImage: ["/images/p4.jpg"],
         description:
           "Experience luxury in this hotel with a beautiful pool and stunning views of the surrounding mountains.",
         rooms: [
@@ -1020,10 +819,10 @@ export const citiesData = {
           "Room Service",
           "Airport Shuttle",
         ],
-        image: [pI5],
+        image: ["/images/p5.jpg"],
         coords: [28.21, 83.986],
         reviews: generateRandomReviews(),
-        detailsImage: [Atithi1,Atithi2,Atithi3,Atithi4,Atithi5,Atithi6,Atithi7,Atithi8],
+        detailsImage: ["/images/p5.jpg"],
         description:
           "This resort offers a perfect blend of relaxation and adventure, with a full-service spa and outdoor activities.",
         rooms: [
@@ -1067,10 +866,10 @@ export const citiesData = {
           "Airport Transfers",
           "Laundry Service",
         ],
-        image: [pI6],
+        image: ["/images/p6.jpg"],
         coords: [28.2095, 83.9855],
         reviews: generateRandomReviews(),
-        detailsImage: [HotelGrande1,HotelGrande2,HotelGrande3,HotelGrande4,HotelGrande5,HotelGrande6,HotelGrande7],
+        detailsImage: ["/images/p6.jpg"],
         description:
           "Ideal for business travelers, this hotel combines comfort with modern amenities and excellent service.",
         rooms: [
@@ -1114,10 +913,10 @@ export const citiesData = {
           "Airport Shuttle",
           "Cultural Tours",
         ],
-        image: [pI7],
+        image: ["/images/p7.jpg"],
         coords: [28.2098, 83.9858],
         reviews: generateRandomReviews(),
-        detailsImage: [HotelMiddle1,HotelMiddle2,HotelMiddle3,HotelMiddle4,HotelMiddle5,HotelMiddle6,HotelMiddle7],
+        detailsImage: ["/images/p7.jpg"],
         description:
           "This hotel features a rooftop bar with stunning views, perfect for enjoying the sunset over the lake.",
         rooms: [
@@ -1161,10 +960,10 @@ export const citiesData = {
           "Airport Transfers",
           "Yoga Classes",
         ],
-        image: [pI8],
+        image: ["/images/p8.jpg"],
         coords: [28.2092, 83.9852],
         reviews: generateRandomReviews(),
-        detailsImage: [HotelMountain1,HotelMountain2,HotelMountain3,HotelMountain4,HotelMountain5,HotelMountain5,HotelMountain6],
+        detailsImage: ["/images/p8.jpg"],
         description:
           "Enjoy breathtaking mountain views from this hotel, which is also a great base for trekking adventures.",
         rooms: [
@@ -1208,10 +1007,10 @@ export const citiesData = {
           "Airport Shuttle",
           "Cultural Tours",
         ],
-        image: [pI1],
+        image: ["/images/p1.jpg"],
         coords: [28.2101, 83.9861],
         reviews: generateRandomReviews(),
-        detailsImage: [Grande1,Grande2,Grande3,Grande4,Grande5,Grande6,Grande7],
+        detailsImage: ["/images/p1.jpg"],
         description:
           "This luxury hotel offers spacious rooms and top-notch amenities, ensuring a memorable stay.",
         rooms: [
@@ -1255,10 +1054,10 @@ export const citiesData = {
           "Airport Transfers",
           "Fishing Tours",
         ],
-        image: [pI10],
+        image: ["/images/p10.jpg"],
         coords: [28.2094, 83.9854],
         reviews: generateRandomReviews(),
-        detailsImage: [HotelLake1,HotelLake2,HotelLake3,HotelLake4,HotelLake5,HotelLake6],
+        detailsImage: ["/images/p10.jpg"],
         description:
           "With direct lake access, this hotel is perfect for those looking to enjoy water sports and relaxation.",
         rooms: [
@@ -1315,37 +1114,14 @@ export const citiesData = {
           "Room Service",
           "Airport Shuttle",
         ],
-        image: [bI1],
+        image: ["/images/b1.jpg"],
         coords: [27.671, 85.4298],
         reviews: generateRandomReviews(),
-        detailsImage: [bI1, bI2, bI3, bI4],
-        description:
-          "Stay in a beautifully restored heritage building that offers a glimpse into the rich culture of Bhaktapur.",
-        rooms: [
-          {
-            type: "Durbar Square View Room",
-            price: 150,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Spacious room overlooking the historic Durbar Square, featuring traditional Newari architectural elements.",
-          },
-          {
-            type: "Cultural Heritage Suite",
-            price: 250,
-            capacity: "4 Adults",
-            available: 3,
-            description:
-              "Luxurious suite showcasing authentic Bhaktapur craftsmanship, with handcrafted wooden furnishings and cultural artifacts.",
-          },
-          {
-            type: "Artisan's Retreat Room",
-            price: 180,
-            capacity: "2 Adults",
-            available: 4,
-            description:
-              "Intimate room designed to celebrate local artistry, with pottery displays and traditional textile decorations.",
-          },
+        detailsImage: [
+          "/images/b1.jpg",
+          "/images/b2.jpg",
+          "/images/b3.jpg",
+          "/images/b4.jpg",
         ],
       },
       {
@@ -1367,38 +1143,10 @@ export const citiesData = {
           "Laundry Service",
           "Local Tours",
         ],
-        image: [bI2],
+        image: ["/images/b2.jpg"],
         coords: [27.6713, 85.4301],
         reviews: generateRandomReviews(),
-        detailsImage: [bI2],
-        description:
-          "This hotel offers a unique cultural experience with views of the vibrant Pottery Square.",
-        rooms: [
-          {
-            type: "Pottery Square Inspiration Room",
-            price: 130,
-            capacity: "2 Adults",
-            available: 6,
-            description:
-              "Vibrant room overlooking the famous Pottery Square, with complimentary pottery workshop access.",
-          },
-          {
-            type: "Cultural Immersion Suite",
-            price: 220,
-            capacity: "3 Adults",
-            available: 4,
-            description:
-              "Expansive suite featuring interactive cultural exhibits, traditional music instruments, and local art installations.",
-          },
-          {
-            type: "Artisan's Workshop Room",
-            price: 160,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Creative room with dedicated workspace for artists, featuring natural light and local craft inspiration.",
-          },
-        ],
+        detailsImage: ["/images/b2.jpg"],
       },
       {
         id: "bkt3",
@@ -1414,38 +1162,10 @@ export const citiesData = {
           "Room Service",
           "Garden Access",
         ],
-        image: [bI3],
+        image: ["/images/b3.jpg"],
         coords: [27.6708, 85.4296],
         reviews: generateRandomReviews(),
-        detailsImage: [bI3],
-        description:
-          "Experience traditional Nepali hospitality in this guest house located near the famous temples.",
-        rooms: [
-          {
-            type: "Temple Terrace Room",
-            price: 140,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Serene room with a private terrace offering panoramic views of nearby ancient temples.",
-          },
-          {
-            type: "Traditional Living Suite",
-            price: 240,
-            capacity: "4 Adults",
-            available: 3,
-            description:
-              "Spacious suite replicating a traditional Newari home, complete with authentic furnishings and cultural experiences.",
-          },
-          {
-            type: "Garden Meditation Room",
-            price: 170,
-            capacity: "2 Adults",
-            available: 4,
-            description:
-              "Tranquil room overlooking a traditional Bhaktapur garden, designed for relaxation and mindfulness.",
-          },
-        ],
+        detailsImage: ["/images/b3.jpg"],
       },
       {
         id: "bkt4",
@@ -1466,38 +1186,10 @@ export const citiesData = {
           "Laundry Service",
           "Local Tours",
         ],
-        image: [bI4],
+        image: ["/images/b4.jpg"],
         coords: [27.6712, 85.43],
         reviews: generateRandomReviews(),
-        detailsImage: [bI4],
-        description:
-          "A family-friendly hotel that offers comfortable accommodations and easy access to cultural sites.",
-        rooms: [
-          {
-            type: "Family Heritage Room",
-            price: 120,
-            capacity: "4 Adults",
-            available: 6,
-            description:
-              "Spacious family room with interconnected spaces, traditional decor, and family-friendly amenities.",
-          },
-          {
-            type: "Cultural Learning Suite",
-            price: 230,
-            capacity: "3 Adults",
-            available: 4,
-            description:
-              "Educational suite with interactive cultural displays, local history books, and traditional craft workshops.",
-          },
-          {
-            type: "Cozy Neighborhood View Room",
-            price: 100,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Charming room offering views of Bhaktapur's historic neighborhood, capturing the essence of local life.",
-          },
-        ],
+        detailsImage: ["/images/b4.jpg"],
       },
       {
         id: "bkt5",
@@ -1513,38 +1205,10 @@ export const citiesData = {
           "Room Service",
           "Heritage Tours",
         ],
-        image: [bI5],
+        image: ["/images/b5.jpg"],
         coords: [27.6711, 85.4299],
         reviews: generateRandomReviews(),
-        detailsImage: [bI5],
-        description:
-          "This premium hotel offers luxurious rooms and a spa, perfect for relaxation after exploring the city.",
-        rooms: [
-          {
-            type: "Luxury Heritage Room",
-            price: 180,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Elegantly designed room blending modern luxury with traditional Bhaktapur architectural elements.",
-          },
-          {
-            type: "Royal Artisan Suite",
-            price: 300,
-            capacity: "4 Adults",
-            available: 3,
-            description:
-              "Expansive suite celebrating royal Newari craftsmanship, featuring exclusive art pieces and premium amenities.",
-          },
-          {
-            type: "Wellness Cultural Retreat",
-            price: 220,
-            capacity: "2 Adults",
-            available: 4,
-            description:
-              "Holistic room offering spa treatments inspired by traditional Nepali wellness practices.",
-          },
-        ],
+        detailsImage: ["/images/b5.jpg"],
       },
       {
         id: "bkt6",
@@ -1565,38 +1229,10 @@ export const citiesData = {
           "Room Service",
           "Local Tours",
         ],
-        image: [bI6],
+        image: ["/images/b6.jpg"],
         coords: [27.6709, 85.4297],
         reviews: generateRandomReviews(),
-        detailsImage: [bI6],
-        description:
-          "Immerse yourself in local culture with pottery classes and traditional meals at this charming hotel.",
-        rooms: [
-          {
-            type: "Pottery Craft Room",
-            price: 130,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Unique room with dedicated pottery workspace, local craft tools, and inspirational artisan views.",
-          },
-          {
-            type: "Cultural Immersion Suite",
-            price: 250,
-            capacity: "3 Adults",
-            available: 4,
-            description:
-              "Comprehensive suite offering deep dive into Bhaktapur's rich cultural heritage, with live craft demonstrations.",
-          },
-          {
-            type: "Artisan's Inspiration Room",
-            price: 160,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Creative room designed to inspire artists, with natural light and views of local craft workshops.",
-          },
-        ],
+        detailsImage: ["/images/b6.jpg"],
       },
       {
         id: "bkt7",
@@ -1617,38 +1253,10 @@ export const citiesData = {
           "Room Service",
           "Temple Visits",
         ],
-        image: [bI7],
+        image: ["/images/b7.jpg"],
         coords: [27.6714, 85.4302],
         reviews: generateRandomReviews(),
-        detailsImage: [bI7],
-        description:
-          "Enjoy luxury accommodations with stunning views of the Nyatapola Temple, a UNESCO World Heritage site.",
-        rooms: [
-          {
-            type: "Nyatapola Temple View Room",
-            price: 170,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Stunning room offering direct views of the iconic Nyatapola Temple, capturing Bhaktapur's architectural marvel.",
-          },
-          {
-            type: "Royal Cultural Suite",
-            price: 320,
-            capacity: "4 Adults",
-            available: 3,
-            description:
-              "Majestic suite replicating royal Newari living spaces, with curated historical artifacts and premium services.",
-          },
-          {
-            type: "Architectural Heritage Room",
-            price: 200,
-            capacity: "2 Adults",
-            available: 4,
-            description:
-              "Room designed to showcase Bhaktapur's unique architectural heritage, with informative displays and traditional design.",
-          },
-        ],
+        detailsImage: ["/images/b7.jpg"],
       },
       {
         id: "bkt8",
@@ -1669,38 +1277,10 @@ export const citiesData = {
           "Room Service",
           "Local Tours",
         ],
-        image: [bI8],
+        image: ["/images/b8.jpg"],
         coords: [27.6707, 85.4295],
         reviews: generateRandomReviews(),
-        detailsImage: [bI8],
-        description:
-          "Experience authentic Nepali culture with home-cooked meals and local activities in this cozy homestay.",
-        rooms: [
-          {
-            type: "Local Life Experience Room",
-            price: 100,
-            capacity: "2 Adults",
-            available: 6,
-            description:
-              "Authentic room offering an intimate glimpse into daily life in Bhaktapur's historic neighborhoods.",
-          },
-          {
-            type: "Family Tradition Suite",
-            price: 200,
-            capacity: "4 Adults",
-            available: 3,
-            description:
-              "Spacious family suite providing immersive experiences in local customs, cooking, and cultural practices.",
-          },
-          {
-            type: "Artisan's Home Room",
-            price: 130,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Cozy room within a local artisan's home, offering direct interaction with traditional craft-making processes.",
-          },
-        ],
+        detailsImage: ["/images/b8.jpg"],
       },
       {
         id: "bkt9",
@@ -1716,38 +1296,10 @@ export const citiesData = {
           "Room Service",
           "Heritage Tours",
         ],
-        image: [bI9],
+        image: ["/images/b9.jpg"],
         coords: [27.6715, 85.4303],
         reviews: generateRandomReviews(),
-        detailsImage: [bI9],
-        description:
-          "This royal hotel offers luxurious accommodations and a spa, perfect for a regal experience in Bhaktapur.",
-        rooms: [
-          {
-            type: "Newari Royal Heritage Room",
-            price: 180,
-            capacity: "2 Adults",
-            available: 6,
-            description:
-              "Elegantly designed room showcasing royal Newari architectural elements, with handcrafted wooden furnishings and traditional artwork, offering a glimpse into Bhaktapur's regal past.",
-          },
-          {
-            type: "Durbar Square Panorama Suite",
-            price: 350,
-            capacity: "4 Adults",
-            available: 4,
-            description:
-              "Expansive luxury suite with breathtaking views of Durbar Square, featuring a private terrace, curated historical artifacts, and personalized cultural concierge service.",
-          },
-          {
-            type: "Wellness Royal Retreat",
-            price: 250,
-            capacity: "2 Adults",
-            available: 5,
-            description:
-              "Holistic room designed for ultimate relaxation, featuring a private spa area, traditional Ayurvedic wellness treatments, and meditation space with cultural healing elements.",
-          },
-        ],
+        detailsImage: ["/images/b9.jpg"],
       },
       {
         id: "bkt10",
@@ -1768,38 +1320,10 @@ export const citiesData = {
           "Local Tours",
           "Garden Access",
         ],
-        image: [bI10],
+        image: ["/images/b10.jpg"],
         coords: [27.6706, 85.4294],
         reviews: generateRandomReviews(),
-        detailsImage: [bI10],
-        description:
-          "This resort offers cultural programs and stunning mountain views, making it a unique getaway.",
-        rooms: [
-          {
-            type: "Artisan's Cultural Immersion Room",
-            price: 140,
-            capacity: "2 Adults",
-            available: 7,
-            description:
-              "Interactive room designed to connect guests with local crafts, featuring a dedicated workspace, live craft demonstrations, and views of traditional artisan workshops.",
-          },
-          {
-            type: "Mountain Heritage Experience Suite",
-            price: 280,
-            capacity: "4 Adults",
-            available: 5,
-            description:
-              "Comprehensive cultural suite offering panoramic mountain views, traditional living spaces, and curated experiences including cooking classes, craft workshops, and local storytelling sessions.",
-          },
-          {
-            type: "Meditation and Cultural Retreat Room",
-            price: 200,
-            capacity: "2 Adults",
-            available: 6,
-            description:
-              "Tranquil room designed for mindfulness and cultural exploration, featuring a dedicated meditation area, local spiritual artifacts, and guided cultural reflection experiences.",
-          },
-        ],
+        detailsImage: ["/images/b10.jpg"],
       },
     ],
   },
@@ -1828,10 +1352,15 @@ export const citiesData = {
           "Room Service",
           "Heritage Experiences",
         ],
-        image: [liI1],
+        image: ["/images/li1.jpg"],
         coords: [27.6766, 85.3241],
         reviews: generateRandomReviews(),
-        detailsImage: [liI1, liI2, liI3, liI4],
+        detailsImage: [
+          "/images/li1.jpg",
+          "/images/li2.jpg",
+          "/images/li3.jpg",
+          "/images/li4.jpg",
+        ],
         description:
           "This hotel offers stunning views of Patan Durbar Square and a rooftop restaurant for a unique dining experience.",
         rooms: [
@@ -1880,10 +1409,10 @@ export const citiesData = {
           "Local Tours",
           "Garden Access",
         ],
-        image: [liI2],
+        image: ["/images/li2.jpg"],
         coords: [27.6762, 85.3245],
         reviews: generateRandomReviews(),
-        detailsImage: [liI2],
+        detailsImage: ["/images/li2.jpg"],
         description:
           "Stay in a beautifully restored heritage building that offers a glimpse into the rich culture of Lalitpur.",
         rooms: [
@@ -1932,10 +1461,10 @@ export const citiesData = {
           "Room Service",
           "Free Wi-Fi",
         ],
-        image: [liI3],
+        image: ["/images/li3.jpg"],
         coords: [27.6805, 85.3162],
         reviews: generateRandomReviews(),
-        detailsImage: [liI3],
+        detailsImage: ["/images/li3.jpg"],
         description:
           "This hotel features a swimming pool and multiple dining options, perfect for both relaxation and business.",
         rooms: [
@@ -1979,10 +1508,10 @@ export const citiesData = {
           "Local Tours",
           "Cultural Activities",
         ],
-        image: [liI4],
+        image: ["/images/li4.jpg"],
         coords: [27.6789, 85.3169],
         reviews: generateRandomReviews(),
-        detailsImage: [liI4],
+        detailsImage: ["/images/li4.jpg"],
         description:
           "Enjoy a cozy atmosphere with a garden and bar, ideal for unwinding after a day of exploring.",
         rooms: [
@@ -2031,10 +1560,10 @@ export const citiesData = {
           "Laundry Service",
           "Local Tours",
         ],
-        image: [liI5],
+        image: ["/images/li5.jpg"],
         coords: [27.6775, 85.3198],
         reviews: generateRandomReviews(),
-        detailsImage: [liI5],
+        detailsImage: ["/images/li5.jpg"],
         description:
           "This budget-friendly hotel offers comfortable accommodations with complimentary breakfast and business services.",
         rooms: [
@@ -2083,10 +1612,10 @@ export const citiesData = {
           "Room Service",
           "Local Experiences",
         ],
-        image: [liI6],
+        image: ["/images/li6.jpg"],
         coords: [27.6768, 85.3243],
         reviews: generateRandomReviews(),
-        detailsImage: [liI6],
+        detailsImage: ["/images/li6.jpg"],
         description:
           "This hotel offers cultural tours and a rooftop cafe with stunning views of Patan Durbar Square.",
         rooms: [
@@ -2130,10 +1659,10 @@ export const citiesData = {
           "Local Tours",
           "Cultural Activities",
         ],
-        image: [liI7],
+        image: ["/images/li7.jpg"],
         coords: [27.6812, 85.3156],
         reviews: generateRandomReviews(),
-        detailsImage: [liI7],
+        detailsImage: ["/images/li7.jpg"],
         description:
           "Experience boutique luxury in this stylish hotel with a beautiful garden and excellent dining options.",
         rooms: [
@@ -2191,10 +1720,15 @@ export const citiesData = {
           "Room Service",
           "Spa Services",
         ],
-        image: [lI1],
+        image: ["/images/l1.jpg"],
         coords: [27.4833, 83.2767],
         reviews: generateRandomReviews(),
-        detailsImage: [lI1, lI2, lI3, lI4],
+        detailsImage: [
+          "/images/l1.jpg",
+          "/images/l2.jpg",
+          "/images/l3.jpg",
+          "/images/l4.jpg",
+        ],
         description:
           "This hotel offers a peaceful retreat with a meditation center and beautiful views of the Maya Devi Temple.",
         rooms: [
@@ -2243,10 +1777,10 @@ export const citiesData = {
           "Cultural Activities",
           "Local Tours",
         ],
-        image: [lI2],
+        image: ["/images/l2.jpg"],
         coords: [27.4835, 83.2769],
         reviews: generateRandomReviews(),
-        detailsImage: [lI2],
+        detailsImage: ["/images/l2.jpg"],
         description:
           "Enjoy comfortable accommodations with easy access to temple tours and cultural experiences.",
         rooms: [
@@ -2295,10 +1829,10 @@ export const citiesData = {
           "Local Tours",
           "Garden Access",
         ],
-        image: [lI3],
+        image: ["/images/l3.jpg"],
         coords: [27.484, 83.2772],
         reviews: generateRandomReviews(),
-        detailsImage: [lI3],
+        detailsImage: ["/images/l3.jpg"],
         description:
           "This hotel features a beautiful garden view and is perfect for both leisure and business travelers.",
         rooms: [
@@ -2347,10 +1881,10 @@ export const citiesData = {
           "Room Service",
           "Local Tours",
         ],
-        image: [lI4],
+        image: ["/images/l4.jpg"],
         coords: [27.4838, 83.2765],
         reviews: generateRandomReviews(),
-        detailsImage: [lI4],
+        detailsImage: ["/images/l4.jpg"],
         description:
           "A tranquil hotel with a meditation hall and vegetarian restaurant, ideal for a peaceful stay.",
         rooms: [
@@ -2382,7 +1916,7 @@ export const citiesData = {
       },
       {
         id: "lum5",
-        name: "Lumbini Hoj1e Hotel",
+        name: "Lumbini Hokke Hotel",
         price: 130,
         rating: 4.8,
         location: "Near Mayadevi Temple",
@@ -2394,10 +1928,10 @@ export const citiesData = {
           "Room Service",
           "Temple Tours",
         ],
-        image: [lI5],
+        image: ["/images/l5.jpg"],
         coords: [27.4832, 83.2768],
         reviews: generateRandomReviews(),
-        detailsImage: [lI5],
+        detailsImage: ["/images/l5.jpg"],
         description:
           "This hotel offers a unique Japanese dining experience and is located near the sacred Mayadevi Temple.",
         rooms: [
@@ -2446,10 +1980,10 @@ export const citiesData = {
           "Room Service",
           "Local Tours",
         ],
-        image: [lI6],
+        image: ["/images/l6.jpg"],
         coords: [27.4836, 83.2771],
         reviews: generateRandomReviews(),
-        detailsImage: [lI6],
+        detailsImage: ["/images/l6.jpg"],
         description:
           "A serene hotel offering yoga classes and a meditation center, perfect for spiritual travelers.",
         rooms: [
@@ -2498,10 +2032,10 @@ export const citiesData = {
           "Room Service",
           "Temple Tours",
         ],
-        image: [lI7],
+        image: ["/images/l7.jpg"],
         coords: [27.4834, 83.2773],
         reviews: generateRandomReviews(),
-        detailsImage: [lI7],
+        detailsImage: ["/images/l7.jpg"],
         description:
           "This international hotel combines luxury with cultural experiences, offering temple tours and a spa.",
         rooms: [
@@ -2558,10 +2092,10 @@ export const citiesData = {
           "Room Service",
           "Local Guides",
         ],
-        image: [jI1],
+        image: ["/images/j1.jpg"],
         coords: [26.7276, 85.9403],
         reviews: generateRandomReviews(),
-        detailsImage: [jI1, jI2],
+        detailsImage: ["/images/j1.jpg"],
         description:
           "Experience the rich cultural heritage of Janakpur with a stay near the iconic Janaki Temple.",
         rooms: [
@@ -2610,10 +2144,10 @@ export const citiesData = {
           "Room Service",
           "Local Performances",
         ],
-        image: [jI2],
+        image: ["/images/j2.jpg"],
         coords: [26.7278, 85.9406],
         reviews: generateRandomReviews(),
-        detailsImage: [jI2],
+        detailsImage: ["/images/j2.jpg"],
         description:
           "Enjoy unparalleled proximity to the Janaki Temple with cultural immersion and local experiences.",
         rooms: [
@@ -2662,10 +2196,10 @@ export const citiesData = {
           "Room Service",
           "Local Experiences",
         ],
-        image: [jI3],
+        image: ["/images/j3.jpg"],
         coords: [26.7275, 85.9404],
         reviews: generateRandomReviews(),
-        detailsImage: [jI3],
+        detailsImage: ["/images/j3.jpg"],
         description:
           "Enjoy a comfortable stay with easy access to the Janaki Temple and local markets.",
         rooms: [
@@ -2713,10 +2247,10 @@ export const citiesData = {
           "Cultural Activities",
           "Local Tours",
         ],
-        image: [jI4],
+        image: ["/images/j4.jpg"],
         coords: [26.7277, 85.941],
         reviews: generateRandomReviews(),
-        detailsImage: [jI4, jI6],
+        detailsImage: ["/images/j4.jpg", "/images/j6.jpg"],
         description:
           "This budget-friendly hotel offers comfortable accommodations and easy access to local attractions.",
         rooms: [
@@ -2760,10 +2294,10 @@ export const citiesData = {
           "Garden Access",
           "Local Experiences",
         ],
-        image: [jI5],
+        image: ["/images/j5.jpg"],
         coords: [26.7279, 85.9411],
         reviews: generateRandomReviews(),
-        detailsImage: [jI5],
+        detailsImage: ["/images/j5.jpg"],
         description:
           "Experience the local culture and hospitality in this charming hotel near Janaki Temple.",
         rooms: [
@@ -2807,10 +2341,10 @@ export const citiesData = {
           "Cultural Tours",
           "Local Tours",
         ],
-        image: [jI6],
+        image: ["/images/j6.jpg"],
         coords: [26.728, 85.9405],
         reviews: generateRandomReviews(),
-        detailsImage: [jI6, jI7],
+        detailsImage: ["/images/j6.jpg", "/images/j7.jpg"],
         description:
           "A luxurious hotel offering spa services and cultural experiences in the heart of Janakpur.",
         rooms: [
@@ -2859,10 +2393,10 @@ export const citiesData = {
           "Room Service",
           "Local Craft Experiences",
         ],
-        image: [jI7],
+        image: ["/images/j7.jpg"],
         coords: [26.7281, 85.9407],
         reviews: generateRandomReviews(),
-        detailsImage: [jI7],
+        detailsImage: ["/images/j7.jpg"],
         description:
           "A unique resort celebrating the rich Mithila culture, offering immersive artistic and cultural experiences.",
         rooms: [
@@ -2919,10 +2453,10 @@ export const citiesData = {
           "Room Service",
           "Local Experiences",
         ],
-        image: [nI1],
+        image: ["/images/n1.jpg"],
         coords: [27.7175, 85.52],
         reviews: generateRandomReviews(),
-        detailsImage: [nI1, nI2, nI3],
+        detailsImage: ["/images/n1.jpg", "/images/n2.jpg", "/images/n3.jpg"],
         description:
           "Experience breathtaking Himalayan views and unforgettable sunrise moments in this mountain retreat.",
         rooms: [
@@ -2966,10 +2500,10 @@ export const citiesData = {
           "Room Service",
           "Cultural Experiences",
         ],
-        image: [nI2],
+        image: ["/images/n2.jpg"],
         coords: [27.717, 85.5195],
         reviews: generateRandomReviews(),
-        detailsImage: [nI2],
+        detailsImage: ["/images/n2.jpg"],
         description:
           "A cozy hotel offering warm hospitality and stunning mountain landscapes.",
         rooms: [
@@ -3018,10 +2552,10 @@ export const citiesData = {
           "Room Service",
           "Local Experiences",
         ],
-        image: [nI3],
+        image: ["/images/n3.jpg"],
         coords: [27.7173, 85.5198],
         reviews: generateRandomReviews(),
-        detailsImage: [nI3],
+        detailsImage: ["/images/n3.jpg"],
         description:
           "The ultimate destination for sunrise lovers and mountain enthusiasts.",
         rooms: [
@@ -3065,10 +2599,10 @@ export const citiesData = {
           "Room Service",
           "Forest Experiences",
         ],
-        image: [nI4],
+        image: ["/images/n4.jpg"],
         coords: [27.7168, 85.5196],
         reviews: generateRandomReviews(),
-        detailsImage: [nI4],
+        detailsImage: ["/images/n4.jpg"],
         description:
           "A serene resort nestled at the forest's edge, offering tranquility and natural beauty.",
         rooms: [
@@ -3117,10 +2651,10 @@ export const citiesData = {
           "Room Service",
           "Conservation Programs",
         ],
-        image: [nI5],
+        image: ["/images/n5.jpg"],
         coords: [27.7171, 85.5199],
         reviews: generateRandomReviews(),
-        detailsImage: [nI5],
+        detailsImage: ["/images/n5.jpg"],
         description:
           "An eco-friendly lodge committed to sustainable tourism and environmental conservation.",
         rooms: [
@@ -3169,10 +2703,10 @@ export const citiesData = {
           "Room Service",
           "Local Experiences",
         ],
-        image: [nI6],
+        image: ["/images/n6.jpg"],
         coords: [27.7174, 85.5201],
         reviews: generateRandomReviews(),
-        detailsImage: [nI6],
+        detailsImage: ["/images/n6.jpg"],
         description:
           "Experience adventure and breathtaking mountain views in this dynamic mountain hotel.",
         rooms: [
@@ -3220,10 +2754,10 @@ export const citiesData = {
           "Free Wi-Fi",
           "Local Tours",
         ],
-        image: [nI7],
+        image: ["/images/n7.jpg"],
         coords: [27.7171, 85.5237],
         reviews: generateRandomReviews(),
-        detailsImage: [nI7],
+        detailsImage: ["/images/n7.jpg"],
         description:
           "This villa offers premium views and is an ideal spot for adventure sports enthusiasts.",
         rooms: [
@@ -3274,10 +2808,10 @@ export const citiesData = {
           "Conference Facilities",
           "Local Tours",
         ],
-        image: [dI1],
+        image: ["/images/d1.jpg"],
         coords: [26.8065, 87.2846],
         reviews: generateRandomReviews(),
-        detailsImage: [dI1],
+        detailsImage: ["/images/d1.jpg"],
         description:
           "This hotel offers comfortable accommodations with city views and modern amenities.",
         rooms: [
@@ -3320,10 +2854,10 @@ export const citiesData = {
           "Room Service",
           "Local Tours",
         ],
-        image: [dI2],
+        image: ["/images/d2.jpg"],
         coords: [26.8068, 87.2849],
         reviews: generateRandomReviews(),
-        detailsImage: [dI2],
+        detailsImage: ["/images/d2.jpg"],
         description:
           "Ideal for business travelers, this hotel features a gym and business center for your convenience.",
         rooms: [
@@ -3366,10 +2900,10 @@ export const citiesData = {
           "Free Wi-Fi",
           "Local Tours",
         ],
-        image: [dI3],
+        image: ["/images/d3.jpg"],
         coords: [26.807, 87.2852],
         reviews: generateRandomReviews(),
-        detailsImage: [dI3],
+        detailsImage: ["/images/d3.jpg"],
         description:
           "Enjoy hill views and adventure sports arrangements at this comfortable hotel.",
         rooms: [
@@ -3417,10 +2951,10 @@ export const citiesData = {
           "Free Wi-Fi",
           "Local Tours",
         ],
-        image: [dI4],
+        image: ["/images/d4.jpg"],
         coords: [26.8063, 87.2844],
         reviews: generateRandomReviews(),
-        detailsImage: [dI4],
+        detailsImage: ["/images/d4.jpg"],
         description:
           "This hotel offers medical tourism support and comfortable accommodations for patients and families.",
         rooms: [
@@ -3468,10 +3002,10 @@ export const citiesData = {
           "Free Wi-Fi",
           "Local Tours",
         ],
-        image: [dI5],
+        image: ["/images/d5.jpg"],
         coords: [26.8072, 87.2855],
         reviews: generateRandomReviews(),
-        detailsImage: [dI5],
+        detailsImage: ["/images/d5.jpg"],
         description:
           "This premium hotel features a swimming pool and multi-cuisine restaurant for a luxurious stay.",
         rooms: [
@@ -3519,10 +3053,10 @@ export const citiesData = {
           "Business Services",
           "Local Tours",
         ],
-        image: [dI6],
+        image: ["/images/d6.jpg"],
         coords: [26.8066, 87.2847],
         reviews: generateRandomReviews(),
-        detailsImage: [dI6],
+        detailsImage: ["/images/d6.jpg"],
         description:
           "Centrally located, this hotel offers easy access to local attractions and comfortable accommodations.",
         rooms: [
@@ -3570,10 +3104,10 @@ export const citiesData = {
           "Free Wi-Fi",
           "Local Tours",
         ],
-        image: [dI7],
+        image: ["/images/d7.jpg"],
         coords: [26.8069, 87.285],
         reviews: generateRandomReviews(),
-        detailsImage: [dI7],
+        detailsImage: ["/images/d7.jpg"],
         description:
           "This hotel offers mountain views and adventure tours, making it perfect for outdoor enthusiasts.",
         rooms: [
@@ -3606,3 +3140,5 @@ export const citiesData = {
     ],
   },
 };
+
+module.exports = { citiesData };

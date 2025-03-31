@@ -1,98 +1,145 @@
 .topRatedSection {
-  @apply py-4 sm:py-6 lg:py-8 px-2 sm:px-4 bg-gray-50;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+  position: relative;
 }
 
 .sectionTitle {
-  @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-4 sm:mb-6;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.carouselContainer {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .scrollContainer {
-  @apply flex overflow-x-scroll gap-3 sm:gap-4 lg:gap-6 w-full py-2 sm:py-4 px-2;
-  scroll-snap-type: x mandatory;
-  max-width: 95%; /* Wider on mobile */
-  @apply sm:max-w-[85%] lg:max-w-[70%]; /* Gradually decrease width on larger screens */
-  margin: 0 auto;
-  
-  /* Hide scrollbar for all browsers */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.scrollContainer::-webkit-scrollbar {
-  display: none;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 0 2rem;
 }
 
 .propertyCard {
-  @apply flex-shrink-0 rounded-lg shadow-lg bg-white transition-all duration-300 ease-in-out;
-  /* Responsive card widths */
-  width: calc(80% - 12px); /* Show 1.25 cards on mobile */
-  @apply sm:w-[calc(45%-16px)] /* Show ~2 cards on tablet */
-         md:w-[calc(33.333%-16px)] /* Show 3 cards on medium screens */
-         lg:w-[calc(25%-16px)]; /* Show 4 cards on large screens */
-  
-  /* Hover effects */
-  transform: scale(1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 0 0 calc(25% - 1rem); /* Show exactly 4 cards */
+  min-width: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  transition: transform 0.3s ease;
 }
 
 .propertyCard:hover {
-  transform: scale(1.05); /* Slightly enlarge the card */
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12); /* Enhanced shadow on hover */
-  cursor: pointer; /* Change cursor to pointer */
+  transform: translateY(-5px);
 }
 
-.propertyCard:hover .propertyDetails {
-  @apply bg-gray-50; /* Subtle background change on hover */
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.leftButton {
+  left: 0;
+}
+
+.rightButton {
+  right: 0;
+}
+
+.scrollButton:hover {
+  background-color: #f0f0f0;
 }
 
 .imageContainer {
-  @apply relative h-32 sm:h-40 lg:h-48;
+  position: relative;
+  height: 200px;
 }
 
 .propertyImage {
-  @apply w-full h-full object-cover rounded-t-lg;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.savedIcon {
-  @apply absolute top-2 right-2 cursor-pointer;
+.heartButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.heartIcon {
-  @apply text-gray-300 text-xl;
+.heartEmpty {
+  color: #ffffff;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 
-.heartIcon.saved {
-  @apply text-red-500;
-}
-
-.propertyDetails {
-  @apply p-3;
-}
-
-.propertyName {
-  @apply text-base font-semibold mb-1;
+.heartFilled {
+  color: #ff4d4d;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
 }
 
 .propertyInfo {
-  @apply flex justify-between mb-1;
+  padding: 1rem;
+}
+
+.propertyInfo h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .location {
-  @apply text-gray-600;
-}
-
-.rating {
-  @apply text-yellow-500;
-}
-
-.priceContainer {
-  @apply flex justify-between items-baseline;
+  color: #666;
+  margin-bottom: 0.5rem;
 }
 
 .price {
-  @apply font-bold text-green-600;
+  font-weight: bold;
+  color: #2c5282;
+  margin-bottom: 0.5rem;
 }
 
-.perNight {
-  @apply text-gray-500 text-sm;
+.rating {
+  color: #f59e0b;
+  margin-bottom: 1rem;
+}
+
+.viewButton {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  text-align: center;
+  background-color: #2c5282;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.viewButton:hover {
+  background-color: #1a365d;
 }

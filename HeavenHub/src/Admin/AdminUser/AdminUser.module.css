@@ -1,4 +1,4 @@
-.userContainer {
+.hotelContainer {
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -20,7 +20,8 @@
 }
 
 .addButton,
-.editButton {
+.editButton,
+.deleteButton {
   background-color: #007bff;
   color: white;
   padding: 10px 20px;
@@ -31,7 +32,8 @@
 }
 
 .addButton:hover,
-.editButton:hover {
+.editButton:hover,
+.deleteButton:hover {
   background-color: #0056b3;
 }
 
@@ -39,32 +41,20 @@
   overflow-x: auto;
 }
 
-.userTable {
+.hotelTable {
   width: 100%;
   border-collapse: collapse;
   background-color: #e0e0e0;
   border: 1px solid #007bff;
 }
 
-.userTable th,
-.userTable td {
+.hotelTable th,
+.hotelTable td {
   padding: 10px;
   text-align: left;
 }
 
-.userTable th {
+.hotelTable th {
   background-color: #007bff;
   color: white;
-}
-
-.actionButton {
-  background-color: transparent;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.actionButton:hover {
-  text-decoration: underline;
 }

@@ -5,12 +5,93 @@ import styles from "./Favourites.module.css";
 
 const Favourites = ({ savedProperties, setSavedProperties }) => {
   const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // eslint-disable-next-line no-unused-vars
+  const [error, setError] = useState(false);
+
+  // Fix the transformImagePath function to handle all image types
+  const transformImagePath = (imagePath) => {
+    if (!imagePath) return "/logo192.png"; // Default fallback
+
+    // If it's already a full URL, use it as is
+    if (imagePath.startsWith("http")) return imagePath;
+
+    // If it's a webpack bundled path from static/media, fix it
+    if (imagePath.includes("/static/media/")) {
+      // Extract the filename without hash
+      const filenameWithExt = imagePath.split("/").pop();
+      const filename = filenameWithExt.split(".")[0];
+
+      // Extract the extension from the original path if possible
+      const ext = filenameWithExt.match(/\.(jpg|jpeg|png|gif)($|\?)/i);
+
+      // Use the detected extension or try multiple extensions
+      if (ext && ext[1]) {
+        return `http://localhost:4000/images/${filename}.${ext[1]}`;
+      }
+
+      // Special case handling
+      if (filename === "kathmandu2") {
+        return `http://localhost:4000/images/kathmandu2.png`;
+      }
+
+      if (filename === "p1" || filename.startsWith("p")) {
+        return `http://localhost:4000/images/${filename}.jpg`;
+      }
+
+      if (filename === "l5" || filename.startsWith("l")) {
+        return `http://localhost:4000/images/${filename}.jpg`;
+      }
+
+      if (filename === "b5" || filename.startsWith("b")) {
+        return `http://localhost:4000/images/${filename}.jpg`;
+      }
+
+      // Try to preserve the original extension if it's in the filename
+      if (filename.includes("png")) {
+        return `http://localhost:4000/images/${filename}.png`;
+      }
+
+      // Default to jpg if no extension can be determined
+      return `http://localhost:4000/images/${filename}.jpg`;
+    }
+
+    // If it starts with /images, add the backend URL
+    if (imagePath.startsWith("/images")) {
+      return `http://localhost:4000${imagePath}`;
+    }
+
+    // If it already has an extension, use it as is
+    if (/\.(jpg|jpeg|png|gif)$/i.test(imagePath)) {
+      return `http://localhost:4000/images/${imagePath}`;
+    }
+
+    // Try to infer extension from filename
+    if (imagePath.includes("png")) {
+      return `http://localhost:4000/images/${imagePath}.png`;
+    }
+
+    // Check for special filenames
+    if (imagePath === "kathmandu2") {
+      return `http://localhost:4000/images/kathmandu2.png`;
+    }
+
+    // Default to jpg
+    return `http://localhost:4000/images/${imagePath}.jpg`;
+  };
 
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
+        setLoading(true);
         const token = localStorage.getItem("token");
+        if (!token) {
+          setLoading(false);
+          return;
+        }
+
         const response = await fetch("http://localhost:4000/api/favorites", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -19,10 +100,18 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
 
         if (response.ok) {
           const favoriteProperties = await response.json();
-          setFavorites(favoriteProperties);
+
+          // Transform image paths in the fetched favorites
+          const transformedFavorites = favoriteProperties.map((prop) => ({
+            ...prop,
+            // Transform the image path
+            image: transformImagePath(prop.image),
+          }));
+
+          setFavorites(transformedFavorites);
 
           // Update global savedProperties state
-          const favoritesMap = favoriteProperties.reduce((acc, prop) => {
+          const favoritesMap = transformedFavorites.reduce((acc, prop) => {
             acc[prop.propertyId] = {
               ...prop,
               isFavorite: true,
@@ -34,11 +123,33 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
         }
       } catch (error) {
         console.error("Error fetching favorites:", error);
+        toast.error("Failed to load favorites");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchFavorites();
   }, [setSavedProperties]);
+
+  // Add this useEffect to update isFavorited status for all favorites
+  useEffect(() => {
+    // When savedProperties changes, ensure all favorites are marked as favorited
+    const favoritesMap = favorites.reduce((acc, prop) => {
+      acc[prop.propertyId] = {
+        ...prop,
+        isFavorite: true,
+      };
+      return acc;
+    }, {});
+
+    // Merge with existing savedProperties to preserve other properties
+    // that might not be in the favorites list
+    setSavedProperties((prev) => ({
+      ...prev,
+      ...favoritesMap,
+    }));
+  }, [favorites, setSavedProperties]);
 
   const handleRemoveFavorite = async (propertyId) => {
     try {
@@ -81,6 +192,65 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
     navigate(`/hotel-details/${city}/${propertyId}`);
   };
 
+  // Create an improved ImageWithFallback component that tries different extensions
+  const ImageWithFallback = ({ src, alt, className }) => {
+    const [finalSrc, setFinalSrc] = useState(transformImagePath(src));
+
+    const handleError = () => {
+      console.error(`Image load error for: ${finalSrc}`);
+
+      // If we're already showing the fallback, don't try again
+      if (finalSrc === "/logo192.png") return;
+
+      // Try different extensions
+      if (finalSrc.endsWith(".jpg")) {
+        // Try PNG instead
+        const pngSrc = finalSrc.replace(/\.jpg$/, ".png");
+        console.log(`Trying alternative format: ${pngSrc}`);
+
+        // Set a temporary img to test if PNG exists
+        const testImg = new Image();
+        testImg.onload = () => setFinalSrc(pngSrc);
+        testImg.onerror = () => {
+          // Try JPEG
+          const jpegSrc = finalSrc.replace(/\.jpg$/, ".jpeg");
+          console.log(`Trying alternative format: ${jpegSrc}`);
+
+          const testJpeg = new Image();
+          testJpeg.onload = () => setFinalSrc(jpegSrc);
+          testJpeg.onerror = () => setFinalSrc("/logo192.png");
+          testJpeg.src = jpegSrc;
+        };
+        testImg.src = pngSrc;
+      } else if (finalSrc.endsWith(".png")) {
+        // Try JPG instead
+        const jpgSrc = finalSrc.replace(/\.png$/, ".jpg");
+        console.log(`Trying alternative format: ${jpgSrc}`);
+
+        const testImg = new Image();
+        testImg.onload = () => setFinalSrc(jpgSrc);
+        testImg.onerror = () => setFinalSrc("/logo192.png");
+        testImg.src = jpgSrc;
+      } else {
+        // If not a recognized extension, use fallback
+        setFinalSrc("/logo192.png");
+      }
+    };
+
+    return (
+      <img
+        src={finalSrc}
+        alt={alt}
+        className={className}
+        onError={handleError}
+      />
+    );
+  };
+
+  if (loading) {
+    return <div className={styles.loading}>Loading your favorites...</div>;
+  }
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.favoritesContainer}>
@@ -91,7 +261,8 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
           <div className={styles.favoritesList}>
             {favorites.map((property) => (
               <div key={property.propertyId} className={styles.favoriteItem}>
-                <img
+                {/* Replace img with ImageWithFallback */}
+                <ImageWithFallback
                   src={property.image}
                   alt={property.name}
                   className={styles.propertyImage}

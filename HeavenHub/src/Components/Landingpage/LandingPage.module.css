@@ -57,58 +57,24 @@
 
 /* Why Choose Us Section */
 .whyChooseUsSection {
-  @apply w-full flex justify-center items-center py-16 bg-gray-100;
+  @apply relative w-full h-96; /* Adjust the height as needed */
 }
 
-.whyChooseUsContainer {
-  @apply flex flex-wrap items-center justify-center max-w-6xl mx-auto gap-12 px-6;
-}
-
-.whyChooseUsImage {
-  @apply w-full md:w-1/2 flex justify-center;
-}
-
-.whyChooseUsImage img {
-  @apply w-full max-w-md rounded-xl shadow-lg;
+.whyChooseUsBackground {
+  @apply bg-cover bg-center h-full flex justify-center items-center text-center text-white;
+  background-image: url('../Assets/hotel1.png'); 
 }
 
 .textContainer {
-  @apply w-full md:w-1/2 text-left;
+  @apply flex flex-col justify-center items-center text-center;
 }
 
 .whyChooseUsHeading {
-  @apply text-4xl font-bold text-gray-900 mb-4;
+  @apply text-4xl font-bold mb-4;
 }
 
 .whyChooseUsDescription {
-  @apply text-lg text-gray-700 leading-relaxed;
-}
-
-
-.whyChooseUsContainer {
-  display: flex;
-  flex-direction: row; /* Arrange items in a row */
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 40px;
-}
-
-.whyChooseUsImage {
-  flex: 1; /* Give the image section space */
-  display: flex;
-  justify-content: flex-start; /* Align image to the left */
-}
-
-.whyChooseUsImage img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.textContainer {
-  flex: 1; /* Make the text section take equal space */
-  text-align: left;
+  @apply text-xl max-w-2xl mx-auto leading-relaxed opacity-90;
 }
 
 .floatingChatIcon {
@@ -127,4 +93,3 @@
   color: white; /* Icon color */
   font-size: 24px; /* Icon size */
 }
-
