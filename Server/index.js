@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
 const favoriteRoutes = require("./routes/favoriteRoutes");
-const hotelRoutes = require("./routes/hotelRoutes");
 require("dotenv").config(); // Load environment variables
 const passport = require("passport");
 require("./config/passport");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary").v2;
+const path = require("path");
 
 const app = express();
 
@@ -38,12 +38,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Connect to MongoDB using the environment variable
-console.log("Mongo URI:", process.env.MONGO_URI); // This should log your Mongo URI
-
+// Connect to MongoDB Atlas
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => console.log("Connected to MongoDB Atlas"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Cloudinary Configuration
@@ -57,8 +55,26 @@ cloudinary.config({
 app.use(authRoutes);
 app.use("/api", chatbotRoutes);
 app.use("/api/favorites", favoriteRoutes);
-app.use("/api", hotelRoutes);
+
+// Routes
+const cityRoutes = require("./routes/cityRoutes");
+app.use("/api/cities", cityRoutes);
+
+// Add these lines to serve static files
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
+// Add CORS headers
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // Start the server
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
