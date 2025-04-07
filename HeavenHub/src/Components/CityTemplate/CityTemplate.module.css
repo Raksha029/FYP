@@ -260,3 +260,55 @@
   .saved {
     @apply text-red-500; /* Color when saved */
   }
+
+.searchContainer {
+  display: flex;
+  gap: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.searchButton {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+}
+
+.amenitiesCheckboxes {
+  @apply grid grid-cols-2 gap-2 max-h-60 overflow-y-auto p-2;
+}
+
+.amenityCheckbox {
+  @apply flex items-center gap-2;
+}
+
+.amenityCheckbox input[type="checkbox"] {
+  @apply w-4 h-4;
+}
+
+.amenityCheckbox label {
+  @apply text-sm;
+}

@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Reserve.module.css";
-import KhaltiCheckout from "khalti-checkout-web"; // Import Khalti SDK
+import { toast } from "react-toastify";
 
-const Reserve = ({ userDetails, setUserDetails, setShowReservationForm }) => {
-  const [selectedCountry, setSelectedCountry] = useState(null); // Initialize selectedCountry after fetching countries
-  const [countryOptions, setCountryOptions] = useState([]); // State for country options
-  const [showDropdown, setShowDropdown] = useState(false); // State for dropdown visibility
-  const [filteredCountries, setFilteredCountries] = useState([]); // State for filtered countries
+const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBookingComplete }) => {
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Get today's date and tomorrow's date for default values
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // Format dates for input field default values
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   useEffect(() => {
     // Fetch countries from API
@@ -22,20 +36,20 @@ const Reserve = ({ userDetails, setUserDetails, setShowReservationForm }) => {
       }));
       setCountryOptions(formattedCountries);
       setFilteredCountries(formattedCountries);
-      setSelectedCountry(formattedCountries[0]); // Set default selected country
+      setSelectedCountry(formattedCountries[0]);
     };
     fetchCountries();
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserDetails((prev) => ({ ...prev, [name]: value })); // Update user details
+    setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCountryChange = (country) => {
     setSelectedCountry(country);
-    setUserDetails((prev) => ({ ...prev, country: country.name })); // Update country in user details
-    setShowDropdown(false); // Close dropdown after selection
+    setUserDetails((prev) => ({ ...prev, country: country.name }));
+    setShowDropdown(false);
   };
 
   const handleSearch = (e) => {
@@ -46,56 +60,136 @@ const Reserve = ({ userDetails, setUserDetails, setShowReservationForm }) => {
     setFilteredCountries(filtered);
   };
 
-  // Khalti Payment Config
-  const khaltiConfig = {
-    publicKey: "your_public_key_here", // Replace with your Khalti Public Key
-    productIdentity: "1234567890",
-    productName: "Hotel Booking",
-    productUrl: "http://localhost:3000",
-    eventHandler: {
-      onSuccess(payload) {
-        console.log("Payment Successful", payload);
-        alert("Khalti Payment successful! Booking confirmed.");
-      },
-      onError(error) {
-        console.log("Payment Error", error);
-        alert("Khalti Payment failed. Try again.");
-      },
-      onClose() {
-        console.log("Payment closed.");
-      },
-    },
-    paymentPreference: ["KHALTI"],
-  };
-
-  const khaltiCheckout = new KhaltiCheckout(khaltiConfig);
-
-  const handleKhaltiPayment = () => {
-    khaltiCheckout.show({ amount: 1000 }); // Amount in Paisa (1000 = Rs.10)
-  };
-
-  // eSewa Payment Function
-  const handleEsewaPayment = () => {
-    const amount = 10; // Rs.10
-    const url = `https://esewa.com.np/epay/main?amt=${amount}&psc=0&pdc=0&txAmt=0&tAmt=${amount}&pid=1234567890&scd=your_esewa_merchant_id&su=http://localhost:3000/payment-success&fu=http://localhost:3000/payment-failed`;
-    window.location.href = url;
-  };
-
-  const handlePayment = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userDetails?.paymentMethod === "Khalti") {
-      handleKhaltiPayment();
-    } else if (userDetails?.paymentMethod === "esewa") {
-      handleEsewaPayment();
-    } else {
-      alert("Please select a payment method.");
+    setIsSubmitting(true);
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Please log in to complete your booking");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Validate required fields
+      if (!userDetails.checkInDate || !userDetails.checkOutDate) {
+        toast.error("Please select check-in and check-out dates");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const bookingData = {
+        hotelId: selectedRoom.hotelId,
+        hotelName: selectedRoom.hotelName,
+        roomType: selectedRoom.type,
+        checkInDate: userDetails.checkInDate,
+        checkOutDate: userDetails.checkOutDate,
+        guestDetails: {
+          firstName: userDetails.firstName,
+          lastName: userDetails.lastName,
+          email: userDetails.email,
+          phone: userDetails.phone,
+          country: selectedCountry?.name || userDetails.country
+        },
+        roomCount: selectedRoom.count, // Make sure we're using the correct room count
+        totalPrice: selectedRoom.totalPrice
+      };
+
+      // Validate all required fields are present
+      const requiredFields = ['hotelId', 'hotelName', 'roomType', 'checkInDate', 'checkOutDate', 'totalPrice'];
+      for (const field of requiredFields) {
+        if (!bookingData[field]) {
+          throw new Error(`Missing required field: ${field}`);
+        }
+      }
+
+      const response = await fetch("http://localhost:4000/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(bookingData)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create booking");
+      }
+
+      await response.json();
+      toast.success("Booking confirmed successfully!");
+      
+      // Pass the correct room count to update availability
+      if (onBookingComplete) {
+        onBookingComplete(selectedRoom.hotelId, selectedRoom.type, selectedRoom.count);
+      }
+      
+      onClose();
+    } catch (error) {
+      console.error("Booking error:", error);
+      toast.error(error.message || "Failed to complete booking");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className={styles.reservationForm}>
       <h2>Enter your details</h2>
-      <form onSubmit={handlePayment}>
+      <form onSubmit={handleSubmit}>
+        {/* Room details section */}
+        <div className={styles.roomDetails}>
+          <h3>Booking Details</h3>
+          {selectedRoom && (
+            <>
+              <p>
+                <strong>Room Type:</strong> {selectedRoom.type}
+              </p>
+              <p>
+                <strong>Rooms:</strong> {selectedRoom.count}
+              </p>
+              <p>
+                <strong>Total Price:</strong> NPR {selectedRoom.totalPrice}
+              </p>
+            </>
+          )}
+
+          {/* Check-in/Check-out dates */}
+          <div className={styles.dateInputs}>
+            {/* Check-in field at the top */}
+            <div className={styles.dateField}>
+              <label htmlFor="checkInDate">Check-in Date:</label>
+              <input
+                type="date"
+                id="checkInDate"
+                name="checkInDate"
+                min={formatDate(today)}
+                defaultValue={formatDate(today)}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            
+            {/* Check-out field below */}
+            <div className={styles.dateField}>
+              <label htmlFor="checkOutDate">Check-out Date:</label>
+              <input
+                type="date"
+                id="checkOutDate"
+                name="checkOutDate"
+                min={formatDate(tomorrow)}
+                defaultValue={formatDate(tomorrow)}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Personal details */}
+        <h3>Guest Information</h3>
         <input
           type="text"
           name="firstName"
@@ -168,32 +262,7 @@ const Reserve = ({ userDetails, setUserDetails, setShowReservationForm }) => {
           required
           style={{ marginTop: "15px" }}
         />
-        {/* Payment Method */}
-        <div>
-          <label>Payment Method:</label>
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="Khalti"
-                checked={userDetails?.paymentMethod === "Khalti"}
-                onChange={handleInputChange}
-              />
-              Khalti
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="esewa"
-                checked={userDetails?.paymentMethod === "esewa"}
-                onChange={handleInputChange}
-              />
-              eSewa
-            </label>
-          </div>
-        </div>
+
         <div>
           <label>Who are you booking for? (optional)</label>
           <div>
@@ -242,12 +311,11 @@ const Reserve = ({ userDetails, setUserDetails, setShowReservationForm }) => {
             </label>
           </div>
         </div>
-        <button type="submit">Confirm Reservation</button>
-        <button
-          type="button"
-          onClick={() => setShowReservationForm(false)}
-          className={styles.cancelButton}
-        >
+
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Processing..." : "Confirm Booking"}
+        </button>
+        <button type="button" onClick={onClose} className={styles.cancelButton}>
           Cancel
         </button>
       </form>

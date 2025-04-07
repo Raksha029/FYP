@@ -2,9 +2,10 @@
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 1000px;
   margin: 0 auto;
+  margin-bottom: 80px; /* Space for fixed position buttons */
 }
 
 .header {
@@ -14,47 +15,350 @@
   margin-bottom: 20px;
 }
 
+.header h2 {
+  margin: 0;
+  color: #333;
+}
+
 .actions {
   display: flex;
   gap: 10px;
 }
 
-.addButton,
-.editButton,
-.deleteButton {
-  background-color: #007bff;
+.addButton {
+  background-color: #28a745;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.addButton:hover,
-.editButton:hover,
+.modifyButton {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addButton:hover, .modifyButton:hover {
+  background-color: #218838;
+}
+
 .deleteButton:hover {
-  background-color: #0056b3;
+  background-color: #c82333;
+}
+
+
+.deleteButton.activeDelete {
+  background-color: #dc3545;
+}
+
+.deleteButton:disabled {
+  background-color: #ffcdd2;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .tableContainer {
-  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .roomTable {
   width: 100%;
   border-collapse: collapse;
-  background-color: #e0e0e0;
-  border: 1px solid #007bff;
-}
-
-.roomTable th,
-.roomTable td {
-  padding: 10px;
-  text-align: left;
+  background-color: white;
+  border: 1px solid #e0e0e0;
 }
 
 .roomTable th {
   background-color: #007bff;
   color: white;
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.roomTable td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.roomTable tr:hover {
+  background-color: #f5f5f5;
+}
+
+.description {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.description:focus {
+  border-color: #2196f3;
+  outline: none;
+}
+
+/* Add any additional room-specific styles here */
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: none;
+  transform: none;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.formRow {
+  margin-bottom: 20px;
+}
+
+.formRow input,
+.formRow textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #fff;
+  transition: none;
+  transform: none;
+  animation: none;
+  position: static;
+  z-index: auto;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.formRow input:focus,
+.formRow textarea:focus {
+  border-color: #2196f3;
+  outline: none;
+  background-color: #fff;
+  transform: none;
+  animation: none;
+}
+
+.formRow:focus-within {
+  transform: none;
+  animation: none;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.submitBtn:hover {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* Custom scrollbar for the popup */
+.popup::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popup::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.popup::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.popup::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .popup {
+    width: 95%;
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .formRow input,
+  .formRow textarea {
+    padding: 10px;
+  }
+}
+
+/* Grid layout for multiple inputs in a row */
+.formRow.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Error state for inputs */
+.formRow input.error,
+.formRow textarea.error {
+  border-color: #ff4444;
+  background-color: #fff8f8;
+}
+
+.errorMessage {
+  color: #ff4444;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Placeholder styling */
+.formRow input::placeholder,
+.formRow textarea::placeholder {
+  color: #aaa;
+}
+
+.editableRow {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.editableRow:hover {
+  background-color: #f5f5f5;
+}
+
+.selectedRow {
+  background-color: #e3f2fd;
+}
+
+.checkbox {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.activeEdit {
+  background-color: #2196f3;
+  color: white;
+}
+
+.activeDelete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.deleteConfirm {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.deleteConfirmButton {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.deleteConfirmButton:hover {
+  background-color: #d32f2f;
+}
+
+.editPrompt {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Remove all animations */
+@keyframes fadeIn {
+  /* Remove this */
+}
+
+@keyframes slideIn {
+  /* Remove this */
 }

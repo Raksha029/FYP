@@ -24,8 +24,9 @@
   margin: 0;
   font-size: 1.5rem;
   color: #333;
-  flex-grow: 1; /* Allow the header to take available space */
-  margin-bottom: 10px; /* Add some space if wrapping occurs */
+  flex-grow: 1;
+  margin-bottom: 10px;
+  font-weight: 700; /* Added this line to make the text bold */
 }
 .reservationContent {
   background-color: white;

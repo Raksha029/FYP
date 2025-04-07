@@ -31,52 +31,146 @@
 /* Search Form */
 
 .searchForm {
-  @apply flex items-center justify-center space-x-4 mt-6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.searchFields {
-  @apply flex flex-wrap justify-center gap-6;
+.guestInputs {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex: 3;
+}
+
+.select {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
+  height: 50px;
 }
 
 .searchInput {
-  @apply p-3 rounded-lg border border-gray-300 w-48 bg-white text-gray-900 placeholder-gray-500;
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  font-weight: 500;
 }
 
-.searchInput:focus {
-  @apply outline-none ring-2 ring-blue-500;
+.searchInput::placeholder {
+  color: #666;
 }
 
 .searchButton {
-  @apply bg-blue-500 text-white py-2 px-6 rounded-lg text-lg cursor-pointer;
+  flex: 1;
+  padding: 12px 24px;
+  height: 50px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  font-weight: 600;
 }
 
 .searchButton:hover {
-  @apply bg-blue-600;
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+    gap: 15px;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .guestInputs {
+    flex-direction: column;
+  }
+
+  .searchInput,
+  .select,
+  .searchButton {
+    width: 100%;
+  }
 }
 
 /* Why Choose Us Section */
 .whyChooseUsSection {
-  @apply relative w-full h-96; /* Adjust the height as needed */
+  @apply w-full flex justify-center items-center py-16 bg-gray-100;
 }
 
-.whyChooseUsBackground {
-  @apply bg-cover bg-center h-full flex justify-center items-center text-center text-white;
-  background-image: url('../Assets/hotel1.png'); 
+.whyChooseUsContainer {
+  @apply flex flex-wrap items-center justify-center max-w-6xl mx-auto gap-12 px-6;
+}
+
+.whyChooseUsImage {
+  @apply w-full md:w-1/2 flex justify-center;
+}
+
+.whyChooseUsImage img {
+  @apply w-full max-w-md rounded-xl shadow-lg;
 }
 
 .textContainer {
-  @apply flex flex-col justify-center items-center text-center;
+  @apply w-full md:w-1/2 text-left;
 }
 
 .whyChooseUsHeading {
-  @apply text-4xl font-bold mb-4;
+  @apply text-4xl font-bold text-gray-900 mb-4;
 }
 
 .whyChooseUsDescription {
-  @apply text-xl max-w-2xl mx-auto leading-relaxed opacity-90;
+  @apply text-lg text-gray-700 leading-relaxed;
 }
 
+
+.whyChooseUsContainer {
+  display: flex;
+  flex-direction: row; /* Arrange items in a row */
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px;
+}
+
+.whyChooseUsImage {
+  flex: 1; /* Give the image section space */
+  display: flex;
+  justify-content: flex-start; /* Align image to the left */
+}
+
+.whyChooseUsImage img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.textContainer {
+  flex: 1; /* Make the text section take equal space */
+  text-align: left;
+}
 .floatingChatIcon {
   position: fixed;
   bottom: 20px;
@@ -92,4 +186,25 @@
 .chatIconStyle {
   color: white; /* Icon color */
   font-size: 24px; /* Icon size */
+}
+
+/* Add styles for the container if needed */
+.searchContainer {
+  position: relative;
+  z-index: 2; /* Ensure search form stays above background */
+  padding: 20px;
+}
+
+/* Optional: Add these styles if you want to adjust the text color */
+.select option {
+  background-color: white;
+  color: #000;
+}
+
+/* Add focus styles for better visibility */
+.searchInput:focus,
+.select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }

@@ -186,19 +186,71 @@
 }
 
 .roomCard {
-  @apply flex justify-between items-center p-4 border rounded-lg border-gray-200;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .roomInfo {
-  @apply font-semibold;
+  flex: 1;
+}
+
+.roomInfo h4 {
+  margin-top: 0;
+  color: #333;
+  font-size: 18px;
 }
 
 .roomPrice {
-  @apply text-gray-600;
+  font-weight: 600;
+  color: #2a5885;
+  font-size: 16px;
+  margin: 8px 0;
 }
 
-.bookButton {
-  @apply bg-blue-500 text-white px-4 py-2 rounded;
+.reserveButton {
+  align-self: flex-end;
+  background-color: #2a5885;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.reserveButton:hover {
+  background-color: #1c3d5a;
+}
+
+.reserveButton:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+/* For larger screens, make the room card layout horizontal */
+@media (min-width: 768px) {
+  .roomCard {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .roomInfo {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .reserveButton {
+    margin-top: 0;
+  }
 }
 
 .infoSection,
@@ -256,6 +308,10 @@
 .writeReviewButton {
   @apply mt-4 bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer; /* Button styling */
   transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.writeReviewButton:hover {
+  @apply bg-blue-600; /* Darker blue on hover */
 }
 
 .mapTitle {
@@ -630,9 +686,10 @@
 }
 
 .hotelDetailsContainer {
-  padding: 20px;
-  max-width: 1200px;
+  max-width: 1400px; /* Increase from what's likely a smaller value */
+  width: 95%; /* Use more of the screen width */
   margin: 0 auto;
+  padding: 20px 15px;
 }
 
 .mapContainer {
@@ -846,9 +903,10 @@
 
 .imageGallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .galleryImage {
@@ -886,4 +944,153 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.2); }
   100% { transform: scale(1); }
+}
+
+/* Room count selector styling */
+.roomCountSelector {
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.roomCountSelector label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.roomCountSelector select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100px;
+}
+
+.totalPrice {
+  font-weight: 600;
+  margin-top: 8px;
+  font-size: 16px;
+  color: #2a5885;
+}
+
+/* Price surge indicator */
+.priceSurge {
+  font-size: 12px;
+  color: #e74c3c;
+  font-style: italic;
+  margin-left: 5px;
+}
+
+/* Availability indicator */
+.availability {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Improve layout for the content area */
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .contentContainer {
+    flex-direction: row;
+  }
+  
+  .leftColumn {
+    flex: 0 0 65%;
+  }
+  
+  .rightColumn {
+    flex: 0 0 32%;
+  }
+}
+
+/* For smaller screens, ensure full width is used */
+@media (max-width: 768px) {
+  .hotelDetailsContainer {
+    width: 100%;
+    padding: 15px 10px;
+  }
+}
+
+.addReviewSection {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.addReviewSection h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.ratingSelector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ratingSelector span {
+  margin-right: 10px;
+}
+
+.ratingStar {
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.ratingStar:hover,
+.activeStar {
+  color: #ffcc00;
+}
+
+.reviewInput {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.submitReviewButton {
+  background-color: #2a5885;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.submitReviewButton:hover {
+  background-color: #1c3d5a;
+}
+
+.submitReviewButton:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
 }

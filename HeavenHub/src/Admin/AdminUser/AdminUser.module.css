@@ -1,4 +1,4 @@
-.hotelContainer {
+.userContainer {
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -19,21 +19,37 @@
   gap: 10px;
 }
 
-.addButton,
-.editButton,
-.deleteButton {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
+.addButton, .modifyButton, .deleteButton {
+  padding: 8px 16px;
   border: none;
   border-radius: 4px;
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+}
+
+.addButton {
+  background-color: #28a745;
+}
+
+.modifyButton {
+  background-color: #ffc107;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+}
+
+.editableRow {
+  cursor: pointer;
+}
+
+.editableRow:hover {
+  background-color: #f8f9fa;
 }
 
 .addButton:hover,
-.editButton:hover,
-.deleteButton:hover {
+.editButton:hover {
   background-color: #0056b3;
 }
 
@@ -41,20 +57,217 @@
   overflow-x: auto;
 }
 
-.hotelTable {
+.userTable {
   width: 100%;
   border-collapse: collapse;
   background-color: #e0e0e0;
   border: 1px solid #007bff;
 }
 
-.hotelTable th,
-.hotelTable td {
+.userTable th,
+.userTable td {
   padding: 10px;
   text-align: left;
 }
 
-.hotelTable th {
+.userTable th {
   background-color: #007bff;
   color: white;
+}
+
+.actionButton {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.actionButton:hover {
+  text-decoration: underline;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  position: relative;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.imageUpload {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.circle input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.formRow input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.formRow input:focus {
+  border-color: #2196f3;
+  outline: none;
+}
+
+.formRow:focus-within {
+  /* Remove transform styles */
+}
+
+.addBtn {
+  width: 100%;
+  padding: 12px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.addBtn:hover {
+  background: darkgreen;
+}
+
+.activeDelete {
+  background-color: #ff4444;
+  color: white;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.deleteConfirm {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.deleteButton {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.deleteButton:hover {
+  background-color: #ff0000;
+}
+
+.userTable td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.userTable input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+}
+
+.activeEdit {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.editableRow {
+  cursor: pointer;
+}
+
+.editableRow:hover {
+  background-color: #f5f5f5;
+}
+
+.selectedRow {
+  background-color: #e3f2fd;
+}
+
+.editPrompt {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }

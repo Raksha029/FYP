@@ -1,5 +1,3 @@
-
-
 .contactContainer {
   @apply flex items-center justify-between p-5 w-full max-w-[1200px] mx-auto font-sans text-gray-800 bg-[#f0f4ff] rounded-lg shadow-md; /* Use Tailwind utilities */
 }
@@ -34,5 +32,3 @@
 .contactContainer button:hover {
   @apply bg-[#e65c1b]; /* Use Tailwind utilities */
 }
-
-

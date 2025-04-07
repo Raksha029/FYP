@@ -1,30 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminLogin.module.css';
+import { toast } from 'react-toastify';
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '' 
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Clear any existing admin sessions on component mount
+  useEffect(() => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminData');
+  }, []);
+
   const handleChange = (e) => {
+    setError(''); // Clear error when user types
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // For now, using hardcoded credentials. In production, this should be properly authenticated
-    if (credentials.username === 'admin' && credentials.password === 'admin123') {
-      localStorage.setItem('adminToken', 'temp-admin-token');
-      navigate('/admin/dashboard'); // Ensure this line is present
-    } else {
-      setError('Invalid credentials');
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:4000/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('adminToken', data.token);
+        localStorage.setItem('adminData', JSON.stringify(data.admin));
+        toast.success('Login successful');
+        navigate('/admin/dashboard');
+      } else {
+        if (response.status === 423) {
+          // Account locked message
+          toast.error(data.message);
+        }
+        setError(data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Network error. Please try again later.');
+      toast.error('Connection failed');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -41,6 +76,7 @@ const AdminLogin = () => {
               placeholder="Username"
               value={credentials.username}
               onChange={handleChange}
+              disabled={isLoading}
               required
             />
           </div>
@@ -51,11 +87,16 @@ const AdminLogin = () => {
               placeholder="Password"
               value={credentials.password}
               onChange={handleChange}
+              disabled={isLoading}
               required
             />
           </div>
-          <button type="submit" className={styles.loginButton}>
-            Login
+          <button 
+            type="submit" 
+            className={styles.loginButton}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
       </div>

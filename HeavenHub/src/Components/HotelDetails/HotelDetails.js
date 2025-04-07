@@ -46,6 +46,12 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
   // eslint-disable-next-line no-unused-vars
   const currentUser = null; // Will be implemented with auth
 
+  // Add a new state for the selected room
+  const [selectedRoom, setSelectedRoom] = useState(null);
+
+  // Add a new state for room counts
+  const [roomCounts, setRoomCounts] = useState({});
+
   // Image handling component
   const ImageWithFallback = ({ src, alt, className }) => {
     const handleError = (e) => {
@@ -153,14 +159,66 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     };
   }, [hotel, mapContainerRef]); // Add mapContainerRef to dependencies
 
-  const handleReserve = (roomType) => {
-    setShowReservationForm(true); // Show reservation form
+  // Calculate dynamic price based on availability
+  const calculateDynamicPrice = (basePrice, available) => {
+    // Apply dynamic pricing - increase price as availability decreases
+    if (available <= 2) {
+      return Math.round(basePrice * 1.3); // 30% markup for high demand
+    } else if (available <= 5) {
+      return Math.round(basePrice * 1.15); // 15% markup for medium demand
+    }
+    return basePrice; // Normal price for good availability
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Reserved ${userDetails.name} using ${userDetails.paymentMethod}`);
-    setShowReservationForm(false); // Close the form after submission
+  // Handle room count change
+  const handleRoomCountChange = (roomType, count) => {
+    setRoomCounts((prev) => ({
+      ...prev,
+      [roomType]: count,
+    }));
+  };
+
+  // Update the handleReserve function
+  const handleReserve = (room) => {
+    if (room.available <= 0) {
+      toast.error("Sorry, this room is no longer available");
+      return;
+    }
+
+    // Get the selected count for this room (default to 1 if not set)
+    const count = roomCounts[room.type] || 1;
+
+    // Calculate the total price
+    const price = calculateDynamicPrice(room.price, room.available) * count;
+
+    // Save the selected room with count and total price
+    setSelectedRoom({
+      ...room,
+      count: count,
+      totalPrice: price,
+      hotelId: id,
+      hotelName: hotel.name,
+    });
+
+    setShowReservationForm(true);
+  };
+
+  // Remove the unused handleSubmit function since we're using Reserve component now
+
+  // Add handleBookingComplete function
+  const handleBookingComplete = (hotelId, roomType, bookedCount) => {
+    setHotel(prevHotel => {
+      if (!prevHotel) return prevHotel;
+
+      const updatedHotel = { ...prevHotel };
+      const roomToUpdate = updatedHotel.rooms.find(room => room.type === roomType);
+      
+      if (roomToUpdate) {
+        roomToUpdate.available = Math.max(0, roomToUpdate.available - bookedCount);
+      }
+      
+      return updatedHotel;
+    });
   };
 
   const toggleFavorite = async () => {
@@ -247,9 +305,87 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const handleReviewSubmit = () => {
-    // Implementation coming soon
+  // Update the handleReviewSubmit function to get the real username
+  const handleReviewSubmit = async () => {
+    try {
+      if (!newReview.comment.trim()) {
+        toast.error("Please add a comment to your review");
+        return;
+      }
+
+      // Get token - required for authentication
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Please log in to submit a review");
+        return;
+      }
+
+      // Get the username from localStorage
+      let username = "Guest User";
+
+      // Try multiple locations where user data might be stored
+      try {
+        // First check if there's a username directly stored
+        const storedUsername = localStorage.getItem("username");
+        if (storedUsername) {
+          username = storedUsername;
+        } else {
+          // Check if user data is stored as JSON
+          const userData = JSON.parse(localStorage.getItem("user") || "{}");
+          if (userData.name) {
+            username = userData.name;
+          } else if (userData.username) {
+            username = userData.username;
+          } else if (userData.firstName) {
+            username =
+              userData.firstName +
+              (userData.lastName ? " " + userData.lastName : "");
+          }
+        }
+      } catch (e) {
+        console.log("Error getting user data:", e);
+      }
+
+      console.log("Submitting review as:", username);
+
+      const response = await fetch(
+        `http://localhost:4000/api/cities/${city}/hotels/${id}/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            rating: newReview.rating,
+            comment: newReview.comment,
+            reviewer: username,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to submit review");
+      }
+
+      // Get the updated hotel data with the new review
+      const updatedHotel = await response.json();
+
+      // Update the hotel state with the new data including the new review
+      setHotel(updatedHotel);
+
+      // Reset the review form
+      setNewReview({
+        rating: 5,
+        comment: "",
+      });
+
+      toast.success("Review submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      toast.error(error.message || "Failed to submit review");
+    }
   };
 
   if (loading) {
@@ -366,6 +502,42 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                   </button>
                 )}
               </div>
+
+              {/* Add Review Form */}
+              <div className={styles.addReviewSection}>
+                <h3>Leave a Review</h3>
+                <div className={styles.ratingSelector}>
+                  <span>Your Rating: </span>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                      key={star}
+                      className={`${styles.ratingStar} ${
+                        newReview.rating >= star ? styles.activeStar : ""
+                      }`}
+                      onClick={() =>
+                        setNewReview({ ...newReview, rating: star })
+                      }
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <textarea
+                  className={styles.reviewInput}
+                  placeholder="Share your experience..."
+                  value={newReview.comment}
+                  onChange={(e) =>
+                    setNewReview({ ...newReview, comment: e.target.value })
+                  }
+                />
+                <button
+                  className={styles.submitReviewButton}
+                  onClick={handleReviewSubmit}
+                  disabled={!newReview.comment.trim()}
+                >
+                  Submit Review
+                </button>
+              </div>
             </section>
           </div>
 
@@ -374,28 +546,78 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
             <div className={styles.bookingCard}>
               <div className={styles.priceSection}>
                 <span className={styles.priceLabel}>Starting from</span>
-                <h2 className={styles.price}>${price}</h2>
+                <h2 className={styles.price}>NPR {price}</h2>
                 <span className={styles.perNight}>per night</span>
               </div>
 
               <div className={styles.roomsSection}>
                 <h3>Available Rooms</h3>
-                {rooms.map((room, index) => (
-                  <div key={index} className={styles.roomCard}>
-                    <div className={styles.roomInfo}>
-                      <h4>{room.type}</h4>
-                      <p>{room.description}</p>
-                      <p>Capacity: {room.capacity}</p>
-                      <p className={styles.roomPrice}>${room.price}/night</p>
+                {rooms.map((room, index) => {
+                  const dynamicPrice = calculateDynamicPrice(
+                    room.price,
+                    room.available
+                  );
+                  const count = roomCounts[room.type] || 1;
+                  const totalPrice = dynamicPrice * count;
+
+                  return (
+                    <div key={index} className={styles.roomCard}>
+                      <div className={styles.roomInfo}>
+                        <h4>{room.type}</h4>
+                        <p>{room.description}</p>
+                        <p>Capacity: {room.capacity}</p>
+                        <p className={styles.roomPrice}>
+                          NPR {dynamicPrice}/night
+                          {dynamicPrice > room.price && (
+                            <span className={styles.priceSurge}>
+                              {" "}
+                              (Limited availability pricing)
+                            </span>
+                          )}
+                        </p>
+                        <p className={styles.availability}>
+                          {room.available > 0
+                            ? `${room.available} rooms available`
+                            : "Currently unavailable"}
+                        </p>
+
+                        {room.available > 0 && (
+                          <div className={styles.roomCountSelector}>
+                            <label htmlFor={`roomCount-${index}`}>
+                              Number of rooms:
+                            </label>
+                            <select
+                              id={`roomCount-${index}`}
+                              value={count}
+                              onChange={(e) =>
+                                handleRoomCountChange(
+                                  room.type,
+                                  parseInt(e.target.value)
+                                )
+                              }
+                            >
+                              {[...Array(room.available)].map((_, i) => (
+                                <option key={i + 1} value={i + 1}>
+                                  {i + 1}
+                                </option>
+                              ))}
+                            </select>
+                            <p className={styles.totalPrice}>
+                              Total: NPR {totalPrice}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        className={styles.reserveButton}
+                        onClick={() => handleReserve(room)}
+                        disabled={room.available <= 0}
+                      >
+                        Reserve Now
+                      </button>
                     </div>
-                    <button
-                      className={styles.reserveButton}
-                      onClick={() => handleReserve(room.type)}
-                    >
-                      Reserve
-                    </button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -405,10 +627,11 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
       {/* Reservation Form Modal */}
       {showReservationForm && (
         <Reserve
-          onClose={() => setShowReservationForm(false)}
-          onSubmit={handleSubmit}
           userDetails={userDetails}
           setUserDetails={setUserDetails}
+          onClose={() => setShowReservationForm(false)}
+          selectedRoom={selectedRoom}
+          onBookingComplete={handleBookingComplete}
         />
       )}
     </div>

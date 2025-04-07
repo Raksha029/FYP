@@ -7,6 +7,8 @@ import hotelbackground_icon from "../Assets/hotelbackground.png";
 import TopRatedProperties from "../TopRatedProperties/TopRatedProperties";
 import PopularPlaces from "../PopularPlaces/PopularPlaces";
 import Chatbot from "../Chatbot/Chatbot";
+import hotel1 from "../Assets/hotel1.png";
+import { citiesData } from "../data/citiesData";
 
 const LandingPage = ({ savedProperties, setSavedProperties }) => {
   const [searchParams, setSearchParams] = useState({
@@ -14,9 +16,6 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
     adults: 1,
     children: 0,
     rooms: 1,
-    priceRange: [0, 5000],
-    amenities: [],
-    rating: 0,
   });
 
   const [showChatbot, setShowChatbot] = useState(false);
@@ -26,32 +25,49 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
     e.preventDefault();
 
     try {
-      const queryParams = new URLSearchParams({
-        name: searchParams.location.toLowerCase(),
-        adults: searchParams.adults,
-        children: searchParams.children,
-        rooms: searchParams.rooms,
-      });
+      // Get city data from citiesData
+      const cityData = citiesData[searchParams.location.toLowerCase()];
 
-      const response = await fetch(
-        `http://localhost:4000/api/cities/search?${queryParams}`
-      );
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to search hotels");
+      if (!cityData) {
+        toast.error("City not found!");
+        return;
       }
 
-      // Navigate to results page with the filtered data
+      const totalGuests =
+        parseInt(searchParams.adults) + parseInt(searchParams.children);
+
+      // Filter hotels based on capacity requirements
+      const filteredHotels = cityData.hotels.filter((hotel) => {
+        // Check if any room type can accommodate the guests and required rooms
+        return hotel.rooms.some((room) => {
+          const roomCapacity = parseInt(room.capacity.split(" ")[0]);
+          return (
+            roomCapacity >= totalGuests && room.available >= searchParams.rooms
+          );
+        });
+      });
+
+      // Prepare the filtered city data
+      const filteredCityData = {
+        ...cityData,
+        hotels: filteredHotels,
+      };
+
+      if (filteredHotels.length === 0) {
+        toast.info("No hotels found matching your requirements");
+        return;
+      }
+
+      // Navigate to city page with filtered results
       navigate(`/${searchParams.location.toLowerCase()}`, {
         state: {
           searchParams,
-          cityData: data,
+          cityData: filteredCityData,
         },
       });
     } catch (error) {
       console.error("Search Error:", error);
-      toast.error(error.message || "Failed to search hotels");
+      toast.error("Failed to search hotels");
     }
   };
 
@@ -69,12 +85,11 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
             <h2>Welcome to HeavenHub</h2>
             <p>Your gateway to the best hotels and exclusive experiences.</p>
             {/* Search Box */}
-            <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
-              <div className={styles.searchFields}>
+            <div className={styles.searchContainer}>
+              <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
                 <input
                   type="text"
-                  name="location"
-                  placeholder="Where would you like to stay?"
+                  placeholder="Enter city name..."
                   value={searchParams.location}
                   onChange={(e) =>
                     setSearchParams({
@@ -84,47 +99,65 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
                   }
                   className={styles.searchInput}
                 />
-                <input
-                  type="number"
-                  name="adults"
-                  value={searchParams.adults}
-                  onChange={(e) =>
-                    setSearchParams({ ...searchParams, adults: e.target.value })
-                  }
-                  min="1"
-                  className={styles.searchInput}
-                  placeholder="Adults"
-                />
-                <input
-                  type="number"
-                  name="children"
-                  value={searchParams.children}
-                  onChange={(e) =>
-                    setSearchParams({
-                      ...searchParams,
-                      children: e.target.value,
-                    })
-                  }
-                  min="0"
-                  className={styles.searchInput}
-                  placeholder="Children"
-                />
-                <input
-                  type="number"
-                  name="rooms"
-                  value={searchParams.rooms}
-                  onChange={(e) =>
-                    setSearchParams({ ...searchParams, rooms: e.target.value })
-                  }
-                  min="1"
-                  className={styles.searchInput}
-                  placeholder="Rooms"
-                />
+
+                <div className={styles.guestInputs}>
+                  <select
+                    value={searchParams.adults}
+                    onChange={(e) =>
+                      setSearchParams({
+                        ...searchParams,
+                        adults: parseInt(e.target.value),
+                      })
+                    }
+                    className={styles.select}
+                  >
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <option key={num} value={num}>
+                        {num} Adult{num > 1 ? "s" : ""}
+                      </option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={searchParams.children}
+                    onChange={(e) =>
+                      setSearchParams({
+                        ...searchParams,
+                        children: parseInt(e.target.value),
+                      })
+                    }
+                    className={styles.select}
+                  >
+                    {[0, 1, 2, 3, 4].map((num) => (
+                      <option key={num} value={num}>
+                        {num} Child{num !== 1 ? "ren" : ""}
+                      </option>
+                    ))}
+                  </select>
+
+                  <select
+                    value={searchParams.rooms}
+                    onChange={(e) =>
+                      setSearchParams({
+                        ...searchParams,
+                        rooms: parseInt(e.target.value),
+                      })
+                    }
+                    className={styles.select}
+                  >
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <option key={num} value={num}>
+                        {num} Room{num > 1 ? "s" : ""}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 <button type="submit" className={styles.searchButton}>
                   Search
                 </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -138,15 +171,23 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
         setSavedProperties={setSavedProperties}
       />
 
-      {/* Why Choose Us Section */}
-      <section className={styles.whyChooseUsSection}>
-        <div className={styles.whyChooseUsBackground}>
-          <div className={styles.textContainer}>
-            <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
-            <p className={styles.whyChooseUsDescription}>
-              Discover the reasons why HeavenHub is the best choice for your
-              stay. We offer unbeatable deals, a wide selection of hotels, and
-              exclusive experiences tailored to your needs.
+       {/* Why Choose Us Section */}
+<section className={styles.whyChooseUsSection}>
+  <div className={styles.whyChooseUsContainer}>
+    {/* Image on the Left */}
+    <div className={styles.whyChooseUsImage}>
+      <img src={hotel1} alt="Why Choose Us" />
+    </div>
+
+    {/* Text on the Right */}
+    <div className={styles.textContainer}>
+      <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
+      <p className={styles.whyChooseUsDescription}>
+        Discover why HeavenHub is your perfect choice. We offer unbeatable 
+        deals, a vast selection of hotels, and exclusive experiences tailored 
+        to your needs. Enjoy seamless booking, 24/7 support, and personalized 
+        recommendations for a memorable stay.
+
             </p>
           </div>
         </div>

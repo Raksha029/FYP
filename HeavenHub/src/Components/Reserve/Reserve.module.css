@@ -139,3 +139,42 @@
            text-left text-sm sm:text-base lg:text-lg 
            font-bold text-gray-700; /* Ensure this line is present for bold text */
 }
+
+.dateInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Remove the media query to keep vertical layout */
+.dateField {
+  flex: 1;
+  margin-bottom: 15px;
+}
+
+.dateField label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.dateField input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.roomDetails {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.roomDetails h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}

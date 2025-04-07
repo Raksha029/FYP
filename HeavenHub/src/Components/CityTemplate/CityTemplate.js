@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -30,16 +30,28 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
+const calculateHotelScore = (hotel) => {
+  // Calculate score based on ratings and number of reviews
+  const averageRating = hotel.rating || 0;
+  const numberOfReviews = hotel.reviews?.length || 0;
+  
+  // Weight factors (can be adjusted)
+  const ratingWeight = 0.6;
+  const reviewCountWeight = 0.4;
+  
+  // Calculate weighted score
+  const ratingScore = averageRating * ratingWeight;
+  const reviewScore = (numberOfReviews / 1000) * reviewCountWeight; // Normalize by assuming max 1000 reviews
+  
+  return ratingScore + reviewScore;
+};
+
 const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
   const { name, referencePoint, centerName } = cityData;
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const [searchTerm, setSearchTerm] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
+  const [allHotels, setAllHotels] = useState([]);
+  const [filteredHotels, setFilteredHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState({
     priceRange: [0, 5000],
     rating: 0,
@@ -50,26 +62,29 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [showMapModal, setShowMapModal] = useState(false);
 
-  // Add useEffect to fetch hotels dynamically
   useEffect(() => {
     const fetchHotels = async () => {
       try {
         setLoading(true);
-        console.log(`Fetching hotels for ${name}...`);
-
         const response = await fetch(
           `http://localhost:4000/api/cities/${name.toLowerCase()}/hotels`
         );
 
         if (!response.ok) {
-          console.error(`API error: ${response.status} ${response.statusText}`);
           throw new Error(`Failed to fetch hotels for ${name}`);
         }
 
         const data = await response.json();
-        console.log(`Received ${data.length} hotels for ${name}:`, data);
+        
+        // Sort hotels by calculated score
+        const sortedHotels = data.sort((a, b) => {
+          const scoreA = calculateHotelScore(a);
+          const scoreB = calculateHotelScore(b);
+          return scoreB - scoreA; // Sort in descending order
+        });
 
-        setHotels(data);
+        setAllHotels(sortedHotels);
+        setFilteredHotels(sortedHotels);
       } catch (error) {
         console.error("Error fetching hotels:", error);
         toast.error(`Could not load hotels for ${name}`);
@@ -81,23 +96,108 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
     fetchHotels();
   }, [name]);
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (!value.trim()) {
+      setFilteredHotels(allHotels);
+    }
+  };
+
   const handleSearch = () => {
-    console.log("Searching for:", {
-      searchTerm,
-      checkInDate,
-      checkOutDate,
-      adults,
-      children,
-    });
+    if (!searchTerm.trim()) {
+      setFilteredHotels(allHotels);
+      return;
+    }
+
+    const filtered = allHotels.filter((hotel) =>
+      hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredHotels(filtered);
   };
 
+  // Add this new useEffect to handle all filters
+  useEffect(() => {
+    const applyFilters = () => {
+      let filtered = [...allHotels];
+
+      // Apply price range filter
+      filtered = filtered.filter(
+        (hotel) => hotel.price >= filter.priceRange[0] && hotel.price <= filter.priceRange[1]
+      );
+
+      // Apply rating filter
+      if (filter.rating > 0) {
+        filtered = filtered.filter((hotel) => hotel.rating >= filter.rating);
+      }
+
+      // Apply amenities filter
+      if (filter.amenities.length > 0) {
+        filtered = filtered.filter((hotel) =>
+          filter.amenities.every((amenity) => 
+            hotel.amenities?.includes(amenity)
+          )
+        );
+      }
+
+      // Apply distance filter
+      filtered = filtered.filter((hotel) => {
+        const distance = getDistance(
+          referencePoint.lat,
+          referencePoint.lon,
+          hotel.coords[0],
+          hotel.coords[1]
+        );
+        return distance <= filter.maxDistance;
+      });
+
+      // Apply search term filter
+      if (searchTerm.trim()) {
+        filtered = filtered.filter((hotel) =>
+          hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+
+      // Apply sorting
+      if (sortBy) {
+        filtered.sort((a, b) => {
+          switch (sortBy) {
+            case "price":
+              return a.price - b.price;
+            case "rating":
+              return b.rating - a.rating;
+            case "recommended":
+              const scoreA = calculateHotelScore(a);
+              const scoreB = calculateHotelScore(b);
+              return scoreB - scoreA;
+            default:
+              return 0;
+          }
+        });
+      }
+
+      setFilteredHotels(filtered);
+    };
+
+    applyFilters();
+  }, [filter, searchTerm, sortBy, allHotels, referencePoint]);
+
+  // Update handleFilterChange to trigger immediate filter application
   const handleFilterChange = (key, value) => {
-    setFilter({ ...filter, [key]: value });
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      [key]: value,
+    }));
   };
 
+  // Update handleSortChange
   const handleSortChange = (value) => {
     setSortBy(value);
   };
+
+  // Remove the old sortedHotels and filteredHotelsMemo as they're no longer needed
+  // Instead, use filteredHotels directly in your render method
 
   const handleShowOnMap = (hotel) => {
     setSelectedHotel(hotel);
@@ -195,94 +295,34 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
     }
   };
 
-  const filterHotels = (hotels) => {
-    return hotels.filter((hotel) => {
-      // Price filter
-      const withinPrice =
-        hotel.price >= filter.priceRange[0] &&
-        hotel.price <= filter.priceRange[1];
+  const sortedHotels = [...filteredHotels].sort((a, b) => {
+    if (sortBy === "price") return a.price - b.price;
+    if (sortBy === "rating") return b.rating - a.rating;
+    return 0;
+  });
 
-      // Rating filter
-      const meetsRating = hotel.rating >= filter.rating;
-
-      // Amenities filter
-      const hasAmenities =
-        filter.amenities.length === 0 ||
-        filter.amenities.every((amenity) => hotel.amenities.includes(amenity));
-
-      // Name search
-      const matchesSearch = hotel.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-
-      return withinPrice && meetsRating && hasAmenities && matchesSearch;
-    });
-  };
-
-  // Sort functionality
-  const sortHotels = (hotels) => {
-    switch (sortBy) {
-      case "price-low":
-        return [...hotels].sort((a, b) => a.price - b.price);
-      case "price-high":
-        return [...hotels].sort((a, b) => b.price - a.price);
-      case "rating":
-        return [...hotels].sort((a, b) => b.rating - a.rating);
-      default:
-        return hotels;
-    }
-  };
-
-  const filteredHotels = filterHotels(hotels);
-  const sortedHotels = sortHotels(filteredHotels);
-
-  // Add loading state
-  if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
-  }
+  // Use useMemo for filtered hotels
+  const filteredHotelsMemo = useMemo(() => {
+    if (!searchTerm.trim()) return allHotels;
+    return allHotels.filter((hotel) =>
+      hotel.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [allHotels, searchTerm]);
 
   return (
     <div className="min-h-screen flex flex-col">
       <div className={styles.pageContainer}>
         <div className={styles.headerSection}>
           <h1 className={styles.pageTitle}>
-            {name} with {hotels.length} properties
+            {name} with {allHotels.length} properties
           </h1>
-          <div className={styles.searchBar}>
+          <div className={styles.searchContainer}>
             <input
               type="text"
-              placeholder="Search for hotels..."
+              placeholder="Search hotels..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearchChange}
               className={styles.searchInput}
-            />
-            <input
-              type="date"
-              value={checkInDate}
-              onChange={(e) => setCheckInDate(e.target.value)}
-              className={styles.dateInput}
-            />
-            <input
-              type="date"
-              value={checkOutDate}
-              onChange={(e) => setCheckOutDate(e.target.value)}
-              className={styles.dateInput}
-            />
-            <input
-              type="number"
-              value={adults}
-              onChange={(e) => setAdults(e.target.value)}
-              min="1"
-              className={styles.guestInput}
-              placeholder="Adults"
-            />
-            <input
-              type="number"
-              value={children}
-              onChange={(e) => setChildren(e.target.value)}
-              min="0"
-              className={styles.guestInput}
-              placeholder="Children"
             />
             <button onClick={handleSearch} className={styles.searchButton}>
               Search
@@ -302,7 +342,7 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
-                {hotels.map((hotel) => {
+                {allHotels.map((hotel) => {
                   const distance = getDistance(
                     referencePoint.lat,
                     referencePoint.lon,
@@ -377,107 +417,147 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                   className={styles.filterSelect}
                 >
                   <option value="">None</option>
-                  <option value="price-low">Price (Low to High)</option>
-                  <option value="price-high">Price (High to Low)</option>
+                  <option value="recommended">Recommended</option>
+                  <option value="price">Price (Low to High)</option>
                   <option value="rating">Rating (High to Low)</option>
                 </select>
               </div>
               <div className={styles.filterGroup}>
                 <label className={styles.filterLabel}>Amenities</label>
                 <div className={styles.amenitiesCheckboxes}>
-                  {["wifi", "pool", "parking", "breakfast", "gym"].map(
-                    (amenity) => (
-                      <div key={amenity}>
-                        <input
-                          type="checkbox"
-                          id={amenity}
-                          value={amenity}
-                          checked={filter.amenities.includes(amenity)}
-                          onChange={(e) => {
-                            const selectedOptions = e.target.checked
-                              ? [...filter.amenities, amenity]
-                              : filter.amenities.filter((a) => a !== amenity);
-                            handleFilterChange("amenities", selectedOptions);
-                          }}
-                        />
-                        <label htmlFor={amenity}>
-                          {amenity.charAt(0).toUpperCase() + amenity.slice(1)}
-                        </label>
-                      </div>
-                    )
-                  )}
+                  {[
+                    "5-Star Luxury",
+                    "Multiple Restaurants",
+                    "Spa",
+                    "Pool",
+                    "Tennis Court",
+                    "Heritage Property",
+                    "Luxury Spa",
+                    "Cultural Tours",
+                    "Fine Dining",
+                    "Casino",
+                    "Business Center",
+                    "Modern Design",
+                    "Rooftop Bar",
+                    "Gym",
+                    "Meeting Rooms",
+                    "Garden",
+                    "Restaurant",
+                    "Executive Lounge",
+                    "Coffee Shop",
+                    "Bar",
+                    "Conference Facilities",
+                    "Lake View",
+                    "Private Beach",
+                    "Boat Service",
+                    "Mountain Views"
+                  ].map((amenity) => (
+                    <div key={amenity} className={styles.amenityCheckbox}>
+                      <input
+                        type="checkbox"
+                        id={amenity}
+                        value={amenity}
+                        checked={filter.amenities.includes(amenity)}
+                        onChange={(e) => {
+                          const selectedOptions = e.target.checked
+                            ? [...filter.amenities, amenity]
+                            : filter.amenities.filter((a) => a !== amenity);
+                          handleFilterChange("amenities", selectedOptions);
+                        }}
+                      />
+                      <label htmlFor={amenity}>
+                        {amenity}
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
           <div className={styles.hotelsList}>
-            {sortedHotels.map((hotel) => {
-              const distance = getDistance(
-                referencePoint.lat,
-                referencePoint.lon,
-                hotel.coords[0],
-                hotel.coords[1]
-              ).toFixed(2);
-              const isSaved = savedProperties[hotel.id] !== undefined;
+            {loading ? (
+              <div className={styles.loading}>Loading...</div>
+            ) : (
+              <>
+                {filteredHotelsMemo.length > 0 ? (
+                  sortedHotels.map((hotel) => {
+                    const distance = getDistance(
+                      referencePoint.lat,
+                      referencePoint.lon,
+                      hotel.coords[0],
+                      hotel.coords[1]
+                    ).toFixed(2);
+                    const isSaved = savedProperties[hotel.id] !== undefined;
 
-              return (
-                <div key={hotel.id} className={styles.hotelCard}>
-                  <div className={styles.imageContainer}>
-                    <img
-                      src={
-                        Array.isArray(hotel.image)
-                          ? hotel.image[0]
-                          : hotel.image
-                      }
-                      alt={hotel.name}
-                      className={styles.hotelImage}
-                    />
-                    <div
-                      className={styles.savedIcon}
-                      onClick={() => handleHeartClick(hotel)}
-                    >
-                      <FaHeart
-                        className={`${styles.heartIcon} ${
-                          isSaved ? styles.saved : ""
-                        }`}
-                      />
-                    </div>
+                    return (
+                      <div key={hotel.id} className={styles.hotelCard}>
+                        <div className={styles.imageContainer}>
+                          <img
+                            src={
+                              Array.isArray(hotel.image)
+                                ? hotel.image[0]
+                                : hotel.image
+                            }
+                            alt={hotel.name}
+                            className={styles.hotelImage}
+                          />
+                          <div
+                            className={styles.savedIcon}
+                            onClick={() => handleHeartClick(hotel)}
+                          >
+                            <FaHeart
+                              className={`${styles.heartIcon} ${
+                                isSaved ? styles.saved : ""
+                              }`}
+                            />
+                          </div>
+                        </div>
+                        <div className={styles.hotelInfo}>
+                          <h3 className={styles.hotelName}>{hotel.name}</h3>
+                          <p className={styles.hotelLocation}>
+                            {hotel.location}
+                          </p>
+                          <p className={styles.hotelPrice}>
+                            NPR {hotel.price} per night
+                          </p>
+                          <p className={styles.hotelRating}>
+                            Rating: <span>{hotel.rating} ★</span>
+                          </p>
+                          <p className={styles.hotelAmenities}>
+                            {hotel.amenities?.join(", ")}
+                          </p>
+                          <p className={styles.hotelDistance}>
+                            Distance from {centerName}: {distance} km
+                          </p>
+                          <div className={styles.hotelReviews}>
+                            <p>{hotel.reviews?.length || 0} reviews</p>
+                          </div>
+                          <Link
+                            to={`/hotel-details/${name.toLowerCase()}/${
+                              hotel.id
+                            }`}
+                            className={styles.hotelButton}
+                          >
+                            View Details
+                          </Link>
+                          <button
+                            onClick={() => handleShowOnMap(hotel)}
+                            className={styles.showOnMapButton}
+                          >
+                            Show on Map
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className={styles.noResults}>
+                    No hotels found matching "{searchTerm}"
                   </div>
-                  <div className={styles.hotelInfo}>
-                    <h3 className={styles.hotelName}>{hotel.name}</h3>
-                    <p className={styles.hotelLocation}>{hotel.location}</p>
-                    <p className={styles.hotelPrice}>
-                      NPR {hotel.price} per night
-                    </p>
-                    <p className={styles.hotelRating}>
-                      Rating: <span>{hotel.rating} ★</span>
-                    </p>
-                    <p className={styles.hotelAmenities}>
-                      {hotel.amenities?.join(", ")}
-                    </p>
-                    <p className={styles.hotelDistance}>
-                      Distance from {centerName}: {distance} km
-                    </p>
-                    <div className={styles.hotelReviews}>
-                      <p>{hotel.reviews?.length || 0} reviews</p>
-                    </div>
-                    <Link
-                      to={`/hotel-details/${name.toLowerCase()}/${hotel.id}`}
-                      className={styles.hotelButton}
-                    >
-                      View Details
-                    </Link>
-                    <button
-                      onClick={() => handleShowOnMap(hotel)}
-                      className={styles.showOnMapButton}
-                    >
-                      Show on Map
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                )}
+              </>
+            )}
           </div>
         </div>
 
