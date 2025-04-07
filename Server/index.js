@@ -4,6 +4,12 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
 const favoriteRoutes = require("./routes/favoriteRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const statsRoutes = require('./routes/api/stats');
+const userRoutes = require('./routes/api/users');
 require("dotenv").config(); // Load environment variables
 const passport = require("passport");
 require("./config/passport");
@@ -55,6 +61,10 @@ cloudinary.config({
 app.use(authRoutes);
 app.use("/api", chatbotRoutes);
 app.use("/api/favorites", favoriteRoutes);
+app.use("/api", reviewRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/contact", contactRoutes);
+
 
 // Routes
 const cityRoutes = require("./routes/cityRoutes");
@@ -78,3 +88,13 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// Add admin routes
+// Add this line with your other app.use statements
+app.use("/api/admin", adminRoutes);
+
+// Add the stats routes
+app.use('/api', statsRoutes);
+
+// Add the users routes
+app.use('/api', userRoutes);

@@ -166,36 +166,4 @@ router.get("/:cityName/hotels", async (req, res) => {
   }
 });
 
-router.get("/search", (req, res) => {
-  try {
-    const { name, adults, children, rooms } = req.query;
-    const totalGuests = parseInt(adults || 0) + parseInt(children || 0);
-    const requiredRooms = parseInt(rooms || 1);
-
-    // Case-insensitive city search
-    const cityData = citiesData[name.toLowerCase()];
-    if (!cityData) {
-      return res.status(404).json({ message: "City not found" });
-    }
-
-    // Filter hotels based on room capacity and availability
-    const filteredHotels = cityData.hotels.filter((hotel) => {
-      return hotel.rooms.some((room) => {
-        const roomCapacity = parseInt(room.capacity.split(" ")[0]);
-        return roomCapacity >= totalGuests && room.available >= requiredRooms;
-      });
-    });
-
-    res.json({
-      name: cityData.name,
-      referencePoint: cityData.referencePoint,
-      centerName: cityData.centerName,
-      hotels: filteredHotels,
-    });
-  } catch (error) {
-    console.error("Search error:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
 module.exports = router;
