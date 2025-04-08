@@ -6,13 +6,43 @@ import LoginSignup from "../LoginSignup/LoginSignup";
 import Language from "../Language/Language"; // Import the Language component
 import Currency from "../Currency/Currency"; // Import the Currency component
 import Chatbot from "../Chatbot/Chatbot"; // Import the Chatbot component
+import logo from "../Assets/Heavenhub.png"; // Adjust the path according to your logo location
 
+
+// Add userProfile state and fetch function
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showPopup, setShowPopup] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showChatbot, setShowChatbot] = useState(false); // State for chatbot visibility
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
+
+  // Add this useEffect to fetch user profile
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      if (isLoggedIn) {
+        try {
+          const token = localStorage.getItem('token');
+          const response = await fetch('http://localhost:4000/api/user-profile', {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setUserProfile(data);
+          }
+        } catch (error) {
+          console.error('Error fetching profile:', error);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [isLoggedIn]);
 
   // Modify useEffect to check localStorage more carefully
   useEffect(() => {
@@ -114,7 +144,7 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
 
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>HeavenHub</h1>
+      <img src={logo} alt="StayBooker" className={styles.logo} />
       <nav className={styles.nav}>
         <button
           className={styles.navLink}
@@ -141,7 +171,15 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
           </button>
         ) : (
           <div className={styles.userIconWrapper} onClick={toggleDropdown}>
-            <FaUserCircle className={styles.appicon} />
+            {userProfile?.profilePicture ? (
+              <img 
+                src={userProfile.profilePicture} 
+                alt="Profile" 
+                className={styles.userProfileImage}
+              />
+            ) : (
+              <FaUserCircle className={styles.appicon} />
+            )}
             {showDropdown && (
               <div className={styles.dropdownMenu}>
                 <button

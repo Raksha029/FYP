@@ -9,8 +9,19 @@
 }
 
 .logo {
-    @apply text-xl sm:text-2xl lg:text-3xl font-bold text-white 
-           ml-4 sm:ml-16 md:ml-24 lg:ml-60;
+    @apply ml-4 sm:ml-16 md:ml-24 lg:ml-60;
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    margin-right: 1rem; /* Add right margin */
+}
+
+/* Responsive margin adjustments */
+@media (max-width: 768px) {
+    .logo {
+        height: 45px;
+        margin-right: 1rem; /* Smaller margin for mobile */
+    }
 }
 
 .nav {
@@ -136,6 +147,43 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    object-fit: cover;
+}
+
+.userIconWrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.userProfileImage {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.userIconWrapper {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.appicon {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+    color: white;
+}
+
+.userIconWrapper:hover .userProfileImage {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.userIcon {
     background-color: #f1f1f1; /* Placeholder background */
 }
 
@@ -149,4 +197,3 @@
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
