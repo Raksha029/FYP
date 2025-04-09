@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styles from "./LoyaltyPoints.module.css"; // Create this CSS file for styling
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./LoyaltyPoints.module.css";
 import chestbox from "../Assets/Chestboxs.png";
 
 const FAQs = [
@@ -20,9 +21,52 @@ const FAQs = [
 ];
 
 const LoyaltyPoints = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("All");
   const [activeSection, setActiveSection] = useState("Loyalty Points");
   const [activeFAQ, setActiveFAQ] = useState(null);
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    loyaltyPoints: 0
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          navigate('/login');
+          return;
+        }
+
+        const response = await fetch('http://localhost:4000/api/user-profile', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUserData({
+            firstName: data.firstName || data.googleDisplayName || 'User',
+            lastName: data.lastName || '',
+            email: data.email || '',
+            loyaltyPoints: data.loyaltyPoints || 0
+          });
+        } else {
+          throw new Error('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        navigate('/login');
+      }
+    };
+
+    fetchUserData();
+  }, [navigate]);
 
   const handleTabClick = (section) => {
     setActiveSection(section);
@@ -40,12 +84,14 @@ const LoyaltyPoints = () => {
     <div className={`${styles.landingContainer} min-h-screen`}>
       <div className={styles.loyaltyContainer}>
         <div className={styles.sidebar}>
-          <h1 style={{ fontWeight: "bold", fontSize: "1.5em" }}>Hi, Raksha</h1>
-          <p>raksha993@gmail.com</p>
+          <h1 style={{ fontWeight: "bold", fontSize: "1.5em" }}>
+            Hi, {userData.firstName}
+          </h1>
+          <p>{userData.email}</p>
           <div className={styles.card}>
             <h2>Loyalty points</h2>
             <hr className={styles.separator} />
-            <div className={styles.coinDisplay}>0</div>
+            <div className={styles.coinDisplay}>{userData.loyaltyPoints}</div>
           </div>
           <div className="nav">
             <ul className={styles.navList}>
