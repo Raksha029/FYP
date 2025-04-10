@@ -15,6 +15,30 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
+
+const handleShare = async () => {
+  const shareData = {
+    url: window.location.href,
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      console.error("Share failed:", err);
+    }
+  } else {
+    // Fallback to clipboard copy
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+      alert("Link copied to clipboard!");
+    } catch (err) {
+      alert("Failed to copy link. Please copy manually.");
+    }
+  }
+};
+
+
 function HotelDetails({ savedProperties, setSavedProperties }) {
   const { city, id } = useParams();
   const [hotel, setHotel] = useState(null);
@@ -430,7 +454,11 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
               }`}
               onClick={toggleFavorite}
             />
+            <button className={styles.shareButton} onClick={handleShare}>
             <FaShareAlt className={styles.icon} />
+</button>
+
+            
           </div>
         </div>
 
@@ -623,6 +651,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
           </div>
         </div>
       </div>
+
 
       {/* Reservation Form Modal */}
       {showReservationForm && (
