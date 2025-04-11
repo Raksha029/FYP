@@ -1,6 +1,74 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AdminUser.module.css";
 
+const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) => (
+  <div
+    className={styles.popupOverlay}
+    onClick={(e) => {
+      if (e.target === e.currentTarget) onClose();
+    }}
+  >
+    <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+      <button className={styles.closeButton} onClick={onClose}>
+        ×
+      </button>
+      <form onSubmit={onSubmit}>
+        <div className={styles.imageUpload}>
+          <div className={styles.circle}>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+        <div className={styles.formRow}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            value={formData.city}
+            onChange={handleInputChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleInputChange}
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleInputChange}
+            pattern="[0-9]{10}"
+          />
+        </div>
+        <button type="submit" className={styles.addBtn}>
+          {title}
+        </button>
+      </form>
+    </div>
+  </div>
+);
+
 const AdminUser = () => {
   const [showAddPopup, setShowAddPopup] = useState(false);
   const [showEditPopup, setShowEditPopup] = useState(false);
@@ -70,12 +138,16 @@ const AdminUser = () => {
     fetchUsers();
   }, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleInputChange = ({ target: { name, value } }) => {
+    setFormData((prevData) => {
+      if (prevData[name] === value) {
+        return prevData; // Avoid state update if the value hasn't changed
+      }
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
   };
 
   const handleDeleteClick = () => {
@@ -152,74 +224,6 @@ const AdminUser = () => {
       phone: "",
     });
   };
-
-  const PopupForm = ({ onSubmit, title, onClose }) => (
-    <div
-      className={styles.popupOverlay}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>
-          ×
-        </button>
-        <form onSubmit={onSubmit}>
-          <div className={styles.imageUpload}>
-            <div className={styles.circle}>
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              value={formData.city}
-              onChange={handleInputChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleInputChange}
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleInputChange}
-              pattern="[0-9]{10}"
-            />
-          </div>
-          <button type="submit" className={styles.addBtn}>
-            {title}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
 
   return (
     <div className={styles.userContainer}>
@@ -299,6 +303,8 @@ const AdminUser = () => {
           onSubmit={handleAddSubmit}
           title="ADD"
           onClose={() => setShowAddPopup(false)}
+          formData={formData}
+          handleInputChange={handleInputChange}
         />
       )}
 
@@ -310,6 +316,8 @@ const AdminUser = () => {
             setShowEditPopup(false);
             setSelectedUserToEdit(null);
           }}
+          formData={formData}
+          handleInputChange={handleInputChange}
         />
       )}
 

@@ -1,5 +1,70 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./AdminRoom.module.css";
+
+
+
+const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) => {
+  return (
+    <div className={styles.popupOverlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className={styles.popup}>
+        <button className={styles.closeButton} onClick={onClose}>×</button>
+        <form onSubmit={onSubmit}>
+          <div className={styles.formRow}>
+            <input
+              type="text"
+              name="type"
+              placeholder="Room Type"
+              value={formData.type}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className={styles.formRow}>
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              value={formData.price}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="capacity"
+              placeholder="Capacity"
+              value={formData.capacity}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className={styles.formRow}>
+            <input
+              type="number"
+              name="availability"
+              placeholder="Available Rooms"
+              value={formData.availability}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className={styles.formRow}>
+            <textarea
+              name="description"
+              placeholder="Room Description"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+              className={styles.description}
+            />
+          </div>
+          <button type="submit" className={styles.submitBtn}>{title}</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+
 
 const AdminRoom = () => {
   const [showAddPopup, setShowAddPopup] = useState(false);
@@ -12,6 +77,7 @@ const AdminRoom = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+
   const [formData, setFormData] = useState({
     type: "",
     price: "",
@@ -20,27 +86,26 @@ const AdminRoom = () => {
     description: "",
   });
 
-  // Fetch rooms from all hotels in all cities
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/cities/all');
-        if (!response.ok) {
-          throw new Error('Failed to fetch rooms');
-        }
+        const response = await fetch("http://localhost:4000/api/cities/all");
+        if (!response.ok) throw new Error("Failed to fetch rooms");
+
         const citiesData = await response.json();
-        
-        // Flatten rooms from all hotels in all cities into a single array
-        const allRooms = citiesData.flatMap(city => 
-          city.hotels.flatMap(hotel => 
-            hotel.rooms.map(room => ({
+
+        const allRooms = citiesData.flatMap((city, cityIndex) =>
+          city.hotels.flatMap((hotel, hotelIndex) =>
+            hotel.rooms.map((room, roomIndex) => ({
               ...room,
+              id: room.id || `room_${cityIndex}_${hotelIndex}_${roomIndex}`,
               hotelName: hotel.name,
-              cityName: city.name
+              cityName: city.name,
+              availability: room.availableRooms || room.available || 0,
             }))
           )
         );
-        
+
         setRooms(allRooms);
         setLoading(false);
       } catch (err) {
@@ -52,14 +117,14 @@ const AdminRoom = () => {
     fetchRooms();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
-    console.log("Input changing:", name, value);
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
-  };
+    }));
+  }, []);
+  
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
@@ -70,6 +135,8 @@ const AdminRoom = () => {
       capacity: formData.capacity,
       availability: Number(formData.availability),
       description: formData.description,
+      hotelName: "N/A",
+      cityName: "N/A",
     };
 
     setRooms((prevRooms) => [...prevRooms, newRoom]);
@@ -88,28 +155,22 @@ const AdminRoom = () => {
     setSelectedRoom(room);
     setFormData({
       type: room.type,
-      price: room.price,
+      price: String(room.price),
       capacity: room.capacity,
-      availability: room.availability,
+      availability: String(room.availability),
       description: room.description,
     });
     setShowEditPopup(true);
   };
 
   const handleDeleteSelect = (roomId) => {
-    setSelectedForDelete((prev) => {
-      if (prev.includes(roomId)) {
-        return prev.filter((id) => id !== roomId);
-      } else {
-        return [...prev, roomId];
-      }
-    });
+    setSelectedForDelete((prev) =>
+      prev.includes(roomId) ? prev.filter((id) => id !== roomId) : [...prev, roomId]
+    );
   };
 
   const handleDeleteConfirm = () => {
-    setRooms((prevRooms) =>
-      prevRooms.filter((room) => !selectedForDelete.includes(room.id))
-    );
+    setRooms((prevRooms) => prevRooms.filter((room) => !selectedForDelete.includes(room.id)));
     setSelectedForDelete([]);
     setIsDeleteMode(false);
   };
@@ -141,85 +202,29 @@ const AdminRoom = () => {
     });
   };
 
-  const PopupForm = ({ onSubmit, title, onClose }) => (
-    <div
-      className={styles.popupOverlay}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>
-          ×
-        </button>
-        <form onSubmit={onSubmit}>
-          <div className={styles.formRow}>
-            <input
-              type="text"
-              name="type"
-              placeholder="Room Type"
-              value={formData.type}
-              onChange={handleInputChange}
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={formData.price}
-              onChange={handleInputChange}
-              autoComplete="off"
-              required
-            />
-            <input
-              type="text"
-              name="capacity"
-              placeholder="Capacity (e.g., 2 Adults)"
-              value={formData.capacity}
-              onChange={handleInputChange}
-              autoComplete="off"
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="number"
-              name="availability"
-              placeholder="Available Rooms"
-              value={formData.availability}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <textarea
-              name="description"
-              placeholder="Room Description"
-              value={formData.description}
-              onChange={handleInputChange}
-              required
-              className={styles.description}
-            />
-          </div>
-          <button type="submit" className={styles.submitBtn}>
-            {title}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-
+ 
   return (
     <div className={styles.roomContainer}>
       <div className={styles.header}>
         <h2>Rooms Management</h2>
         <div className={styles.actions}>
-          <button className={styles.addButton}>Add Room</button>
-          <button className={styles.modifyButton}>Modify Room</button>
-          <button className={styles.deleteButton}>Delete Room</button>
+          <button className={styles.addButton} onClick={() => setShowAddPopup(true)}>
+            Add Room
+          </button>
+          <button
+            className={styles.modifyButton}
+            onClick={() => setIsEditMode(!isEditMode)}
+            style={{ backgroundColor: isEditMode ? "#ffc107" : "#28a745" }}
+          >
+            {isEditMode ? "Cancel Modify" : "Modify Room"}
+          </button>
+          <button
+            className={styles.deleteButton}
+            onClick={() => setIsDeleteMode(!isDeleteMode)}
+            style={{ backgroundColor: isDeleteMode ? "#dc3545" : "#dc3545" }}
+          >
+            {isDeleteMode ? "Cancel Delete" : "Delete Room"}
+          </button>
         </div>
       </div>
 
@@ -232,6 +237,7 @@ const AdminRoom = () => {
           <table className={styles.roomTable}>
             <thead>
               <tr>
+                {isDeleteMode && <th>Select</th>}
                 <th>Type</th>
                 <th>Hotel</th>
                 <th>City</th>
@@ -242,19 +248,69 @@ const AdminRoom = () => {
               </tr>
             </thead>
             <tbody>
-              {rooms.map((room, index) => (
-                <tr key={index}>
+              {rooms.map((room) => (
+                <tr
+                  key={room.id}
+                  className={styles.editableRow}
+                  onClick={() => handleRoomSelect(room)}
+                >
+                  {isDeleteMode && (
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedForDelete.includes(room.id)}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          handleDeleteSelect(room.id);
+                        }}
+                        className={styles.checkbox}
+                      />
+                    </td>
+                  )}
                   <td>{room.type}</td>
                   <td>{room.hotelName}</td>
                   <td>{room.cityName}</td>
                   <td>${room.price}</td>
                   <td>{room.capacity}</td>
-                  <td>{room.available}</td>
+                  <td>{room.availability}</td>
                   <td>{room.description}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+{showAddPopup && (
+  <PopupForm
+    onSubmit={handleAddSubmit}
+    title="Add New Room"
+    onClose={() => setShowAddPopup(false)}
+    formData={formData}
+    handleInputChange={handleInputChange}
+  />
+)}
+
+{showEditPopup && (
+  <PopupForm
+    onSubmit={handleEditSubmit}
+    title="Edit Room"
+    onClose={() => setShowEditPopup(false)}
+    formData={formData}
+    handleInputChange={handleInputChange}
+  />
+)}
+
+
+      {isEditMode && (
+        <div className={styles.editPrompt}>Click on a room to edit its information</div>
+      )}
+
+      {isDeleteMode && (
+        <div className={styles.deleteConfirm}>
+          <button className={styles.deleteConfirmButton} onClick={handleDeleteConfirm}>
+            Delete Selected ({selectedForDelete.length})
+          </button>
         </div>
       )}
     </div>

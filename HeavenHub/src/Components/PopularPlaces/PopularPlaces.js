@@ -96,6 +96,8 @@ const PopularPlaces = () => {
   return (
     <section className={styles.popularPlacesSection}>
       <h2 className={styles.sectionTitle}>Popular Places</h2>
+      <p className={styles.sectionSubtitle}>
+        Explore our most sought-after destinations and find your perfect stay.</p>
       <div className={styles.carouselContainer}>
         <button
           className={`${styles.scrollButton} ${styles.leftButton}`}

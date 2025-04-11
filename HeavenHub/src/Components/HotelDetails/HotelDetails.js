@@ -1,3 +1,5 @@
+
+
 import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./HotelDetails.module.css";
@@ -37,6 +39,7 @@ const handleShare = async () => {
     }
   }
 };
+
 
 
 function HotelDetails({ savedProperties, setSavedProperties }) {

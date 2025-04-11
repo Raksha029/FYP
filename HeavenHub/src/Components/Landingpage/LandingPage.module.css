@@ -17,31 +17,33 @@
 }
 
 .heroOverlay {
-  @apply absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-white text-center p-6 z-10;
+  @apply absolute top-16 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-0 text-black text-center p-6 z-10;
 }
 
 .heroOverlay h2 {
-  @apply text-4xl font-bold mb-4;
+  @apply text-4xl font-bold mb-5;
 }
 
 .heroOverlay p {
-  @apply text-xl mb-6;
+  @apply text-xl mb-10;
 }
 
 /* Search Form */
 
 .searchForm {
+  margin-top : 60px; /* Adjust the value as needed */
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  width: 100%;
+  gap: 25px;
+  width: 120%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  background: whitesmoke;
+  border-radius: 15px;
+  box-shadow: 1 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .guestInputs {
@@ -80,7 +82,7 @@
 
 .searchButton {
   flex: 1;
-  padding: 12px 24px;
+  padding: 12px 4px;
   height: 50px;
   background-color: #007bff;
   color: white;
@@ -145,7 +147,6 @@
   @apply text-lg text-gray-700 leading-relaxed;
 }
 
-
 .whyChooseUsContainer {
   display: flex;
   flex-direction: row; /* Arrange items in a row */
@@ -171,6 +172,71 @@
   flex: 1; /* Make the text section take equal space */
   text-align: left;
 }
+
+/* Why Choose Us Cards Section */
+.whyChooseUs {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+}
+
+.whyChooseUsHeading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.whyChooseUsSubheading {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.whyChooseUsCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  max-width: 250px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.iconContainer {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eaf6ff;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #007bff;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+}
+
 .floatingChatIcon {
   position: fixed;
   bottom: 20px;

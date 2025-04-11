@@ -187,19 +187,25 @@
 
 .roomCard {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: column; /* Stack the content vertically */
+  width: 100%;
   padding: 15px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 15px;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  background-color: #fff;
 }
 
 .roomInfo {
-  flex: 1;
+  flex-grow: 1; /* This makes the description section take up remaining space */
 }
+
+  roomPriceSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
 
 .roomInfo h4 {
   margin-top: 0;

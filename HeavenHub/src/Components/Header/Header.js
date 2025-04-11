@@ -6,8 +6,6 @@ import LoginSignup from "../LoginSignup/LoginSignup";
 import Language from "../Language/Language"; // Import the Language component
 import Currency from "../Currency/Currency"; // Import the Currency component
 import Chatbot from "../Chatbot/Chatbot"; // Import the Chatbot component
-import logo from "../Assets/Heavenhub.png"; // Adjust the path according to your logo location
-
 
 // Add userProfile state and fetch function
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
@@ -144,7 +142,7 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
 
   return (
     <header className={styles.header}>
-      <img src={logo} alt="StayBooker" className={styles.logo} />
+      <h2 className={styles.logo}>HeavenHub</h2>
       <nav className={styles.nav}>
         <button
           className={styles.navLink}

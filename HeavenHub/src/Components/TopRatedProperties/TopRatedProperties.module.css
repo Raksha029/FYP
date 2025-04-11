@@ -11,7 +11,12 @@
   margin-bottom: 2rem;
   color: #333;
 }
-
+.sectionsubtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #666;
+}
 .carouselContainer {
   position: relative;
   max-width: 1200px;
@@ -29,16 +34,16 @@
 
 .propertyCard {
   flex: 0 0 calc(25% - 1rem); /* Show exactly 4 cards */
-  min-width: 250px;
-  border-radius: 8px;
+  min-width: 300px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
   background: white;
   transition: transform 0.3s ease;
 }
 
 .propertyCard:hover {
-  transform: translateY(-5px);
+  transform: translateY(-7px);
 }
 
 .scrollButton {

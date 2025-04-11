@@ -147,6 +147,10 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
   return (
     <section className={styles.topRatedSection}>
       <h2 className={styles.sectionTitle}>Top Rated Properties</h2>
+      
+      <p className={styles.sectionsubtitle}>
+        Experience the best of hospitality with our top-rated properties.
+      </p>
       <div className={styles.carouselContainer}>
         <button
           className={`${styles.scrollButton} ${styles.leftButton}`}

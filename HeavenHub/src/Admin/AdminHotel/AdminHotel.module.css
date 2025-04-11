@@ -87,16 +87,24 @@
 .amenitiesList {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  max-width: 200px;
+  gap: 6px;
+  max-width: none;
 }
 
 .amenityTag {
-  background-color: #e3f2fd;
-  padding: 2px 6px;
+  background-color: #f0f0f0;
+  padding: 4px 10px;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 12px;
   white-space: nowrap;
+  color: #333;
+  border: 1px solid #ddd;
+  display: inline-flex;
+  align-items: center;
+}
+
+.amenityTag:hover {
+  background-color: #e8e8e8;
 }
 
 .imageUpload {

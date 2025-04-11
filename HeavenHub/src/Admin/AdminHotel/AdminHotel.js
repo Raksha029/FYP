@@ -1,8 +1,105 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./AdminHotel.module.css";
 
+const PopupForm = React.memo(({ onSubmit, title, onClose, formData, handleInputChange, availableAmenities, setFormData }) => (
+  <div
+    className={styles.popupOverlay}
+    onClick={(e) => {
+      if (e.target === e.currentTarget) onClose();
+    }}
+  >
+    <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
+      <button className={styles.closeButton} onClick={onClose}>
+        ×
+      </button>
+      <form onSubmit={onSubmit}>
+        <div className={styles.imageUpload}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleInputChange}
+            className={styles.imageInput}
+          />
+        </div>
+        <div className={styles.formRow}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Hotel Name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className={styles.formRow}>
+          <input
+            type="number"
+            name="price"
+            placeholder="Price per night"
+            value={formData.price}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="number"
+            name="rating"
+            placeholder="Rating (0-5)"
+            min="0"
+            max="5"
+            step="0.1"
+            value={formData.rating}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className={styles.formRow}>
+          <input
+            type="text"
+            name="distance"
+            placeholder="Distance from center"
+            value={formData.distance}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className={styles.amenitiesSection}>
+          <h3>Amenities</h3>
+          <div className={styles.amenitiesGrid}>
+            {availableAmenities.map((amenity) => (
+              <label key={amenity} className={styles.amenityLabel}>
+                <input
+                  type="checkbox"
+                  checked={formData.amenities.includes(amenity)}
+                  onChange={() => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      amenities: prev.amenities.includes(amenity)
+                        ? prev.amenities.filter((a) => a !== amenity)
+                        : [...prev.amenities, amenity],
+                    }));
+                  }}
+                />
+                {amenity}
+              </label>
+            ))}
+          </div>
+        </div>
+        <button type="submit" className={styles.submitBtn}>
+          {title}
+        </button>
+      </form>
+    </div>
+  </div>
+));
 const AdminHotel = () => {
-  // Remove these states as they're no longer needed
   const [showAddPopup, setShowAddPopup] = useState(false);
   const [showEditPopup, setShowEditPopup] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -69,14 +166,12 @@ const AdminHotel = () => {
     "Airport Shuttle",
   ];
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    console.log("Input changing:", name, value); // Add this for debugging
-    setFormData({
-      ...formData,
+  const handleInputChange = useCallback(({ target: { name, value } }) => {
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
-  };
+    }));
+  }, []);
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
@@ -87,16 +182,7 @@ const AdminHotel = () => {
     };
     setHotels([...hotels, newHotel]);
     setShowAddPopup(false);
-    setFormData({
-      name: "",
-      location: "",
-      price: "",
-      rating: "",
-      amenities: [],
-      distance: "",
-      reviews: 0,
-      image: "",
-    });
+    resetForm();
   };
 
   const handleEditClick = () => {
@@ -155,7 +241,10 @@ const AdminHotel = () => {
       )
     );
     setShowEditPopup(false);
-    setSelectedHotel(null);
+    resetForm();
+  };
+
+  const resetForm = () => {
     setFormData({
       name: "",
       location: "",
@@ -168,126 +257,46 @@ const AdminHotel = () => {
     });
   };
 
-  const PopupForm = ({ onSubmit, title, onClose }) => (
-    <div
-      className={styles.popupOverlay}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>
-          ×
-        </button>
-        <form onSubmit={onSubmit}>
-          <div className={styles.imageUpload}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleInputChange}
-              className={styles.imageInput}
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Hotel Name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              name="location"
-              placeholder="Location"
-              value={formData.location}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="number"
-              name="price"
-              placeholder="Price per night"
-              value={formData.price}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="number"
-              name="rating"
-              placeholder="Rating (0-5)"
-              min="0"
-              max="5"
-              step="0.1"
-              value={formData.rating}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="text"
-              name="distance"
-              placeholder="Distance from center"
-              value={formData.distance}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.amenitiesSection}>
-            <h3>Amenities</h3>
-            <div className={styles.amenitiesGrid}>
-              {availableAmenities.map((amenity) => (
-                <label key={amenity} className={styles.amenityLabel}>
-                  <input
-                    type="checkbox"
-                    checked={formData.amenities.includes(amenity)}
-                    onChange={() => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        amenities: prev.amenities.includes(amenity)
-                          ? prev.amenities.filter((a) => a !== amenity)
-                          : [...prev.amenities, amenity],
-                      }));
-                    }}
-                  />
-                  {amenity}
-                </label>
-              ))}
-            </div>
-          </div>
-          <button type="submit" className={styles.submitBtn}>
-            {title}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+  
 
-  // Modified table rendering to include loading and error states
   return (
     <div className={styles.hotelContainer}>
       <div className={styles.header}>
-        <h2>Hotels Management</h2>
+        <h2>Hotel Management</h2>
         <div className={styles.actions}>
-          <button className={styles.addButton}>Add Hotel</button>
-          <button className={styles.modifyButton}>Modify Hotel</button>
-          <button className={styles.deleteButton}>Delete Hotel</button>
+          <button
+            className={styles.addButton}
+            onClick={() => setShowAddPopup(true)}
+          >
+            Add Hotel
+          </button>
+          <button
+            className={styles.modifyButton}
+            onClick={handleEditClick}
+            style={{ backgroundColor: isEditMode ? '#ffc107' : '#28a745' }}
+          >
+            {isEditMode ? 'Cancel Modify' : 'Modify Hotel'}
+          </button>
+          <button
+            className={styles.deleteButton}
+            onClick={handleDeleteClick}
+            style={{ backgroundColor: isDeleteMode ? '#dc3545' : '#dc3545' }}
+          >
+            {isDeleteMode ? 'Cancel Delete' : 'Delete Hotel'}
+          </button>
         </div>
       </div>
 
       {loading ? (
-        <p>Loading hotels...</p>
+        <div>Loading hotels...</div>
       ) : error ? (
-        <p>Error: {error}</p>
+        <div className={styles.error}>{error}</div>
       ) : (
         <div className={styles.tableContainer}>
           <table className={styles.hotelTable}>
             <thead>
               <tr>
+                {isDeleteMode && <th>Select</th>}
                 <th>Name</th>
                 <th>City</th>
                 <th>Location</th>
@@ -297,19 +306,79 @@ const AdminHotel = () => {
             </thead>
             <tbody>
               {hotels.map((hotel) => (
-                <tr key={hotel.id}>
+                <tr
+                  key={hotel.id}
+                  className={styles.editableRow}
+                  onClick={() => handleHotelSelect(hotel)}
+                >
+                  {isDeleteMode && (
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedForDelete.includes(hotel.id)}
+                        onChange={() => handleDeleteSelect(hotel.id)}
+                        className={styles.checkbox}
+                      />
+                    </td>
+                  )}
                   <td>{hotel.name}</td>
                   <td>{hotel.cityName}</td>
                   <td>{hotel.location}</td>
                   <td>{hotel.rating}</td>
                   <td>
-                    {hotel.amenities.slice(0, 3).join(", ")}
-                    {hotel.amenities.length > 3 && "..."}
+                    <div className={styles.amenitiesList}>
+                      {hotel.amenities.map((amenity, index) => (
+                        <span key={index} className={styles.amenityTag}>
+                          {amenity}
+                        </span>
+                      ))}
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+{showAddPopup && (
+  <PopupForm
+    onSubmit={handleAddSubmit}
+    title="Add Hotel"
+    onClose={() => setShowAddPopup(false)}
+    formData={formData}
+    handleInputChange={handleInputChange}
+    availableAmenities={availableAmenities}
+    setFormData={setFormData}
+  />
+)}
+
+{showEditPopup && (
+  <PopupForm
+    onSubmit={handleEditSubmit}
+    title="Edit Hotel"
+    onClose={() => setShowEditPopup(false)}
+    formData={formData}
+    handleInputChange={handleInputChange}
+    availableAmenities={availableAmenities}
+    setFormData={setFormData}
+  />
+)}
+
+      {isEditMode && (
+        <div className={styles.editPrompt}>
+          Click on a hotel to edit its information
+        </div>
+      )}
+
+      {isDeleteMode && (
+        <div className={styles.deleteConfirm}>
+          <button
+            className={styles.deleteConfirmButton}
+            onClick={handleDeleteConfirm}
+          >
+            Delete Selected ({selectedForDelete.length})
+          </button>
         </div>
       )}
     </div>

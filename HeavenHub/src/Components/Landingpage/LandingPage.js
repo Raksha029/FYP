@@ -9,6 +9,7 @@ import PopularPlaces from "../PopularPlaces/PopularPlaces";
 import Chatbot from "../Chatbot/Chatbot";
 import hotel1 from "../Assets/hotel1.png";
 import { citiesData } from "../data/citiesData";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const LandingPage = ({ savedProperties, setSavedProperties }) => {
   const [searchParams, setSearchParams] = useState({
@@ -82,8 +83,8 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
         <div className={styles.heroImage}>
           <img src={hotelbackground_icon} alt="Luxurious hotel" />
           <div className={styles.heroOverlay}>
-            <h2>Welcome to HeavenHub</h2>
-            <p>Your gateway to the best hotels and exclusive experiences.</p>
+            <h2>Perfect Stays, Just a Click Away</h2>
+            <p>Your access point to premium hotels and unique getaways.</p>
             {/* Search Box */}
             <div className={styles.searchContainer}>
               <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
@@ -171,23 +172,47 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
         setSavedProperties={setSavedProperties}
       />
 
-       {/* Why Choose Us Section */}
-<section className={styles.whyChooseUsSection}>
-  <div className={styles.whyChooseUsContainer}>
-    {/* Image on the Left */}
-    <div className={styles.whyChooseUsImage}>
-      <img src={hotel1} alt="Why Choose Us" />
-    </div>
-
-    {/* Text on the Right */}
-    <div className={styles.textContainer}>
-      <h3 className={styles.whyChooseUsHeading}>Why Choose Us?</h3>
-      <p className={styles.whyChooseUsDescription}>
-        Discover why HeavenHub is your perfect choice. We offer unbeatable 
-        deals, a vast selection of hotels, and exclusive experiences tailored 
-        to your needs. Enjoy seamless booking, 24/7 support, and personalized 
-        recommendations for a memorable stay.
-
+      {/* Why Choose Us Section */}
+      <section className={styles.whyChooseUs}>
+        <h2 className={styles.whyChooseUsHeading}>Why Choose HeavenHub?</h2>
+        <p className={styles.whyChooseUsSubheading}>
+          We offer the best selection of hotels with unmatched service and value.
+        </p>
+        <div className={styles.whyChooseUsCards}>
+          <div className={styles.card}>
+            <div className={styles.iconContainer}>
+              <i className="fas fa-bed"></i> {/* Font Awesome Bed Icon */}
+            </div>
+            <h3>Comfort Guaranteed</h3>
+            <p>
+              Handpicked accommodations that meet our high standards of comfort.
+            </p>
+          </div>
+          <div className={styles.card}>
+            <div className={styles.iconContainer}>
+              <i className="fas fa-award"></i> {/* Font Awesome Award Icon */}
+            </div>
+            <h3>Quality Selection</h3>
+            <p>
+              Every hotel is personally vetted for quality and service excellence.
+            </p>
+          </div>
+          <div className={styles.card}>
+            <div className={styles.iconContainer}>
+              <i className="fas fa-clock"></i> {/* Font Awesome Clock Icon */}
+            </div>
+            <h3>24/7 Support</h3>
+            <p>
+              Our customer support team is available 24/7 for any assistance.
+            </p>
+          </div>
+          <div className={styles.card}>
+            <div className={styles.iconContainer}>
+              <i className="fas fa-check-circle"></i> {/* Font Awesome Check Icon */}
+            </div>
+            <h3>Best Price Promise</h3>
+            <p>
+              We guarantee competitive rates with no hidden fees.
             </p>
           </div>
         </div>
