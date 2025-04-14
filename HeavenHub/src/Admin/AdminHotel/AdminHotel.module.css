@@ -2,9 +2,11 @@
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  max-width: 1400px;
   margin: 0 auto;
+  margin-bottom: 80px;
 }
 
 .header {
@@ -14,251 +16,201 @@
   margin-bottom: 20px;
 }
 
+.header h2 {
+  margin: 0;
+  color: #333;
+}
+
 .actions {
   display: flex;
   gap: 10px;
 }
 
-.addButton {
-  background-color: #28a745;
+/* Update button styles */
+.addButton, .modifyButton {
+  background-color: #4f46e5;
   color: white;
-  padding: 8px 16px;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-}
-
-.modifyButton {
-  background-color: #28a745;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .deleteButton {
-  background-color: #dc3545;
+  background-color: #ef4444;
   color: white;
-  padding: 8px 16px;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .addButton:hover, .modifyButton:hover {
-  background-color: #218838;
+  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1);
 }
 
 .deleteButton:hover {
-  background-color: #c82333;
+  background-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1);
 }
 
-
+/* Update table styles */
 .tableContainer {
-  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 1.5rem;
 }
 
 .hotelTable {
   width: 100%;
-  border-collapse: collapse;
-  background-color: #e0e0e0;
-  border: 1px solid #007bff;
-}
-
-.hotelTable th,
-.hotelTable td {
-  padding: 10px;
-  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .hotelTable th {
-  background-color: #007bff;
+  background-color: #4f46e5;
   color: white;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.hotelImage {
-  width: 100px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 4px;
+.hotelTable th:first-child {
+  border-top-left-radius: 8px;
 }
 
-.amenitiesList {
+.hotelTable th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.hotelTable td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.9375rem;
+}
+
+.hotelTable tr:last-child td {
+  border-bottom: none;
+}
+
+.hotelTable tr:hover {
+  background-color: #f8fafc;
+}
+
+.selectedRow {
+  background-color: #eef2ff !important;
+}
+
+/* Update pagination styles */
+.pagination {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  max-width: none;
-}
-
-.amenityTag {
-  background-color: #f0f0f0;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-  color: #333;
-  border: 1px solid #ddd;
-  display: inline-flex;
+  justify-content: space-between;
   align-items: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 12px 12px;
 }
 
-.amenityTag:hover {
-  background-color: #e8e8e8;
-}
-
-.imageUpload {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.imageInput {
-  width: 100%;
-  padding: 10px;
-  border: 2px dashed #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.popupOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popup {
-  background: white;
-  padding: 25px;
+.paginationButton {
+  padding: 0.625rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  color: #4f46e5;
   border-radius: 8px;
-  width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 24px;
   cursor: pointer;
-  color: #666;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  padding: 0;
-  line-height: 1;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.closeButton:hover {
-  background: #f0f0f0;
-  color: #333;
-}
-
-.formRow {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-}
-
-.formRow input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.2s ease;
-}
-
-.formRow input:focus {
-  border-color: #2196f3;
-  outline: none;
-}
-
-.formRow:focus-within {
-  /* Remove transform styles */
-}
-
-.amenitiesSection {
-  margin: 20px 0;
-}
-
-.amenitiesSection h3 {
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.amenitiesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.amenityLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.amenityLabel input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.submitBtn {
-  width: 100%;
-  padding: 12px;
-  background: #4CAF50;
+.paginationButton:hover:not(:disabled) {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.1);
 }
 
-.submitBtn:hover {
-  background: #45a049;
+.paginationButton:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
 }
 
-/* Scrollbar styling for the popup */
-.popup::-webkit-scrollbar {
-  width: 8px;
+.pageInfo {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
-.popup::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+/* Update button states */
+.modifyButton.activeEdit {
+  background-color: #eab308;
+  color: #1e293b;
 }
 
-.popup::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+.modifyButton.activeEdit:hover {
+  background-color: #ca8a04;
 }
 
-.popup::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.deleteButton.activeDelete {
+  background-color: #dc2626;
+}
+
+.deleteButton.activeDelete:hover {
+  background-color: #b91c1c;
+}
+
+.addButton:disabled,
+.modifyButton:disabled,
+.deleteButton:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.hotelTable td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.hotelTable tr:hover {
+  background-color: #f5f5f5;
 }
 
 .editableRow {
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .editableRow:hover {
@@ -269,53 +221,469 @@
   background-color: #e3f2fd;
 }
 
-.activeEdit {
-  background-color: #2196f3;
-  color: white;
-}
-
-.activeDelete {
-  background-color: #f44336;
-  color: white;
-}
-
 .checkbox {
+  cursor: pointer;
   width: 18px;
   height: 18px;
-  cursor: pointer;
 }
 
-.deleteConfirm {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 15px;
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #e0e0e0;
 }
 
-.deleteConfirmButton {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+.paginationButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: #374151;
+  border-radius: 0.375rem;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 0.875rem;
+  transition: all 0.2s;
 }
 
-.deleteConfirmButton:hover {
-  background-color: #d32f2f;
+.paginationButton:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.paginationButton:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  color: #374151;
+  font-size: 0.875rem;
 }
 
 .editPrompt {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 15px;
-  background-color: #2196f3;
-  color: white;
+  padding: 12px 24px;
+  background-color: #fff;
+  color: #333;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 15px;
+  animation: slideIn 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editPrompt::before {
+  content: "ℹ️";
+  font-size: 18px;
+}
+
+.deleteConfirm {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+}
+
+.deleteConfirmButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.deleteConfirmButton:hover {
+  background-color: #c82333;
+}
+
+.editableRow {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editableRow:hover {
+  background-color: #f8f9fa;
+}
+
+.editableRow.selected {
+  background-color: #e8f4ff;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #dc3545;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.noResults {
+  text-align: center;
+  padding: 2rem !important;
+  color: #6b7280;
+  font-style: italic;
+  background-color: #f9fafb;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.popup {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.popupHeader {
+  background-color: #f8f9fa;
+  padding: 25px 40px;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 16px 16px 0 0;
+  margin-bottom: 30px;
+}
+
+.popupHeader h2 {
+  margin: 0;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Update close button position for new header */
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f5f5f5;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #e0e0e0;
+  color: #333;
+  transform: rotate(90deg);
+}
+.formRow {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 20px;
+}
+
+.formRow input,
+.formRow textarea {
+  flex: 1;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.formRow select {
+  flex: 1;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.formRow select:focus {
+  border-color: #2196f3;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.formRow textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+  font-family: inherit;
+}
+
+/* Add these styles to your existing CSS file */
+
+/* Main image upload section */
+.imageUploadSection {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px dashed #dee2e6;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.imageUploadSection:hover {
+  border-color: #2196f3;
+  background: #f0f7ff;
+}
+
+.imageInputLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+  text-align: center;
+  min-height: 100px;
+}
+
+.imageInputLabel:hover {
+  border-color: #2196f3;
+  background: #f5fbff;
+}
+
+.imageInputLabel span {
+  color: #666;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.imageInputLabel::before {
+  content: "📁";
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.imageInput {
+  display: none;
+}
+
+/* Image preview styles */
+.imagePreview {
+  width: 100%;
+  max-width: 300px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #fff;
+  padding: 5px;
+  border: 1px solid #e0e0e0;
+  margin-top: 10px;
+}
+
+/* Detail images grid */
+.imagePreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.imagePreviewGrid img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease;
+}
+
+.imagePreviewGrid img:hover {
+  transform: scale(1.03);
+}
+
+/* Required indicator */
+.requiredIndicator {
+  color: #dc3545;
+  margin-left: 4px;
+}
+.amenitiesSection {
+  margin-top: 30px;
+  background: #f8f9fa;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.amenitiesSection h3 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.amenitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.amenityLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.amenityLabel:hover {
+  background: #f0f7ff;
+}
+
+.amenityLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2196f3;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.submitBtn:hover {
+  background-color: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* Custom scrollbar for the popup */
+.popup::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popup::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.popup::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.popup::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .popup {
+    width: 95%;
+    padding: 30px 20px;
+    margin: 15px;
+  }
+
+  .popupHeader {
+    margin: -30px -20px 20px -20px;
+    padding: 20px;
+  }
+
+  .popupHeader h2 {
+    font-size: 20px;
+  }
+}
+
+/* Add these styles */
+.modifyButton.activeEdit {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.modifyButton.activeEdit:hover {
+  background-color: #e0a800;
+}
+
+.deleteButton.activeDelete {
+  background-color: #c82333;
+}
+
+.deleteButton.activeDelete:hover {
+  background-color: #bd2130;
+}
+
+/* Update the button styles */
+.addButton:disabled,
+.modifyButton:disabled,
+.deleteButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
 }

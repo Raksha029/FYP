@@ -18,16 +18,64 @@
     @apply flex flex-wrap items-center gap-3 sm:gap-4 w-full mt-4 sm:mt-0;
   }
   
+  /* Remove or update these duplicate styles */
   .searchInput,
   .dateInput,
   .guestInput {
-    @apply p-2 border border-[#071524] rounded-md 
-           w-full sm:w-auto min-w-[10px] 
-           bg-[#343a40] text-white;
+    @apply p-3 border border-gray-200 rounded-lg
+           w-full sm:w-auto min-w-[200px]
+           bg-white text-gray-700 text-sm
+           focus:border-[#006CE4] focus:ring-1 focus:ring-[#006CE4]
+           transition-all duration-300 shadow-sm;
+  }
+  
+  /* Update dark mode styles to maintain white background */
+  @media (prefers-color-scheme: dark) {
+    .searchInput,
+    .dateInput,
+    .guestInput {
+      @apply bg-white text-gray-700 border-gray-200;
+    }
+  
+   .searchButton {
+      @apply bg-[#006CE4] text-white;
+      } 
+   }
+
+  .searchBar {
+    @apply flex flex-wrap items-center gap-3 sm:gap-4 w-full mt-4 sm:mt-0
+           bg-white rounded-lg p-2;
+  }
+  
+  /* Remove the dark background from dark mode */
+  @media (prefers-color-scheme: dark) {
+    .searchInput,
+    .dateInput,
+    .guestInput {
+      @apply bg-white text-gray-700 border-gray-200;
+    }
   }
   
   .searchButton {
-    @apply px-8 py-3 bg-blue-500 text-white rounded-md cursor-pointer text-lg font-medium;
+    @apply px-6 py-3 bg-[#006CE4] text-white rounded-lg 
+           text-sm font-semibold cursor-pointer
+           hover:bg-[#003b95] transition-all duration-300
+           flex items-center justify-center gap-2
+           shadow-sm hover:shadow-md;
+  }
+  
+  .searchContainer {
+    @apply flex items-center gap-3 max-w-2xl mx-auto 
+           bg-white p-4 rounded-xl shadow-sm;
+  }
+  
+  /* Update dark mode styles */
+  @media (prefers-color-scheme: dark) {
+    .searchInput,
+    .dateInput,
+    .guestInput {
+      @apply bg-white text-gray-700 border-gray-300;
+    }
   }
   
   .searchButton:hover {
@@ -70,7 +118,72 @@
   }
   
   .filterSelect {
-    @apply p-2 border border-gray-300 rounded;
+    @apply p-2 border border-[#006CE4] rounded bg-white text-gray-700;
+  }
+  
+  /* Update dark mode styles */
+  @media (prefers-color-scheme: dark) {
+    .filterSelect,
+    .searchInput {
+      @apply bg-white border-[#006CE4] text-gray-700;
+    }
+  
+    .filterSelect:focus,
+    .searchInput:focus {
+      @apply ring-2 ring-[#006CE4] ring-opacity-50;
+    }
+  }
+  
+  /* Update filter input styles */
+  .filterInput {
+    @apply w-full bg-white;
+    margin: 0.5rem 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 2px;
+    background: #e5e7eb;
+    border-radius: 2px;
+  }
+  
+  .filterInput::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #006CE4;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -7px;
+    box-shadow: 0 0 0 6px rgba(0, 108, 228, 0.1);
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .filterInput::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #006CE4;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 0 6px rgba(0, 108, 228, 0.1);
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .filterInput::-webkit-slider-runnable-track {
+    background: #006CE4;
+    height: 2px;
+    border-radius: 2px;
+  }
+  
+  .filterInput::-moz-range-track {
+    background: #006CE4;
+    height: 2px;
+    border-radius: 2px;
+  }
+  
+  .filterInput::-webkit-slider-thumb:hover,
+  .filterInput::-moz-range-thumb:hover {
+    box-shadow: 0 0 0 8px rgba(0, 108, 228, 0.2);
   }
   
   .hotelsList {
@@ -79,16 +192,12 @@
   
   .hotelCard {
     @apply flex flex-col sm:flex-row gap-4 
-           border border-gray-300 rounded-lg p-4 
-           shadow-md hover:shadow-lg transition-shadow mb-4;
-  }
-  
-  .hotelImage {
-    @apply w-full sm:w-[320px] h-[200px] sm:h-[320px] object-cover rounded-lg;
+           border border-gray-200 rounded-lg p-4 
+           bg-white shadow-sm hover:shadow-md transition-shadow mb-4;
   }
   
   .hotelInfo {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 bg-white;
   }
   
   .hotelName {
@@ -166,11 +275,11 @@
   /* Dark mode support */
   @media (prefers-color-scheme: dark) {
     .hotelCard {
-      @apply bg-gray-800 border-gray-700;
+      @apply bg-white border-gray-200;
     }
   
     .hotelName {
-      @apply text-white;
+      @apply text-gray-900;
     }
   
     .hotelLocation,
@@ -178,12 +287,15 @@
     .hotelRating,
     .hotelAmenities,
     .hotelDistance {
-      @apply text-gray-300;
+      @apply text-gray-700;
     }
   
-    .filterSelect,
-    .searchInput {
-      @apply bg-gray-700 border-gray-600 text-white;
+    /* Find and remove or modify this block */
+    @media (prefers-color-scheme: dark) {
+      .filterSelect,
+      .searchInput {
+        @apply bg-white border-gray-200 text-gray-700;
+      }
     }
   }
   
@@ -311,4 +423,32 @@
 
 .amenityCheckbox label {
   @apply text-sm;
+}
+
+.buttonContainer {
+  @apply flex gap-3 mt-4;
+}
+
+.hotelButton {
+  @apply px-6 py-2.5 bg-[#006CE4] text-white text-sm font-semibold rounded
+         hover:bg-[#003b95] transition-all duration-300 flex items-center justify-center
+         min-w-[120px] shadow-sm;
+}
+
+.showOnMapButton {
+  @apply px-6 py-2.5 bg-white text-[#006CE4] text-sm font-semibold rounded
+         border border-[#006CE4] hover:bg-[#F5F9FF] transition-all duration-300
+         flex items-center justify-center min-w-[120px];
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .buttonContainer {
+    @apply flex-col gap-2;
+  }
+
+  .hotelButton,
+  .showOnMapButton {
+    @apply w-full;
+  }
 }

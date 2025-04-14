@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useOutletContext } from 'react-router-dom';
 import styles from "./AdminRoom.module.css";
 
 
@@ -7,58 +8,63 @@ const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) =>
   return (
     <div className={styles.popupOverlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className={styles.popup}>
-        <button className={styles.closeButton} onClick={onClose}>×</button>
-        <form onSubmit={onSubmit}>
-          <div className={styles.formRow}>
-            <input
-              type="text"
-              name="type"
-              placeholder="Room Type"
-              value={formData.type}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="number"
-              name="price"
-              placeholder="Price"
-              value={formData.price}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              name="capacity"
-              placeholder="Capacity"
-              value={formData.capacity}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <input
-              type="number"
-              name="availability"
-              placeholder="Available Rooms"
-              value={formData.availability}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className={styles.formRow}>
-            <textarea
-              name="description"
-              placeholder="Room Description"
-              value={formData.description}
-              onChange={handleInputChange}
-              required
-              className={styles.description}
-            />
-          </div>
-          <button type="submit" className={styles.submitBtn}>{title}</button>
-        </form>
+        <div className={styles.popupHeader}>
+          <h2>{title}</h2>
+          <button className={styles.closeButton} onClick={onClose}>×</button>
+        </div>
+        <div className={styles.formContainer}>
+          <form onSubmit={onSubmit}>
+            <div className={styles.formRow}>
+              <input
+                type="text"
+                name="type"
+                placeholder="Room Type"
+                value={formData.type}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles.formRow}>
+              <input
+                type="number"
+                name="price"
+                placeholder="Price"
+                value={formData.price}
+                onChange={handleInputChange}
+                required
+              />
+              <input
+                type="text"
+                name="capacity"
+                placeholder="Capacity"
+                value={formData.capacity}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles.formRow}>
+              <input
+                type="number"
+                name="availability"
+                placeholder="Available Rooms"
+                value={formData.availability}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className={styles.formRow}>
+              <textarea
+                name="description"
+                placeholder="Room Description"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+                className={styles.description}
+              />
+            </div>
+            <button type="submit" className={styles.submitBtn}>{title}</button>
+          </form>
+        </div>
       </div>
     </div>
   );
@@ -67,6 +73,9 @@ const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) =>
 
 
 const AdminRoom = () => {
+  // Change roomsPerPage from 7 to 5
+  const [currentPage, setCurrentPage] = useState(1);
+  const [roomsPerPage] = useState(7); // Changed from 7 to 5
   const [showAddPopup, setShowAddPopup] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
@@ -203,118 +212,210 @@ const AdminRoom = () => {
   };
 
  
+  // Add pagination calculations after the useEffect and before the handlers
+  const { searchQuery } = useOutletContext();
+
+  // Add filtered rooms functionality
+  const filteredRooms = useMemo(() => {
+    if (!searchQuery) return rooms;
+    
+    const query = searchQuery.toLowerCase();
+    return rooms.filter(room => 
+      room.type.toLowerCase().includes(query) ||
+      room.hotelName?.toLowerCase().includes(query) ||
+      room.cityName?.toLowerCase().includes(query)
+    );
+  }, [rooms, searchQuery]);
+
+  // Update pagination to use filteredRooms
+  const indexOfLastRoom = currentPage * roomsPerPage;
+  const indexOfFirstRoom = indexOfLastRoom - roomsPerPage;
+  const currentRooms = filteredRooms.slice(indexOfFirstRoom, indexOfLastRoom);
+  const totalPages = Math.ceil(filteredRooms.length / roomsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Add this function before handleAddClick
+  const resetForm = () => {
+    setFormData({
+      type: "",
+      price: "",
+      capacity: "",
+      availability: "",
+      description: "",
+    });
+  };
+
+  const handleAddClick = () => {
+    resetForm();
+    setShowAddPopup(true);
+  };
+  
+  // Inside AdminRoom component, replace the return statement
+  // Add these handler functions before the return statement
+  const handleEditClick = () => {
+    setIsEditMode(!isEditMode);
+    setIsDeleteMode(false);
+    setSelectedForDelete([]);
+  };
+  
+  const handleDeleteClick = () => {
+    setIsDeleteMode(!isDeleteMode);
+    setIsEditMode(false);
+    setSelectedForDelete([]);
+  };
+  
+  // Update the return statement buttons section
   return (
     <div className={styles.roomContainer}>
       <div className={styles.header}>
         <h2>Rooms Management</h2>
         <div className={styles.actions}>
-          <button className={styles.addButton} onClick={() => setShowAddPopup(true)}>
+          <button
+            className={styles.addButton}
+            onClick={handleAddClick}
+            disabled={isEditMode || isDeleteMode}
+          >
             Add Room
           </button>
           <button
-            className={styles.modifyButton}
-            onClick={() => setIsEditMode(!isEditMode)}
-            style={{ backgroundColor: isEditMode ? "#ffc107" : "#28a745" }}
+            className={`${styles.modifyButton} ${isEditMode ? styles.activeEdit : ''}`}
+            onClick={handleEditClick}
+            disabled={isDeleteMode}
           >
-            {isEditMode ? "Cancel Modify" : "Modify Room"}
+            {isEditMode ? "Cancel Room" : "Modify Room"}
           </button>
           <button
-            className={styles.deleteButton}
-            onClick={() => setIsDeleteMode(!isDeleteMode)}
-            style={{ backgroundColor: isDeleteMode ? "#dc3545" : "#dc3545" }}
+            className={`${styles.deleteButton} ${isDeleteMode ? styles.activeDelete : ''}`}
+            onClick={handleDeleteClick}
+            disabled={isEditMode}
           >
-            {isDeleteMode ? "Cancel Delete" : "Delete Room"}
+            {isDeleteMode ? "Cancel Room" : "Delete Room"}
           </button>
         </div>
       </div>
-
+  
+      {/* Table container */}
+      <div className={styles.tableContainer}>
+        <table className={styles.roomTable}>
+          <thead>
+            <tr>
+              {isDeleteMode && <th>Select</th>}
+              <th>Type</th>
+              <th>Hotel</th>
+              <th>City</th>
+              <th>Price</th>
+              <th>Capacity</th>
+              <th>Available</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentRooms.map((room) => (
+              <tr
+                key={room.id}
+                className={`${styles.editableRow} ${
+                  selectedRoom?.id === room.id ? styles.selected : ""
+                }`}
+                onClick={() => isEditMode && handleRoomSelect(room)}
+              >
+                {isDeleteMode && (
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <input
+                      type="checkbox"
+                      checked={selectedForDelete.includes(room.id)}
+                      onChange={() => handleDeleteSelect(room.id)}
+                      className={styles.checkbox}
+                    />
+                  </td>
+                )}
+                <td>{room.type}</td>
+                <td>{room.hotelName}</td>
+                <td>{room.cityName}</td>
+                <td>${room.price}</td>
+                <td>{room.capacity}</td>
+                <td>{room.availability}</td>
+                <td>{room.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+  
+      {/* Pagination */}
       {loading ? (
         <p>Loading rooms...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
-        <div className={styles.tableContainer}>
-          <table className={styles.roomTable}>
-            <thead>
-              <tr>
-                {isDeleteMode && <th>Select</th>}
-                <th>Type</th>
-                <th>Hotel</th>
-                <th>City</th>
-                <th>Price</th>
-                <th>Capacity</th>
-                <th>Available</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rooms.map((room) => (
-                <tr
-                  key={room.id}
-                  className={styles.editableRow}
-                  onClick={() => handleRoomSelect(room)}
-                >
-                  {isDeleteMode && (
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedForDelete.includes(room.id)}
-                        onChange={(e) => {
-                          e.stopPropagation();
-                          handleDeleteSelect(room.id);
-                        }}
-                        className={styles.checkbox}
-                      />
-                    </td>
-                  )}
-                  <td>{room.type}</td>
-                  <td>{room.hotelName}</td>
-                  <td>{room.cityName}</td>
-                  <td>${room.price}</td>
-                  <td>{room.capacity}</td>
-                  <td>{room.availability}</td>
-                  <td>{room.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-{showAddPopup && (
-  <PopupForm
-    onSubmit={handleAddSubmit}
-    title="Add New Room"
-    onClose={() => setShowAddPopup(false)}
-    formData={formData}
-    handleInputChange={handleInputChange}
-  />
-)}
-
-{showEditPopup && (
-  <PopupForm
-    onSubmit={handleEditSubmit}
-    title="Edit Room"
-    onClose={() => setShowEditPopup(false)}
-    formData={formData}
-    handleInputChange={handleInputChange}
-  />
-)}
-
-
-      {isEditMode && (
-        <div className={styles.editPrompt}>Click on a room to edit its information</div>
-      )}
-
-      {isDeleteMode && (
-        <div className={styles.deleteConfirm}>
-          <button className={styles.deleteConfirmButton} onClick={handleDeleteConfirm}>
-            Delete Selected ({selectedForDelete.length})
+        <div className={styles.pagination}>
+          <button 
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={styles.paginationButton}
+          >
+            Previous
+          </button>
+          <span className={styles.pageInfo}>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button 
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={styles.paginationButton}
+          >
+            Next
           </button>
         </div>
       )}
-    </div>
-  );
+    {/* Mode-specific prompts */}
+    {isEditMode && (
+      <div className={styles.editPrompt}>
+        Click on a room to edit its information
+      </div>
+    )}
+
+    {isDeleteMode && selectedForDelete.length > 0 && (
+      <div className={styles.deleteConfirm}>
+        <button 
+          className={styles.deleteConfirmButton}
+          onClick={handleDeleteConfirm}
+        >
+          Delete Selected ({selectedForDelete.length})
+        </button>
+      </div>
+    )}
+
+    {/* Popups */}
+    {showAddPopup && (
+      <PopupForm
+        onSubmit={handleAddSubmit}
+        title="Add New Room"
+        onClose={() => {
+          setShowAddPopup(false);
+          resetForm();
+        }}
+        formData={formData}
+        handleInputChange={handleInputChange}
+      />
+    )}
+
+    {showEditPopup && (
+      <PopupForm
+        onSubmit={handleEditSubmit}
+        title="Edit Room"
+        onClose={() => {
+          setShowEditPopup(false);
+          resetForm();
+        }}
+        formData={formData}
+        handleInputChange={handleInputChange}
+      />
+    )}
+  </div>
+);
 };
 
 export default AdminRoom;

@@ -314,7 +314,7 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
       <div className={styles.pageContainer}>
         <div className={styles.headerSection}>
           <h1 className={styles.pageTitle}>
-            {name} with {allHotels.length} properties
+            {name} with {allHotels.length} Unique homes
           </h1>
           <div className={styles.searchContainer}>
             <input

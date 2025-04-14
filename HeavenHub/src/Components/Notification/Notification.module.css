@@ -1,34 +1,77 @@
 .notificationContainer {
-    background: #f7f7f7;
+    background: #ffffff;
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 16px;
+    border-radius: 12px;
+    padding: 20px;
     width: 90%;
     max-width: 1400px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
     margin-top: 90px;
+}
+
+.notificationHeader {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .notificationItem {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #e0e0e0;
+    align-items: flex-start;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
 }
 
-.notificationItem:last-child {
-    border-bottom: none;
+.notificationContent {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+}
+
+.notificationIcon {
+    font-size: 24px;
+    color: #0066cc;
+    margin-top: 3px;
+}
+
+.notificationDetails {
+    flex: 1;
+}
+
+.bookingInfo {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 8px 0;
+}
+
+.hotelName {
+    font-weight: 500;
+    color: #0066cc;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.roomType, .dateInfo, .price, .status {
+    color: #666;
+    margin: 4px 0;
+    display: block;
+}
+
+.dateInfo {
+    display: flex;
+    gap: 15px;
 }
 
 .notificationDate {
     font-size: 0.8em;
     color: #888;
-    margin-left: 10px;
-    text-align: right;
-    flex-shrink: 0;
-    min-width: 100px;
+    display: block;
+    margin-top: 5px;
 }
 
 .closeButton {
@@ -37,21 +80,25 @@
     cursor: pointer;
     color: #888;
     font-size: 1.2em;
+    padding: 0 8px;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 600px) {
+.closeButton:hover {
+    color: #333;
+}
+
+@media (max-width: 768px) {
     .notificationContainer {
-        padding: 12px;
+        width: 95%;
+        padding: 15px;
+    }
+
+    .dateInfo {
+        flex-direction: column;
+        gap: 5px;
     }
 
     .notificationItem {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .notificationDate {
-        text-align: left;
-        min-width: auto;
+        padding: 12px;
     }
 }

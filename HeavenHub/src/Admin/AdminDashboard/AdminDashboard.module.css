@@ -1,79 +1,285 @@
 .mainContent {
   flex: 1;
   padding: 2rem;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
+}
+
+.dashboardHeader {
+  margin-bottom: 2rem;
+}
+
+.dashboardHeader h1 {
+  font-size: 2.25rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.welcomeText {
+  color: #6c757d;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .statCard {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
 .statCard:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.statCard h3 {
-  margin: 10px 0;
-  color: #333;
-  font-size: 1.2rem;
+.statContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.statInfo h3 {
+  color: #6c757d;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .statNumber {
   font-size: 2rem;
   font-weight: bold;
   color: #2c3e50;
-  margin: 10px 0;
 }
 
-.statImage {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
+.statIcon {
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 50%;
+  color: white;
 }
 
-.notifications {
+.bookings .statIcon {
+  background-color: #4CAF50;
+}
+
+.users .statIcon {
+  background-color: #2196F3;
+}
+
+.hotels .statIcon {
+  background-color: #9C27B0;
+}
+
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
-.notificationBox {
-  width: 100%;
-  height: 200px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+.recentActivity,
+.notifications {
+  .bookingChart {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  
+  .chartContainer {
+    height: 400px;
+    position: relative;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  .sectionHeader h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  height: 100%;
 }
 
-.searchContainer {
+.notificationItem {
   display: flex;
   align-items: center;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  background-color: white;
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
-.searchContainer input {
-  padding: 5px;
-  margin-right: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+.notificationItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
 
-.searchContainer button {
-  padding: 5px;
-  border: none;
-  background-color: transparent;
+.notificationIcon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  color: #6c757d;
+  background-color: #f8f9fa;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notificationIcon:hover {
+  background-color: #e9ecef;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.75rem;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 0 6px;
+  font-weight: 600;
+  border: 2px solid white;
+}
+
+.notificationItem.login .notificationIcon {
+  background-color: #2196F3;
+}
+
+.notificationItem.booking .notificationIcon {
+  background-color: #4CAF50;
+}
+
+.notificationItem.hotel .notificationIcon {
+  background-color: #9C27B0;
+}
+
+.notificationItem.system .notificationIcon {
+  background-color: #f57c00;
+}
+
+.notificationContent {
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.notificationContent p {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.notificationTime {
+  display: block;
+  font-size: 0.813rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+.notificationActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid #e9ecef;
+}
+
+.actionButton:hover {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.notificationBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.75rem;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+.notificationItem.read {
+  opacity: 0.8;
+  background-color: #f8f9fa;
+}
+
+.notificationList {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.notificationList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notificationList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.notificationList::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.notificationList::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.sectionHeader h2 {
+  font-size: 1.375rem;
+  color: #2c3e50;
+  font-weight: 600;
 }

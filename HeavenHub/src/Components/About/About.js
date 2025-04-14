@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaHome, FaEye, FaBullseye, FaShieldAlt, FaUsers } from "react-icons/fa";
 import styles from "./About.module.css";
 import jeevan from "../Assets/Kim.jpg";
 import jeevan1 from "../Assets/kim1.jpg";
@@ -7,40 +8,50 @@ import jeevan2 from "../Assets/kim2.jpg";
 const About = () => {
   const [activeSection, setActiveSection] = useState("about");
 
+  const menuItems = [
+    { id: "about", icon: <FaHome />, text: "About HeavenHub" },
+    { id: "vision", icon: <FaEye />, text: "Our Vision" },
+    { id: "mission", icon: <FaBullseye />, text: "Our Mission" },
+    { id: "policies", icon: <FaShieldAlt />, text: "Our Policies" },
+    { id: "team", icon: <FaUsers />, text: "Our Team" },
+  ];
+
   const renderContent = () => {
     switch (activeSection) {
       case "vision":
         return (
           <div className={styles.contentSection}>
             <h2>Our Vision</h2>
-            <p>
-              At HeavenHub, our vision is to revolutionize the way travelers
-              discover and book accommodations. We aim to create a seamless,
-              intuitive, and rewarding experience that connects guests with the
-              perfect stay—whether for leisure or business. By leveraging
-              innovation and customer-centric solutions, we strive to make
-              travel planning effortless, reliable, and enjoyable for everyone.
-            </p>
+            <div className={styles.descriptionContainer}>
+              <p>
+                At HeavenHub, our vision is to revolutionize the way travelers
+                discover and book accommodations. We aim to create a seamless,
+                intuitive, and rewarding experience that connects guests with the
+                perfect stay—whether for leisure or business. By leveraging
+                innovation and customer-centric solutions, we strive to make
+                travel planning effortless, reliable, and enjoyable for everyone.
+              </p>
+            </div>
           </div>
         );
       case "mission":
         return (
           <div className={styles.contentSection}>
             <h2>Our Mission</h2>
-            <p>
-              Our mission at HeavenHub is to simplify and enhance the hotel
-              booking experience by offering a user-friendly platform that
-              connects travelers with the best accommodations. We are committed
-              to providing seamless navigation, secure transactions, and
-              personalized recommendations to ensure every stay is memorable.
-              Through innovation, transparency, and exceptional customer
-              service, we aim to make booking hotels easy, affordable, and
-              rewarding for all
-            </p>
+            <div className={styles.descriptionContainer}>
+              <p>
+                Our mission at HeavenHub is to simplify and enhance the hotel
+                booking experience by offering a user-friendly platform that
+                connects travelers with the best accommodations. We are committed
+                to providing seamless navigation, secure transactions, and
+                personalized recommendations to ensure every stay is memorable.
+                Through innovation, transparency, and exceptional customer
+                service, we aim to make booking hotels easy, affordable, and
+                rewarding for all.
+              </p>
+            </div>
           </div>
         );
-      // ... existing code ...
-
       case "policies":
         return (
           <div className={styles.contentSection}>
@@ -132,8 +143,6 @@ const About = () => {
             </ul>
           </div>
         );
-
-      // ... rest of your code ...
       case "team":
         return (
           <div className={styles.contentSection}>
@@ -187,20 +196,22 @@ const About = () => {
         return (
           <div className={styles.contentSection}>
             <h2>About HeavenHub</h2>
-            <p>
-              At HeavenHub, we maintain a strict policy of transparency,
-              security, and customer satisfaction. We ensure that all hotels
-              listed on our platform provide accurate details, fair pricing, and
-              quality service. Our secure payment system protects user
-              transactions, and we safeguard personal information through
-              advanced security protocols. We support fair business practices,
-              ensuring that both travelers and hoteliers have a smooth and
-              trustworthy experience. Cancellations, refunds, and booking
-              modifications are handled with clarity and fairness. Our
-              commitment to reliability and integrity makes HeavenHub a platform
-              travelers can trust for safe and convenient hotel bookings
-              worldwide. Here are our key policies.
-            </p>
+            <div className={styles.descriptionContainer}>
+              <p>
+                At HeavenHub, we maintain a strict policy of transparency,
+                security, and customer satisfaction. We ensure that all hotels
+                listed on our platform provide accurate details, fair pricing, and
+                quality service. Our secure payment system protects user
+                transactions, and we safeguard personal information through
+                advanced security protocols. We support fair business practices,
+                ensuring that both travelers and hoteliers have a smooth and
+                trustworthy experience. Cancellations, refunds, and booking
+                modifications are handled with clarity and fairness. Our
+                commitment to reliability and integrity makes HeavenHub a platform
+                travelers can trust for safe and convenient hotel bookings
+                worldwide.
+              </p>
+            </div>
           </div>
         );
     }
@@ -211,36 +222,16 @@ const About = () => {
       <div className={styles.sidebar}>
         <nav>
           <ul>
-            <li
-              className={activeSection === "about" ? styles.active : ""}
-              onClick={() => setActiveSection("about")}
-            >
-              About HeavenHub
-            </li>
-            <li
-              className={activeSection === "vision" ? styles.active : ""}
-              onClick={() => setActiveSection("vision")}
-            >
-              Our Vision
-            </li>
-            <li
-              className={activeSection === "mission" ? styles.active : ""}
-              onClick={() => setActiveSection("mission")}
-            >
-              Our Mission
-            </li>
-            <li
-              className={activeSection === "policies" ? styles.active : ""}
-              onClick={() => setActiveSection("policies")}
-            >
-              Our Policies
-            </li>
-            <li
-              className={activeSection === "team" ? styles.active : ""}
-              onClick={() => setActiveSection("team")}
-            >
-              Our Team Members
-            </li>
+            {menuItems.map((item) => (
+              <li
+                key={item.id}
+                className={activeSection === item.id ? styles.active : ""}
+                onClick={() => setActiveSection(item.id)}
+              >
+                {item.icon}
+                {item.text}
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

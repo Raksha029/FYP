@@ -1,30 +1,141 @@
 .bookingContainer {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
+  padding: 2rem;
+  background-color: #f8fafc;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
   margin: 0 auto;
 }
 
 .tableContainer {
-  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.tableContainer h2 {
+  font-size: 1.75rem;
+  color: #1e293b;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .bookingTable {
   width: 100%;
-  border-collapse: collapse;
-  background-color: #e0e0e0;
-  border: 1px solid #007bff;
-}
-
-.bookingTable th,
-.bookingTable td {
-  padding: 10px;
-  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .bookingTable th {
-  background-color: #007bff;
+  background-color: #4f46e5;
   color: white;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bookingTable th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.bookingTable th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.bookingTable td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.9375rem;
+}
+
+.bookingTable tr:last-child td {
+  border-bottom: none;
+}
+
+.bookingTable tr:hover {
+  background-color: #f8fafc;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 12px 12px;
+}
+
+.paginationButton {
+  padding: 0.625rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  background-color: white;
+  color: #4f46e5;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.1);
+}
+
+.paginationButton:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+}
+
+.pageInfo {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  color: #64748b;
+  font-size: 1rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #e2e8f0;
+  margin: 1rem 0;
+}
+
+/* Status styles */
+.bookingTable td:last-child {
+  font-weight: 500;
+}
+
+/* Price column */
+.bookingTable td:nth-last-child(2) {
+  font-weight: 600;
+  color: #059669;
+}
+
+/* Date columns */
+.bookingTable td:nth-child(4),
+.bookingTable td:nth-child(5) {
+  color: #6366f1;
+  font-weight: 500;
 }

@@ -10,13 +10,25 @@
 }
 .logo {
     @apply ml-0 sm:ml-16 md:ml-24 lg:ml-60;
-    width: 100px; /* Set a fixed width for the logo */
-    height: auto; /* Maintain aspect ratio */
-    width: auto;
-    object-fit: contain;
-    margin-right: 1rem; /* Add right margin */
     display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
+
+.logoIcon {
+    width: 40px;
+    height: 40px;
+    color: #4a5568;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    letter-spacing: 0.5px;
+}
+
 .nav {
     @apply flex space-x-2 sm:space-x-3 md:space-x-4 lg:space-x-6;
     flex-grow: 1;

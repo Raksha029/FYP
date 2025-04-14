@@ -5,7 +5,8 @@
 
 /* Hero Section */
 .heroSection {
-  @apply relative w-full h-screen flex items-center justify-center;
+  @apply relative w-full h-screen;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
 .heroImage {
@@ -13,109 +14,105 @@
 }
 
 .heroImage img {
-  @apply object-cover w-full h-full;
+  @apply w-full h-full object-cover absolute;
+  filter: brightness(0.8);
 }
 
 .heroOverlay {
-  @apply absolute top-16 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-0 text-black text-center p-6 z-10;
+  @apply absolute inset-0 flex flex-col items-center justify-center text-center px-4;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .heroOverlay h2 {
-  @apply text-4xl font-bold mb-5;
+  @apply text-6xl font-bold mb-6 text-white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .heroOverlay p {
-  @apply text-xl mb-10;
+  @apply text-2xl mb-12 text-white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Search Form */
+.searchContainer {
+  @apply w-full max-w-5xl mx-auto px-4;
+}
 
 .searchForm {
-  margin-top : 60px; /* Adjust the value as needed */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  width: 120%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px;
-  background: whitesmoke;
-  border-radius: 15px;
-  box-shadow: 1 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.guestInputs {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  flex: 3;
-}
-
-.select {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #000;
-  font-size: 16px;
-  font-weight: 500;
-  height: 50px;
+  @apply flex items-center gap-4 p-6 bg-white rounded-2xl shadow-xl;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 .searchInput {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #000;
-  font-weight: 500;
+  @apply flex-1 px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300;
+  min-width: 200px;
 }
 
-.searchInput::placeholder {
-  color: #666;
+.guestInputs {
+  @apply flex gap-4;
+  min-width: 400px;
+}
+
+.select {
+  @apply px-4 py-4 text-lg border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 transition-all duration-300;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.5em;
+  padding-right: 2.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .searchButton {
-  flex: 1;
-  padding: 12px 4px;
-  height: 50px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  font-weight: 600;
+  @apply px-8 py-4 text-lg font-semibold text-white rounded-xl transition-all duration-300 transform hover:scale-105;
+  background: linear-gradient(135deg, #0061ff 0%, #60efff 100%);
+  min-width: 120px;
 }
 
 .searchButton:hover {
-  background-color: #0056b3;
+  @apply shadow-lg;
+  background: linear-gradient(135deg, #0052d6 0%, #45c7ff 100%);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
   .searchForm {
-    flex-direction: column;
-    gap: 15px;
-    width: 90%;
-    padding: 15px;
+    @apply flex-col;
   }
 
   .guestInputs {
-    flex-direction: column;
+    @apply flex-col w-full min-w-0;
   }
 
   .searchInput,
   .select,
   .searchButton {
-    width: 100%;
+    @apply w-full;
   }
+
+  .heroOverlay h2 {
+    @apply text-4xl;
+  }
+
+  .heroOverlay p {
+    @apply text-xl;
+  }
+}
+
+/* Add smooth transitions */
+.searchInput,
+.select,
+.searchButton {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Enhance focus states */
+.searchInput:focus,
+.select:focus {
+  @apply outline-none ring-2 ring-blue-300;
 }
 
 /* Why Choose Us Section */

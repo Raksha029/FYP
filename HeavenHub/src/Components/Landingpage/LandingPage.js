@@ -7,7 +7,6 @@ import hotelbackground_icon from "../Assets/hotelbackground.png";
 import TopRatedProperties from "../TopRatedProperties/TopRatedProperties";
 import PopularPlaces from "../PopularPlaces/PopularPlaces";
 import Chatbot from "../Chatbot/Chatbot";
-import hotel1 from "../Assets/hotel1.png";
 import { citiesData } from "../data/citiesData";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -83,14 +82,13 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
         <div className={styles.heroImage}>
           <img src={hotelbackground_icon} alt="Luxurious hotel" />
           <div className={styles.heroOverlay}>
-            <h2>Perfect Stays, Just a Click Away</h2>
-            <p>Your access point to premium hotels and unique getaways.</p>
-            {/* Search Box */}
+            <h2>Find Your Perfect Stay</h2>
+            <p>Discover luxury and comfort at unbeatable prices</p>
             <div className={styles.searchContainer}>
               <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
                 <input
                   type="text"
-                  placeholder="Enter city name..."
+                  placeholder="Where would you like to stay?"
                   value={searchParams.location}
                   onChange={(e) =>
                     setSearchParams({
@@ -155,7 +153,7 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
                 </div>
 
                 <button type="submit" className={styles.searchButton}>
-                  Search
+                  Search Hotels
                 </button>
               </form>
             </div>

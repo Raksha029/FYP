@@ -1,12 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import styles from './AdminBooking.module.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from "react";
+import { useOutletContext, useNavigate } from 'react-router-dom';
+import styles from "./AdminBooking.module.css";
 
 const AdminBooking = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookingsPerPage] = useState(5);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { searchQuery } = useOutletContext();
+
+  // Add filtered bookings functionality
+  const filteredBookings = useMemo(() => {
+    if (!searchQuery) return bookings;
+    
+    const query = searchQuery.toLowerCase();
+    return bookings.filter(booking => 
+      `${booking.guestDetails?.firstName || ''} ${booking.guestDetails?.lastName || ''}`.toLowerCase().includes(query) ||
+      booking.hotelName?.toLowerCase().includes(query) ||
+      booking.status?.toLowerCase().includes(query)
+    );
+  }, [bookings, searchQuery]);
+
+  // Update pagination calculations
+  const indexOfLastBooking = currentPage * bookingsPerPage;
+  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+  const currentBookings = filteredBookings.slice(indexOfFirstBooking, indexOfLastBooking);
+  const totalPages = Math.ceil(filteredBookings.length / bookingsPerPage);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -50,6 +71,10 @@ const AdminBooking = () => {
     fetchBookings();
   }, [navigate]);
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   if (loading) return <div>Loading bookings...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -70,7 +95,7 @@ const AdminBooking = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((booking) => (
+            {currentBookings.map((booking) => (
               <tr key={booking._id}>
                 <td>{`${booking.guestDetails?.firstName || ''} ${booking.guestDetails?.lastName || ''}`}</td>
                 <td>{booking.hotelName}</td>
@@ -83,6 +108,30 @@ const AdminBooking = () => {
             ))}
           </tbody>
         </table>
+
+        {currentBookings.length === 0 ? (
+          <p className={styles.noResults}>No bookings found matching your search.</p>
+        ) : (
+          <div className={styles.pagination}>
+            <button 
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={styles.paginationButton}
+            >
+              Previous
+            </button>
+            <span className={styles.pageInfo}>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button 
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={styles.paginationButton}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

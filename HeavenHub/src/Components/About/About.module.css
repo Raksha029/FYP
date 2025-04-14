@@ -1,11 +1,13 @@
 .pageContainer {
-  @apply flex flex-col lg:flex-row min-h-screen bg-white mt-16;
+  @apply flex flex-col lg:flex-row min-h-screen bg-white;
   font-family: 'Poppins', sans-serif;
+  margin-top: 8rem;
 }
 
 .sidebar {
   @apply w-full lg:w-64 bg-gray-50 border-b lg:border-r border-gray-200 p-4 
          mx-4 lg:mx-0 lg:ml-60 lg:min-h-screen;
+  margin-top: -2rem;
 }
 
 .sidebar nav ul {
@@ -13,12 +15,16 @@
 }
 
 .sidebar nav ul li {
-  @apply px-4 py-2 rounded-md cursor-pointer text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors;
+  @apply px-6 py-3 rounded-lg cursor-pointer text-gray-600 
+         hover:bg-blue-50 hover:text-blue-600 transition-all duration-300
+         flex items-center gap-4 text-base font-medium
+         border border-transparent hover:border-blue-100
+         hover:shadow-sm;
 }
 
-
 .sidebar nav ul li.active {
-  @apply bg-blue-100 text-blue-600 font-medium;
+  @apply bg-blue-100 text-blue-600 font-semibold shadow-sm
+         border border-blue-200;
 }
 
 .mainContent {
@@ -36,8 +42,6 @@
 .contentSection p {
   @apply text-lg text-gray-700 leading-relaxed text-justify;
 }
-
-/* ... existing styles ... */
 
 .policyList {
   @apply space-y-8 mt-6;
@@ -121,8 +125,6 @@
 .aboutContainer h2 {
   @apply text-4xl mb-2 text-blue-600 font-bold;
 }
-
-/* ... existing styles ... */
 
 .teamGrid {
   @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 mt-8;
