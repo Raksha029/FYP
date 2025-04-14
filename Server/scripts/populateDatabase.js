@@ -20,9 +20,15 @@ async function populateDatabase() {
       centerName: value.centerName,
       hotels: value.hotels.map((hotel) => ({
         ...hotel,
-        reviews: hotel.reviews || [], // Ensure reviews exist
+        reviews: hotel.reviews || [],
         image: hotel.image || [],
         detailsImage: hotel.detailsImage || [],
+        policies: hotel.policies || { // Add default policies if none exist
+          checkIn: "From 3:00 PM",
+          checkOut: "Until 11:00 AM",
+          cancellation: "Free cancellation up to 48 hours before check-in",
+          payment: "Khalti digital payment only"
+        }
       })),
     }));
 

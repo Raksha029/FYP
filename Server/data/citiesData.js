@@ -1,30 +1,63 @@
 // Helper function to generate random reviews
 const generateRandomReviews = () => {
-  return Array.from(
-    { length: Math.floor(Math.random() * (1000 - 50 + 1)) + 50 },
-    (_, i) => ({
-      reviewer: `Guest${i + 1}`,
+  const realNames = [
+    "Sarah Johnson",
+    "Michael Chen",
+    "Emma Davis",
+    "Raj Patel",
+    "Maria Garcia",
+    "David Kim",
+    "Lisa Wong",
+    "John Smith",
+    "Priya Sharma",
+    "James Wilson",
+    "Ana Santos",
+    "Tom Anderson",
+    "Maya Patel",
+    "Alex Turner",
+    "Sophie Martin",
+    "Omar Hassan",
+    "Nina Rodriguez",
+    "Chris Lee",
+    "Ava Thompson",
+    "Daniel Brown",
+  ];
+
+  const reviewComments = [
+    "Exceptional luxury experience",
+    "Perfect stay",
+    "Outstanding service",
+    "Beautiful property",
+    "Excellent facilities",
+    "Great location",
+    "Wonderful staff",
+    "Luxurious rooms",
+    "Amazing experience",
+    "Worth every penny",
+    "Highly recommended",
+    "Fantastic experience",
+    "Superb hospitality",
+    "Memorable stay",
+    "Perfect getaway",
+  ];
+
+  // Generate random number of reviews between 0 and 20
+  const numberOfReviews = Math.floor(Math.random() * 21);
+
+  return Array.from({ length: numberOfReviews }, () => {
+    const randomName = realNames[Math.floor(Math.random() * realNames.length)];
+    const randomComment =
+      reviewComments[Math.floor(Math.random() * reviewComments.length)];
+
+    return {
+      reviewer: randomName,
       rating: Math.floor(Math.random() * 2) + 4, // Generates either 4 or 5
-      comment: [
-        "Exceptional luxury experience",
-        "Perfect stay",
-        "Outstanding service",
-        "Beautiful property",
-        "Excellent facilities",
-        "Great location",
-        "Wonderful staff",
-        "Luxurious rooms",
-        "Amazing experience",
-        "Worth every penny",
-        "Highly recommended",
-        "Fantastic experience",
-        "Superb hospitality",
-        "Memorable stay",
-        "Perfect getaway",
-      ][Math.floor(Math.random() * 15)],
-    })
-  );
+      comment: randomComment,
+    };
+  });
 };
+
+// ... rest of citiesData ...
 
 const citiesData = {
   kathmandu: {
@@ -69,6 +102,12 @@ const citiesData = {
         ],
         description:
           "This luxurious room offers stunning views of the Himalayas, perfect for a relaxing getaway.",
+        policies: {
+          checkIn: "From 3:00 PM",
+          checkOut: "Until 11:00 AM",
+          cancellation: "Free cancellation up to 48 hours before check-in",
+          payment: "Khalti digital payment only"
+        },
         rooms: [
           {
             type: "Himalayan View Room",
@@ -132,6 +171,12 @@ const citiesData = {
         ],
         description:
           "Experience heritage and luxury in this beautifully designed suite with traditional decor.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Credit card and cash accepted"
+        },
         rooms: [
           {
             type: "Heritage Deluxe Room",
@@ -196,6 +241,12 @@ const citiesData = {
         ],
         description:
           "Enjoy a modern stay in this spacious room equipped with all the amenities for a comfortable experience.",
+        policies: {
+          checkIn: "From 3:00 PM",
+          checkOut: "Until 11:00 AM",
+          cancellation: "Free cancellation up to 48 hours before check-in",
+          payment: "Cash and major credit cards accepted"
+        },
         rooms: [
           {
             type: "Casino Deluxe Room",
@@ -248,6 +299,12 @@ const citiesData = {
         ],
         description:
           "This contemporary room features a rooftop view and is ideal for both leisure and business travelers.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Credit card and cash accepted"
+        },
         rooms: [
           {
             type: "Urban Loft Room",
@@ -300,6 +357,12 @@ const citiesData = {
         ],
         description:
           "Relax in this cozy room that combines comfort with modern amenities, perfect for families.",
+        policies: {
+          checkIn: "From 3:00 PM",
+          checkOut: "Until 11:00 AM",
+          cancellation: "Free cancellation up to 48 hours before check-in",
+          payment: "Cash and credit cards accepted"
+        },
         rooms: [
           {
             type: "Family Comfort Room",
@@ -352,6 +415,12 @@ const citiesData = {
         ],
         description:
           "This elegant room offers a serene atmosphere with access to the hotel's beautiful garden.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Cash and credit cards accepted"
+        },
         rooms: [
           {
             type: "Garden Serenity Room",
@@ -416,6 +485,12 @@ const citiesData = {
         ],
         description:
           "Indulge in luxury with this spacious suite that includes a private balcony and premium services.",
+        policies: {
+          checkIn: "From 3:00 PM",
+          checkOut: "Until 11:00 AM",
+          cancellation: "Free cancellation up to 48 hours before check-in",
+          payment: "Cash and credit cards accepted"
+        },
         rooms: [
           {
             type: "Executive Lounge Access Room",
@@ -468,6 +543,12 @@ const citiesData = {
         ],
         description:
           "This charming room provides a perfect blend of comfort and style, ideal for a romantic getaway.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Cash and credit cards accepted"
+        },
         rooms: [
           {
             type: "Poolside Comfort Room",
@@ -520,6 +601,12 @@ const citiesData = {
         ],
         description:
           "Experience tranquility in this well-appointed room with modern furnishings and a relaxing ambiance.",
+        policies: {
+          checkIn: "From 3:00 PM",
+          checkOut: "Until 11:00 AM",
+          cancellation: "Free cancellation up to 48 hours before check-in",
+          payment: "Cash and credit cards accepted"
+        },
         rooms: [
           {
             type: "Rooftop Pool Access Room",
@@ -577,6 +664,12 @@ const citiesData = {
         ],
         description:
           "This room offers a unique blend of traditional and modern design, ensuring a memorable stay.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Cash and credit cards accepted"
+        },
         rooms: [
           {
             type: "Garden Retreat Room",
@@ -637,6 +730,12 @@ const citiesData = {
         ],
         description:
           "Enjoy breathtaking views of the lake from this cozy lodge, perfect for a peaceful retreat.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Lakeside Deluxe Room",
@@ -684,6 +783,12 @@ const citiesData = {
         detailsImage: ["/images/p2.jpg"],
         description:
           "Relax in this serene resort that offers stunning mountain views and luxurious amenities.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Mountain View Zen Room",
@@ -731,6 +836,12 @@ const citiesData = {
         detailsImage: ["/images/p3.jpg"],
         description:
           "This resort features direct access to the lake, making it ideal for water sports enthusiasts.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Water Sports Enthusiast Room",
@@ -778,6 +889,12 @@ const citiesData = {
         detailsImage: ["/images/p4.jpg"],
         description:
           "Experience luxury in this hotel with a beautiful pool and stunning views of the surrounding mountains.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Poolside Relaxation Room",
@@ -825,6 +942,12 @@ const citiesData = {
         detailsImage: ["/images/p5.jpg"],
         description:
           "This resort offers a perfect blend of relaxation and adventure, with a full-service spa and outdoor activities.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Wellness Rejuvenation Room",
@@ -872,6 +995,12 @@ const citiesData = {
         detailsImage: ["/images/p6.jpg"],
         description:
           "Ideal for business travelers, this hotel combines comfort with modern amenities and excellent service.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Business Executive Room",
@@ -919,6 +1048,12 @@ const citiesData = {
         detailsImage: ["/images/p7.jpg"],
         description:
           "This hotel features a rooftop bar with stunning views, perfect for enjoying the sunset over the lake.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Rooftop Sunset Room",
@@ -966,6 +1101,12 @@ const citiesData = {
         detailsImage: ["/images/p8.jpg"],
         description:
           "Enjoy breathtaking mountain views from this hotel, which is also a great base for trekking adventures.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Trekkers' Base Camp Room",
@@ -1013,6 +1154,12 @@ const citiesData = {
         detailsImage: ["/images/p1.jpg"],
         description:
           "This luxury hotel offers spacious rooms and top-notch amenities, ensuring a memorable stay.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Luxury Lakeside Room",
@@ -1060,6 +1207,12 @@ const citiesData = {
         detailsImage: ["/images/p10.jpg"],
         description:
           "With direct lake access, this hotel is perfect for those looking to enjoy water sports and relaxation.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Water Sports Lover's Room",
@@ -1123,30 +1276,40 @@ const citiesData = {
           "/images/b3.jpg",
           "/images/b4.jpg",
         ],
-        description: "Experience the rich cultural heritage of Bhaktapur in this beautifully preserved historic hotel.",
+        description:
+          "Experience the rich cultural heritage of Bhaktapur in this beautifully preserved historic hotel.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Heritage Deluxe Room",
             price: 120,
             capacity: "2 Adults",
             available: 5,
-            description: "Traditional room featuring authentic Newari architecture and handcrafted furnishings."
+            description:
+              "Traditional room featuring authentic Newari architecture and handcrafted furnishings.",
           },
           {
             type: "Royal Heritage Suite",
             price: 250,
             capacity: "4 Adults",
             available: 3,
-            description: "Luxurious suite with carved wooden windows, private courtyard views, and cultural artifacts."
+            description:
+              "Luxurious suite with carved wooden windows, private courtyard views, and cultural artifacts.",
           },
           {
             type: "Cultural Experience Room",
             price: 180,
             capacity: "2 Adults",
             available: 4,
-            description: "Immersive room with traditional decor and direct views of Durbar Square."
-          }
-        ]
+            description:
+              "Immersive room with traditional decor and direct views of Durbar Square.",
+          },
+        ],
       },
       {
         id: "bkt2",
@@ -1171,30 +1334,40 @@ const citiesData = {
         coords: [27.6713, 85.4301],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b2.jpg"],
-        description: "Modern comfort meets traditional charm in the heart of the pottery district.",
+        description:
+          "Modern comfort meets traditional charm in the heart of the pottery district.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Pottery View Room",
             price: 90,
             capacity: "2 Adults",
             available: 6,
-            description: "Comfortable room overlooking the historic Pottery Square, perfect for cultural enthusiasts."
+            description:
+              "Comfortable room overlooking the historic Pottery Square, perfect for cultural enthusiasts.",
           },
           {
             type: "Artisan Suite",
             price: 180,
             capacity: "3 Adults",
             available: 4,
-            description: "Spacious suite featuring local pottery displays and traditional craft demonstrations."
+            description:
+              "Spacious suite featuring local pottery displays and traditional craft demonstrations.",
           },
           {
             type: "City View Deluxe",
             price: 150,
             capacity: "2 Adults",
             available: 5,
-            description: "Modern room with panoramic views of Bhaktapur's ancient skyline."
-          }
-        ]
+            description:
+              "Modern room with panoramic views of Bhaktapur's ancient skyline.",
+          },
+        ],
       },
       {
         id: "bkt3",
@@ -1214,30 +1387,40 @@ const citiesData = {
         coords: [27.6708, 85.4296],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b3.jpg"],
-        description: "Experience traditional Newari hospitality with stunning temple views and peaceful garden setting.",
+        description:
+          "Experience traditional Newari hospitality with stunning temple views and peaceful garden setting.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Temple View Traditional Room",
             price: 80,
             capacity: "2 Adults",
             available: 5,
-            description: "Authentic room with direct views of Taumadhi Square temples, featuring traditional Newari decor."
+            description:
+              "Authentic room with direct views of Taumadhi Square temples, featuring traditional Newari decor.",
           },
           {
             type: "Garden Retreat Suite",
             price: 150,
             capacity: "3 Adults",
             available: 3,
-            description: "Spacious suite overlooking the peaceful garden, perfect for families seeking a cultural experience."
+            description:
+              "Spacious suite overlooking the peaceful garden, perfect for families seeking a cultural experience.",
           },
           {
             type: "Cultural Heritage Room",
             price: 100,
             capacity: "2 Adults",
             available: 4,
-            description: "Cozy room with traditional architecture, offering easy access to cultural tours and local experiences."
-          }
-        ]
+            description:
+              "Cozy room with traditional architecture, offering easy access to cultural tours and local experiences.",
+          },
+        ],
       },
       {
         id: "bkt4",
@@ -1262,30 +1445,40 @@ const citiesData = {
         coords: [27.6712, 85.43],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b4.jpg"],
-        description: "Family-friendly hotel in the heart of historic Dattatreya Square, perfect for cultural exploration.",
+        description:
+          "Family-friendly hotel in the heart of historic Dattatreya Square, perfect for cultural exploration.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Family Comfort Room",
             price: 70,
             capacity: "4 Adults",
             available: 6,
-            description: "Spacious family room with traditional touches, perfect for families exploring Bhaktapur's heritage."
+            description:
+              "Spacious family room with traditional touches, perfect for families exploring Bhaktapur's heritage.",
           },
           {
             type: "Cultural Explorer Suite",
             price: 120,
             capacity: "3 Adults",
             available: 4,
-            description: "Suite designed for cultural enthusiasts, featuring local art and easy access to heritage sites."
+            description:
+              "Suite designed for cultural enthusiasts, featuring local art and easy access to heritage sites.",
           },
           {
             type: "Cozy Heritage Room",
             price: 90,
             capacity: "2 Adults",
             available: 5,
-            description: "Comfortable room blending modern amenities with traditional charm, ideal for couples."
-          }
-        ]
+            description:
+              "Comfortable room blending modern amenities with traditional charm, ideal for couples.",
+          },
+        ],
       },
       {
         id: "bkt5",
@@ -1305,30 +1498,40 @@ const citiesData = {
         coords: [27.6711, 85.4299],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b5.jpg"],
-        description: "Experience luxury and heritage in the heart of Bhaktapur's historic district.",
+        description:
+          "Experience luxury and heritage in the heart of Bhaktapur's historic district.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Paradise Heritage Room",
             price: 130,
             capacity: "2 Adults",
             available: 5,
-            description: "Luxurious room combining traditional architecture with modern spa amenities and heritage views."
+            description:
+              "Luxurious room combining traditional architecture with modern spa amenities and heritage views.",
           },
           {
             type: "Royal Spa Suite",
             price: 250,
             capacity: "3 Adults",
             available: 3,
-            description: "Premium suite with private spa facilities, traditional decor, and personalized heritage tour services."
+            description:
+              "Premium suite with private spa facilities, traditional decor, and personalized heritage tour services.",
           },
           {
             type: "Cultural Luxury Room",
             price: 180,
             capacity: "2 Adults",
             available: 4,
-            description: "Elegant room featuring cultural artifacts, premium amenities, and easy access to heritage sites."
-          }
-        ]
+            description:
+              "Elegant room featuring cultural artifacts, premium amenities, and easy access to heritage sites.",
+          },
+        ],
       },
       {
         id: "bkt6",
@@ -1353,31 +1556,40 @@ const citiesData = {
         coords: [27.6709, 85.4297],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b6.jpg"],
-        detailsImage: ["/images/b6.jpg"],
-        description: "Immerse yourself in the pottery culture of Bhaktapur with hands-on experiences.",
+        description:
+          "Immerse yourself in the pottery culture of Bhaktapur with hands-on experiences.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Pottery Artist Room",
             price: 85,
             capacity: "2 Adults",
             available: 6,
-            description: "Creative room with pottery workspace, traditional tools, and views of the pottery square."
+            description:
+              "Creative room with pottery workspace, traditional tools, and views of the pottery square.",
           },
           {
             type: "Artisan Suite",
             price: 150,
             capacity: "3 Adults",
             available: 4,
-            description: "Spacious suite with private pottery workshop space and traditional craft demonstrations."
+            description:
+              "Spacious suite with private pottery workshop space and traditional craft demonstrations.",
           },
           {
             type: "Garden Craft Room",
             price: 120,
             capacity: "2 Adults",
             available: 5,
-            description: "Peaceful room with garden views and dedicated space for cultural activities."
-          }
-        ]
+            description:
+              "Peaceful room with garden views and dedicated space for cultural activities.",
+          },
+        ],
       },
       {
         id: "bkt7",
@@ -1402,30 +1614,40 @@ const citiesData = {
         coords: [27.6714, 85.4302],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b7.jpg"],
-        description: "Luxury accommodation with stunning views of the iconic Nyatapola Temple.",
+        description:
+          "Luxury accommodation with stunning views of the iconic Nyatapola Temple.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Temple View Luxury Room",
             price: 140,
             capacity: "2 Adults",
             available: 5,
-            description: "Elegant room offering panoramic views of Nyatapola Temple with luxury amenities."
+            description:
+              "Elegant room offering panoramic views of Nyatapola Temple with luxury amenities.",
           },
           {
             type: "Heritage Palace Suite",
             price: 260,
             capacity: "4 Adults",
             available: 3,
-            description: "Grand suite with traditional palace decor, temple views, and premium dining services."
+            description:
+              "Grand suite with traditional palace decor, temple views, and premium dining services.",
           },
           {
             type: "Cultural Luxury Room",
             price: 190,
             capacity: "2 Adults",
             available: 4,
-            description: "Sophisticated room combining luxury comfort with cultural experiences and temple tour access."
-          }
-        ]
+            description:
+              "Sophisticated room combining luxury comfort with cultural experiences and temple tour access.",
+          },
+        ],
       },
       {
         id: "bkt8",
@@ -1450,30 +1672,40 @@ const citiesData = {
         coords: [27.6707, 85.4295],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b8.jpg"],
-        description: "Experience authentic Nepali family life in this welcoming homestay in the heart of Old Town.",
+        description:
+          "Experience authentic Nepali family life in this welcoming homestay in the heart of Old Town.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Family Home Room",
             price: 60,
             capacity: "2 Adults",
             available: 6,
-            description: "Cozy room in a traditional family home, offering authentic local living experience with home-cooked meals."
+            description:
+              "Cozy room in a traditional family home, offering authentic local living experience with home-cooked meals.",
           },
           {
             type: "Garden View Homestay Suite",
             price: 100,
             capacity: "3 Adults",
             available: 3,
-            description: "Spacious family suite with garden views, perfect for experiencing traditional Newari lifestyle and customs."
+            description:
+              "Spacious family suite with garden views, perfect for experiencing traditional Newari lifestyle and customs.",
           },
           {
             type: "Cultural Living Room",
             price: 80,
             capacity: "2 Adults",
             available: 4,
-            description: "Authentic room featuring local decor, with direct access to cultural activities and cooking demonstrations."
-          }
-        ]
+            description:
+              "Authentic room featuring local decor, with direct access to cultural activities and cooking demonstrations.",
+          },
+        ],
       },
       {
         id: "bkt9",
@@ -1493,30 +1725,40 @@ const citiesData = {
         coords: [27.6715, 85.4303],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b9.jpg"],
-        description: "Luxury accommodation combining traditional architecture with modern comforts near Durbar Square.",
-  rooms: [
-    {
-      type: "Royal Heritage Room",
-      price: 180,
-      capacity: "2 Adults",
-      available: 5,
-      description: "Luxurious room featuring traditional royal decor and modern amenities with heritage views."
-    },
-    {
-      type: "Maharaja Suite",
-      price: 300,
-      capacity: "4 Adults",
-      available: 3,
-      description: "Opulent suite with separate living area, spa bathroom, and personalized butler service."
-    },
-    {
-      type: "Durbar View Deluxe",
-      price: 220,
-      capacity: "2 Adults",
-      available: 4,
-      description: "Premium room offering stunning views of Durbar Square with luxury amenities."
-    }
-  ]
+        description:
+          "Luxury accommodation combining traditional architecture with modern comforts near Durbar Square.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
+        rooms: [
+          {
+            type: "Royal Heritage Room",
+            price: 180,
+            capacity: "2 Adults",
+            available: 5,
+            description:
+              "Luxurious room featuring traditional royal decor and modern amenities with heritage views.",
+          },
+          {
+            type: "Maharaja Suite",
+            price: 300,
+            capacity: "4 Adults",
+            available: 3,
+            description:
+              "Opulent suite with separate living area, spa bathroom, and personalized butler service.",
+          },
+          {
+            type: "Durbar View Deluxe",
+            price: 220,
+            capacity: "2 Adults",
+            available: 4,
+            description:
+              "Premium room offering stunning views of Durbar Square with luxury amenities.",
+          },
+        ],
       },
       {
         id: "bkt10",
@@ -1541,30 +1783,40 @@ const citiesData = {
         coords: [27.6706, 85.4294],
         reviews: generateRandomReviews(),
         detailsImage: ["/images/b10.jpg"],
-        description: "A perfect blend of cultural experiences and modern comfort with mountain views.",
-  rooms: [
-    {
-      type: "Mountain Vista Room",
-      price: 140,
-      capacity: "2 Adults",
-      available: 6,
-      description: "Comfortable room with panoramic mountain views and traditional decor elements."
-    },
-    {
-      type: "Cultural Program Suite",
-      price: 200,
-      capacity: "3 Adults",
-      available: 4,
-      description: "Suite designed for cultural immersion with private space for cultural activities and workshops."
-    },
-    {
-      type: "Garden Retreat Room",
-      price: 160,
-      capacity: "2 Adults",
-      available: 5,
-      description: "Serene room with garden access and perfect blend of modern comfort and cultural charm."
-    }
-  ]
+        description:
+          "A perfect blend of cultural experiences and modern comfort with mountain views.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
+        rooms: [
+          {
+            type: "Mountain Vista Room",
+            price: 140,
+            capacity: "2 Adults",
+            available: 6,
+            description:
+              "Comfortable room with panoramic mountain views and traditional decor elements.",
+          },
+          {
+            type: "Cultural Program Suite",
+            price: 200,
+            capacity: "3 Adults",
+            available: 4,
+            description:
+              "Suite designed for cultural immersion with private space for cultural activities and workshops.",
+          },
+          {
+            type: "Garden Retreat Room",
+            price: 160,
+            capacity: "2 Adults",
+            available: 5,
+            description:
+              "Serene room with garden access and perfect blend of modern comfort and cultural charm.",
+          },
+        ],
       },
     ],
   },
@@ -1604,6 +1856,12 @@ const citiesData = {
         ],
         description:
           "This hotel offers stunning views of Patan Durbar Square and a rooftop restaurant for a unique dining experience.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Patan Square Heritage Room",
@@ -1656,6 +1914,12 @@ const citiesData = {
         detailsImage: ["/images/li2.jpg"],
         description:
           "Stay in a beautifully restored heritage building that offers a glimpse into the rich culture of Lalitpur.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Artisan's Garden Retreat",
@@ -1708,6 +1972,12 @@ const citiesData = {
         detailsImage: ["/images/li3.jpg"],
         description:
           "This hotel features a swimming pool and multiple dining options, perfect for both relaxation and business.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Wellness Sanctuary Room",
@@ -1755,6 +2025,12 @@ const citiesData = {
         detailsImage: ["/images/li4.jpg"],
         description:
           "Enjoy a cozy atmosphere with a garden and bar, ideal for unwinding after a day of exploring.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Garden Serenity Room",
@@ -1807,6 +2083,12 @@ const citiesData = {
         detailsImage: ["/images/li5.jpg"],
         description:
           "This budget-friendly hotel offers comfortable accommodations with complimentary breakfast and business services.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Business Traveler's Compact Room",
@@ -1859,6 +2141,12 @@ const citiesData = {
         detailsImage: ["/images/li6.jpg"],
         description:
           "This hotel offers cultural tours and a rooftop cafe with stunning views of Patan Durbar Square.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Patan Durbar Square Heritage Room",
@@ -1906,6 +2194,12 @@ const citiesData = {
         detailsImage: ["/images/li7.jpg"],
         description:
           "Experience boutique luxury in this stylish hotel with a beautiful garden and excellent dining options.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Garden Serenity Boutique Room",
@@ -1972,6 +2266,12 @@ const citiesData = {
         ],
         description:
           "This hotel offers a peaceful retreat with a meditation center and beautiful views of the Maya Devi Temple.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Spiritual Serenity Room",
@@ -2024,6 +2324,12 @@ const citiesData = {
         detailsImage: ["/images/l2.jpg"],
         description:
           "Enjoy comfortable accommodations with easy access to temple tours and cultural experiences.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Cultural Immersion Room",
@@ -2076,6 +2382,12 @@ const citiesData = {
         detailsImage: ["/images/l3.jpg"],
         description:
           "This hotel features a beautiful garden view and is perfect for both leisure and business travelers.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Zen Garden Retreat Room",
@@ -2128,6 +2440,12 @@ const citiesData = {
         detailsImage: ["/images/l4.jpg"],
         description:
           "A tranquil hotel with a meditation hall and vegetarian restaurant, ideal for a peaceful stay.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Mindfulness Sanctuary Room",
@@ -2175,6 +2493,12 @@ const citiesData = {
         detailsImage: ["/images/l5.jpg"],
         description:
           "This hotel offers a unique Japanese dining experience and is located near the sacred Mayadevi Temple.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Zen Meditation Room",
@@ -2227,6 +2551,12 @@ const citiesData = {
         detailsImage: ["/images/l6.jpg"],
         description:
           "A serene hotel offering yoga classes and a meditation center, perfect for spiritual travelers.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Yoga Wellness Room",
@@ -2279,6 +2609,12 @@ const citiesData = {
         detailsImage: ["/images/l7.jpg"],
         description:
           "This international hotel combines luxury with cultural experiences, offering temple tours and a spa.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "International Spiritual Retreat Room",
@@ -2339,6 +2675,12 @@ const citiesData = {
         detailsImage: ["/images/j1.jpg"],
         description:
           "Experience the rich cultural heritage of Janakpur with a stay near the iconic Janaki Temple.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Ramayana Heritage Room",
@@ -2391,6 +2733,12 @@ const citiesData = {
         detailsImage: ["/images/j2.jpg"],
         description:
           "Enjoy unparalleled proximity to the Janaki Temple with cultural immersion and local experiences.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Temple Panorama Room",
@@ -2443,6 +2791,12 @@ const citiesData = {
         detailsImage: ["/images/j3.jpg"],
         description:
           "Enjoy a comfortable stay with easy access to the Janaki Temple and local markets.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Mythological Heritage Room",
@@ -2494,6 +2848,12 @@ const citiesData = {
         detailsImage: ["/images/j4.jpg", "/images/j6.jpg"],
         description:
           "This budget-friendly hotel offers comfortable accommodations and easy access to local attractions.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Budget Cultural Explorer Room",
@@ -2541,6 +2901,12 @@ const citiesData = {
         detailsImage: ["/images/j5.jpg"],
         description:
           "Experience the local culture and hospitality in this charming hotel near Janaki Temple.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Garden Cultural Retreat Room",
@@ -2588,6 +2954,12 @@ const citiesData = {
         detailsImage: ["/images/j6.jpg", "/images/j7.jpg"],
         description:
           "A luxurious hotel offering spa services and cultural experiences in the heart of Janakpur.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Spiritual Luxury Room",
@@ -2640,6 +3012,12 @@ const citiesData = {
         detailsImage: ["/images/j7.jpg"],
         description:
           "A unique resort celebrating the rich Mithila culture, offering immersive artistic and cultural experiences.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Mithila Art Heritage Room",
@@ -2700,6 +3078,12 @@ const citiesData = {
         detailsImage: ["/images/n1.jpg", "/images/n2.jpg", "/images/n3.jpg"],
         description:
           "Experience breathtaking Himalayan views and unforgettable sunrise moments in this mountain retreat.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Himalayan Sunrise Observation Room",
@@ -2747,6 +3131,12 @@ const citiesData = {
         detailsImage: ["/images/n2.jpg"],
         description:
           "A cozy hotel offering warm hospitality and stunning mountain landscapes.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Mountain Serenity Room",
@@ -2799,6 +3189,12 @@ const citiesData = {
         detailsImage: ["/images/n3.jpg"],
         description:
           "The ultimate destination for sunrise lovers and mountain enthusiasts.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Sunrise Observation Room",
@@ -2846,6 +3242,12 @@ const citiesData = {
         detailsImage: ["/images/n4.jpg"],
         description:
           "A serene resort nestled at the forest's edge, offering tranquility and natural beauty.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Forest Harmony Room",
@@ -2898,6 +3300,12 @@ const citiesData = {
         detailsImage: ["/images/n5.jpg"],
         description:
           "An eco-friendly lodge committed to sustainable tourism and environmental conservation.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Sustainable Living Room",
@@ -2950,6 +3358,12 @@ const citiesData = {
         detailsImage: ["/images/n6.jpg"],
         description:
           "Experience adventure and breathtaking mountain views in this dynamic mountain hotel.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Adventure Base Camp Room",
@@ -3001,6 +3415,12 @@ const citiesData = {
         detailsImage: ["/images/n7.jpg"],
         description:
           "This villa offers premium views and is an ideal spot for adventure sports enthusiasts.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Luxury Mountain Panorama Room",
@@ -3055,6 +3475,12 @@ const citiesData = {
         detailsImage: ["/images/d1.jpg"],
         description:
           "This hotel offers comfortable accommodations with city views and modern amenities.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Urban Panorama Room",
@@ -3101,6 +3527,12 @@ const citiesData = {
         detailsImage: ["/images/d2.jpg"],
         description:
           "Ideal for business travelers, this hotel features a gym and business center for your convenience.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Professional Performance Room",
@@ -3147,6 +3579,12 @@ const citiesData = {
         detailsImage: ["/images/d3.jpg"],
         description:
           "Enjoy hill views and adventure sports arrangements at this comfortable hotel.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Hill Adventure Base Room",
@@ -3198,6 +3636,12 @@ const citiesData = {
         detailsImage: ["/images/d4.jpg"],
         description:
           "This hotel offers medical tourism support and comfortable accommodations for patients and families.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Medical Care Comfort Room",
@@ -3249,6 +3693,12 @@ const citiesData = {
         detailsImage: ["/images/d5.jpg"],
         description:
           "This premium hotel features a swimming pool and multi-cuisine restaurant for a luxurious stay.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Luxury Wellness Retreat Room",
@@ -3300,6 +3750,12 @@ const citiesData = {
         detailsImage: ["/images/d6.jpg"],
         description:
           "Centrally located, this hotel offers easy access to local attractions and comfortable accommodations.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Urban Explorer's Compact Room",
@@ -3351,6 +3807,12 @@ const citiesData = {
         detailsImage: ["/images/d7.jpg"],
         description:
           "This hotel offers mountain views and adventure tours, making it perfect for outdoor enthusiasts.",
+        policies: {
+          checkIn: "From 2:00 PM",
+          checkOut: "Until 12:00 PM",
+          cancellation: "Free cancellation up to 24 hours before check-in",
+          payment: "Khalti" // Updated payment method
+        },
         rooms: [
           {
             type: "Mountain Adventure Base Room",

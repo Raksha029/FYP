@@ -9,13 +9,14 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const statsRoutes = require('./routes/api/stats');
-const userRoutes = require('./routes/api/users');
+const user = require('./routes/api/users');
 require("dotenv").config(); // Load environment variables
 const passport = require("passport");
 require("./config/passport");
 const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary").v2;
 const path = require("path");
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
@@ -97,4 +98,11 @@ app.use("/api/admin", adminRoutes);
 app.use('/api', statsRoutes);
 
 // Add the users routes
-app.use('/api', userRoutes);
+app.use('/api', user);
+
+app.use(fileUpload({
+  createParentPath: true,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  useTempFiles: false,
+  debug: true
+}));
