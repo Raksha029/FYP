@@ -2,9 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useOutletContext } from 'react-router-dom';
 import styles from "./AdminRoom.module.css";
 
-
-
-const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) => {
+const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange, cities, hotels, onCityChange, onHotelChange }) => {
   return (
     <div className={styles.popupOverlay} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className={styles.popup}>
@@ -14,6 +12,42 @@ const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) =>
         </div>
         <div className={styles.formContainer}>
           <form onSubmit={onSubmit}>
+            <div className={styles.selectionRow}>
+              <select
+                name="cityName"
+                value={formData.cityName}
+                onChange={(e) => {
+                  handleInputChange(e);
+                  onCityChange(e.target.value);
+                }}
+                required
+              >
+                <option value="">Select City</option>
+                {cities.map(city => (
+                  <option key={city._id} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
+            
+              <select
+                name="hotelId"
+                value={formData.hotelId}
+                onChange={(e) => {
+                  handleInputChange(e);
+                  onHotelChange(e.target.value);
+                }}
+                required
+                disabled={!formData.cityName}
+              >
+                <option value="">Select Hotel</option>
+                {hotels && hotels.map(hotel => (
+                  <option key={hotel._id} value={hotel._id}>
+                    {hotel.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className={styles.formRow}>
               <input
                 type="text"
@@ -71,11 +105,10 @@ const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) =>
 };
 
 
-
 const AdminRoom = () => {
   // Change roomsPerPage from 7 to 5
   const [currentPage, setCurrentPage] = useState(1);
-  const [roomsPerPage] = useState(7); // Changed from 7 to 5
+  const [roomsPerPage] = useState(5); // Changed from 7 to 5
   const [showAddPopup, setShowAddPopup] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
@@ -87,44 +120,139 @@ const AdminRoom = () => {
   const [error, setError] = useState(null);
 
 
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [hotels, setHotels] = useState([]);
+  const [selectedHotel, setSelectedHotel] = useState(''); // Correct declaration
+
   const [formData, setFormData] = useState({
     type: "",
     price: "",
     capacity: "",
     availability: "",
     description: "",
+    cityName: "",
+    hotelId: "",
   });
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await fetch("http://localhost:4000/api/cities/all");
-        if (!response.ok) throw new Error("Failed to fetch rooms");
 
-        const citiesData = await response.json();
+const handleCityChange = (cityName) => {
+  setSelectedCity(cityName);
+  setFormData(prev => ({ ...prev, cityName, hotelId: '' }));
+};
 
-        const allRooms = citiesData.flatMap((city, cityIndex) =>
-          city.hotels.flatMap((hotel, hotelIndex) =>
-            hotel.rooms.map((room, roomIndex) => ({
-              ...room,
-              id: room.id || `room_${cityIndex}_${hotelIndex}_${roomIndex}`,
-              hotelName: hotel.name,
-              cityName: city.name,
-              availability: room.availableRooms || room.available || 0,
-            }))
-          )
-        );
+const handleHotelChange = (hotelId) => {
+  setSelectedHotel(hotelId);
+  setFormData(prev => ({ ...prev, hotelId }));
+};
 
-        setRooms(allRooms);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
+// Add this useEffect for fetching cities
+useEffect(() => {
+  const fetchCitiesAndHotels = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/cities/all");
+      if (!response.ok) throw new Error("Failed to fetch cities");
 
-    fetchRooms();
-  }, []);
+      const citiesData = await response.json();
+      setCities(citiesData);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  fetchCitiesAndHotels();
+}, []);
+
+// Add this useEffect for updating hotels when city changes
+useEffect(() => {
+  if (selectedCity) {
+    const cityData = cities.find(city => city.name === selectedCity);
+    if (cityData && cityData.hotels) {
+      const hotelsWithIds = cityData.hotels.map(hotel => ({
+        ...hotel,
+        _id: hotel._id || hotel.id // Handle both _id and id cases
+      }));
+      setHotels(hotelsWithIds);
+    } else {
+      setHotels([]);
+    }
+    if (!formData.hotelId) {
+      setSelectedHotel('');
+      setFormData(prev => ({ ...prev, hotelId: '' }));
+    }
+  } else {
+    setHotels([]);
+    setSelectedHotel('');
+    setFormData(prev => ({ ...prev, hotelId: '' }));
+  }
+}, [selectedCity, cities, formData.hotelId, setSelectedHotel]); // Added setSelectedHotel to dependency array
+
+// Update the fetchRooms useEffect to include hotelId
+useEffect(() => {
+  const fetchRooms = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/api/cities/all");
+      if (!response.ok) throw new Error("Failed to fetch rooms");
+
+      const citiesData = await response.json();
+
+      // In fetchRooms useEffect
+      const allRooms = citiesData.flatMap((city, cityIndex) =>
+        city.hotels.flatMap((hotel, hotelIndex) =>
+          hotel.rooms.map((room, roomIndex) => ({
+            ...room,
+            id: room._id || room.id || `room_NPR{cityIndex}_NPR{hotelIndex}_NPR{roomIndex}`,
+            hotelId: hotel._id,
+            hotelName: hotel.name,
+            cityName: city.name,
+            availability: room.availableRooms || room.available || 0,
+          }))
+        )
+      );
+
+      setRooms(allRooms);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  fetchRooms();
+}, []);
+
+// Update handleRoomSelect to properly set the city and hotel
+const handleRoomSelect = (room) => {
+  if (!isEditMode) return;
+  setSelectedRoom(room);
+  
+  // First set the city to trigger hotel list update
+  setSelectedCity(room.cityName);
+  
+  // Set form data
+  setFormData({
+    type: room.type,
+    price: String(room.price),
+    capacity: room.capacity,
+    availability: String(room.availability),
+    description: room.description,
+    cityName: room.cityName,
+    hotelId: room.hotelId,
+  });
+
+  // Find the city data to get hotels
+  const cityData = cities.find(city => city.name === room.cityName);
+  if (cityData && cityData.hotels) {
+    const hotelsWithIds = cityData.hotels.map(hotel => ({
+      ...hotel,
+      _id: hotel._id || hotel.id
+    }));
+    setHotels(hotelsWithIds);
+  }
+  
+  setSelectedHotel(room.hotelId);
+  setShowEditPopup(true);
+};
 
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
@@ -135,42 +263,112 @@ const AdminRoom = () => {
   }, []);
   
 
-  const handleAddSubmit = (e) => {
+  const handleAddSubmit = async (e) => {
     e.preventDefault();
-    const newRoom = {
-      id: `room${Date.now()}`,
-      type: formData.type,
-      price: Number(formData.price),
-      capacity: formData.capacity,
-      availability: Number(formData.availability),
-      description: formData.description,
-      hotelName: "N/A",
-      cityName: "N/A",
-    };
-
-    setRooms((prevRooms) => [...prevRooms, newRoom]);
-    setFormData({
-      type: "",
-      price: "",
-      capacity: "",
-      availability: "",
-      description: "",
-    });
-    setShowAddPopup(false);
+    try {
+      const response = await fetch("http://localhost:4000/api/cities/rooms/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cityName: formData.cityName,
+          hotelId: formData.hotelId,
+          roomData: {
+            type: formData.type,
+            price: Number(formData.price),
+            capacity: formData.capacity,
+            available: Number(formData.availability),
+            description: formData.description,
+          },
+        }),
+      });
+  
+      if (!response.ok) throw new Error("Failed to add room");
+  
+      const newRoom = await response.json();
+      
+      // Create a complete room object with all necessary data
+      const completeNewRoom = {
+        ...newRoom,
+        id: newRoom._id,
+        cityName: formData.cityName,
+        hotelId: formData.hotelId,
+        hotelName: hotels.find(h => h._id === formData.hotelId)?.name,
+        type: formData.type,
+        price: Number(formData.price),
+        capacity: formData.capacity,
+        availability: Number(formData.availability),
+        description: formData.description
+      };
+  
+      // Update rooms state immediately
+      setRooms(prevRooms => [...prevRooms, completeNewRoom]);
+      setShowAddPopup(false);
+      resetForm();
+    } catch (error) {
+      console.error("Error adding room:", error);
+      setError(error.message);
+    }
   };
-
-  const handleRoomSelect = (room) => {
-    if (!isEditMode) return;
-    setSelectedRoom(room);
-    setFormData({
-      type: room.type,
-      price: String(room.price),
-      capacity: room.capacity,
-      availability: String(room.availability),
-      description: room.description,
-    });
-    setShowEditPopup(true);
+  
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:4000/api/cities/rooms/update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cityName: selectedRoom.cityName,
+          hotelId: selectedRoom.hotelId,
+          roomId: selectedRoom.id,
+          updatedRoom: {
+            type: formData.type,
+            price: Number(formData.price),
+            capacity: formData.capacity,
+            available: Number(formData.availability),
+            description: formData.description,
+          },
+        }),
+      });
+  
+      if (!response.ok) throw new Error("Failed to update room");
+  
+      const updatedRoomData = await response.json();
+  
+      // Create a complete updated room object
+      const completeUpdatedRoom = {
+        ...selectedRoom,
+        ...updatedRoomData,
+        type: formData.type,
+        price: Number(formData.price),
+        capacity: formData.capacity,
+        availability: Number(formData.availability),
+        description: formData.description,
+        cityName: selectedRoom.cityName,
+        hotelId: selectedRoom.hotelId,
+        hotelName: selectedRoom.hotelName
+      };
+  
+      // Update rooms state immediately with the new data
+      setRooms(prevRooms => 
+        prevRooms.map(room => 
+          room.id === selectedRoom.id ? completeUpdatedRoom : room
+        )
+      );
+      
+      setShowEditPopup(false);
+      setSelectedRoom(null);
+      resetForm();
+      setIsEditMode(false);
+    } catch (error) {
+      console.error("Error updating room:", error);
+      setError(error.message);
+    }
   };
+  
 
   const handleDeleteSelect = (roomId) => {
     setSelectedForDelete((prev) =>
@@ -178,40 +376,43 @@ const AdminRoom = () => {
     );
   };
 
-  const handleDeleteConfirm = () => {
-    setRooms((prevRooms) => prevRooms.filter((room) => !selectedForDelete.includes(room.id)));
-    setSelectedForDelete([]);
-    setIsDeleteMode(false);
+  const handleDeleteConfirm = async () => {
+    try {
+      if (selectedForDelete.length === 0) return;
+
+      // Get the first selected room to get city and hotel info
+      const roomToDelete = rooms.find(room => room.id === selectedForDelete[0]);
+      if (!roomToDelete) return;
+  
+      const response = await fetch("http://localhost:4000/api/cities/rooms", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cityName: roomToDelete.cityName,
+          hotelId: roomToDelete.hotelId,
+          roomIds: selectedForDelete
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+      
+      // Update local state after successful deletion
+      setRooms(prev => 
+        prev.filter(room => !selectedForDelete.includes(room.id))
+      );
+      setSelectedForDelete([]);
+      setIsDeleteMode(false);
+    } catch (error) {
+      console.error("Deletion error:", error);
+      setError(error.message);
+    }
   };
 
-  const handleEditSubmit = (e) => {
-    e.preventDefault();
-    setRooms((prevRooms) =>
-      prevRooms.map((room) =>
-        room.id === selectedRoom.id
-          ? {
-              ...room,
-              type: formData.type,
-              price: Number(formData.price),
-              capacity: formData.capacity,
-              availability: Number(formData.availability),
-              description: formData.description,
-            }
-          : room
-      )
-    );
-    setShowEditPopup(false);
-    setSelectedRoom(null);
-    setFormData({
-      type: "",
-      price: "",
-      capacity: "",
-      availability: "",
-      description: "",
-    });
-  };
-
- 
   // Add pagination calculations after the useEffect and before the handlers
   const { searchQuery } = useOutletContext();
 
@@ -245,7 +446,11 @@ const AdminRoom = () => {
       capacity: "",
       availability: "",
       description: "",
+      cityName: "",
+      hotelId: "",
     });
+    setSelectedCity('');
+    setSelectedHotel(''); 
   };
 
   const handleAddClick = () => {
@@ -277,6 +482,11 @@ const AdminRoom = () => {
             className={styles.addButton}
             onClick={handleAddClick}
             disabled={isEditMode || isDeleteMode}
+            style={{ 
+              backgroundColor: isEditMode || isDeleteMode ? '#e2e8f0' : '#6366f1',
+              color: isEditMode || isDeleteMode ? '#94a3b8' : 'white',
+              cursor: isEditMode || isDeleteMode ? 'not-allowed' : 'pointer'
+            }}
           >
             Add Room
           </button>
@@ -284,6 +494,11 @@ const AdminRoom = () => {
             className={`${styles.modifyButton} ${isEditMode ? styles.activeEdit : ''}`}
             onClick={handleEditClick}
             disabled={isDeleteMode}
+            style={{ 
+              backgroundColor: isDeleteMode ? '#e2e8f0' : isEditMode ? '#eab308' : '#6366f1',
+              color: isDeleteMode ? '#94a3b8' : 'white',
+              cursor: isDeleteMode ? 'not-allowed' : 'pointer'
+            }}
           >
             {isEditMode ? "Cancel Room" : "Modify Room"}
           </button>
@@ -291,6 +506,11 @@ const AdminRoom = () => {
             className={`${styles.deleteButton} ${isDeleteMode ? styles.activeDelete : ''}`}
             onClick={handleDeleteClick}
             disabled={isEditMode}
+            style={{ 
+              backgroundColor: isEditMode ? '#e2e8f0' : '#ef4444',
+              color: isEditMode ? '#94a3b8' : 'white',
+              cursor: isEditMode ? 'not-allowed' : 'pointer'
+            }}
           >
             {isDeleteMode ? "Cancel Room" : "Delete Room"}
           </button>
@@ -313,43 +533,47 @@ const AdminRoom = () => {
             </tr>
           </thead>
           <tbody>
-            {currentRooms.map((room) => (
-              <tr
-                key={room.id}
-                className={`${styles.editableRow} ${
-                  selectedRoom?.id === room.id ? styles.selected : ""
-                }`}
-                onClick={() => isEditMode && handleRoomSelect(room)}
-              >
-                {isDeleteMode && (
-                  <td onClick={(e) => e.stopPropagation()}>
-                    <input
-                      type="checkbox"
-                      checked={selectedForDelete.includes(room.id)}
-                      onChange={() => handleDeleteSelect(room.id)}
-                      className={styles.checkbox}
-                    />
-                  </td>
-                )}
-                <td>{room.type}</td>
-                <td>{room.hotelName}</td>
-                <td>{room.cityName}</td>
-                <td>${room.price}</td>
-                <td>{room.capacity}</td>
-                <td>{room.availability}</td>
-                <td>{room.description}</td>
+            {currentRooms.length > 0 ? (
+              currentRooms.map((room) => (
+                <tr
+                  key={room.id}
+                  className={`NPR{styles.editableRow} NPR{
+                    selectedRoom?.id === room.id ? styles.selected : ""
+                  }`}
+                  onClick={() => isEditMode && handleRoomSelect(room)}
+                >
+                  {isDeleteMode && (
+                    <td onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={selectedForDelete.includes(room.id)}
+                        onChange={() => handleDeleteSelect(room.id)}
+                        className={styles.checkbox}
+                      />
+                    </td>
+                  )}
+                  <td>{room.type}</td>
+                  <td>{room.hotelName}</td>
+                  <td>{room.cityName}</td>
+                  <td>NPR{room.price}</td>
+                  <td>{room.capacity}</td>
+                  <td>{room.availability}</td>
+                  <td>{room.description}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={isDeleteMode ? 8 : 7} className={styles.noResults}>
+                  No rooms found matching your search
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
-  
-      {/* Pagination */}
-      {loading ? (
-        <p>Loading rooms...</p>
-      ) : error ? (
-        <p>Error: {error}</p>
-      ) : (
+      
+      {/* Pagination - Only show when there are results */}
+      {currentRooms.length > 0 && !loading && !error && (
         <div className={styles.pagination}>
           <button 
             onClick={() => handlePageChange(currentPage - 1)}
@@ -392,13 +616,14 @@ const AdminRoom = () => {
     {showAddPopup && (
       <PopupForm
         onSubmit={handleAddSubmit}
-        title="Add New Room"
-        onClose={() => {
-          setShowAddPopup(false);
-          resetForm();
-        }}
+        title="Add Room"
+        onClose={() => setShowAddPopup(false)}
         formData={formData}
         handleInputChange={handleInputChange}
+        cities={cities}
+        hotels={hotels}
+        onCityChange={handleCityChange}
+        onHotelChange={handleHotelChange}
       />
     )}
 
@@ -412,6 +637,10 @@ const AdminRoom = () => {
         }}
         formData={formData}
         handleInputChange={handleInputChange}
+        cities={cities}
+        hotels={hotels}
+        onCityChange={handleCityChange}
+        onHotelChange={handleHotelChange}
       />
     )}
   </div>

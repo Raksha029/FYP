@@ -27,7 +27,6 @@ import Contact from "./Components/Contact/Contact";
 import Notification from "./Components/Notification/Notification";
 import Reservation from "./Components/Reservation/Reservation";
 import Favourites from "./Components/Favourites/Favourites";
-import TopRatedProperties from "./Components/TopRatedProperties/TopRatedProperties";
 import Profile from "./Components/Profile/Profile";
 import LoyaltyPoints from "./Components/LoyaltyPoints/LoyaltyPoints";
 import Admin from "./Admin/Admin/AdminLogin";
@@ -37,6 +36,9 @@ import AdminUser from "./Admin/AdminUser/AdminUser";
 import AdminHotel from "./Admin/AdminHotel/AdminHotel";
 import AdminRoom from "./Admin/AdminRoom/AdminRoom";
 import AdminBooking from "./Admin/AdminBooking/AdminBooking";
+import ProtectedRoute from './Components/ProtectedRoute';
+import { LanguageProvider } from './context/LanguageContext';
+import './i18n'; // Add this line
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -114,16 +116,18 @@ const App = () => {
 
   return (
     <Router>
-      <Content
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
-        handleLogout={handleLogout}
-        savedProperties={savedProperties}
-        setSavedProperties={setSavedProperties}
-        notifications={notifications}
-        handleClose={handleClose}
-      />
-      <ToastContainer />
+      <LanguageProvider>
+        <Content
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          handleLogout={handleLogout}
+          savedProperties={savedProperties}
+          setSavedProperties={setSavedProperties}
+          notifications={notifications}
+          handleClose={handleClose}
+        />
+        <ToastContainer />
+      </LanguageProvider>
     </Router>
   );
 };
@@ -151,128 +155,60 @@ const Content = ({
       )}
       <div style={{ flex: 1 }}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <LandingPage
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
+          <Route path="/" element={
+            <>
+              <LandingPage savedProperties={savedProperties} setSavedProperties={setSavedProperties} />
+            </>
+          } />
+          
+          {/* City Routes */}
+          <Route path="/kathmandu" element={<Kathmandu savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/pokhara" element={<Pokhara savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/baktapur" element={<Baktapur savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/lalitpur" element={<Lalitpur savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/lumbini" element={<Lumbini savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/janakpur" element={<Janakpur savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/nagarkot" element={<Nagarkot savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          <Route path="/dharan" element={<Dharan savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          
+          {/* Hotel Details Route */}
+          <Route path="/hotel-details/:city/:id" element={<HotelDetails savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
+          
+          {/* Protected Routes */}
+          <Route path="/notifications" element={
+            <ProtectedRoute>
+              <Notification notifications={notifications} onClose={handleClose} />
+            </ProtectedRoute>
+          } />
+          <Route path="/reservation" element={
+            <ProtectedRoute>
+              <Reservation />
+            </ProtectedRoute>
+          } />
+          <Route path="/favourites" element={
+            <ProtectedRoute>
+              <Favourites savedProperties={savedProperties} setSavedProperties={setSavedProperties} />
+            </ProtectedRoute>
+          } />
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path="/loyalty-points" element={
+            <ProtectedRoute>
+              <LoyaltyPoints />
+            </ProtectedRoute>
+          } />
+
+          {/* Public Routes */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
-          <Route
-            path="/kathmandu"
-            element={
-              <Kathmandu
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/pokhara"
-            element={
-              <Pokhara
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/baktapur"
-            element={
-              <Baktapur
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/lalitpur"
-            element={
-              <Lalitpur
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/lumbini"
-            element={
-              <Lumbini
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/janakpur"
-            element={
-              <Janakpur
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/nagarkot"
-            element={
-              <Nagarkot
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/dharan"
-            element={
-              <Dharan
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/hotel-details/:city/:id"
-            element={
-              <HotelDetails
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route
-            path="/notifications"
-            element={
-              <Notification
-                notifications={notifications}
-                onClose={handleClose}
-              />
-            }
-          />
+          <Route path="/notifications" element={<Notification notifications={notifications} onClose={handleClose} />} />
           <Route path="/reservation" element={<Reservation />} />
-          <Route
-            path="/favourites"
-            element={
-              <Favourites
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <TopRatedProperties
-                savedProperties={savedProperties}
-                setSavedProperties={setSavedProperties}
-              />
-            }
-          />
+          <Route path="/favourites" element={<Favourites savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/loyalty-points" element={<LoyaltyPoints />} />
           <Route path="/admin" element={<Admin />} />
@@ -291,3 +227,5 @@ const Content = ({
 };
 
 export default App;
+
+// Remove the duplicate Routes component at the bottom

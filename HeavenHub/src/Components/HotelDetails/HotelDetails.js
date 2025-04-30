@@ -1,44 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./HotelDetails.module.css";
-import { 
-  FaHeart, 
-  FaShareAlt, 
-  FaStar, 
-  FaBed, 
-  FaConciergeBell, 
-  FaUtensils, 
-  FaSpa, 
-  FaCoffee, 
-  FaCocktail, 
-  FaSwimmingPool,
-  FaDumbbell,
-  FaWifi,
-  FaParking,
-  FaBriefcase,
-  FaBuilding,  // Replace FaMeetingRoom with FaBuilding
-  FaTshirt,
-  FaShuttleVan,
-  FaCheck
-} from "react-icons/fa";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import Reserve from "../Reserve/Reserve";
+import { FaHeart, FaShareAlt } from "react-icons/fa"; // Import icons
+import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
+import L from "leaflet"; // Import Leaflet for marker icon
+import Reserve from "../Reserve/Reserve"; // Import the new Reserve component
 import { toast } from "react-toastify";
-import { 
-  FaClock,
-  FaCalendarAlt,
-  FaCreditCard,
-  FaSignOutAlt,
-} from "react-icons/fa";
-
-// Add this after amenityIcons object
-const policyIcons = {
-  checkIn: <FaClock />,
-  checkOut: <FaSignOutAlt />,
-  cancellation: <FaCalendarAlt />,
-  payment: <FaCreditCard />
-};
 
 // Fix default marker icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -48,40 +15,16 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-// Update the amenityIcons object to match exact amenity names
-const amenityIcons = {
-  // Room Types
-  "Luxury Rooms": <FaBed />,
-  "Standard Room": <FaBed />,
-  "Deluxe Room": <FaBed />,
-  "Suite": <FaBed />,
-  
-  // Dining
-  "Restaurant": <FaUtensils />,
-  "Multiple Restaurants": <FaUtensils />,
-  "Cafe": <FaCoffee />,
-  "Bar": <FaCocktail />,
-  "Executive Lounge": <FaConciergeBell />,
-  
-  // Facilities
-  "Swimming Pool": <FaSwimmingPool />,
-  "Spa": <FaSpa />,
-  "Fitness Center": <FaDumbbell />,
-  "Gym": <FaDumbbell />,
-  "Free WiFi": <FaWifi />,
-  "Internet": <FaWifi />,
-  "Parking": <FaParking />,
-  "Free Parking": <FaParking />,
-  
-  // Additional Services
-  "Room Service": <FaConciergeBell />,
-  "Business Center": <FaBriefcase />,
-  "Conference Room": <FaBuilding />, // Update this line
-  "Laundry": <FaTshirt />,
-  "Airport Shuttle": <FaShuttleVan />
-};
 
 const handleShare = async () => {
+  // Check if user is logged in
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  
+  if (!isLoggedIn) {
+    toast.error('Please login to share this property');
+    return;
+  }
+
   const shareData = {
     url: window.location.href,
   };
@@ -92,7 +35,7 @@ const handleShare = async () => {
       toast.success("Link created successfully!");
     } catch (err) {
       console.error("Share failed:", err);
-      toast.error("Failed to share link");
+      toast.error("Failed to share link.");
     }
   } else {
     // Fallback to clipboard copy
@@ -100,12 +43,10 @@ const handleShare = async () => {
       await navigator.clipboard.writeText(shareData.url);
       toast.success("Link copied to clipboard!");
     } catch (err) {
-      console.error("Copy failed:", err);
-      toast.error("Failed to copy link. Please try again.");
+      toast.error("Failed to copy link. Please copy manually.");
     }
   }
 };
-
 
 
 function HotelDetails({ savedProperties, setSavedProperties }) {
@@ -135,9 +76,6 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     comment: "",
   });
 
-  // For future user authentication
-  // eslint-disable-next-line no-unused-vars
-  const currentUser = null; // Will be implemented with auth
 
   // Add a new state for the selected room
   const [selectedRoom, setSelectedRoom] = useState(null);
@@ -148,13 +86,12 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
   // Image handling component
   const ImageWithFallback = ({ src, alt, className }) => {
     const handleError = (e) => {
-      e.target.src = "/images/fallback-hotel.jpg";
+      console.error(` Image load error for: ${src}`);
+      e.target.src = "/logo192.png";
     };
 
     return (
-      <div className={styles.imageWrapper}>
-        <img src={src} alt={alt} className={className} onError={handleError} />
-      </div>
+      <img src={src} alt={alt} className={className} onError={handleError} />
     );
   };
 
@@ -169,19 +106,6 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
 
         console.log("Original hotel data:", data);
         console.log("Coordinates:", data.coords); // Debug the coordinates
-
-        const transformImagePaths = (images) => {
-          if (!images) return [];
-          return images
-            .map((img) => {
-              if (!img) return null;
-              if (img.startsWith("http")) return img;
-              if (img.startsWith("/images"))
-                return `http://localhost:4000${img}`;
-              return `http://localhost:4000/images/${img}`;
-            })
-            .filter(Boolean);
-        };
 
         const transformedData = {
           ...data,
@@ -399,49 +323,34 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     );
   };
 
-  // Update the handleReviewSubmit function to get the real username
+  const transformImagePaths = (images) => {
+    if (!images) return [];
+    return images
+      .map((img) => {
+        if (!img) return null;
+        if (img.startsWith("http")) return img;
+        if (img.startsWith("/uploads"))
+          return `http://localhost:4000${img}`;
+        if (img.startsWith("/images"))
+          return `http://localhost:4000${img}`;
+        return `http://localhost:4000/images/${img}`;
+      })
+      .filter(Boolean);
+  };
+
   const handleReviewSubmit = async () => {
     try {
       if (!newReview.comment.trim()) {
         toast.error("Please add a comment to your review");
         return;
       }
-
-      // Get token - required for authentication
+  
       const token = localStorage.getItem("token");
       if (!token) {
         toast.error("Please log in to submit a review");
         return;
       }
-
-      // Get the username from localStorage
-      let username = "Guest User";
-
-      // Try multiple locations where user data might be stored
-      try {
-        // First check if there's a username directly stored
-        const storedUsername = localStorage.getItem("username");
-        if (storedUsername) {
-          username = storedUsername;
-        } else {
-          // Check if user data is stored as JSON
-          const userData = JSON.parse(localStorage.getItem("user") || "{}");
-          if (userData.name) {
-            username = userData.name;
-          } else if (userData.username) {
-            username = userData.username;
-          } else if (userData.firstName) {
-            username =
-              userData.firstName +
-              (userData.lastName ? " " + userData.lastName : "");
-          }
-        }
-      } catch (e) {
-        console.log("Error getting user data:", e);
-      }
-
-      console.log("Submitting review as:", username);
-
+  
       const response = await fetch(
         `http://localhost:4000/api/cities/${city}/hotels/${id}/reviews`,
         {
@@ -453,28 +362,33 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
           body: JSON.stringify({
             rating: newReview.rating,
             comment: newReview.comment,
-            reviewer: username,
           }),
         }
       );
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to submit review");
       }
-
-      // Get the updated hotel data with the new review
-      const updatedHotel = await response.json();
-
-      // Update the hotel state with the new data including the new review
-      setHotel(updatedHotel);
-
+  
+      const updatedHotelData = await response.json();
+  
+      // Transform the data with proper image paths
+      const transformedData = {
+        ...updatedHotelData,
+        detailsImage: transformImagePaths(updatedHotelData.detailsImage),
+        image: transformImagePaths(updatedHotelData.image),
+      };
+  
+      // Update the hotel state with transformed data
+      setHotel(transformedData);
+  
       // Reset the review form
       setNewReview({
         rating: 5,
         comment: "",
       });
-
+  
       toast.success("Review submitted successfully!");
     } catch (error) {
       console.error("Error submitting review:", error);
@@ -519,7 +433,9 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
           </div>
           <div className={styles.actions}>
             <FaHeart
-              className={`${styles.icon} ${isFavorited ? styles.favorited : ""}`}
+              className={`${styles.icon} ${
+                isFavorited ? styles.favorited : ""
+              }`}
               onClick={toggleFavorite}
             />
             <button className={styles.shareButton} onClick={handleShare}>
@@ -549,10 +465,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
               <div className={styles.amenitiesGrid}>
                 {amenities.map((amenity, index) => (
                   <div key={index} className={styles.amenityItem}>
-                    <span className={styles.amenityIcon}>
-                      {amenityIcons[amenity] || <FaCheck />}
-                    </span>
-                    <span className={styles.amenityText}>{amenity}</span>
+                    {amenity}
                   </div>
                 ))}
               </div>
@@ -574,30 +487,8 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
               )}
               {!coords && <p>Map location not available</p>}
             </section>
-            
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>Hotel Policies</h2>
-              <div className={styles.policiesGrid}>
-                {['checkIn', 'checkOut', 'cancellation', 'payment'].map((key) => (
-                  <div key={key} className={styles.policyItem}>
-                    <span className={styles.policyIcon}>
-                      {policyIcons[key]}
-                    </span>
-                    <div className={styles.policyContent}>
-                      <h3 className={styles.policyTitle}>
-                        {key === 'checkIn' ? 'Check In' :
-                         key === 'checkOut' ? 'Check Out' :
-                         key === 'cancellation' ? 'Cancellation' :
-                         'Payment'}
-                      </h3>
-                      <p className={styles.policyText}>{hotel.policies?.[key]}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
 
-            {/* Reviews Section */}
+            {/* Reviews */}
             <section className={styles.section}>
               <h2>Guest Reviews</h2>
               <div className={styles.reviewsContainer}>
@@ -606,22 +497,14 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                   .map((review, index) => (
                     <div key={index} className={styles.reviewCard}>
                       <div className={styles.reviewHeader}>
-                        <div className={styles.reviewerInfo}>
-                          <span className={styles.reviewerName}>{review.reviewer}</span>
-                          <div className={styles.reviewRating}>
-                            {[...Array(5)].map((_, i) => (
-                              <FaStar
-                                key={i}
-                                className={i < review.rating ? styles.starFilled : styles.starEmpty}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                        <span className={styles.reviewDate}>{review.date}</span>
+                        <span className={styles.reviewer}>
+                          {review.reviewer}
+                        </span>
+                        <span className={styles.rating}>{review.rating} ★</span>
                       </div>
-                      <p className={styles.reviewText}>{review.comment}</p>
+                      <p className={styles.comment}>{review.comment}</p>
                     </div>
-                ))}
+                  ))}
                 {reviews.length > 3 && (
                   <button
                     className={styles.seeMoreButton}
@@ -632,28 +515,32 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                 )}
               </div>
 
-              {/* Leave a Review Section */}
+              {/* Add Review Form */}
               <div className={styles.addReviewSection}>
-                <h3 className={styles.addReviewTitle}>Leave a Review</h3>
-                <div className={styles.ratingContainer}>
-                  <span className={styles.ratingText}>Your Rating</span>
-                  <div className={styles.starRating}>
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <FaStar
-                        key={star}
-                        className={`${styles.starIcon} ${
-                          newReview.rating >= star ? styles.active : ''
-                        }`}
-                        onClick={() => setNewReview({ ...newReview, rating: star })}
-                      />
-                    ))}
-                  </div>
+                <h3>Leave a Review</h3>
+                <div className={styles.ratingSelector}>
+                  <span>Your Rating: </span>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                      key={star}
+                      className={`${styles.ratingStar} ${
+                        newReview.rating >= star ? styles.activeStar : ""
+                      }`}
+                      onClick={() =>
+                        setNewReview({ ...newReview, rating: star })
+                      }
+                    >
+                      ★
+                    </span>
+                  ))}
                 </div>
                 <textarea
-                  className={styles.reviewTextArea}
+                  className={styles.reviewInput}
                   placeholder="Share your experience..."
                   value={newReview.comment}
-                  onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+                  onChange={(e) =>
+                    setNewReview({ ...newReview, comment: e.target.value })
+                  }
                 />
                 <button
                   className={styles.submitReviewButton}
@@ -765,4 +652,3 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
 }
 
 export default HotelDetails;
-

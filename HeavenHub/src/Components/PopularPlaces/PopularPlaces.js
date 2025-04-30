@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import styles from "./PopularPlaces.module.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 const PopularPlaces = () => {
+  const { t } = useTranslation();
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef(null);
@@ -86,18 +88,16 @@ const PopularPlaces = () => {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <div className={styles.loading}>{t('loading')}</div>;
   }
 
   if (!places || places.length === 0) {
-    return <div className={styles.noPlaces}>No popular places available</div>;
+    return <div className={styles.noPlaces}>{t('noPopularPlaces')}</div>;
   }
 
   return (
     <section className={styles.popularPlacesSection}>
-      <h2 className={styles.sectionTitle}>Popular Places</h2>
-      <p className={styles.sectionSubtitle}>
-        Explore our most sought-after destinations and find your perfect stay.</p>
+      <h2 className={styles.sectionTitle}>{t('popularPlaces')}</h2>
       <div className={styles.carouselContainer}>
         <button
           className={`${styles.scrollButton} ${styles.leftButton}`}
@@ -106,25 +106,28 @@ const PopularPlaces = () => {
           <FaChevronLeft />
         </button>
         <div className={styles.scrollContainer} ref={scrollContainerRef}>
-          {places.map((place, index) => (
-            <div key={index} className={styles.placeCard}>
-              <Link
-                to={place.route || `/${place.name.toLowerCase()}`}
-                className={styles.imageLink}
-              >
-                <div className={styles.imageContainer}>
-                  <ImageWithFallback
-                    src={place.image}
-                    alt={place.name}
-                    className={styles.placeImage}
-                  />
-                  <div className={styles.placeName}>
-                    <h3>{place.name}</h3>
+          {places.map((place, index) => {
+            const cityKey = place.name.toLowerCase();
+            return (
+              <div key={index} className={styles.placeCard}>
+                <Link
+                  to={place.route || `/${cityKey}`}
+                  className={styles.imageLink}
+                >
+                  <div className={styles.imageContainer}>
+                    <ImageWithFallback
+                      src={place.image}
+                      alt={t(`city.${cityKey}`)}
+                      className={styles.placeImage}
+                    />
+                    <div className={styles.placeName}>
+                      <h3>{t(`city.${cityKey}`)}</h3>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          ))}
+                </Link>
+              </div>
+            );
+          })}
         </div>
         <button
           className={`${styles.scrollButton} ${styles.rightButton}`}

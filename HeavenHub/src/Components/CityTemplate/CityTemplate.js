@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import styles from "./CityTemplate.module.css";
 import L from "leaflet";
 import { FaHeart } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371;
@@ -47,7 +48,8 @@ const calculateHotelScore = (hotel) => {
 };
 
 const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
-  const { name, referencePoint, centerName } = cityData;
+  const { t, i18n } = useTranslation();
+  const { name, referencePoint } = cityData; // Remove centerName from destructuring
   const [searchTerm, setSearchTerm] = useState("");
   const [allHotels, setAllHotels] = useState([]);
   const [filteredHotels, setFilteredHotels] = useState([]);
@@ -196,8 +198,6 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
     setSortBy(value);
   };
 
-  // Remove the old sortedHotels and filteredHotelsMemo as they're no longer needed
-  // Instead, use filteredHotels directly in your render method
 
   const handleShowOnMap = (hotel) => {
     setSelectedHotel(hotel);
@@ -314,18 +314,22 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
       <div className={styles.pageContainer}>
         <div className={styles.headerSection}>
           <h1 className={styles.pageTitle}>
-            {name} with {allHotels.length} Unique homes
+          {t('cityHotelsHeader', { 
+    name: t(`city.${name.toLowerCase()}`), // Add .toLowerCase()
+    count: allHotels.length 
+  })}
           </h1>
           <div className={styles.searchContainer}>
             <input
               type="text"
-              placeholder="Search hotels..."
+              placeholder={t('searchHotelsPlaceholder')}
+
               value={searchTerm}
               onChange={handleSearchChange}
               className={styles.searchInput}
             />
             <button onClick={handleSearch} className={styles.searchButton}>
-              Search
+            {t('searchButton')}
             </button>
           </div>
         </div>
@@ -354,9 +358,12 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                     <Marker position={hotel.coords} key={hotel.id}>
                       <Popup>
                         <div>
-                          <h3>{hotel.name}</h3>
-                          <p>{hotel.location}</p>
-                          <p>{`Distance from ${centerName}: ${distance} km`}</p>
+                        <h3>{t(`hotel.${hotel.name}`)}</h3>
+                        <p>{t(`location.${hotel.location}`)}</p>
+                        <p>{t('distanceFrom', { 
+                             centerName: t(`location.${hotel.location}`),
+                              distance: new Intl.NumberFormat(i18n.language).format(distance)
+                         })}</p>
                         </div>
                       </Popup>
                     </Marker>
@@ -365,109 +372,77 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
               </MapContainer>
             </div>
             <div className={styles.filters}>
-              <h3 className={styles.filterTitle}>Filters</h3>
+              <h3 className={styles.filterTitle}>{t('filters')}</h3>
               <div className={styles.filterGroup}>
-                <label className={styles.filterLabel}>Price Range</label>
+                <label className={styles.filterLabel}>{t('priceRange')}</label>
                 <input
                   type="range"
                   min="0"
                   max="5000"
                   value={filter.priceRange[1]}
-                  onChange={(e) =>
-                    handleFilterChange("priceRange", [0, +e.target.value])
-                  }
+                  onChange={(e) => handleFilterChange("priceRange", [0, +e.target.value])}
                   className={styles.filterInput}
                 />
-                <span>{`NPR ${filter.priceRange[0]} - NPR ${filter.priceRange[1]}`}</span>
+                <span>{t('priceRangeDisplay', { 
+                  min: filter.priceRange[0], 
+                  max: filter.priceRange[1] 
+                })}</span>
               </div>
               <div className={styles.filterGroup}>
-                <label className={styles.filterLabel}>Max Distance (km)</label>
+                <label className={styles.filterLabel}>{t('maxDistance')}</label>
                 <input
                   type="range"
                   min="0"
                   max="100"
                   value={filter.maxDistance}
-                  onChange={(e) =>
-                    handleFilterChange("maxDistance", +e.target.value)
-                  }
+                  onChange={(e) => handleFilterChange("maxDistance", +e.target.value)}
                   className={styles.filterInput}
                 />
-                <span>{`Up to ${filter.maxDistance} km`}</span>
+                <span>{t('maxDistanceDisplay', { distance: filter.maxDistance })}</span>
               </div>
               <div className={styles.filterGroup}>
-                <label className={styles.filterLabel}>Minimum Rating</label>
+                <label className={styles.filterLabel}>{t('minimumRating')}</label>
                 <select
                   value={filter.rating}
-                  onChange={(e) =>
-                    handleFilterChange("rating", +e.target.value)
-                  }
+                  onChange={(e) => handleFilterChange("rating", +e.target.value)}
                   className={styles.filterSelect}
                 >
-                  <option value="0">All</option>
-                  <option value="3">3 Stars & Above</option>
-                  <option value="4">4 Stars & Above</option>
-                  <option value="5">5 Stars</option>
+                  <option value="0">{t('all')}</option>
+                  <option value="3">{t('rating3Plus')}</option>
+                  <option value="4">{t('rating4Plus')}</option>
+                  <option value="5">{t('rating5')}</option>
                 </select>
               </div>
               <div className={styles.filterGroup}>
-                <label className={styles.filterLabel}>Sort By</label>
+                <label className={styles.filterLabel}>{t('sortBy')}</label>
                 <select
                   value={sortBy}
                   onChange={(e) => handleSortChange(e.target.value)}
                   className={styles.filterSelect}
                 >
-                  <option value="">None</option>
-                  <option value="recommended">Recommended</option>
-                  <option value="price">Price (Low to High)</option>
-                  <option value="rating">Rating (High to Low)</option>
+                  <option value="">{t('none')}</option>
+                  <option value="price">{t('priceLowToHigh')}</option>
+                  <option value="rating">{t('ratingHighToLow')}</option>
                 </select>
               </div>
               <div className={styles.filterGroup}>
-                <label className={styles.filterLabel}>Amenities</label>
+                <label className={styles.filterLabel}>{t('amenities1')}</label>
                 <div className={styles.amenitiesCheckboxes}>
-                  {[
-                    "5-Star Luxury",
-                    "Multiple Restaurants",
-                    "Spa",
-                    "Pool",
-                    "Tennis Court",
-                    "Heritage Property",
-                    "Luxury Spa",
-                    "Cultural Tours",
-                    "Fine Dining",
-                    "Casino",
-                    "Business Center",
-                    "Modern Design",
-                    "Rooftop Bar",
-                    "Gym",
-                    "Meeting Rooms",
-                    "Garden",
-                    "Restaurant",
-                    "Executive Lounge",
-                    "Coffee Shop",
-                    "Bar",
-                    "Conference Facilities",
-                    "Lake View",
-                    "Private Beach",
-                    "Boat Service",
-                    "Mountain Views"
-                  ].map((amenity) => (
-                    <div key={amenity} className={styles.amenityCheckbox}>
+                  {Object.keys(t('amenities', { returnObjects: true })).map((key) => (
+                    <div key={key} className={styles.amenityCheckbox}>
                       <input
                         type="checkbox"
-                        id={amenity}
-                        value={amenity}
-                        checked={filter.amenities.includes(amenity)}
+                        id={key}
+                        value={key}
+                        checked={filter.amenities.includes(key)}
                         onChange={(e) => {
                           const selectedOptions = e.target.checked
-                            ? [...filter.amenities, amenity]
-                            : filter.amenities.filter((a) => a !== amenity);
+                            ? [...filter.amenities, key]
+                            : filter.amenities.filter(a => a !== key);
                           handleFilterChange("amenities", selectedOptions);
                         }}
                       />
-                      <label htmlFor={amenity}>
-                        {amenity}
-                      </label>
+                      <label htmlFor={key}>{t(`amenities.${key}`)}</label>
                     </div>
                   ))}
                 </div>
@@ -514,38 +489,36 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                           </div>
                         </div>
                         <div className={styles.hotelInfo}>
-                          <h3 className={styles.hotelName}>{hotel.name}</h3>
-                          <p className={styles.hotelLocation}>
-                            {hotel.location}
-                          </p>
+                          <h3 className={styles.hotelName}>{t(`hotel.${hotel.name}`)}</h3>
+                          <p className={styles.hotelLocation}>{t(`location.${hotel.location}`)}</p>
                           <p className={styles.hotelPrice}>
-                            NPR {hotel.price} per night
+                            {t('currency')} {new Intl.NumberFormat(i18n.language).format(hotel.price)} {t('perNight')}
                           </p>
                           <p className={styles.hotelRating}>
-                            Rating: <span>{hotel.rating} ★</span>
+                            {t('rating')}: <span>{new Intl.NumberFormat(i18n.language).format(hotel.rating)} ★</span>
                           </p>
                           <p className={styles.hotelAmenities}>
-                            {hotel.amenities?.join(", ")}
+                            {hotel.amenities?.map(amenity => t(`amenities.${amenity}`)).join(", ")}
                           </p>
                           <p className={styles.hotelDistance}>
-                            Distance from {centerName}: {distance} km
-                          </p>
+                            {t('distanceFrom', { 
+                              centerName: t(`location.${hotel.location}`),
+                              distance: new Intl.NumberFormat(i18n.language).format(distance)
+                            })}</p>
                           <div className={styles.hotelReviews}>
                             <p>{hotel.reviews?.length || 0} reviews</p>
                           </div>
                           <Link
-                            to={`/hotel-details/${name.toLowerCase()}/${
-                              hotel.id
-                            }`}
+                            to={`/hotel-details/${name.toLowerCase()}/${hotel.id}`}
                             className={styles.hotelButton}
                           >
-                            View Details
+                            {t('viewDetails')}
                           </Link>
                           <button
                             onClick={() => handleShowOnMap(hotel)}
                             className={styles.showOnMapButton}
                           >
-                            Show on Map
+                            {t('showOnMap')}
                           </button>
                         </div>
                       </div>

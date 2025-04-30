@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const moment = require('moment'); // Add moment here at the top level
 const authRoutes = require("./routes/authRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
 const favoriteRoutes = require("./routes/favoriteRoutes");
@@ -25,9 +26,11 @@ app.use(
   cors({
     origin: "http://localhost:3000", // Your frontend URL
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+    credentials: true // Add this line
   })
 );
+
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
@@ -59,6 +62,22 @@ cloudinary.config({
 });
 
 // Use Routes
+// Move this before the routes
+// Update the fileUpload middleware configuration
+app.use(fileUpload({
+  createParentPath: true,
+  limits: { fileSize: 50 * 1024 * 1024 }, // Increased to 50MB
+  debug: true,
+  safeFileNames: true,
+  preserveExtension: true
+}));
+
+// Add a new static route for uploads
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
+
+// Then your routes
 app.use(authRoutes);
 app.use("/api", chatbotRoutes);
 app.use("/api/favorites", favoriteRoutes);
@@ -99,10 +118,3 @@ app.use('/api', statsRoutes);
 
 // Add the users routes
 app.use('/api', user);
-
-app.use(fileUpload({
-  createParentPath: true,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
-  useTempFiles: false,
-  debug: true
-}));

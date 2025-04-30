@@ -13,15 +13,9 @@ const Reservation = () => {
   const [activeTab, setActiveTab] = useState("recent");
   const [recentBookings, setRecentBookings] = useState([]);
   const [pastBookings, setPastBookings] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Renamed from loading to isLoading
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Add function to check if booking is expired
-  const isBookingExpired = (checkOutDate) => {
-    return new Date(checkOutDate) < new Date();
-  };
-
-  // Modify useEffect to include interval check
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -78,33 +72,38 @@ const Reservation = () => {
 
   const handleCancelBooking = async (bookingId) => {
     try {
-      const token = localStorage.getItem("token");
-      
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:4000/api/bookings/${bookingId}/cancel`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       });
-
+  
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.message || "Failed to cancel booking");
+        throw new Error(data.message || 'Failed to cancel booking');
       }
-
-      // Immediately update UI
+  
+      // Update the booking status locally
+      setRecentBookings(prevBookings => 
+        prevBookings.filter(booking => booking._id !== bookingId)
+      );
+      
       const cancelledBooking = recentBookings.find(booking => booking._id === bookingId);
       if (cancelledBooking) {
-        setRecentBookings(prev => prev.filter(booking => booking._id !== bookingId));
-        setPastBookings(prev => [{ ...cancelledBooking, status: "Cancelled" }, ...prev]);
+        setPastBookings(prevBookings => [
+          { ...cancelledBooking, status: 'Cancelled' },
+          ...prevBookings
+        ]);
       }
-
-      toast.success("Booking cancelled successfully");
+  
+      toast.success(data.message || 'Booking cancelled successfully');
     } catch (error) {
-      console.error("Error cancelling booking:", error);
-      toast.error(error.message || "Failed to cancel booking");
+      console.error('Error cancelling booking:', error);
+      toast.error(error.message || 'Failed to cancel booking');
     }
   };
 

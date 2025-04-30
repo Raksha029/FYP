@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./TopRatedProperties.module.css";
 import { FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
+  const { t } = useTranslation();
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef(null);
@@ -47,31 +49,9 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
       const token = localStorage.getItem("token");
       const isPropertySaved = savedProperties && savedProperties[property.id];
 
-      // If not logged in, handle locally
+      // Check if user is logged in
       if (!token) {
-        if (isPropertySaved) {
-          const { [property.id]: removed, ...rest } = savedProperties;
-          setSavedProperties(rest);
-          // Save to localStorage
-          localStorage.setItem("savedProperties", JSON.stringify(rest));
-          toast.success("Property removed from favorites");
-        } else {
-          const updatedProperties = {
-            ...savedProperties,
-            [property.id]: {
-              ...property,
-              isFavorite: true,
-              propertyId: property.id,
-            },
-          };
-          setSavedProperties(updatedProperties);
-          // Save to localStorage
-          localStorage.setItem(
-            "savedProperties",
-            JSON.stringify(updatedProperties)
-          );
-          toast.success("Property added to favorites");
-        }
+        toast.warning("Please log in to save properties to favorites");
         return;
       }
 
@@ -110,8 +90,8 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
       if (isPropertySaved) {
         const { [property.id]: removed, ...rest } = savedProperties;
         setSavedProperties(rest);
-        // Save to localStorage
         localStorage.setItem("savedProperties", JSON.stringify(rest));
+        toast.success("Property removed from favorites");
       } else {
         const updatedProperties = {
           ...savedProperties,
@@ -122,18 +102,9 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
           },
         };
         setSavedProperties(updatedProperties);
-        // Save to localStorage
-        localStorage.setItem(
-          "savedProperties",
-          JSON.stringify(updatedProperties)
-        );
+        localStorage.setItem("savedProperties", JSON.stringify(updatedProperties));
+        toast.success("Property added to favorites");
       }
-
-      toast.success(
-        isPropertySaved
-          ? "Property removed from favorites"
-          : "Property added to favorites"
-      );
     } catch (error) {
       console.error("Error updating favorites:", error);
       toast.error("Failed to update favorites");
@@ -141,16 +112,12 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   return (
     <section className={styles.topRatedSection}>
-      <h2 className={styles.sectionTitle}>Top Rated Properties</h2>
-      
-      <p className={styles.sectionsubtitle}>
-        Experience the best of hospitality with our top-rated properties.
-      </p>
+      <h2 className={styles.sectionTitle}>{t('topRatedProperties')}</h2>
       <div className={styles.carouselContainer}>
         <button
           className={`${styles.scrollButton} ${styles.leftButton}`}
@@ -160,7 +127,11 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
         </button>
         <div className={styles.scrollContainer} ref={scrollContainerRef}>
           {hotels.map((hotel) => (
-            <div key={hotel.id} className={styles.propertyCard}>
+            <Link
+              key={hotel.id}
+              to={`/hotel-details/${hotel.cityName}/${hotel.id}`}
+              className={styles.propertyCard}
+            >
               <div className={styles.imageContainer}>
                 <img
                   src={hotel.image[0]}
@@ -169,7 +140,10 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
                 />
                 <button
                   className={styles.heartButton}
-                  onClick={() => toggleSaveProperty(hotel)}
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent link navigation
+                    toggleSaveProperty(hotel);
+                  }}
                 >
                   <FaHeart
                     className={
@@ -181,18 +155,14 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
                 </button>
               </div>
               <div className={styles.propertyInfo}>
-                <h3>{hotel.name}</h3>
-                <p className={styles.location}>{hotel.location}</p>
-                <p className={styles.price}>NPR {hotel.price} per night</p>
-                <p className={styles.rating}>Rating: {hotel.rating} ★</p>
-                <Link
-                  to={`/hotel-details/${hotel.cityName}/${hotel.id}`}
-                  className={styles.viewButton}
-                >
-                  View Details
-                </Link>
+               <h3>{t(`hotel.${hotel.name}`)}</h3>
+                <p className={styles.location}>{t(`location.${hotel.location}`)}</p>
+                <p className={styles.price}>
+                  {t('currency')} {hotel.price} {t('perNight')}
+                </p>
+                <p className={styles.rating}>{t('rating')}: {hotel.rating} ★</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <button

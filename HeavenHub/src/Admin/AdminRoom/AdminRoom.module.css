@@ -1,10 +1,9 @@
 .roomContainer {
-  padding: 20px;
+  padding: 2rem;
   background-color: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 95%;
-  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 80px;
 }
@@ -29,7 +28,7 @@
 /* Update the button styles to match AdminHotel */
 /* Update button styles */
 .addButton, .modifyButton {
-  background-color: #4f46e5;
+  background-color: #6366f1;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -60,31 +59,20 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+.modifyButton.activeEdit {
+  background-color: #eab308;
+  color: #1e293b;
+}
+
+/* Update hover states */
 .addButton:hover, .modifyButton:hover {
-  background-color: #4338ca;
+  background-color: #4f46e5;
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1);
 }
 
 .deleteButton:hover {
   background-color: #dc2626;
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1);
-}
-
-.addButton:disabled,
-.modifyButton:disabled,
-.deleteButton:disabled {
-  background-color: #e5e7eb;
-  color: #9ca3af;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-.modifyButton.activeEdit {
-  background-color: #eab308;
-  color: #1e293b;
 }
 
 .modifyButton.activeEdit:hover {
@@ -458,3 +446,125 @@
   }
 }
 
+/* Add these new styles for select dropdowns */
+.selectionRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding: 0 0 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.selectionRow select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #1e293b;
+  background-color: #fff;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.selectionRow select:hover:not(:disabled) {
+  border-color: #4f46e5;
+}
+
+.selectionRow select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.selectionRow select:disabled {
+  background-color: #f8fafc;
+  color: #94a3b8;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+  opacity: 0.7;
+}
+
+.selectionRow select option {
+  padding: 12px;
+  font-size: 15px;
+  color: #1e293b;
+}
+
+.selectionRow select option:first-child {
+  color: #94a3b8;
+}
+
+@media (min-width: 768px) {
+  .selectionRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.selectionRow select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 15px;
+  background-color: #fff;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  transition: all 0.2s ease;
+}
+
+.selectionRow select:focus {
+  border-color: #2196f3;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.selectionRow select:disabled {
+  background-color: #f5f5f5;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Enhance input group styling */
+.formRow {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.formRow[data-grid="2"] {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .formRow[data-grid="2"] {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Update textarea height */
+.description {
+  min-height: 150px;
+}

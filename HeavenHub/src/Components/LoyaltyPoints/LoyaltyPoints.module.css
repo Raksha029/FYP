@@ -175,3 +175,160 @@
   margin-top: 10px; /* Space above the answer */
   color: #555; /* Color for the answer text */
 }
+
+.historyList {
+  margin-top: 20px;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.historyDetails h3 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.historyDetails p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.pointsAmount {
+  font-size: 18px;
+  font-weight: bold;
+  color: #28a745; /* Green for earned points */
+}
+
+.pointsAmount.reduced {
+  color: #dc3545; /* Red for reduced points */
+}
+
+.cancelledItem {
+  background-color: #fff5f5;
+}
+
+.cancelledText {
+  color: #e53e3e;
+}
+
+.cancelled {
+  color: #e53e3e;
+}
+
+.pointsAmount.cancelled {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.redeemedItem {
+  background-color: #f8f9fa;
+  border: 1px solid #6c757d;
+}
+
+.redeemedText {
+  color: #6c757d;
+}
+
+.pointsAmount.redeemed {
+  color: #6c757d;
+  font-weight: bold;
+}
+
+.weeklyDealsContainer {
+  padding: 20px;
+}
+
+.dealsDescription {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.dealsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.dealItem {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dealItem:hover {
+  transform: translateY(-5px);
+}
+
+.dealImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.dealInfo {
+  padding: 15px;
+}
+
+.dealInfo h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.discount {
+  color: #e74c3c;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.pointsCost {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.redeemButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.redeemButton:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.redeemButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.errorContainer {
+  padding: 20px;
+  text-align: center;
+}
+
+.errorMessage {
+  color: #dc3545;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #f8d7da;
+  border-radius: 4px;
+}

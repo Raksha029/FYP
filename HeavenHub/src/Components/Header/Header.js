@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FaUserCircle } from "react-icons/fa"; // Import user icon and chat icon
+import { FaUserCircle, FaHotel } from "react-icons/fa"; // Add FaHotel icon
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import LoginSignup from "../LoginSignup/LoginSignup";
-import Language from "../Language/Language"; // Import the Language component
-import Currency from "../Currency/Currency"; // Import the Currency component
-import Chatbot from "../Chatbot/Chatbot"; // Import the Chatbot component
+import Language from "../Language/Language";
+import Currency from "../Currency/Currency";
+import Chatbot from "../Chatbot/Chatbot";
+import { useTranslation } from 'react-i18next';
 
-// Add userProfile state and fetch function
+// Remove the logo import and replace the img tag with this in the return statement:
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [showPopup, setShowPopup] = useState(false);
@@ -80,12 +82,10 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
   };
 
   const handleLogout = () => {
+    localStorage.clear(); // Clear all localStorage data
     setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
-    // Remove the googleLoginSuccess parameter from URL
-    const newUrl = window.location.pathname;
-    window.history.replaceState({}, "", newUrl);
     setShowDropdown(false);
+    window.location.href = '/'; // Force page refresh and redirect to landing page
   };
 
   const toggleDropdown = () => {
@@ -142,34 +142,25 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
-        <svg 
-          className={styles.logoIcon} 
-          viewBox="0 0 24 24" 
-          width="40" 
-          height="40"
-        >
-          <path 
-            fill="currentColor" 
-            d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h6v-6h2v6h6v-8h3l-3-2.7zM17 18h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"
-          />
-        </svg>
+      <div className={styles.logoContainer}>
+        <FaHotel className={styles.logoIcon} />
         <span className={styles.logoText}>HeavenHub</span>
       </div>
       <nav className={styles.nav}>
         <button
           className={styles.navLink}
-          onClick={handleHomeClick} // Use the handler to check if on the home page
+          onClick={handleHomeClick}
         >
-          Home
+          {t('home')}
         </button>
         <button className={styles.navLink} onClick={handleAboutClick}>
-          About Us
+          {t('about')}
         </button>
         <button className={styles.navLink} onClick={handleContactClick}>
-          Contact Us
+          {t('contact')}
         </button>
       </nav>
+
       <div className={styles.languageCurrencyContainer}>
         <Language /> {/* Keep the Language component here */}
         <Currency /> {/* Add the Currency component here */}
@@ -178,7 +169,7 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
         {!isLoggedIn ? (
           <button className={styles.signInButton} onClick={handleSignInClick}>
             <FaUserCircle className={styles.icon} />
-            Sign In
+             {t('signIn')}
           </button>
         ) : (
           <div className={styles.userIconWrapper} onClick={toggleDropdown}>
@@ -193,40 +184,25 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
             )}
             {showDropdown && (
               <div className={styles.dropdownMenu}>
-                <button
-                  className={styles.dropdownItem}
-                  onClick={handleNotificationClick}
-                >
-                  Notifications
+                <button className={styles.dropdownItem} onClick={handleNotificationClick}>
+                  {t('notifications')}
                 </button>
-                <button
-                  className={styles.dropdownItem}
-                  onClick={handleFavouritesClick}
-                >
-                  Favourites
+                <button className={styles.dropdownItem} onClick={handleFavouritesClick}>
+                  {t('favourites')}
                 </button>
-                <button
-                  className={styles.dropdownItem}
-                  onClick={handleReservationClick}
-                >
-                  Reservation
+                <button className={styles.dropdownItem} onClick={handleReservationClick}>
+                  {t('reservation')}
                 </button>
                 <hr className={styles.dropdownDivider} />
-                <span className={styles.dropdownHeading}>Account</span>
-                <button
-                  className={styles.dropdownItem}
-                  onClick={() => navigate("/profile")}
-                >
-                  View Profile
+                <span className={styles.dropdownHeading}>{t('account')}</span>
+                <button className={styles.dropdownItem} onClick={() => navigate("/profile")}>
+                  {t('viewProfile')}
                 </button>
-                <button
-                  className={styles.dropdownItem}
-                  onClick={() => navigate("/loyalty-points")}
-                >
-                  Loyalty Points
+                <button className={styles.dropdownItem} onClick={() => navigate("/loyalty-points")}>
+                  {t('loyaltyPoints')}
                 </button>
                 <button className={styles.dropdownItem} onClick={handleLogout}>
-                  Logout
+                  {t('logout')}
                 </button>
               </div>
             )}

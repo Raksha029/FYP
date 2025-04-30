@@ -35,6 +35,7 @@ const PopupForm = React.memo(
               onChange={handleInputChange}
               required
             />
+            
             {/* Add city selection dropdown */}
             <select
               name="cityName"
@@ -357,62 +358,57 @@ const AdminHotel = () => {
   }, []);
   
   // Add to your existing functions:
+  // Add this function after handleSubmit and before handleEditClick
   const handleAddSubmit = async (e) => {
     e.preventDefault();
     try {
       const formDataToSend = new FormData();
-
-      // Append all basic fields
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("location", formData.location);
-      formDataToSend.append("price", formData.price);
-      formDataToSend.append("rating", formData.rating);
-      formDataToSend.append("distance", formData.distance);
-      formDataToSend.append("description", formData.description);
-      formDataToSend.append("cityName", formData.cityName);
-
-      // Handle amenities
-      formData.amenities.forEach((amenity, index) => {
-        formDataToSend.append(`amenities[${index}]`, amenity);
+      
+      // Add text fields
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('location', formData.location);
+      formDataToSend.append('price', formData.price);
+      formDataToSend.append('rating', formData.rating);
+      formDataToSend.append('distance', formData.distance);
+      formDataToSend.append('description', formData.description);
+      
+      // Add amenities
+      formData.amenities.forEach(amenity => {
+        formDataToSend.append('amenities', amenity);
       });
 
-      // Optional: Handle files if provided
+      // Add main image
       if (formData.mainImageFile) {
-        formDataToSend.append("mainImage", formData.mainImageFile);
+        formDataToSend.append('mainImage', formData.mainImageFile);
       }
+
+      // Add detail images
       if (formData.detailImageFiles) {
-        formData.detailImageFiles.forEach((file) => {
-          formDataToSend.append("detailImages", file);
+        formData.detailImageFiles.forEach(file => {
+          formDataToSend.append('detailImages', file);
         });
       }
 
-      console.log("Sending form data:", formDataToSend);
-
-      const response = await fetch(
-        `http://localhost:4000/api/cities/${formData.cityName}/hotels`,
-        {
-          method: "POST",
-          body: formDataToSend,
-        }
-      );
+      const response = await fetch(`http://localhost:4000/api/cities/${formData.cityName}/hotels`, {
+        method: 'POST',
+        body: formDataToSend
+      });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(
-          errorData.message || `Server error: ${response.status}`
-        );
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      await response.json(); // Remove the newHotel variable assignment
-
-      // Update state by fetching fresh data from server
+      const result = await response.json();
+      console.log('Hotel added successfully:', result);
+      
+      // Refresh the hotels list and reset form
       await fetchHotels();
-
       setShowAddPopup(false);
       resetForm();
+      
     } catch (error) {
-      console.error("Error adding hotel:", error);
-      alert(`Error adding hotel: ${error.message}`);
+      console.error('Error adding hotel:', error);
+      alert('Failed to add hotel: ' + error.message);
     }
   };
 
@@ -474,20 +470,27 @@ const AdminHotel = () => {
         selectedForDelete.map(async (hotelId) => {
           const hotel = hotels.find((h) => h.id === hotelId);
           if (!hotel) return;
-
+  
           const response = await fetch(
             `http://localhost:4000/api/cities/${hotel.cityName}/hotels/${hotelId}`,
-            { method: "DELETE" }
+            { 
+              method: "DELETE",
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
           );
-
+  
           if (!response.ok) {
-            throw new Error("Failed to delete hotel");
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to delete hotel");
           }
         })
       );
-
-      setHotels(
-        hotels.filter((hotel) => !selectedForDelete.includes(hotel.id))
+  
+      // Update local state after successful deletion
+      setHotels(prevHotels => 
+        prevHotels.filter(hotel => !selectedForDelete.includes(hotel.id))
       );
       setSelectedForDelete([]);
       setIsDeleteMode(false);
@@ -497,54 +500,64 @@ const AdminHotel = () => {
     }
   };
 
-  // In your handleEditSubmit function
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
       const formDataToSend = new FormData();
-
-      // Append all fields except files
-      Object.keys(formData).forEach((key) => {
-        if (key !== "mainImageFile" && key !== "detailImageFiles") {
-          formDataToSend.append(key, formData[key]);
-        }
+      
+      // Add basic fields
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('location', formData.location);
+      formDataToSend.append('price', formData.price);
+      formDataToSend.append('rating', formData.rating);
+      formDataToSend.append('distance', formData.distance);
+      formDataToSend.append('description', formData.description);
+      
+      // Handle amenities
+      formData.amenities.forEach(amenity => {
+        formDataToSend.append('amenities', amenity);
       });
-
-      // Append main image if changed
+  
+      // Add images if they exist
       if (formData.mainImageFile) {
-        formDataToSend.append("mainImage", formData.mainImageFile);
+        formDataToSend.append('mainImage', formData.mainImageFile);
       }
-
-      // Append detail images if changed
       if (formData.detailImageFiles) {
-        formData.detailImageFiles.forEach((file) => {
-          formDataToSend.append("detailImages", file);
+        Array.from(formData.detailImageFiles).forEach(file => {
+          formDataToSend.append('detailImages', file);
         });
       }
-
+  
       const response = await fetch(
         `http://localhost:4000/api/cities/${formData.cityName}/hotels/${selectedHotel.id}`,
         {
-          method: "PUT",
-          body: formDataToSend,
+          method: 'PUT',
+          body: formDataToSend
         }
       );
-
+  
       if (!response.ok) {
-        throw new Error("Failed to update hotel");
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update hotel');
       }
-
+  
       const updatedHotel = await response.json();
-      // Update your state with the returned hotel data
-      setHotels(
-        hotels.map((hotel) =>
-          hotel.id === selectedHotel.id ? updatedHotel : hotel
+      
+      // Update local state with the new hotel data
+      setHotels(prevHotels => 
+        prevHotels.map(hotel => 
+          hotel.id === selectedHotel.id 
+            ? { ...updatedHotel, cityName: formData.cityName } 
+            : hotel
         )
       );
+  
       setShowEditPopup(false);
       resetForm();
+      setSelectedHotel(null);
     } catch (error) {
-      console.error("Error updating hotel:", error);
+      console.error('Error updating hotel:', error);
+      setError(error.message);
     }
   };
 
@@ -561,9 +574,34 @@ const AdminHotel = () => {
       detailsImage: [],
       description: "",
       coords: [0, 0],
-      cityName: "", // Add this line
+      cityName: "",
     });
   };
+  // Add these to your existing useEffect for fetching hotels
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/cities/all');
+        if (!response.ok) throw new Error('Failed to fetch hotels');
+        
+        const citiesData = await response.json();
+        const allHotels = citiesData.flatMap(city => 
+          city.hotels.map(hotel => ({
+            ...hotel,
+            cityName: city.name
+          }))
+        );
+        
+        setHotels(allHotels);
+      } catch (error) {
+        console.error('Error fetching hotels:', error);
+        setError(error.message);
+      }
+    };
+
+    fetchHotels();
+  }, []);
+
 
   // Modify the Add Hotel button click handler
   const handleAddClick = () => {

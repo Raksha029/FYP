@@ -8,6 +8,105 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
   const [showDropdown, setShowDropdown] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [appliedDiscount, setAppliedDiscount] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(selectedRoom?.totalPrice || 0);
+
+  // Update the useEffect for discount check
+  useEffect(() => {
+    try {
+      const loyaltyDiscountStr = localStorage.getItem('loyaltyDiscount');
+      if (!loyaltyDiscountStr) {
+        setTotalPrice(selectedRoom?.totalPrice || 0);
+        setAppliedDiscount(null);
+        return;
+      }
+  
+      const loyaltyDiscount = JSON.parse(loyaltyDiscountStr);
+      
+      // Check if discount is valid for this specific hotel and not expired
+      if (loyaltyDiscount && 
+          loyaltyDiscount.hotelId === selectedRoom?.hotelId && 
+          new Date(loyaltyDiscount.validUntil) > new Date()) {
+        const discountedPrice = selectedRoom.totalPrice * 0.8; // 20% off
+        setTotalPrice(discountedPrice);
+        setAppliedDiscount(loyaltyDiscount);
+      } else {
+        setTotalPrice(selectedRoom?.totalPrice || 0);
+        setAppliedDiscount(null);
+        // Clear invalid or non-matching hotel discount
+        localStorage.removeItem('loyaltyDiscount');
+      }
+    } catch (error) {
+      console.error('Error processing discount:', error);
+      setTotalPrice(selectedRoom?.totalPrice || 0);
+      setAppliedDiscount(null);
+    }
+  }, [selectedRoom]);
+
+  // Update the handleSubmit function
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+  
+    try {
+      const token = localStorage.getItem('token');
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      // Check if user is logged in first
+      if (!isLoggedIn || !token) {
+        toast.error('Please login to make a booking');
+        setIsSubmitting(false);
+        return;
+      }
+      
+      // Prepare booking data
+      const bookingData = {
+        hotelId: selectedRoom.hotelId,
+        hotelName: selectedRoom.hotelName,
+        roomType: selectedRoom.type,
+        checkInDate: document.getElementById('checkInDate').value,
+        checkOutDate: document.getElementById('checkOutDate').value,
+        guestDetails: userDetails,
+        roomCount: selectedRoom.count || 1,
+        totalPrice: totalPrice
+      };
+  
+      // Only add discount if it's valid
+      if (appliedDiscount) {
+        bookingData.discountCode = appliedDiscount.discountCode;
+        bookingData.discountPercentage = 20;
+      }
+  
+      const response = await fetch('http://localhost:4000/api/bookings', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bookingData)
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create booking');
+      }
+  
+      
+      // Clear the loyalty discount after successful booking
+      if (appliedDiscount) {
+        localStorage.removeItem('loyaltyDiscount');
+      }
+  
+      toast.success('Booking confirmed successfully!');
+      onBookingComplete(selectedRoom.hotelId, selectedRoom.type, selectedRoom.count || 1);
+      onClose();
+    } catch (error) {
+      console.error('Booking error:', error);
+      toast.error(error.message || 'Failed to create booking. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Get today's date and tomorrow's date for default values
   const today = new Date();
@@ -60,81 +159,6 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
     setFilteredCountries(filtered);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        toast.error("Please log in to complete your booking");
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Validate required fields
-      if (!userDetails.checkInDate || !userDetails.checkOutDate) {
-        toast.error("Please select check-in and check-out dates");
-        setIsSubmitting(false);
-        return;
-      }
-
-      const bookingData = {
-        hotelId: selectedRoom.hotelId,
-        hotelName: selectedRoom.hotelName,
-        roomType: selectedRoom.type,
-        checkInDate: userDetails.checkInDate,
-        checkOutDate: userDetails.checkOutDate,
-        guestDetails: {
-          firstName: userDetails.firstName,
-          lastName: userDetails.lastName,
-          email: userDetails.email,
-          phone: userDetails.phone,
-          country: selectedCountry?.name || userDetails.country
-        },
-        roomCount: selectedRoom.count, // Make sure we're using the correct room count
-        totalPrice: selectedRoom.totalPrice
-      };
-
-      // Validate all required fields are present
-      const requiredFields = ['hotelId', 'hotelName', 'roomType', 'checkInDate', 'checkOutDate', 'totalPrice'];
-      for (const field of requiredFields) {
-        if (!bookingData[field]) {
-          throw new Error(`Missing required field: ${field}`);
-        }
-      }
-
-      const response = await fetch("http://localhost:4000/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(bookingData)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create booking");
-      }
-
-      await response.json();
-      toast.success("Booking confirmed successfully!");
-      
-      // Pass the correct room count to update availability
-      if (onBookingComplete) {
-        onBookingComplete(selectedRoom.hotelId, selectedRoom.type, selectedRoom.count);
-      }
-      
-      onClose();
-    } catch (error) {
-      console.error("Booking error:", error);
-      toast.error(error.message || "Failed to complete booking");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className={styles.reservationForm}>
       <h2>Enter your details</h2>
@@ -151,7 +175,10 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
                 <strong>Rooms:</strong> {selectedRoom.count}
               </p>
               <p>
-                <strong>Total Price:</strong> NPR {selectedRoom.totalPrice}
+                <strong>Total Price:</strong> NPR {totalPrice}
+                {appliedDiscount && (
+                  <span className={styles.discountLabel}> (20% loyalty discount applied)</span>
+                )}
               </p>
             </>
           )}

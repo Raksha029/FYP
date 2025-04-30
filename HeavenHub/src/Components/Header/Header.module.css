@@ -1,32 +1,27 @@
 .header {
     @apply fixed top-0 left-0 w-full flex justify-between items-center p-2 sm:p-3 lg:p-4 z-50;
-    background: white;
-    border-bottom: 1px solid #eaeaea; 
+    background: linear-gradient(to right, rgba(0, 51, 102, 0.8), rgba(0, 153, 204, 0.8)); 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .logo {
-    @apply ml-0 sm:ml-16 md:ml-24 lg:ml-60;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+    @apply ml-4 sm:ml-16 md:ml-24 lg:ml-60;
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    margin-right: 1rem; /* Add right margin */
 }
 
-.logoIcon {
-    width: 40px;
-    height: 40px;
-    color: #4a5568;
-}
-
-.logoText {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #2d3748;
-    letter-spacing: 0.5px;
+/* Responsive margin adjustments */
+@media (max-width: 768px) {
+    .logo {
+        height: 45px;
+        margin-right: 1rem; /* Smaller margin for mobile */
+    }
 }
 
 .nav {
@@ -34,12 +29,10 @@
     flex-grow: 1;
     display: flex;
     justify-content: center;
-   
 }
 
 .navLink {
-    @apply text-black text-sm sm:text-base lg:text-lg cursor-pointer hover:underline;
-    
+    @apply text-white text-sm sm:text-base lg:text-lg cursor-pointer hover:underline;
 }
 
 .authButtons {
@@ -203,4 +196,24 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-left: 4rem;
+}
+
+.logoIcon {
+  font-size: 24px;
+  color: white;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
 }

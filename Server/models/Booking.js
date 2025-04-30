@@ -49,9 +49,26 @@ const bookingSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Confirmed", "Completed", "Cancelled"],
-    default: "Confirmed",
+    enum: ["Pending", "Confirmed", "Completed", "Cancelled", "Redeemed", "Used"],
+    default: "Pending",
   },
+  discountCode: {
+    type: String,
+    default: null
+  },
+  discountPercentage: {
+    type: Number,
+    default: 0
+  },
+  validUntil: {
+    type: Date,
+    default: null
+  },
+  type: {
+    type: String,
+    enum: ["booking", "redemption"],
+    default: "booking"
+  }
 });
 
 module.exports = mongoose.model("Booking", bookingSchema);
