@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./Favourites.module.css";
+import { useTranslation } from 'react-i18next';
 
 const Favourites = ({ savedProperties, setSavedProperties }) => {
+  const { t } = useTranslation();
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState(false);
 
   // Fix the transformImagePath function to handle all image types
   const transformImagePath = (imagePath) => {
@@ -123,14 +123,14 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
         }
       } catch (error) {
         console.error("Error fetching favorites:", error);
-        toast.error("Failed to load favorites");
+        toast.error(t('favourites1.loadError'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchFavorites();
-  }, [setSavedProperties]);
+  }, [setSavedProperties, t]);
 
   // Add this useEffect to update isFavorited status for all favorites
   useEffect(() => {
@@ -248,28 +248,27 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading your favorites...</div>;
+    return <div className={styles.loading}>{t('favourites1.loading')}</div>;
   }
 
   return (
     <div className={styles.pageContainer}>
       <div className={styles.favoritesContainer}>
-        <h2 className={styles.favoritesTitle}>My Favorites</h2>
+        <h2 className={styles.favoritesTitle}>{t('favourites1.title')}</h2>
         {favorites.length === 0 ? (
-          <p className={styles.emptyState}>No favorites added yet</p>
+          <p className={styles.emptyState}>{t('favourites1.empty')}</p>
         ) : (
           <div className={styles.favoritesList}>
             {favorites.map((property) => (
               <div key={property.propertyId} className={styles.favoriteItem}>
-                {/* Replace img with ImageWithFallback */}
                 <ImageWithFallback
                   src={property.image}
                   alt={property.name}
                   className={styles.propertyImage}
                 />
                 <div className={styles.propertyDetails}>
-                  <h3>{property.name}</h3>
-                  <p>{property.city}</p>
+                  <h3>{t(`hotel.${property.name}`)}</h3>
+                  <p>{t(`city.${property.city.toLowerCase()}`)}</p>
                   <div className={styles.actions}>
                     <button
                       className={styles.viewDetailsButton}
@@ -277,7 +276,7 @@ const Favourites = ({ savedProperties, setSavedProperties }) => {
                         handleViewDetails(property.propertyId, property.city)
                       }
                     >
-                      View Details
+                      {t('favourites1.viewDetails')}
                     </button>
                     <button
                       className={styles.removeButton}

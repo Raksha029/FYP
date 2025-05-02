@@ -5,8 +5,10 @@ import { FaEdit, FaEye, FaEyeSlash } from "react-icons/fa"; // Import edit icon 
 import Modal from "./Modal"; // Import the modal component
 import ChangePasswordModal from "./ChangePasswordModal"; // Import the new modal
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     firstName: "",
@@ -121,16 +123,14 @@ const Profile = () => {
       // Validate file size
       if (file.size > 5 * 1024 * 1024) {
         // 5MB limit
-        toast.error("Image size must be less than 5MB");
+        toast.error(t('profile.imageSizeError'));
         return;
       }
 
       // Validate file type
       const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
       if (!validTypes.includes(file.type)) {
-        toast.error(
-          "Invalid file type. Please upload JPEG, PNG, GIF, or WebP."
-        );
+        toast.error(t('profile.invalidFileType'));
         return;
       }
 
@@ -166,10 +166,10 @@ const Profile = () => {
             profilePicture: responseData.profilePicture || reader.result,
           }));
 
-          toast.success("Profile picture updated successfully!");
+          toast.success(t('profile.uploadSuccess'));
         } catch (error) {
           console.error("Full Upload Error:", error);
-          toast.error(error.message || "Failed to upload profile picture");
+          toast.error(error.message || t('profile.uploadError'));
         }
       };
       reader.readAsDataURL(file);
@@ -194,10 +194,10 @@ const Profile = () => {
           lastName,
         }));
         setIsEditingName(false);
-        toast.success("Name updated successfully!");
+        toast.success(t('profile.nameUpdateSuccess'));
       } else {
         const errorData = await response.json();
-        toast.error(errorData.error || "Failed to update name");
+        toast.error(errorData.error || t('profile.nameUpdateError'));
       }
     } catch (error) {
       console.error("Error updating name:", error);
@@ -210,16 +210,14 @@ const Profile = () => {
 
     // Validate password
     if (newPassword !== confirmPassword) {
-      toast.error("New passwords do not match");
+      toast.error(t('profile.passwordMismatch'));
       return;
     }
 
     // Password strength validation
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordPattern.test(newPassword)) {
-      toast.error(
-        "Password must be at least 8 characters long and contain at least one letter and one number"
-      );
+      toast.error(t('profile.passwordRequirements'));
       return;
     }
 
@@ -246,11 +244,11 @@ const Profile = () => {
         });
       } else {
         const errorData = await response.json();
-        toast.error(errorData.error || "Failed to change password");
+        toast.error(errorData.error || t('profile.passwordChangeError'));
       }
     } catch (error) {
       console.error("Error changing password:", error);
-      toast.error("An error occurred while changing password");
+      toast.error(t('profile.generalError'));
     }
   };
 
@@ -258,9 +256,9 @@ const Profile = () => {
     <div className={`${styles.landingContainer} min-h-screen`}>
       <div className={styles.profileContainer}>
         <div className={styles.header}>
-          <h1 className={styles.profileTitle}>Personal Details</h1>
-          <p className={styles.infoText}>
-            View your info and discover its uses.
+        <h1 className={styles.profileTitle}>{t('profile.personalDetails')}</h1>
+        <p className={styles.infoText}>
+            {t('profile.viewInfoText')}
           </p>
           <div className={styles.profilePicture}>
             <div className={styles.profilePictureWrapper}>
@@ -288,26 +286,26 @@ const Profile = () => {
         </div>
         <div className={styles.detailsContainer}>
           <div className={styles.detailRow}>
-            <span>Name</span>
+            <span>{t('profile.name')}</span>
             <div className={styles.detailValue}>
               <span>{`${userData.firstName} ${userData.lastName}`}</span>
               <button
                 className={styles.editButton}
                 onClick={() => setIsEditingName(true)}
               >
-                Edit
+                {t('profile.edit')}
               </button>
             </div>
           </div>
           <div className={styles.detailRow}>
-            <span>Email</span>
+            <span>{t('profile.email')}</span>
             <div className={styles.detailValue}>
               <span>{maskSensitiveInfo(userData.email, "email")}</span>
-              <span className={styles.verified}>Verified</span>
+              <span className={styles.verified}>{t('profile.verified')}</span>
             </div>
           </div>
           <div className={styles.detailRow}>
-            <span>Mobile Number</span>
+            <span>{t('profile.mobileNumber')}</span>
             <div className={styles.detailValue}>
               <span>
                 {maskSensitiveInfo(userData.mobileNumber, "mobileNumber")}
@@ -321,20 +319,20 @@ const Profile = () => {
             </div>
           </div>
           <div className={styles.detailRow}>
-            <span>Country</span>
+            <span>{t('profile.country')}</span>
             <div className={styles.detailValue}>
-              <span>{userData.country || "Not provided"}</span>
+              <span>{userData.country || t('profile.notProvided')}</span>
             </div>
           </div>
           <div className={styles.detailRow}>
-            <span>Password</span>
+            <span>{t('profile.password')}</span>
             <div className={styles.detailValue}>
               <span>********</span>
               <button
                 onClick={() => setIsChangingPassword(true)}
                 className={`${styles.changePasswordButton} ${styles.editButton}`}
               >
-                Change Password
+                {t('profile.changePassword')}
               </button>
             </div>
           </div>

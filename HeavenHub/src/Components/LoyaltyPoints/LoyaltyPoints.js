@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./LoyaltyPoints.module.css";
 import chestbox from "../Assets/Chestboxs.png";
+import { useTranslation } from 'react-i18next';
 
 // Add WeeklyHotelDeals component
 const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
+  const { t } = useTranslation();
   const [weeklyDeals, setWeeklyDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,7 +45,7 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
   // In WeeklyHotelDeals component, update handleRedeemDeal
   const handleRedeemDeal = async (deal) => {
     if (points < deal.pointsRequired) {
-      toast.error(`You need ${deal.pointsRequired} points to redeem this deal. Earn points by making bookings!`);
+      toast.error(t('loyaltyPoints1.pointsNeeded', { points: deal.pointsRequired }));
       return;
     }
   
@@ -96,11 +98,14 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
         status: 'Redeemed'
       }]);
   
-      toast.success(`Successfully redeemed ${deal.pointsRequired} points for ${deal.hotelName}! Your discount will be valid for 7 days.`);
+      toast.success(t('loyaltyPoints1.redeemSuccess', { 
+        points: deal.pointsRequired,
+        hotel: deal.hotelName 
+      }));
       navigate(`/hotel-details/${deal.cityName.toLowerCase()}/${deal.hotelId}?discount=true`);
     } catch (error) {
       console.error('Error redeeming points:', error);
-      toast.error('Failed to redeem points. Please try again.');
+      toast.error(t('loyaltyPoints1.redeemError'));
     }
   };
 
@@ -146,21 +151,21 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
     };
   
     fetchPointsHistory();
-  }, [setPointsHistory, setUserData]);
+  }, [setPointsHistory, setUserData, t]);
 
  
 
   if (loading) {
-    return <div>Loading weekly deals...</div>;
+    return <div>{t('loyaltyPoints1.loading')}</div>;
   }
 
   if (error) {
     return (
       <div className={styles.errorContainer}>
-        <h2>This Week's Special Hotel Deals</h2>
+         <h2>{t('loyaltyPoints1.weeklyDealsTitle')}</h2>
         <p className={styles.errorMessage}>{error}</p>
         <p className={styles.dealsDescription}>
-          Please check back later for exclusive discounts at our selected hotels.
+          {t('loyaltyPoints1.dealsDescription')}
         </p>
       </div>
     );
@@ -169,10 +174,9 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
   // Change onClick to use handleRedeemDeal instead of onRedeem
   return (
     <div className={styles.weeklyDealsContainer}>
-      <h2>This Week's Special Hotel Deals</h2>
+      <h2>{t('loyaltyPoints1.weeklyDealsTitle')}</h2>
       <p className={styles.dealsDescription}>
-        Redeem your points for exclusive discounts at these selected hotels.
-        Deals refresh every week!
+        {t('loyaltyPoints1.dealsDescription')}
       </p>
       <div className={styles.dealsList}>
         {weeklyDeals.map((deal) => (
@@ -182,20 +186,24 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
               alt={deal.hotelName} 
               className={styles.dealImage} 
               onError={(e) => {
-                e.target.src = chestbox; // Fallback image if hotel image fails to load
+                e.target.src = chestbox;
               }}
             />
             <div className={styles.dealInfo}>
-              <h3>{deal.hotelName}</h3>
-              <p>{deal.location}</p>
-              <p className={styles.discount}>Get {deal.discountPercentage}% off</p>
-              <p className={styles.pointsCost}>{deal.pointsRequired} points required</p>
+              <h3>{t(`hotel.${deal.hotelName}`)}</h3>
+              <p>{t(`location.${deal.location}`)}</p>
+              <p className={styles.discount}>
+                {t('common.getXOff', {percent: deal.discountPercentage})}
+              </p>
+              <p className={styles.pointsCost}>
+                {t('loyaltyPoints1.pointsNeeded', {points: deal.pointsRequired})}
+              </p>
               <button 
                 className={styles.redeemButton}
                 disabled={points < deal.pointsRequired}
-                onClick={() => handleRedeemDeal(deal)}  // Change this line
+                onClick={() => handleRedeemDeal(deal)}
               >
-                Redeem Points
+                {t('loyaltyPoints1.redeemButton')}
               </button>
             </div>
           </div>
@@ -205,25 +213,11 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
   );
 };
 
-const FAQs = [
-  {
-    question: "How do I earn Loyalty points?",
-    answer:
-      "For everry per booking hotel you will get 100 points which can be used to redeem hotel discounts.",
-  },
-  {
-    question: "How can I redeem Loylaty points?",
-    answer:
-      "You can redeem points through rewards section where you will see the offer to provided there to reddem hotel discounts.",
-  },
-  {
-    question: "When will I be able to redeem Loyalty points?",
-    answer: "You can sactually be able to redeem you point when you have exact 500 points.",
-  },
-];
+
 
 // Inside the LoyaltyPoints component
 const LoyaltyPoints = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("All");
   const [activeSection, setActiveSection] = useState("Loyalty Points");
@@ -235,6 +229,21 @@ const LoyaltyPoints = () => {
     loyaltyPoints: 0
   });
   const [pointsHistory, setPointsHistory] = useState([]);
+
+  const FAQs = [
+    {
+      question: t('faq.earnQuestion'),
+      answer: t('faq.earnAnswer'),
+    },
+    {
+      question: t('faq.redeemQuestion'),
+      answer: t('faq.redeemAnswer'),
+    },
+    {
+      question: t('faq.whenQuestion'),
+      answer: t('faq.whenAnswer'),
+    },
+  ];
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -346,10 +355,10 @@ const LoyaltyPoints = () => {
           />
           <p className={styles.centeredText}>
             {activeTab === "Redeemed" 
-              ? "No points redeemed yet"
+              ? t('loyaltyPoints1.emptyState.redeemed')
               : activeTab === "Earned"
-              ? "Start booking to earn points"
-              : "No points history available"}
+              ? t('loyaltyPoints1.emptyState.earned')
+              : t('loyaltyPoints1.emptyState.general')}
           </p>
         </div>
       );
@@ -368,21 +377,21 @@ const LoyaltyPoints = () => {
                 item.status === 'Cancelled' ? styles.cancelledText : ''
               }>
                 {item.status === 'Cancelled' 
-                  ? `Cancelled Booking (-100 Points)`
+                  ? t('loyaltyPoints1.bookingPoints.cancelled', { points: 100 }) 
                   : item.type === 'earned' 
-                  ? `Earned 100 Points`
-                  : `Redeemed ${Math.abs(item.points)} Points`}
+                  ? t('loyaltyPoints1.bookingPoints.earned', { points: 100 }) 
+                  : t('loyaltyPoints1.bookingPoints.redeemed', { points: Math.abs(item.points) })}
               </h3>
-              <p>{item.hotelName}</p>
+              <p>{t(`hotel.${item.hotelName}`)}</p>
               <p>{new Date(item.date).toLocaleDateString()}</p>
             </div>
             <div className={`${styles.pointsAmount} ${
               item.type === 'redeemed' ? styles.redeemed : 
               item.status === 'Cancelled' ? styles.cancelled : ''
             }`}>
-              {item.status === 'Cancelled' ? '-100' :
-               item.type === 'earned' ? '+100' : 
-               `-${Math.abs(item.points)}`}
+              {item.status === 'Cancelled' ? t('common.cancelledPoints', { points: 100 }) :
+               item.type === 'earned' ? t('common.earnedPoints', { points: 100 }) : 
+               t('common.redeemedPoints', { points: Math.abs(item.points) })}
             </div>
           </div>
         ))}
@@ -395,12 +404,12 @@ const LoyaltyPoints = () => {
     <div className={`${styles.landingContainer} min-h-screen`}>
       <div className={styles.loyaltyContainer}>
         <div className={styles.sidebar}>
-          <h1 style={{ fontWeight: "bold", fontSize: "1.5em" }}>
-            Hi, {userData.firstName}
+           <h1 style={{ fontWeight: "bold", fontSize: "1.5em" }}>
+             {t('loyaltyPoints1.greeting', { name: userData.firstName })}
           </h1>
           <p>{userData.email}</p>
           <div className={styles.card}>
-            <h2>Loyalty points</h2>
+          <h2>{t('loyaltyPoints1.loyaltyPoints')}</h2>
             <hr className={styles.separator} />
             <div className={styles.coinDisplay}>{userData.loyaltyPoints}</div>
           </div>
@@ -415,7 +424,7 @@ const LoyaltyPoints = () => {
                 <span role="img" aria-label="coin">
                   💰
                 </span>{" "}
-                Loyalty Points
+                {t('loyaltyPoints1.loyaltyPoints')}
               </li>
               <li
                 onClick={() => handleTabClick("Rewards")}
@@ -426,7 +435,7 @@ const LoyaltyPoints = () => {
                 <span role="img" aria-label="reward">
                   🏆
                 </span>{" "}
-                Rewards
+                {t('loyaltyPoints1.rewards')}
               </li>
               <li
                 onClick={() => handleTabClick("FAQs")}
@@ -437,7 +446,7 @@ const LoyaltyPoints = () => {
                 <span role="img" aria-label="faq">
                   ❓
                 </span>{" "}
-                FAQs
+                {t('loyaltyPoints1.faqs')}
               </li>
             </ul>
           </div>
@@ -445,7 +454,7 @@ const LoyaltyPoints = () => {
         <div className={styles.content}>
           {activeSection === "Loyalty Points" && (
             <>
-              <h2>Loyalty Points</h2>
+              <h2>{t('loyaltyPoints1.loyaltyPoints')}</h2>
               <div className={styles.historyHeader}>
                 <button
                   className={`${styles.tabButton} ${
@@ -453,7 +462,7 @@ const LoyaltyPoints = () => {
                   }`}
                   onClick={() => handleHistoryTabClick("All")}
                 >
-                  All
+                  {t('loyaltyPoints1.tabs.all')}
                 </button>
                 <button
                   className={`${styles.tabButton} ${
@@ -461,7 +470,7 @@ const LoyaltyPoints = () => {
                   }`}
                   onClick={() => handleHistoryTabClick("Earned")}
                 >
-                  Earned
+                  {t('loyaltyPoints1.tabs.earned')}
                 </button>
                 <button
                   className={`${styles.tabButton} ${
@@ -469,7 +478,7 @@ const LoyaltyPoints = () => {
                   }`}
                   onClick={() => handleHistoryTabClick("Redeemed")}
                 >
-                  Redeemed
+                  {t('loyaltyPoints1.tabs.redeemed')}
                 </button>
               </div>
               {renderPointsHistory()}
@@ -478,17 +487,17 @@ const LoyaltyPoints = () => {
           
           {activeSection === "Rewards" && (
             <div className={styles.content}>
-              <h2>Rewards</h2>
+              <h2>{t('loyaltyPoints1.tabs.rewards')}</h2>
               <WeeklyHotelDeals 
                 points={userData.loyaltyPoints}
                 setUserData={setUserData}
-                setPointsHistory={setPointsHistory}  // Add this prop
+                setPointsHistory={setPointsHistory}
               />
             </div>
           )}
           {activeSection === "FAQs" && (
             <div className={styles.content}>
-              <h2>Frequently Asked Questions</h2>
+              <h2>{t('loyaltyPoints1.faqTitle')}</h2>
               {FAQs.map((faq, index) => (
                 <div key={index} className={styles.faqItem}>
                   <div

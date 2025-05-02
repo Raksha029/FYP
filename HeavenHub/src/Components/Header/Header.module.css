@@ -207,8 +207,15 @@
 }
 
 .logoIcon {
-  font-size: 24px;
-  color: white;
+  color: white; /* This will make the SVG icon white */
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-left: 4rem;
 }
 
 .logoText {

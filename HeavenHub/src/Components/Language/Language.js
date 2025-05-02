@@ -6,7 +6,7 @@ import { useLanguage } from '../../context/LanguageContext';
 
 const Language = () => {
   const [showModal, setShowModal] = useState(false);
-  const { t } = useTranslation(); // Removed unused i18n
+  const { t } = useTranslation();
   const { currentLanguage, changeLanguage } = useLanguage();
 
   const countryLanguageMap = [
@@ -16,6 +16,7 @@ const Language = () => {
 
   const handleLanguageSelect = (language) => {
     changeLanguage(language.lng);
+    localStorage.setItem('language', language.lng); // Save language preference
     setShowModal(false);
   };
 

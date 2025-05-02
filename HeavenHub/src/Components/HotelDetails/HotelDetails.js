@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./HotelDetails.module.css";
 import { FaHeart, FaShareAlt } from "react-icons/fa"; // Import icons
@@ -6,6 +6,9 @@ import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import L from "leaflet"; // Import Leaflet for marker icon
 import Reserve from "../Reserve/Reserve"; // Import the new Reserve component
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
+
+
 
 // Fix default marker icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -16,40 +19,9 @@ L.Icon.Default.mergeOptions({
 });
 
 
-const handleShare = async () => {
-  // Check if user is logged in
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-  
-  if (!isLoggedIn) {
-    toast.error('Please login to share this property');
-    return;
-  }
-
-  const shareData = {
-    url: window.location.href,
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      toast.success("Link created successfully!");
-    } catch (err) {
-      console.error("Share failed:", err);
-      toast.error("Failed to share link.");
-    }
-  } else {
-    // Fallback to clipboard copy
-    try {
-      await navigator.clipboard.writeText(shareData.url);
-      toast.success("Link copied to clipboard!");
-    } catch (err) {
-      toast.error("Failed to copy link. Please copy manually.");
-    }
-  }
-};
-
 
 function HotelDetails({ savedProperties, setSavedProperties }) {
+  const { t} = useTranslation();
   const { city, id } = useParams();
   const [hotel, setHotel] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -76,6 +48,39 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     comment: "",
   });
 
+  
+const handleShare = async () => {
+  // Check if user is logged in
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  
+  if (!isLoggedIn) {
+    toast.error(t('loginToShare'));
+    return;
+  }
+
+  const shareData = {
+    url: window.location.href,
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      toast.success(t('linkCreatedSuccess'));
+    } catch (err) {
+      console.error("Share failed:", err);
+      toast.error(t('shareLinkFailed'));
+    }
+  } else {
+    // Fallback to clipboard copy
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+      toast.success(t('linkCopiedSuccess'));
+    } catch (err) {
+      toast.error(t('copyLinkFailed'));
+    }
+  }
+};
+
 
   // Add a new state for the selected room
   const [selectedRoom, setSelectedRoom] = useState(null);
@@ -95,45 +100,50 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
     );
   };
 
-  useEffect(() => {
-    const fetchHotelDetails = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:4000/api/cities/${city}/hotels/${id}`
-        );
-        if (!response.ok) throw new Error("Failed to fetch hotel details");
-        const data = await response.json();
+  // Move useCallback outside useEffect
+  const fetchHotelDetails = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/cities/${city}/hotels/${id}?ts=${Date.now()}`
+      );
+      if (!response.ok) throw new Error("Failed to fetch hotel details");
+      const data = await response.json();
 
-        console.log("Original hotel data:", data);
-        console.log("Coordinates:", data.coords); // Debug the coordinates
+      console.log("Original hotel data:", data);
+      console.log("Coordinates:", data.coords); // Debug the coordinates
 
-        const transformedData = {
-          ...data,
-          detailsImage: transformImagePaths(data.detailsImage),
-          image: transformImagePaths(data.image),
-        };
+      const transformedData = {
+        ...data,
+        detailsImage: transformImagePaths(data.detailsImage),
+        image: transformImagePaths(data.image),
+      };
 
-        console.log("Transformed hotel data:", transformedData);
+      console.log("Transformed hotel data:", transformedData);
 
-        setHotel(transformedData);
-        setIsFavorited(savedProperties && savedProperties[id] !== undefined);
+      setHotel(transformedData);
+      setIsFavorited(savedProperties && savedProperties[id] !== undefined);
 
-        // Replace missing coordinates with default ones for testing
-        if (!transformedData.coords || transformedData.coords.length !== 2) {
-          console.log("Using default coordinates for testing");
-          const defaultCoords = [27.7172, 85.324]; // Example coordinates for Kathmandu
-          transformedData.coords = defaultCoords;
-        }
-      } catch (error) {
-        console.error("Error fetching hotel details:", error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      // Replace missing coordinates with default ones for testing
+      if (!transformedData.coords || transformedData.coords.length !== 2) {
+        console.log("Using default coordinates for testing");
+        const defaultCoords = [27.7172, 85.324]; // Example coordinates for Kathmandu
+        transformedData.coords = defaultCoords;
       }
-    };
-
-    fetchHotelDetails();
+    } catch (error) {
+      console.error("Error fetching hotel details:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   }, [city, id, savedProperties]);
+
+  useEffect(() => {
+    fetchHotelDetails();
+    
+    // Add interval cleanup properly
+    const interval = setInterval(fetchHotelDetails, 30000);
+    return () => clearInterval(interval);
+  }, [fetchHotelDetails]);
 
   // Add this eslint-disable-next-line comment before the useEffect
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -156,7 +166,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
       // Add a marker for the hotel location
       L.marker(hotel.coords)
         .addTo(newMap)
-        .bindPopup(`<b>${hotel.name}</b><br>${hotel.location}`)
+        .bindPopup(`<b>${t(`hotel.${hotel.name}`) || hotel.name}</b><br>${t(`location.${hotel.location}`) || hotel.location}`)
         .openPopup();
 
       // Save the map instance to the ref
@@ -175,7 +185,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
         mapInstanceRef.current = null;
       }
     };
-  }, [hotel, mapContainerRef]); // Add mapContainerRef to dependencies
+  }, [hotel, mapContainerRef, t]); // Added 't' to the dependency array
 
   // Calculate dynamic price based on availability
   const calculateDynamicPrice = (basePrice, available) => {
@@ -224,7 +234,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
   // Remove the unused handleSubmit function since we're using Reserve component now
 
   // Add handleBookingComplete function
-  const handleBookingComplete = (hotelId, roomType, bookedCount) => {
+  const handleBookingComplete = (roomType, bookedCount) => {
     setHotel(prevHotel => {
       if (!prevHotel) return prevHotel;
 
@@ -244,7 +254,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        toast.error("Please log in to add favorites");
+        toast.error(t('loginToFavorite'));
         return;
       }
 
@@ -297,11 +307,11 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
       }
 
       toast.success(
-        method === "DELETE" ? "Removed from favorites" : "Added to favorites"
+        method === "DELETE" ? t('removedFromFavorites') : t('addedToFavorites')
       );
     } catch (error) {
       console.error("Error updating favorites:", error);
-      toast.error("Failed to update favorites");
+      toast.error(t('failedToUpdateFavorites'));
     }
   };
 
@@ -341,13 +351,13 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
   const handleReviewSubmit = async () => {
     try {
       if (!newReview.comment.trim()) {
-        toast.error("Please add a comment to your review");
+        toast.error(t('addCommentPrompt'));
         return;
       }
   
       const token = localStorage.getItem("token");
       if (!token) {
-        toast.error("Please log in to submit a review");
+        toast.error(t('loginToReview'));
         return;
       }
   
@@ -389,23 +399,23 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
         comment: "",
       });
   
-      toast.success("Review submitted successfully!");
+      toast.success(t('reviewSubmitSuccess'));
     } catch (error) {
       console.error("Error submitting review:", error);
-      toast.error(error.message || "Failed to submit review");
+      toast.error(error.message || t('reviewSubmitError'));
     }
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return <div className={styles.loading}>{t('loading')}</div>;
   }
 
   if (error) {
-    return <div className={styles.error}>Error: {error}</div>;
+    return <div className={styles.error}>{t('error', { message: error })}</div>;
   }
 
   if (!hotel) {
-    return <div className={styles.notFound}>Hotel not found</div>;
+    return <div className={styles.notFound}>{t('notFound')}</div>;
   }
 
   // Remove detailsImage from destructuring since we're accessing it via hotel.detailsImage
@@ -427,9 +437,19 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
         {/* Header Section */}
         <div className={styles.header}>
           <div className={styles.titleSection}>
-            <h1 className={styles.title}>{name}</h1>
-            <div className={styles.location}>{location}</div>
-            <div className={styles.rating}>Rating: {rating} ★</div>
+            <h1 className={styles.title}>
+              {t('hotelName', { 
+                name: t(`hotel.${name}`) || name 
+              })}
+            </h1>
+            <div className={styles.location}>
+              {t('hotelLocation', { 
+                location: t(`location.${location}`) || location 
+              })}
+            </div>
+            <div className={styles.rating}>
+              {t('hotelRating', { rating: rating })}
+            </div>
           </div>
           <div className={styles.actions}>
             <FaHeart
@@ -440,7 +460,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
             />
             <button className={styles.shareButton} onClick={handleShare}>
             <FaShareAlt className={styles.icon} />
-</button>
+            </button>
 
             
           </div>
@@ -455,17 +475,19 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
           <div className={styles.leftColumn}>
             {/* Description */}
             <section className={styles.section}>
-              <h2>About this hotel</h2>
-              <p className={styles.description}>{description}</p>
+              <h2>{t('aboutHotelTitle')}</h2>
+              <p className={styles.description}>
+                {t(`hotelDescription.${name.replace(/[^a-zA-Z0-9]/g, '')}`) || description}
+              </p>
             </section>
 
             {/* Amenities */}
             <section className={styles.section}>
-              <h2>Popular amenities</h2>
+              <h2>{t('popularAmenities')}</h2>
               <div className={styles.amenitiesGrid}>
                 {amenities.map((amenity, index) => (
                   <div key={index} className={styles.amenityItem}>
-                    {amenity}
+                    {t(`amenities.${amenity}`)}
                   </div>
                 ))}
               </div>
@@ -473,7 +495,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
 
             {/* Map */}
             <section className={styles.section}>
-              <h2>Location</h2>
+              <h2>{t('locationTitle')}</h2>
               {coords && (
                 <div
                   ref={(el) => {
@@ -485,12 +507,12 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                   {/* Map will be initialized here */}
                 </div>
               )}
-              {!coords && <p>Map location not available</p>}
+              {!coords && <p>{t('mapNotAvailable')}</p>}
             </section>
 
             {/* Reviews */}
             <section className={styles.section}>
-              <h2>Guest Reviews</h2>
+              <h2>{t('guestReviews')}</h2>
               <div className={styles.reviewsContainer}>
                 {reviews
                   .slice(0, showAllReviews ? undefined : 3)
@@ -498,11 +520,15 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                     <div key={index} className={styles.reviewCard}>
                       <div className={styles.reviewHeader}>
                         <span className={styles.reviewer}>
-                          {review.reviewer}
+                          {t('reviewerName', { name: review.reviewer })}
                         </span>
-                        <span className={styles.rating}>{review.rating} ★</span>
+                        <span className={styles.rating}>
+                          {t('reviewRating', { rating: review.rating })}
+                        </span>
                       </div>
-                      <p className={styles.comment}>{review.comment}</p>
+                      <p className={styles.comment}>
+                        {t('reviewComment', { comment: review.comment })}
+                      </p>
                     </div>
                   ))}
                 {reviews.length > 3 && (
@@ -510,16 +536,16 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                     className={styles.seeMoreButton}
                     onClick={() => setShowAllReviews(!showAllReviews)}
                   >
-                    {showAllReviews ? "Show Less" : "See More Reviews"}
+                    {showAllReviews ? t('showLess') : t('seeMoreReviews')}
                   </button>
                 )}
               </div>
 
               {/* Add Review Form */}
               <div className={styles.addReviewSection}>
-                <h3>Leave a Review</h3>
+                <h3>{t('leaveReview')}</h3>
                 <div className={styles.ratingSelector}>
-                  <span>Your Rating: </span>
+                  <span>{t('yourRating')} </span>
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
                       key={star}
@@ -536,7 +562,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                 </div>
                 <textarea
                   className={styles.reviewInput}
-                  placeholder="Share your experience..."
+                  placeholder={t('shareExperience')}
                   value={newReview.comment}
                   onChange={(e) =>
                     setNewReview({ ...newReview, comment: e.target.value })
@@ -547,7 +573,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                   onClick={handleReviewSubmit}
                   disabled={!newReview.comment.trim()}
                 >
-                  Submit Review
+                  {t('submitReview')}
                 </button>
               </div>
             </section>
@@ -557,13 +583,13 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
           <div className={styles.rightColumn}>
             <div className={styles.bookingCard}>
               <div className={styles.priceSection}>
-                <span className={styles.priceLabel}>Starting from</span>
-                <h2 className={styles.price}>NPR {price}</h2>
-                <span className={styles.perNight}>per night</span>
+                <span className={styles.priceLabel}>{t('startingFrom')}</span>
+                <h2 className={styles.price}>{t('currency')} {price}</h2>
+                <span className={styles.perNight}>{t('perNight')}</span>
               </div>
 
               <div className={styles.roomsSection}>
-                <h3>Available Rooms</h3>
+                <h3>{t('availableRooms')}</h3>
                 {rooms.map((room, index) => {
                   const dynamicPrice = calculateDynamicPrice(
                     room.price,
@@ -575,28 +601,28 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                   return (
                     <div key={index} className={styles.roomCard}>
                       <div className={styles.roomInfo}>
-                        <h4>{room.type}</h4>
-                        <p>{room.description}</p>
-                        <p>Capacity: {room.capacity}</p>
+                        <h4>{t(`roomType.${hotel.name}.${room.type}`)}</h4>
+                        <p>{t(`roomDescription.${hotel.name}.${room.type}`)}</p>
+                        <p>{t('capacity')} {room.capacity}</p>
                         <p className={styles.roomPrice}>
-                          NPR {dynamicPrice}/night
+                          {t('currency')} {dynamicPrice.toLocaleString('en-NP')}/night
                           {dynamicPrice > room.price && (
                             <span className={styles.priceSurge}>
                               {" "}
-                              (Limited availability pricing)
+                              ({t('limitedAvailabilityPricing')})
                             </span>
                           )}
                         </p>
                         <p className={styles.availability}>
                           {room.available > 0
-                            ? `${room.available} rooms available`
-                            : "Currently unavailable"}
+                            ? t('roomsAvailable', { count: room.available })
+                            : t('currentlyUnavailable')}
                         </p>
 
                         {room.available > 0 && (
                           <div className={styles.roomCountSelector}>
                             <label htmlFor={`roomCount-${index}`}>
-                              Number of rooms:
+                              {t('numberOfRooms')}
                             </label>
                             <select
                               id={`roomCount-${index}`}
@@ -615,7 +641,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                               ))}
                             </select>
                             <p className={styles.totalPrice}>
-                              Total: NPR {totalPrice}
+                              {t('total')} {totalPrice}
                             </p>
                           </div>
                         )}
@@ -625,7 +651,7 @@ function HotelDetails({ savedProperties, setSavedProperties }) {
                         onClick={() => handleReserve(room)}
                         disabled={room.available <= 0}
                       >
-                        Reserve Now
+                        {t('reserveNow')}
                       </button>
                     </div>
                   );

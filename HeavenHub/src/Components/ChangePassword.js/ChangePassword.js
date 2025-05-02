@@ -3,8 +3,10 @@ import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./ChangePassword.module.css"; // Updated styles for ChangePassword
 import changePasswordImage from "../Assets/change.png"; // Left-side image
+import { useTranslation } from 'react-i18next';  // Add this import at the top
 
 const ChangePassword = () => {
+  const { t } = useTranslation();  // Add this line
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -23,21 +25,19 @@ const ChangePassword = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match.");
+      setMessage(t('passwordsDoNotMatch'));
       return;
     }
 
     // Password strength validation
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // At least 8 characters, at least one letter and one number
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordPattern.test(password)) {
-      setMessage(
-        "Password must be at least 8 characters long and contain at least one letter and one number."
-      );
+      setMessage(t('passwordRequirements'));
       return;
     }
 
     if (!token) {
-      setMessage("Invalid token.");
+      setMessage(t('invalidToken'));
       return;
     }
 
@@ -51,7 +51,7 @@ const ChangePassword = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Password changed successfully. Redirecting to login...");
+        toast.success(t('passwordChangeSuccess'));
         setTimeout(() => navigate("/?loginPopup=true"), 3000);
       } else {
         toast.error(data.error || "An error occurred.");
@@ -69,26 +69,26 @@ const ChangePassword = () => {
             <img src={changePasswordImage} alt="Change Password" />
           </div>
           <div className={styles.formContent}>
-            <h2>Change Password</h2>
-            <p className="text-gray-600 mt-2">Enter your new password</p>
+            <h2>{t('changePassword')}</h2>
+            <p className="text-gray-600 mt-2">{t('enterNewPassword')}</p>
             <form onSubmit={handleSubmit} className={styles.changePasswordForm}>
               <div className={styles.changePasswordInputGroup}>
-                <label htmlFor="password">New Password</label>
+                <label htmlFor="password">{t('newPassword')}</label>
                 <input
                   type="password"
                   id="password"
-                  placeholder="Enter new password"
+                  placeholder={t('enterNewPasswordPlaceholder')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
               </div>
               <div className={styles.changePasswordInputGroup}>
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
                 <input
                   type="password"
                   id="confirmPassword"
-                  placeholder="Confirm new password"
+                  placeholder={t('confirmNewPasswordPlaceholder')}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
@@ -98,13 +98,13 @@ const ChangePassword = () => {
                 type="submit"
                 className={styles.changePasswordSubmitButton}
               >
-                Change Password
+                {t('changePassword')}
               </button>
             </form>
             {message && (
               <p
                 className={
-                  message.includes("successfully")
+                  message.includes(t('successfully'))
                     ? styles.successMessage
                     : styles.errorMessage
                 }

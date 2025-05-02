@@ -143,8 +143,17 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
   return (
     <header className={styles.header}>
       <div className={styles.logoContainer}>
-        <FaHotel className={styles.logoIcon} />
-        <span className={styles.logoText}>HeavenHub</span>
+        <svg 
+          className={styles.logoIcon} 
+          viewBox="0 0 24 24" 
+          width="40" 
+          height="40"
+        >
+          <path fill="currentColor" d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h6v-6h2v6h6v-8h3l-3-2.7zM17 18h-2v-6H9v6H7v-7.81l5-4.5 5 4.5V18z"/>
+        </svg>
+        <span className={styles.logoText}>
+          {t('logoText')}
+        </span>
       </div>
       <nav className={styles.nav}>
         <button

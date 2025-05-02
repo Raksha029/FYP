@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Reserve.module.css";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBookingComplete }) => {
+  const { t } = useTranslation();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryOptions, setCountryOptions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -54,7 +56,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
 
       // Check if user is logged in first
       if (!isLoggedIn || !token) {
-        toast.error('Please login to make a booking');
+        toast.error(t('pleaseLoginToBook'));
         setIsSubmitting(false);
         return;
       }
@@ -88,7 +90,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
   
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create booking');
+        throw new Error(errorData.error || t('failedToCreateBooking'));
       }
   
       
@@ -97,12 +99,12 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         localStorage.removeItem('loyaltyDiscount');
       }
   
-      toast.success('Booking confirmed successfully!');
+      toast.success(t('bookingConfirmed'));
       onBookingComplete(selectedRoom.hotelId, selectedRoom.type, selectedRoom.count || 1);
       onClose();
     } catch (error) {
-      console.error('Booking error:', error);
-      toast.error(error.message || 'Failed to create booking. Please try again.');
+      console.error(t('bookingError'), error);
+      toast.error(error.message || t('failedToCreateBookingTryAgain'));
     } finally {
       setIsSubmitting(false);
     }
@@ -129,7 +131,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
       );
       const countries = await response.json();
       const formattedCountries = countries.map((country) => ({
-        name: country.name.common,
+        name:country.name.common,
         flag: country.flags.png,
         code: country.cca2,
       }));
@@ -138,7 +140,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
       setSelectedCountry(formattedCountries[0]);
     };
     fetchCountries();
-  }, []);
+  }, [t]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -161,23 +163,22 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
 
   return (
     <div className={styles.reservationForm}>
-      <h2>Enter your details</h2>
+      <h2>{t('enterYourDetails')}</h2>
       <form onSubmit={handleSubmit}>
-        {/* Room details section */}
         <div className={styles.roomDetails}>
-          <h3>Booking Details</h3>
+          <h3>{t('bookingDetails')}</h3>
           {selectedRoom && (
             <>
               <p>
-                <strong>Room Type:</strong> {selectedRoom.type}
+                <strong>{t('roomTypes')}:</strong> {t(`roomType.${selectedRoom.hotelName}.${selectedRoom.type}`)}
               </p>
               <p>
-                <strong>Rooms:</strong> {selectedRoom.count}
+                <strong>{t('rooms')}:</strong> {selectedRoom.count}
               </p>
               <p>
-                <strong>Total Price:</strong> NPR {totalPrice}
+                <strong>{t('totalPrice')}:</strong> {t('currency')} {totalPrice}
                 {appliedDiscount && (
-                  <span className={styles.discountLabel}> (20% loyalty discount applied)</span>
+                  <span className={styles.discountLabel}> ({t('loyaltyDiscountApplied')})</span>
                 )}
               </p>
             </>
@@ -185,9 +186,8 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
 
           {/* Check-in/Check-out dates */}
           <div className={styles.dateInputs}>
-            {/* Check-in field at the top */}
             <div className={styles.dateField}>
-              <label htmlFor="checkInDate">Check-in Date:</label>
+              <label htmlFor="checkInDate">{t('form.checkInDate')}:</label>
               <input
                 type="date"
                 id="checkInDate"
@@ -199,9 +199,8 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
               />
             </div>
             
-            {/* Check-out field below */}
             <div className={styles.dateField}>
-              <label htmlFor="checkOutDate">Check-out Date:</label>
+              <label htmlFor="checkOutDate">{t('form.checkOutDate')}:</label>
               <input
                 type="date"
                 id="checkOutDate"
@@ -216,11 +215,11 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         </div>
 
         {/* Personal details */}
-        <h3>Guest Information</h3>
+        <h3>{t('form.guestInformation')}</h3>
         <input
           type="text"
           name="firstName"
-          placeholder="First Name"
+          placeholder={t('form.firstName')}
           value={userDetails.firstName}
           onChange={handleInputChange}
           required
@@ -228,7 +227,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         <input
           type="text"
           name="lastName"
-          placeholder="Last Name"
+          placeholder={t('form.lastName')}
           value={userDetails.lastName}
           onChange={handleInputChange}
           required
@@ -236,7 +235,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         <input
           type="email"
           name="email"
-          placeholder="Email Address"
+          placeholder={t('form.email')}
           value={userDetails.email}
           onChange={handleInputChange}
           required
@@ -248,7 +247,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
           >
             <img
               src={selectedCountry?.flag || "https://via.placeholder.com/24"}
-              alt="Selected Flag"
+              alt={t('form.selectedFlag')}
               className={styles.flagIconSmall}
             />
             <span>{selectedCountry?.name}</span>
@@ -258,7 +257,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
               <input
                 type="text"
                 className={styles.searchInput}
-                placeholder="Search for a country"
+                placeholder={t('form.searchCountry')}
                 onChange={handleSearch}
               />
               <ul className={styles.dropdownList}>
@@ -283,7 +282,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         <input
           type="tel"
           name="phone"
-          placeholder="Enter your phone number"
+          placeholder={t('form.phone')}
           value={userDetails.phone}
           onChange={handleInputChange}
           required
@@ -291,7 +290,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         />
 
         <div>
-          <label>Who are you booking for? (optional)</label>
+          <label>{t('form.bookingFor')}</label>
           <div>
             <label>
               <input
@@ -301,7 +300,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
                 checked={userDetails.bookingFor === "mainGuest"}
                 onChange={handleInputChange}
               />
-              I'm the main guest
+              {t('form.mainGuest')}
             </label>
             <label>
               <input
@@ -311,12 +310,12 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
                 checked={userDetails.bookingFor === "someoneElse"}
                 onChange={handleInputChange}
               />
-              I'm booking for someone else
+              {t('form.bookingForSomeoneElse')}
             </label>
           </div>
         </div>
         <div>
-          <label>Are you traveling for work? (optional)</label>
+          <label>{t('form.travelingForWork')}</label>
           <div>
             <label>
               <input
@@ -325,7 +324,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
                 value="yes"
                 onChange={handleInputChange}
               />
-              Yes
+              {t('form.yes')}
             </label>
             <label>
               <input
@@ -334,16 +333,16 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
                 value="no"
                 onChange={handleInputChange}
               />
-              No
+              {t('form.no')}
             </label>
           </div>
         </div>
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Processing..." : "Confirm Booking"}
+        {isSubmitting ? t('form.processing') : t('form.confirmBooking')}
         </button>
         <button type="button" onClick={onClose} className={styles.cancelButton}>
-          Cancel
+        {t('form.cancel')}
         </button>
       </form>
     </div>

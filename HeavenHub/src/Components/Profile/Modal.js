@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./Profile.module.css"; // Adjust the path as necessary
+import styles from "./Profile.module.css";
+import { useTranslation } from 'react-i18next';
 
 const Modal = ({
   isOpen,
@@ -10,6 +11,7 @@ const Modal = ({
   setLastName,
   onSave,
 }) => {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -18,22 +20,22 @@ const Modal = ({
         <button className={styles.closeButton} onClick={onClose}>
           &times;
         </button>
-        <h2>Edit Name</h2>
+        <h2>{t('modal.editName')}</h2>
         <div style={{ display: "flex", alignItems: "center" }}>
           <input
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            placeholder="First Name"
+            placeholder={t('modal.firstName')}
           />
           <input
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            placeholder="Last Name"
+            placeholder={t('modal.lastName')}
           />
           <button className={styles.saveButton} onClick={onSave}>
-            Save
+            {t('modal.save')}
           </button>
         </div>
       </div>

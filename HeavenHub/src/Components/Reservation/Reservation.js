@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./Reservation.module.css";
+import { useTranslation } from 'react-i18next';
 
 // Add formatDate function
 const formatDate = (dateString) => {
@@ -10,6 +11,7 @@ const formatDate = (dateString) => {
 };
 
 const Reservation = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("recent");
   const [recentBookings, setRecentBookings] = useState([]);
   const [pastBookings, setPastBookings] = useState([]);
@@ -21,7 +23,7 @@ const Reservation = () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
-          toast.error("Please log in to view your bookings");
+          toast.error(t('reservation1.loginRequired'));
           navigate("/login");
           return;
         }
@@ -57,7 +59,7 @@ const Reservation = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching bookings:", error);
-        toast.error("Failed to load bookings");
+        toast.error(t('reservation1.loadError'));
         setIsLoading(false);
       }
     };
@@ -68,7 +70,7 @@ const Reservation = () => {
     const intervalId = setInterval(fetchBookings, 60000);
 
     return () => clearInterval(intervalId);
-  }, [navigate]);
+  }, [navigate, t]);
 
   const handleCancelBooking = async (bookingId) => {
     try {
@@ -84,7 +86,7 @@ const Reservation = () => {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to cancel booking');
+        throw new Error(data.message || t('reservation1.cancelError'));
       }
   
       // Update the booking status locally
@@ -100,16 +102,17 @@ const Reservation = () => {
         ]);
       }
   
-      toast.success(data.message || 'Booking cancelled successfully');
+      toast.success(data.message || t('reservation1.cancelSuccess'));
     } catch (error) {
       console.error('Error cancelling booking:', error);
-      toast.error(error.message || 'Failed to cancel booking');
+      toast.error(error.message || t('reservation1.cancelError'));
     }
   };
 
   const handleViewDetails = (booking) => {
+    // In handleViewDetails function
     if (!booking || !booking.hotelId) {
-      toast.error("Hotel details not available");
+      toast.error(t('reservation1.hotelDetailsError'));
       return;
     }
 
@@ -131,11 +134,11 @@ const Reservation = () => {
   return (
     <div className={styles.reservationContainer}>
       {isLoading ? (
-        <div className={styles.loading}>Loading...</div>
+        <div className={styles.loading}>{t('reservation1.loading')}</div>
       ) : (
         <>
           <div className={styles.reservationHeader}>
-            <h1>My Bookings</h1>
+            <h1>{t('reservation1.myBookings')}</h1>
             <div className={styles.tabContainer}>
               <button
                 className={`${styles.tabButton} ${
@@ -143,7 +146,7 @@ const Reservation = () => {
                 }`}
                 onClick={() => setActiveTab("recent")}
               >
-                Recent Bookings
+                {t('reservation1.recent')}
               </button>
               <button
                 className={`${styles.tabButton} ${
@@ -151,7 +154,7 @@ const Reservation = () => {
                 }`}
                 onClick={() => setActiveTab("past")}
               >
-                Past Bookings
+                {t('reservation1.past')}
               </button>
             </div>
           </div>
@@ -163,59 +166,59 @@ const Reservation = () => {
                   recentBookings.map((booking) => (
                     <div key={booking._id} className={styles.bookingItem}>
                       <div className={styles.bookingDetails}>
-                        <h3>{booking.hotelName}</h3>
-                        <p>Room Type: {booking.roomType}</p>
-                        <p>Number of Rooms: {booking.roomCount}</p>
-                        <p>Check-in: {formatDate(booking.checkInDate)}</p>
-                        <p>Check-out: {formatDate(booking.checkOutDate)}</p>
-                        <p>Total Price: NPR {booking.totalPrice}</p>
-                        <p>Status: {booking.status}</p>
+                        <h3>{t(`hotel.${booking.hotelName}`)}</h3>
+                        <p>{t('reservation1.roomType')}: {t(`roomType.${booking.hotelName}.${booking.roomType}`)}</p>
+                        <p>{t('reservation1.numberOfRooms')}: {booking.roomCount}</p>
+                        <p>{t('reservation1.checkIn')}: {formatDate(booking.checkInDate)}</p>
+                        <p>{t('reservation1.checkOut')}: {formatDate(booking.checkOutDate)}</p>
+                        <p>{t('reservation1.totalPrice')}: {t('reservation1.currency')} {booking.totalPrice}</p>
+                        <p>{t('reservation1.status')}: {t(`bookingStatus.${booking.status}`)}</p>
                       </div>
                       <div className={styles.bookingActions}>
                         <button
                           className={styles.viewDetailsBtn}
                           onClick={() => handleViewDetails(booking)}
                         >
-                          View Hotel
+                          {t('reservation1.viewHotel')}
                         </button>
                         <button
                           className={styles.cancelBookingBtn}
                           onClick={() => handleCancelBooking(booking._id)}
                         >
-                          Cancel Booking
+                          {t('reservation1.cancelBooking')}
                         </button>
                       </div>
                     </div>
                   ))
                 ) : (
-                  <p>No recent bookings found.</p>
+                  <p>{t('reservation1.noRecentBookings')}</p>
                 )
               ) : (
-                // Past bookings section
                 pastBookings.length > 0 ? (
+                  // Same changes for past bookings section
                   pastBookings.map((booking) => (
                     <div key={booking._id} className={styles.bookingItem}>
                       <div className={styles.bookingDetails}>
-                        <h3>{booking.hotelName}</h3>
-                        <p>Room Type: {booking.roomType}</p>
-                        <p>Number of Rooms: {booking.roomCount}</p>
-                        <p>Check-in: {formatDate(booking.checkInDate)}</p>
-                        <p>Check-out: {formatDate(booking.checkOutDate)}</p>
-                        <p>Total Price: NPR {booking.totalPrice}</p>
-                        <p>Status: {booking.status}</p>
+                        <h3>{t(`hotel.${booking.hotelName}`)}</h3>
+                        <p>{t('reservation1.roomType')}: {t(`roomType.${booking.hotelName}.${booking.roomType}`)}</p>
+                        <p>{t('reservation1.numberOfRooms')}: {booking.roomCount}</p>
+                        <p>{t('reservation1.checkIn')}: {formatDate(booking.checkInDate)}</p>
+                        <p>{t('reservation1.checkOut')}: {formatDate(booking.checkOutDate)}</p>
+                        <p>{t('reservation1.totalPrice')}: {t('reservation1.currency')} {booking.totalPrice}</p>
+                        <p>{t('reservation1.status')}: {t(`bookingStatus.${booking.status}`)}</p>
                       </div>
                       <div className={styles.bookingActions}>
                         <button
                           className={styles.viewDetailsBtn}
                           onClick={() => handleViewDetails(booking)}
                         >
-                          View Hotel
+                          {t('reservation1.viewHotel')}
                         </button>
                       </div>
                     </div>
                   ))
                 ) : (
-                  <p>No past bookings found.</p>
+                  <p>{t('reservation1.noPastBookings')}</p>
                 )
               )}
             </div>

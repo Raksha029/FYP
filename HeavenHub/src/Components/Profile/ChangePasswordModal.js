@@ -1,6 +1,7 @@
 import React from "react";
-import { FaTimes, FaKey } from "react-icons/fa"; // Import the close icon and key icon
-import styles from "./Profile.module.css"; // Adjust the path as necessary
+import { FaTimes, FaKey } from "react-icons/fa";
+import styles from "./Profile.module.css";
+import { useTranslation } from 'react-i18next';
 
 const ChangePasswordModal = ({
   isOpen,
@@ -13,6 +14,7 @@ const ChangePasswordModal = ({
   setConfirmPassword,
   onSubmit,
 }) => {
+  const { t } = useTranslation();
   if (!isOpen) return null;
 
   return (
@@ -21,45 +23,45 @@ const ChangePasswordModal = ({
         <button className={styles.closeButton} onClick={onClose}>
           <FaTimes />
         </button>
-        <h2>Change Password</h2>
+        <h2>{t('passwordModal.title')}</h2>
         <div className={styles.inputGroup}>
-          <label>Current Password:</label>
+          <label>{t('passwordModal.currentPassword')}</label>
           <div className={styles.inputWithIcon}>
             <FaKey className={styles.icon} />
             <input
               type="password"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              placeholder="Enter current password"
+              placeholder={t('passwordModal.enterCurrent')}
             />
           </div>
         </div>
         <div className={styles.inputGroup}>
-          <label>New Password:</label>
+          <label>{t('passwordModal.newPassword')}</label>
           <div className={styles.inputWithIcon}>
             <FaKey className={styles.icon} />
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Enter new password"
+              placeholder={t('passwordModal.enterNew')}
             />
           </div>
         </div>
         <div className={styles.inputGroup}>
-          <label>Confirm New Password:</label>
+          <label>{t('passwordModal.confirmPassword')}</label>
           <div className={styles.inputWithIcon}>
             <FaKey className={styles.icon} />
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm new password"
+              placeholder={t('passwordModal.confirmNew')}
             />
           </div>
         </div>
         <button onClick={onSubmit} className={styles.submitButton}>
-          Change Password
+          {t('passwordModal.changePassword')}
         </button>
       </div>
     </div>

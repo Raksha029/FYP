@@ -1,223 +1,546 @@
 {
-    "selectLanguage": "तपाईंको भाषा चयन गर्नुहोस्",
-    "close": "बन्द गर्नुहोस्",
-    "home": "गृहपृष्ठ",
-    "about": "हाम्रो बारे",
-    "contact": "हाम्रो सम्पर्क",
-    "signIn": "साइन इन",
-    "notifications": "सूचनाहरू",
-  "favourites": "मनपर्नेहरू",
-  "reservation": "आरक्षण",
-  "account": "खाता",
-  "viewProfile": "प्रोफाइल हेर्नुहोस्",
-  "loyaltyPoints": "लोयाल्टी पोइन्टहरू",
-  "logout": "लगआउट",
+  "selectLanguage": "तपाईंको भाषा चयन गर्नुहोस्",
+  "close": "बन्द गर्नुहोस्",
+  "home": "गृहपृष्ठ",
+  "about": "हाम्रो बारे",
+  "contact": "हाम्रो सम्पर्क",
+  "signIn": "साइन इन",
+  "notifications": "सूचनाहरू",
+"favourites": "मनपर्नेहरू",
+"reservation": "आरक्षण",
+"account": "खाता",
+"viewProfile": "प्रोफाइल हेर्नुहोस्",
+"loyaltyPoints": "लोयाल्टी पोइन्टहरू",
+"logout": "लगआउट",
+
+  "welcomeMessage": "हेभनहबमा स्वागत छ",
+  "tagline": "उत्कृष्ट होटलहरू र विशेष अनुभवहरूको लागि तपाईंको प्रवेशद्वार",
+  "searchPlaceholder": "शहरको नाम प्रविष्ट गर्नुहोस्...",
+  "searchButton": "खोज्नुहोस्",
+  "whyChooseUs": "हामीलाई किन छनौट गर्ने?",
+  "whyChooseUsDesc": "हाम्रा अतिथिहरूले हामीलाई यादगार बसाइँ र पटक-पटक फर्कने कारणहरू पत्ता लगाउनुहोस्।",
+  "premiumExperience": "प्रीमियम अनुभव",
+  "premiumExperienceDesc": "असाधारण सेवा र सुविधाहरूको साथ ५-तारा लग्जरी आवासहरूको आनन्द लिनुहोस्।",
+  "adult": "वयस्क",
+  "adult_plural": "वयस्कहरू",
+  "child": "बालबालिका", 
+  "child_plural": "बालबालिकाहरू",
+  "room": "कोठा",
+  "room_plural": "कोठाहरू",
+  "comfortableStays": "आरामदायी बसाइँ",
+  "comfortableStaysDesc": "उत्कृष्ट बेडिंग र फर्निचरहरूसहित हाम्रा सावधानीपूर्वक डिजाइन गरिएका कोठाहरूमा आराम गर्नुहोस्",
+  "secureBooking": "सुरक्षित बुकिङ",
+  "secureBookingDesc": "तपाईंको आरक्षण र भुक्तानी पूर्ण रूपमा सुरक्षित भएको जानेर विश्वासका साथ बुक गर्नुहोस्",
+  "primeLocations": "प्रमुख स्थानहरू",
+  "primeLocationsDesc": "हाम्रा होटेलहरू सबैभन्दा आकर्षक र सुविधाजनक स्थानहरूमा अवस्थित छन्",
+  "support247": "२४/७ समर्थन",
+  "support247Desc": "तपाईंको आवश्यकताहरूमा सहयोग गर्न हाम्रो समर्पित टोली दिनरात उपलब्ध छ",
+  "priceGuarantee": "उत्तम मूल्य ग्यारेन्टी",
+  "priceGuaranteeDesc": "अरू कतै कम दर भेट्नुभयो? हामी त्यसलाई मिलाउनेछौं र पोइन्ट मार्फत थप छुट दिनेछौं",
+  "popularPlaces": "लोकप्रिय स्थानहरू",
+  "loading": "लोड गर्दै...",
+  "noPopularPlaces": "कुनै लोकप्रिय स्थान उपलब्ध छैन",
+
+    "policies": {
+      "cancellation": {
+        "title": "रद्द नीति",
+        "free": "चेक-इन गर्नुभन्दा २४ घण्टा अघि सम्म निःशुल्क रद्द",
+        "charges": "चेक-इनको २४ घण्टा भित्र रद्द गर्दा शुल्क लाग्न सक्छ",
+        "noShow": "नआएमा पहिलो रातको बसाइको शुल्क लिइनेछ",
+        "special": "विशेष दरहरूमा फरक रद्द सर्तहरू हुन सक्छन्"
+      },
+      "booking": {
+        "title": "बुकिङ र भुक्तानी नीति",
+        "secure": "सबै कारोबारहरूको लागि सुरक्षित भुक्तानी गेटवे",
+        "payment": "धेरै भुक्तानी विकल्पहरू स्वीकार गरिन्छ (क्रेडिट कार्ड, पेपाल, आदि)",
+        "guarantee": "सबै पुष्टि गरिएका बुकिङहरूमा मूल्य ग्यारेन्टी",
+        "transparent": "कुनै लुकेको शुल्क बिना पारदर्शी मूल्य"
+      },
+      "checkInOut": {
+        "title": "चेक-इन र चेक-आउट नीति",
+        "checkIn": "मानक चेक-इन समय: अपराह्न २:०० बजे",
+        "checkOut": "मानक चेक-आउट समय: बिहान ११:०० बजे",
+        "early": "चाँडो चेक-इन र ढिलो चेक-आउट उपलब्धताको अधीनमा",
+        "id": "चेक-इनमा मान्य परिचयपत्र आवश्यक"
+      },
+      "privacy": {
+        "title": "गोपनीयता र सुरक्षा नीति",
+        "protection": "कडा डाटा संरक्षण उपायहरू",
+        "encryption": "सबै व्यक्तिगत जानकारीको लागि सुरक्षित इन्क्रिप्शन",
+        "sharing": "तेस्रो पक्षसँग ग्राहक डाटा साझा नगर्ने",
+        "audits": "नियमित सुरक्षा अडिट र अपडेटहरू"
+      },
+      "bestPrice": {
+        "title": "सर्वोत्तम मूल्य ग्यारेन्टी",
+        "match": "हामी अनलाइनमा भेटिएको कुनै पनि कम मूल्यसँग मिलाउँछौं",
+        "claims": "मूल्य मिलान दाबीहरू बुकिङको २४ घण्टा भित्र पेश गर्नुपर्छ",
+        "conditions": "तुलनीय कोठाको प्रकार र सर्तहरू लागू हुनुपर्छ",
+        "rates": "सार्वजनिक रूपमा उपलब्ध दरहरूमा मात्र मान्य"
+      },
+      "support": {
+        "title": "ग्राहक सहायता नीति",
+        "available": "२४/७ ग्राहक सहायता उपलब्ध",
+        "channels": "बहु सहायता च्यानलहरू (फोन, इमेल, च्याट)",
+        "emergency": "आपतकालीन स्थितिहरूको लागि समर्पित सहायता",
+        "multilingual": "बहुभाषी सहायता टीम"
+      },
+      "special": {
+        "title": "विशेष अनुरोध नीति",
+        "availability": "विशेष अनुरोधहरू उपलब्धताको अधीनमा",
+        "notification": "विशेष आवश्यकताहरूको लागि चाँडै सूचना दिन सिफारिस गरिन्छ",
+        "accessibility": "पहुँच आवश्यकताहरू प्राथमिकताका साथ हेरिन्छ",
+        "charges": "केही अनुरोधहरूको लागि अतिरिक्त शुल्क लाग्न सक्छ"
+      }
+    },
+    "team": {
+      "member1": {
+        "name": "जोन डो",
+        "role": "सीईओ र संस्थापक",
+        "email": "john@HeavenHub.com",
+        "phone": "(123) 456-7890"
+      },
+      "member2": {
+        "name": "जेन स्मिथ",
+        "role": "संचालन प्रबन्धक",
+        "email": "jane@HeavenHub.com",
+        "phone": "(123) 456-7891"
+      },
+      "member3": {
+        "name": "माइक जोनसन",
+        "role": "ग्राहक सम्बन्ध",
+        "email": "mike@HeavenHub.com",
+        "phone": "(123) 456-7892"
+      },
+      "labels": {
+      "email": "इमेल:",
+      "phone": "फोन:"
+    }
+    },
+    "aboutMenu": {
+      "aboutHeavenHub": "हेभन हब को बारेमा",
+      "vision": "हाम्रो दृष्टिकोण",
+      "mission": "हाम्रो लक्ष्य",
+      "policies": "हाम्रा नीतिहरू",
+      "team": "हाम्रो टीम"
+    },
+    "aboutContent": {
   
-    "welcomeMessage": "स्टेबुकरमा स्वागत छ",
-    "tagline": "उत्कृष्ट होटलहरू र विशेष अनुभवहरूको लागि तपाईंको प्रवेशद्वार",
-    "searchPlaceholder": "शहरको नाम प्रविष्ट गर्नुहोस्...",
-    "searchButton": "खोज्नुहोस्",
-    "whyChooseUs": "हामीलाई किन छनौट गर्ने?",
-    "whyChooseUsDesc": "हाम्रा अतिथिहरूले हामीलाई यादगार बसाइँ र पटक-पटक फर्कने कारणहरू पत्ता लगाउनुहोस्।",
-    "premiumExperience": "प्रीमियम अनुभव",
-    "premiumExperienceDesc": "असाधारण सेवा र सुविधाहरूको साथ ५-तारा लग्जरी आवासहरूको आनन्द लिनुहोस्।",
-    "adult": "वयस्क",
-    "adult_plural": "वयस्कहरू",
-    "child": "बालबालिका", 
-    "child_plural": "बालबालिकाहरू",
-    "room": "कोठा",
-    "room_plural": "कोठाहरू",
-    "comfortableStays": "आरामदायी बसाइँ",
-    "comfortableStaysDesc": "उत्कृष्ट बेडिंग र फर्निचरहरूसहित हाम्रा सावधानीपूर्वक डिजाइन गरिएका कोठाहरूमा आराम गर्नुहोस्",
-    "secureBooking": "सुरक्षित बुकिङ",
-    "secureBookingDesc": "तपाईंको आरक्षण र भुक्तानी पूर्ण रूपमा सुरक्षित भएको जानेर विश्वासका साथ बुक गर्नुहोस्",
-    "primeLocations": "प्रमुख स्थानहरू",
-    "primeLocationsDesc": "हाम्रा होटेलहरू सबैभन्दा आकर्षक र सुविधाजनक स्थानहरूमा अवस्थित छन्",
-    "support247": "२४/७ समर्थन",
-    "support247Desc": "तपाईंको आवश्यकताहरूमा सहयोग गर्न हाम्रो समर्पित टोली दिनरात उपलब्ध छ",
-    "priceGuarantee": "उत्तम मूल्य ग्यारेन्टी",
-    "priceGuaranteeDesc": "अरू कतै कम दर भेट्नुभयो? हामी त्यसलाई मिलाउनेछौं र पोइन्ट मार्फत थप छुट दिनेछौं",
-    "popularPlaces": "लोकप्रिय स्थानहरू",
-    "loading": "लोड गर्दै...",
-    "noPopularPlaces": "कुनै लोकप्रिय स्थान उपलब्ध छैन",
+          "aboutTitle": "हेभन हब को बारेमा",
+          "aboutText": "हेभन हबमा, हामी पारदर्शिता, सुरक्षा र ग्राहक सन्तुष्टिको कडा नीति कायम राख्छौं। हामी हाम्रो प्लेटफर्ममा सूचीबद्ध सबै होटलहरूले सटीक विवरण, उचित मूल्य र गुणस्तरीय सेवा प्रदान गर्छन् भनी सुनिश्चित गर्छौं। हाम्रो सुरक्षित भुक्तानी प्रणालीले प्रयोगकर्ता लेनदेनहरूको सुरक्षा गर्छ, र हामी उन्नत सुरक्षा प्रोटोकलहरू मार्फत व्यक्तिगत जानकारीको सुरक्षा गर्छौं। हामी निष्पक्ष व्यवसायिक अभ्यासहरूलाई समर्थन गर्छौं, यात्रीहरू र होटलहरू दुवैको सहज र विश्वसनीय अनुभव सुनिश्चित गर्छौं। रद्दीकरण, रिफन्ड र बुकिङ संशोधनहरू स्पष्टता र निष्पक्षताका साथ हेरिन्छ। विश्वसनीयता र सत्यनिष्ठा प्रतिको हाम्रो प्रतिबद्धताले हेभन हबलाई यात्रीहरूले सुरक्षित र सुविधाजनक होटल बुकिङका लागि विश्वास गर्न सक्ने प्लेटफर्म बनाउँछ।",
+      "visionTitle": "हाम्रो दृष्टिकोण",
+ 
+    "visionText": "हेभन हबमा, हाम्रो दृष्टि यात्रीहरूले आवास पत्ता लगाउने र बुक गर्ने तरिकालाई क्रान्तिकारी बनाउने छ। हामी एक निर्बाध, सहज र पुरस्कृत अनुभव सिर्जना गर्न चाहन्छौं जसले पाहुनाहरूलाई उनीहरूको सिद्ध बसाइसँग जोड्छ - चाहे मनोरञ्जन वा व्यवसायको लागि होस्। नवीनता र ग्राहक-केन्द्रित समाधानहरू प्रयोग गरेर, हामी यात्रा योजना सबैको लागि सजिलो, भरपर्दो र आनन्ददायी बनाउन प्रयास गर्छौं।",
+
+      "missionTitle": "हाम्रो लक्ष्य",
+    "missionText": "हेभन हबमा हाम्रो लक्ष्य यात्रीहरूलाई सर्वोत्तम आवासहरूसँग जोड्ने प्रयोगकर्ता-मैत्री प्लेटफर्म प्रदान गरेर होटल बुकिङ अनुभवलाई सरल र बढाउन हो। हामी हरेक बसाइलाई स्मरणीय बनाउन निर्बाध नेभिगेसन, सुरक्षित कारोबार र व्यक्तिगत सिफारिसहरू प्रदान गर्न प्रतिबद्ध छौं। नवीनता, पारदर्शिता र असाधारण ग्राहक सेवा मार्फत, हामी होटल बुकिङलाई सबैको लागि सजिलो, किफायती र पुरस्कृत बनाउने लक्ष्य राख्छौं।",
+      "policiesTitle": "हाम्रा नीतिहरू",
+      "policiesText": "हामी हाम्रा सबै कार्यहरूमा सेवा, सुरक्षा र पारदर्शिताको उच्चतम मापदण्ड कायम राख्न प्रतिबद्ध छौं।",
+      "teamTitle": "हाम्रो टीम",
+      "teamText": "तपाईंको यात्रा अनुभवहरूलाई असाधारण बनाउन काम गर्ने समर्पित पेशेवरहरूलाई भेट्नुहोस्।"
+    },
+
+  "topRatedProperties": "शीर्ष मूल्याङ्कन गरिएका होटलहरू",
+  "currency": "रुपैयाँ", 
+  "perNight": "प्रति रात",
+  "rating": "मूल्याङ्कन",
+ 
   
-    "topRatedProperties": "शीर्ष मूल्याङ्कन गरिएका होटलहरू",
-    "currency": "रुपैयाँ", 
-    "perNight": "प्रति रात",
-    "rating": "मूल्याङ्कन",
-  
-    "copyright": "© २०२४ स्टेबुकर। सर्वाधिकार सुरक्षित।",
-  "facebook": "फेसबुक",
-  "instagram": "इन्स्टाग्राम",
-  "twitter": "ट्विटर",
-  
-  "aboutTitle": "स्टेबुकरको बारेमा",
-  "aboutDescription": "स्टेबुकरमा, हामी पारदर्शिता, सुरक्षा र ग्राहक सन्तुष्टिको कडा नीति कायम गर्छौं। हामीले हाम्रो प्लेटफर्ममा सूचीकृत सबै होटलहरूले सही विवरण, उचित मूल्य र गुणस्तरीय सेवा प्रदान गर्ने निश्चित गर्छौं। हाम्रो सुरक्षित भुक्तानी प्रणालीले प्रयोगकर्ता लेनदेनलाई सुरक्षित गर्दछ, र हामी उन्नत सुरक्षा प्रोटोकलहरू मार्फत व्यक्तिगत जानकारी सुरक्षित गर्छौं।",
-  "visionTitle": "हाम्रो दृष्टिकोण",
-  "visionDescription": "स्टेबुकरमा, हाम्रो दृष्टिकोण भनेको यात्रुहरूले आवास पत्ता लगाउने र बुक गर्ने तरिकामा क्रान्ति ल्याउनु हो। हामीले अतिथिहरूलाई आरामदायी वा व्यवसायिक बसाइँसँग जोड्ने निर्बाध, सहज र पुरस्कृत अनुभव सिर्जना गर्ने लक्ष्य राखेका छौं।",
-  "missionTitle": "हाम्रो मिशन",
-  "missionDescription": "स्टेबुकरको हाम्रो मिशन भनेको यात्रुहरूलाई उत्कृष्ट आवासहरूसँग जोड्ने प्रयोगकर्ता-मैत्री प्लेटफर्म प्रदान गरेर होटेल बुकिङ अनुभवलाई सरल र उत्कृष्ट बनाउनु हो।",
-  
-  "teamTitle": "हाम्रो टोली",
-  "teamMemberAlt": "टोली सदस्य",
-  "ceoRole": "सीईओ र संस्थापक",
-  "opsRole": "अपरेसन्स प्रबन्धक",
-  "crRole": "ग्राहक सम्बन्ध",
-  "teamMember1Name": "जोन डो",
-  "teamMember1Email": "john@StayBooker.com",
-  "teamMember2Name": "जेन स्मिथ",
-  "teamMember2Email": "jane@StayBooker.com", 
-  "teamMember3Name": "माइक जन्सन",
-  "teamMember3Email": "mike@StayBooker.com",
-  "policiesTitle": "हाम्रा नीतिहरू",
-  "bookingPolicyTitle": "बुकिङ नीति",
-  "bookingPolicy1": "प्रत्यक्ष बुकिङहरूको लागि ग्यारेन्टी गरिएको उत्तम मूल्य",
-  "bookingPolicy2": "चेक-इन भन्दा २४ घण्टा अगावै निःशुल्क रद्द गर्न सकिने",
-  "bookingPolicy3": "सुरक्षित भुक्तानी र प्रति बुकिङमा १०० लोयाल्टी पोइन्ट प्राप्त गर्नुहोस्",
-  "bookingPolicy4": "बुकिङहरूको तुरुन्त पुष्टि",
-  "privacyPolicyTitle": "गोपनीयता र सुरक्षा",
-  "privacyPolicy1": "सुरक्षित भुक्तानी प्रक्रिया",
-  "privacyPolicy2": "व्यक्तिगत जानकारीको सुरक्षा",
-  "privacyPolicy3": "तेस्रो पक्षसँग अतिथि विवरण साझेदारी नगर्ने",
-  "privacyPolicy4": "एन्क्रिप्ट गरिएको डाटा सञ्चार",
-  "customerServiceTitle": "ग्राहक सेवा",
-  "customerService1": "२४/७ ग्राहक समर्थन",
-  "customerService2": "बहुभाषिक सहयोग उपलब्ध",
-  "customerService3": "प्रश्नहरूको तुरुन्त जवाफ",
-  "customerService4": "विशेष अनुरोधहरूको लागि समर्पित समर्थन",
-  "qualityAssuranceTitle": "गुणस्तर आश्वासन",
-  "qualityAssurance1": "नियमित होटेल गुणस्तर निरीक्षण",
-  "qualityAssurance2": "प्रमाणित अतिथि समीक्षाहरू",
-  "qualityAssurance3": "सन्तुष्टि ग्यारेन्टी",
-  "qualityAssurance4": "मूल्य मिलान ग्यारेन्टी",
-  
-  "contactTitle": "हाम्रो साथ जोडिनुहोस्",
-  "contactSubtitle": "तपाईंको प्रतिक्रिया हाम्रो लागि महत्त्वपूर्ण छ। बुकिङ सहयोग, प्रश्न वा कुनै पनि अनुरोधका लागि हाम्रो मित्रवत टोलीसँग सम्पर्क गर्नुहोस्।",
-  "callUsTitle": "हामीलाई कल गर्नुहोस्",
-  "callUsContent": "+१ (५५५) १२३-४५६७",
-  "emailUsTitle": "इमेल गर्नुहोस्",
-  "emailUsContent": "contact@luxestay.com", 
-  "visitUsTitle": "हामीलाई भेट्नुहोस्",
-  "visitUsContent": "१२३ लग्जरी बुल्भार्ड, बेभर्ली हिल्स, सिए ९०२१०",
-  "receptionHoursTitle": "रिसेप्सन समय",
-  "receptionHoursContent": "हप्ताको ७ दिन, २४ घन्टा",
-  "formNameLabel": "पूरा नाम",
-  "formNamePlaceholder": "आफ्नो पूरा नाम प्रविष्ट गर्नुहोस्",
-  "formEmailLabel": "इमेल ठेगाना",
-  "formEmailPlaceholder": "आफ्नो इमेल प्रविष्ट गर्नुहोस्",
-  "formPhoneLabel": "फोन नम्बर",
-  "formPhonePlaceholder": "आफ्नो फोन नम्बर प्रविष्ट गर्नुहोस्", 
-  "formSubjectLabel": "विषय",
-  "formSubjectPlaceholder": "सन्देशको विषय प्रविष्ट गर्नुहोस्",
-  "formMessageLabel": "सन्देश",
-  "formMessagePlaceholder": "आफ्नो सन्देश यहाँ टाइप गर्नुहोस्...",
-  "formSubmitButton": "सन्देश पठाउनुहोस्",
-  "formSubmitting": "पठाइदै...",
-  "faq1Question": "तपाईंको चेक-इन र चेक-आउट समय के हो?",
-  "faq1Answer": "चेक-इन समय दिउँसो ३ बजे देखि हो र चेक-आउट समय बिहान ११ बजे सम्म हो। अनुरोध गरेमा चाँडो चेक-इन वा ढिलो चेक-आउट उपलब्ध हुन सक्छ।",
-  "faq2Question": "तपाईंले लोयाल्टी पोइन्टहरू कसरी प्रदान गर्नुहुन्छ?",
-  "faq2Answer": "हो, हामी प्रत्येक बसाइँको लागि लोयाल्टी पोइन्ट प्रदान गर्छौं। तपाईंले आरक्षण गरेर पोइन्ट जम्मा गर्न सक्नुहुन्छ र भविष्यका बसाइँहरूमा छुटका लागि प्रयोग गर्न सक्नुहुन्छ।",
-  "faq3Question": "कोठाको दरमा नाश्ता समावेश छ?",
-  "faq3Answer": "हो, हाम्रा सबै कोठा दरहरूमा निशुल्क नाश्ता समावेश छ जुन हाम्रो रेस्टुरेन्टमा बिहान ६:३० देखि १०:३० सम्म परोसिन्छ।",
-  "faq4Question": "तपाईंको रद्द गर्ने नीति के हो?",
-  "faq4Answer": "हाम्रो मानक रद्द गर्ने नीतिले चेक-इन भन्दा ४८ घन्टा अगावै निःशुल्क रद्द गर्न अनुमति दिन्छ। यसभन्दा ढिलो रद्द गरेमा एक रातको बसाइँ बराबर शुल्क लाग्न सक्छ।",
-  "contactFormTitle": "हामीलाई सन्देश पठाउनुहोस्",
-  "contactFormSubtitle": "तलको फारम भर्नुहोस् र हामी छिटोै तपाईंसँग सम्पर्क गर्नेछौं।",
-  "contactFormNameLabel": "तपाईंको नाम*",
-  "contactFormNamePlaceholder": "जोन डो",
-  "contactFormEmailLabel": "तपाईंको इमेल*",
-  "contactFormEmailPlaceholder": "john@example.com",
-  "contactFormPhoneLabel": "फोन नम्बर",
-  "contactFormPhonePlaceholder": "+९७७ ९८०१२३४५६७",
-  "contactFormSubjectLabel": "विषय",
-  "contactFormSubjectPlaceholder": "बुकिङ जानकारी",
-  "contactFormMessageLabel": "तपाईंको सन्देश*",
-  "contactFormMessagePlaceholder": "हामीलाई तपाईंलाई कसरी सहयोग गर्न सक्छौं भन्ने बारे जानकारी दिनुहोस्...",
-  "faqTitle": "बारम्बार सोधिने प्रश्नहरू",
-  "faqSubtitle": "हाम्रो सेवाहरूको बारेमा साधारण प्रश्नहरूको त्वरित जवाफहरू खोज्नुहोस्",
-  
-  "viewDetails": "विवरण हेर्नुहोस्",
-  "showOnMap": "नक्सामा देखाउनुहोस्",
-  "cityHotelsHeader": "{{name}} मा {{count}} वटा होटेल भेटियो",
-  "searchHotelsPlaceholder": "होटेलहरू खोज्नुहोस्...",
-  "distanceFrom": "{{centerName}} देखि {{distance}} किमी को दूरी",
-  "reviews": "{{count}} वटा समीक्षा",
-  "reviews_plural": "{{count}} वटा समीक्षाहरू",
-  
-  "filters": "फिल्टरहरू",
-  "priceRange": "मूल्य दायरा",
-  "priceRangeDisplay": "रु {{min}} देखि रु {{max}} सम्म",
-  "maxDistance": "अधिकतम दूरी (किमी)",
-  "maxDistanceDisplay": "{{distance}} किमी सम्म",
-  "minimumRating": "न्यूनतम मूल्याङ्कन",
-  "all": "सबै",
-  "rating3Plus": "३ तारा र माथि",
-  "rating4Plus": "४ तारा र माथि",
-  "rating5": "५ तारा",
-  "sortBy": "क्रमबद्ध गर्नुहोस्",
-  "none": "कुनै पनि होईन",
-  "priceLowToHigh": "मूल्य (कम देखि उच्च)",
-  "ratingHighToLow": "मूल्याङ्कन (उच्च देखि कम)",
-  "amenities1": "सुविधाहरू",
-  "amenities": {
-    "5-Star Luxury": "५-तारा लग्जरी",
-    "Multiple Restaurants": "धेरै रेस्टुरेन्टहरू",
-    "Spa": "स्पा",
-    "Pool": "पूल",
-    "Tennis Court": "टेनिस कोर्ट",
-    "Heritage Property": "ऐतिहासिक सम्पत्ति",
-    "Luxury Spa": "लग्जरी स्पा",
-    "Cultural Tours": "सांस्कृतिक भ्रमणहरू",
-    "Fine Dining": "फाइन डाइनिङ",
-    "Casino": "क्यासिनो",
-    "Business Center": "व्यवसाय केन्द्र",
-    "Modern Design": "आधुनिक डिजाइन",
-    "Rooftop Bar": "रूफटप बार",
-    "Gym": "जिम",
-    "Meeting Rooms": "बैठक कोठाहरू",
-    "Garden": "बगैंचा",
-    "Restaurant": "रेस्टुरेन्ट",
-    "ExecutiveLounge": "एक्जिक्युटिभ लाउन्ज",
-    "Coffee Shop": "कफी शप",
-    "Bar": "बार",
-    "Conference Facilities": "सम्मेलन सुविधाहरू",
-    "Lake View": "ताल को दृश्य",
-    "Private Beach": "निजी समुद्र तट",
-    "Boat Service": "डुङ्गा सेवा",
-    "Mountain Views": "पहाडी दृश्यहरू"
+    "contact1": {
+      "mainTitle": "सम्पर्कमा रहनुहोस्",
+      "subtitle": "तपाईंबाट सुन्न पाउँदा हामीलाई खुशी लाग्नेछ। कृपया यो फारम भर्नुहोस् वा हामीलाई इमेल पठाउनुहोस्।",
+      "info": {
+        "phone": {
+          "title": "फोन",
+          "details": "+977 984-1234567",
+          "subDetails": "सोम-शुक्र बिहान ९ बजे देखि बेलुका ६ बजे सम्म"
+        },
+        "email": {
+          "title": "इमेल",
+          "details": "support@heavenhub.com",
+          "subDetails": "२४/७ अनलाइन सहयोग"
+        },
+        "address": {
+          "title": "ठेगाना",
+          "details": "काठमाडौं, नेपाल",
+          "subDetails": "हाम्रो कार्यालय भ्रमण गर्नुहोस्"
+        }
+      },
+      "form": {
+        "title": "हामीलाई सन्देश पठाउनुहोस्",
+        "name": "तपाईंको नाम",
+        "email": "तपाईंको इमेल",
+        "subject": "विषय",
+        "message": "तपाईंको सन्देश",
+        "submit": "सन्देश पठाउनुहोस्",
+        "success": "सन्देश सफलतापूर्वक पठाइयो!",
+        "error": "सन्देश पठाउन असफल। कृपया पुन: प्रयास गर्नुहोस्।"
+      },
+      "faq": {
+        "title": "बारम्बार सोधिने प्रश्नहरू",
+        "items": {
+          "reservation": {
+            "question": "म कसरी आरक्षण गर्न सक्छु?",
+            "answer": "तपाईं हाम्रो वेबसाइट मार्फत आफ्नो इच्छित मिति र कोठाको प्रकार छनौट गरेर आरक्षण गर्न सक्नुहुन्छ। बुकिङ प्रक्रिया पालना गर्नुहोस् र भुक्तानीसँग आफ्नो बसाइ पुष्टि गर्नुहोस्।"
+          },
+          "cancellation": {
+            "question": "तपाईंको रद्द नीति के हो?",
+            "answer": "हाम्रो मानक रद्द नीतिले चेक-इन भन्दा २४ घण्टा अघिसम्म निःशुल्क रद्द गर्न अनुमति दिन्छ। विभिन्न दरहरूमा फरक नीतिहरू हुन सक्छन्।"
+          },
+          "transfer": {
+            "question": "के तपाईं विमानस्थल यातायात प्रदान गर्नुहुन्छ?",
+            "answer": "हो, हामी विमानस्थल यातायात सेवाहरू प्रदान गर्छौं। कृपया तपाईंको पिकअप व्यवस्था गर्न अग्रिम रूपमा हामीलाई सम्पर्क गर्नुहोस्।"
+          },
+          "payment": {
+            "question": "तपाईं कुन भुक्तानी विधिहरू स्वीकार गर्नुहुन्छ?",
+            "answer": "हामी सबै प्रमुख क्रेडिट कार्डहरू, डिजिटल वालेटहरू, र बैंक ट्रान्सफरहरू स्वीकार गर्छौं।"
+          }
+        }
+      }
+    },
+
+  "copyright": "© २०२४ हेभनहब। सर्वाधिकार सुरक्षित।",
+"facebook": "फेसबुक",
+"instagram": "इन्स्टाग्राम",
+"twitter": "ट्विटर",
+
+"aboutTitle": "हेभनहबमा बारेमा",
+"aboutDescription": "हेभनहबमा, हामी पारदर्शिता, सुरक्षा र ग्राहक सन्तुष्टिको कडा नीति कायम गर्छौं। हामीले हाम्रो प्लेटफर्ममा सूचीकृत सबै होटलहरूले सही विवरण, उचित मूल्य र गुणस्तरीय सेवा प्रदान गर्ने निश्चित गर्छौं। हाम्रो सुरक्षित भुक्तानी प्रणालीले प्रयोगकर्ता लेनदेनलाई सुरक्षित गर्दछ, र हामी उन्नत सुरक्षा प्रोटोकलहरू मार्फत व्यक्तिगत जानकारी सुरक्षित गर्छौं।",
+"visionTitle": "हाम्रो दृष्टिकोण",
+"visionDescription": "हेभनहबमा, हाम्रो दृष्टिकोण भनेको यात्रुहरूले आवास पत्ता लगाउने र बुक गर्ने तरिकामा क्रान्ति ल्याउनु हो। हामीले अतिथिहरूलाई आरामदायी वा व्यवसायिक बसाइँसँग जोड्ने निर्बाध, सहज र पुरस्कृत अनुभव सिर्जना गर्ने लक्ष्य राखेका छौं।",
+"missionTitle": "हाम्रो मिशन",
+"missionDescription": "हेभनहबमा हाम्रो मिशन भनेको यात्रुहरूलाई उत्कृष्ट आवासहरूसँग जोड्ने प्रयोगकर्ता-मैत्री प्लेटफर्म प्रदान गरेर होटेल बुकिङ अनुभवलाई सरल र उत्कृष्ट बनाउनु हो।",
+
+"teamTitle": "हाम्रो टोली",
+"teamMemberAlt": "टोली सदस्य",
+"ceoRole": "सीईओ र संस्थापक",
+"opsRole": "अपरेसन्स प्रबन्धक",
+"crRole": "ग्राहक सम्बन्ध",
+"teamMember1Name": "जोन डो",
+"teamMember1Email": "john@StayBooker.com",
+"teamMember2Name": "जेन स्मिथ",
+"teamMember2Email": "jane@StayBooker.com", 
+"teamMember3Name": "माइक जन्सन",
+"teamMember3Email": "mike@StayBooker.com",
+"policiesTitle": "हाम्रा नीतिहरू",
+"bookingPolicyTitle": "बुकिङ नीति",
+"bookingPolicy1": "प्रत्यक्ष बुकिङहरूको लागि ग्यारेन्टी गरिएको उत्तम मूल्य",
+"bookingPolicy2": "चेक-इन भन्दा २४ घण्टा अगावै निःशुल्क रद्द गर्न सकिने",
+"bookingPolicy3": "सुरक्षित भुक्तानी र प्रति बुकिङमा १०० लोयाल्टी पोइन्ट प्राप्त गर्नुहोस्",
+"bookingPolicy4": "बुकिङहरूको तुरुन्त पुष्टि",
+"privacyPolicyTitle": "गोपनीयता र सुरक्षा",
+"privacyPolicy1": "सुरक्षित भुक्तानी प्रक्रिया",
+"privacyPolicy2": "व्यक्तिगत जानकारीको सुरक्षा",
+"privacyPolicy3": "तेस्रो पक्षसँग अतिथि विवरण साझेदारी नगर्ने",
+"privacyPolicy4": "एन्क्रिप्ट गरिएको डाटा सञ्चार",
+"customerServiceTitle": "ग्राहक सेवा",
+"customerService1": "२४/७ ग्राहक समर्थन",
+"customerService2": "बहुभाषिक सहयोग उपलब्ध",
+"customerService3": "प्रश्नहरूको तुरुन्त जवाफ",
+"customerService4": "विशेष अनुरोधहरूको लागि समर्पित समर्थन",
+"qualityAssuranceTitle": "गुणस्तर आश्वासन",
+"qualityAssurance1": "नियमित होटेल गुणस्तर निरीक्षण",
+"qualityAssurance2": "प्रमाणित अतिथि समीक्षाहरू",
+"qualityAssurance3": "सन्तुष्टि ग्यारेन्टी",
+"qualityAssurance4": "मूल्य मिलान ग्यारेन्टी",
+
+
+"noHotelsFound": "\"{{searchTerm}}\" सँग मिल्ने कुनै होटल फेला परेन",
+
+
+"contactTitle": "हाम्रो साथ जोडिनुहोस्",
+"contactSubtitle": "तपाईंको प्रतिक्रिया हाम्रो लागि महत्त्वपूर्ण छ। बुकिङ सहयोग, प्रश्न वा कुनै पनि अनुरोधका लागि हाम्रो मित्रवत टोलीसँग सम्पर्क गर्नुहोस्।",
+"callUsTitle": "हामीलाई कल गर्नुहोस्",
+"callUsContent": "+१ (५५५) १२३-४५६७",
+"emailUsTitle": "इमेल गर्नुहोस्",
+"emailUsContent": "contact@luxestay.com", 
+"visitUsTitle": "हामीलाई भेट्नुहोस्",
+"visitUsContent": "१२३ लग्जरी बुल्भार्ड, बेभर्ली हिल्स, सिए ९०२१०",
+"receptionHoursTitle": "रिसेप्सन समय",
+"receptionHoursContent": "हप्ताको ७ दिन, २४ घन्टा",
+"formNameLabel": "पूरा नाम",
+"formNamePlaceholder": "आफ्नो पूरा नाम प्रविष्ट गर्नुहोस्",
+"formEmailLabel": "इमेल ठेगाना",
+"formEmailPlaceholder": "आफ्नो इमेल प्रविष्ट गर्नुहोस्",
+"formPhoneLabel": "फोन नम्बर",
+"formPhonePlaceholder": "आफ्नो फोन नम्बर प्रविष्ट गर्नुहोस्", 
+"formSubjectLabel": "विषय",
+"formSubjectPlaceholder": "सन्देशको विषय प्रविष्ट गर्नुहोस्",
+"formMessageLabel": "सन्देश",
+"formMessagePlaceholder": "आफ्नो सन्देश यहाँ टाइप गर्नुहोस्...",
+"formSubmitButton": "सन्देश पठाउनुहोस्",
+"formSubmitting": "पठाइदै...",
+"faq1Question": "तपाईंको चेक-इन र चेक-आउट समय के हो?",
+"faq1Answer": "चेक-इन समय दिउँसो ३ बजे देखि हो र चेक-आउट समय बिहान ११ बजे सम्म हो। अनुरोध गरेमा चाँडो चेक-इन वा ढिलो चेक-आउट उपलब्ध हुन सक्छ।",
+"faq2Question": "तपाईंले लोयाल्टी पोइन्टहरू कसरी प्रदान गर्नुहुन्छ?",
+"faq2Answer": "हो, हामी प्रत्येक बसाइँको लागि लोयाल्टी पोइन्ट प्रदान गर्छौं। तपाईंले आरक्षण गरेर पोइन्ट जम्मा गर्न सक्नुहुन्छ र भविष्यका बसाइँहरूमा छुटका लागि प्रयोग गर्न सक्नुहुन्छ।",
+"faq3Question": "कोठाको दरमा नाश्ता समावेश छ?",
+"faq3Answer": "हो, हाम्रा सबै कोठा दरहरूमा निशुल्क नाश्ता समावेश छ जुन हाम्रो रेस्टुरेन्टमा बिहान ६:३० देखि १०:३० सम्म परोसिन्छ।",
+"faq4Question": "तपाईंको रद्द गर्ने नीति के हो?",
+"faq4Answer": "हाम्रो मानक रद्द गर्ने नीतिले चेक-इन भन्दा ४८ घन्टा अगावै निःशुल्क रद्द गर्न अनुमति दिन्छ। यसभन्दा ढिलो रद्द गरेमा एक रातको बसाइँ बराबर शुल्क लाग्न सक्छ।",
+"contactFormTitle": "हामीलाई सन्देश पठाउनुहोस्",
+"contactFormSubtitle": "तलको फारम भर्नुहोस् र हामी छिटोै तपाईंसँग सम्पर्क गर्नेछौं।",
+"contactFormNameLabel": "तपाईंको नाम*",
+"contactFormNamePlaceholder": "जोन डो",
+"contactFormEmailLabel": "तपाईंको इमेल*",
+"contactFormEmailPlaceholder": "john@example.com",
+"contactFormPhoneLabel": "फोन नम्बर",
+"contactFormPhonePlaceholder": "+९७७ ९८०१२३४५६७",
+"contactFormSubjectLabel": "विषय",
+"contactFormSubjectPlaceholder": "बुकिङ जानकारी",
+"contactFormMessageLabel": "तपाईंको सन्देश*",
+"contactFormMessagePlaceholder": "हामीलाई तपाईंलाई कसरी सहयोग गर्न सक्छौं भन्ने बारे जानकारी दिनुहोस्...",
+"faqTitle": "बारम्बार सोधिने प्रश्नहरू",
+"faqSubtitle": "हाम्रो सेवाहरूको बारेमा साधारण प्रश्नहरूको त्वरित जवाफहरू खोज्नुहोस्",
+"logoText": "हेभन हब",
+
+"viewDetails": "विवरण हेर्नुहोस्",
+"showOnMap": "नक्सामा देखाउनुहोस्",
+"cityHotelsHeader": "{{name}} मा {{count}} वटा होटेल भेटियो",
+"searchHotelsPlaceholder": "होटेलहरू खोज्नुहोस्...",
+"distanceFrom": "{{centerName}} देखि {{distance}} किमी को दूरी",
+"reviews": "{{count}} वटा समीक्षा",
+"reviews_plural": "{{count}} वटा समीक्षाहरू",
+
+"filters": "फिल्टरहरू",
+"priceRange": "मूल्य दायरा",
+"priceRangeDisplay": "रु {{min}} देखि रु {{max}} सम्म",
+"maxDistance": "अधिकतम दूरी (किमी)",
+"maxDistanceDisplay": "{{distance}} किमी सम्म",
+"minimumRating": "न्यूनतम मूल्याङ्कन",
+"all": "सबै",
+"rating3Plus": "३ तारा र माथि",
+"rating4Plus": "४ तारा र माथि",
+"rating5": "५ तारा",
+"sortBy": "क्रमबद्ध गर्नुहोस्",
+"none": "कुनै पनि होईन",
+"priceLowToHigh": "मूल्य (कम देखि उच्च)",
+"ratingHighToLow": "मूल्याङ्कन (उच्च देखि कम)",
+"amenities1": "सुविधाहरू",
+
+"error": "त्रुटि: {{message}}",
+"notFound": "होटल फेला परेन",
+
+  "loginToFavorite": "मनपर्ने थप्न कृपया लगइन गर्नुहोस्",
+  "addedToFavorites": "मनपर्नेमा थपियो",
+  "removedFromFavorites": "मनपर्नेबाट हटाइयो",
+  "failedToUpdateFavorites": "मनपर्ने अपडेट गर्न असफल भयो",
+ 
+    "addCommentPrompt": "कृपया आफ्नो समीक्षामा टिप्पणी थप्नुहोस्",
+    "loginToReview": "समीक्षा पेश गर्न कृपया लगइन गर्नुहोस्",
+    "reviewSubmitSuccess": "समीक्षा सफलतापूर्वक पेश गरियो!",
+    "reviewSubmitError": "समीक्षा पेश गर्न असफल भयो",
+      "hotelName": "{{name}}",
+      "hotelLocation": "{{location}}",
+      "hotelRating": "मूल्याङ्कन: {{rating}} ★",
+      "locationTitle": "स्थान",
+  "mapNotAvailable": "नक्सा स्थान उपलब्ध छैन",
+
+
+    "guestReviews": "अतिथि समीक्षाहरू",
+    "reviewRating": "{{rating}} ★",
+    "showLess": "कम देखाउनुहोस्",
+    "seeMoreReviews": "थप समीक्षाहरू हेर्नुहोस्",
+
+      "reviewerName": "{{name}}",
+      "reviewComment": "{{comment}}",
+      "leaveReview": "समीक्षा लेख्नुहोस्",
+      "yourRating": "तपाईंको रेटिंग:",
+      "shareExperience": "तपाईंको अनुभव साझा गर्नुहोस्...",
+      "submitReview": "समीक्षा पेश गर्नुहोस्",
+      "startingFrom": "सुरुवाती मूल्य",
+      "availableRooms": "उपलब्ध कोठाहरू",
+      "capacity": "क्षमता:",
+      "roomsAvailable": "{{count}} कोठा उपलब्ध",
+      "currentlyUnavailable": "हाल उपलब्ध छैन",
+      "limitedAvailabilityPricing": "सीमित उपलब्धता मूल्यांकन",
+        "numberOfRooms": "कोठाको संख्या:",
+        "total": "जम्मा: रु",
+          "reserveNow": "अहिले बुक गर्नुहोस्",
+            "loginToShare": "यो सम्पत्ति साझा गर्न कृपया लगइन गर्नुहोस्",
+            "linkCreatedSuccess": "लिंक सफलतापूर्वक सिर्जना गरियो!",
+            "shareLinkFailed": "लिंक साझा गर्न असफल।",
+            "linkCopiedSuccess": "लिंक क्लिपबोर्डमा प्रतिलिपि गरियो!",
+            "copyLinkFailed": "लिंक प्रतिलिपि गर्न असफल। कृपया म्यानुअल रूपमा प्रतिलिपि गर्नुहोस्।",
+
+"popularAmenities": "लोकप्रिय सुविधाहरू",
+
+"amenities": {
+  "5-Star Luxury": "५-तारा लग्जरी",
+  "Multiple Restaurants": "धेरै रेस्टुरेन्टहरू",
+  "Spa": "स्पा",
+  "Pool": "पूल",
+  "Tennis Court": "टेनिस कोर्ट",
+  "Heritage Property": "ऐतिहासिक सम्पत्ति",
+  "Luxury Spa": "लग्जरी स्पा",
+  "Cultural Tours": "सांस्कृतिक भ्रमणहरू",
+  "Fine Dining": "फाइन डाइनिङ",
+  "Casino": "क्यासिनो",
+  "Business Center": "व्यवसाय केन्द्र",
+  "Modern Design": "आधुनिक डिजाइन",
+  "Rooftop Bar": "रूफटप बार",
+  "Gym": "जिम",
+  "Meeting Rooms": "बैठक कोठाहरू",
+  "Garden": "बगैंचा",
+  "Restaurant": "रेस्टुरेन्ट",
+  "Executive Lounge": "एक्जिक्युटिभ लाउन्ज",
+  "Coffee Shop": "कफी शप",
+  "Bar": "बार",
+  "Conference Facilities": "सम्मेलन सुविधाहरू",
+  "Lake View": "ताल को दृश्य",
+  "Private Beach": "निजी समुद्र तट",
+  "Boat Service": "डुङ्गा सेवा",
+  "Mountain Views": "पहाडी दृश्यहरू",
+  "Luxury Rooms": "लग्जरी कोठाहरू",
+  "Rooftop Pool": "छतमाथिको पूल",
+  "Water Sports": "जल खेलकुद",
+  "Lake Access": "ताल पहुँच",
+  "Trekking Desk": "ट्रेकिङ डेस्क",
+  "Rooftop": "छत",
+  "Premium Rooms": "प्रिमियम कोठाहरू",
+  "Heritage Tours": "सम्पदा भ्रमण",
+  "Heritage Building": "सम्पदा भवन",
+  "Temple View": "मन्दिर दृश्य",
+  "Mountain View": "हिमाल दृश्य",
+  "Cultural Programs": "सांस्कृतिक कार्यक्रमहरू",
+  "City View": "शहर दृश्य",
+  "Cultural Activities": "सांस्कृतिक गतिविधिहरू",
+  "Free Wi-Fi": "नि:शुल्क वाई-फाई",
+  "Traditional Rooms": "परम्परागत कोठाहरू",
+  "Cultural Experience": "सांस्कृतिक अनुभव",
+  "Pottery Classes": "माटोको भाँडा बनाउने कक्षाहरू",
+  "Home Cooking": "घरेलु पकाई",
+  "Local Experience": "स्थानीय अनुभव",
+  "Family Rooms": "पारिवारिक कोठाहरू",
+  "Boutique Design": "बुटिक डिजाइन",
+  "Rooftop Restaurant": "छतमाथिको रेस्टुरेन्ट",
+  "Heritage Views": "सम्पदा दृश्यहरू",
+  "Rooftop Cafe": "छतमाथिको क्याफे",
+  "Swimming Pool": "पौडी पोखरी",
+  "Conference Room": "सम्मेलन कक्षहरू",
+  "Conference Rooms": "सम्मेलन कक्षहरू",
+  "Free Breakfast": "नि:शुल्क नाश्ता",
+  "Laundry": "लुगा धुने",
+  "Japanese Restaurant": "जापानी रेस्टुरेन्ट",
+  "Meditation Center": "ध्यान केन्द्र",
+  "International Restaurant": "अन्तर्राष्ट्रिय रेस्टुरेन्ट",
+  "Garden View": "बगैंचा दृश्य",
+  "Conference Hall": "सम्मेलन हल",
+  "Tour Desk": "भ्रमण डेस्क",
+  "Yoga Classes": "योग कक्षाहरू",
+  "Vegetarian Restaurant": "शाकाहारी रेस्टुरेन्ट",
+  "Temple Tours": "मन्दिर भ्रमण",
+  "Meditation Hall": "ध्यान हल",
+  "Free Parking": "नि:शुल्क पार्किङ",
+  "Cultural Museum": "सांस्कृतिक संग्रहालय",
+  "Art Gallery": "कला दीर्घा",
+  "Temple Proximity": "मन्दिर नजिकै",
+  "Air Conditioning": "एयर कन्डिसनिङ",
+  "Laundry Service": "लुगा धुने सेवा",
+  "Premium Views": "प्रिमियम दृश्यहरू",
+  "Heated Rooms": "तातो कोठाहरू",
+  "Adventure Sports Desk": "साहसिक खेलकुद डेस्क",
+  "Sunrise Deck": "सूर्योदय डेक",
+  "Panoramic Views": "परिदृश्य दृश्यहरू",
+  "Panoramic Mountain Views": "परिदृश्य पर्वत दृश्यहरू",
+  "Forest Views": "वन दृश्यहरू",
+  "Nature Trails": "प्रकृति पदमार्गहरू",
+  "Adventure Desk": "साहसिक डेस्क",
+  "Sustainable Design": "दिगो डिजाइन",
+  "Organic Restaurant": "जैविक रेस्टुरेन्ट",
+  "Multi-cuisine Restaurant": "बहु-व्यञ्जन रेस्टुरेन्ट",
+  "Hill View": "पहाड दृश्य",
+  "Garden Restaurant": "बगैंचा रेस्टुरेन्ट",
+  "Adventure Tours": "साहसिक भ्रमणहरू",
+  "Parking": "पार्किङ",
+  "Medical Tourism Support": "चिकित्सा पर्यटन सहयोग",
+  "Shuttle Service": "सटल सेवा",
+  "Central Location": "केन्द्रीय स्थान",
+  "Cultural Restaurant": "सांस्कृतिक रेस्टुरेन्ट",
+  "Traditional Restaurant": "परम्परागत रेस्टुरेन्ट",
+  "Meditation Room": "ध्यान कक्ष"
+},
+
+  "city": {
+    "kathmandu": "काठमाडौं",
+    "pokhara": "पोखरा",
+    "lumbini": "लुम्बिनी",
+    "baktapur": "भक्तपुर",
+    "lalitpur": "ललितपुर",
+    "janakpur": "जनकपुर",
+    "nagarkot": "नगरकोट",
+    "dharan": "धरान"
   },
-  
-    "city": {
-      "kathmandu": "काठमाडौं",
-      "pokhara": "पोखरा",
-      "lumbini": "लुम्बिनी",
-      "baktapur": "भक्तपुर",
-      "lalitpur": "ललितपुर",
-      "janakpur": "जनकपुर",
-      "nagarkot": "नगरकोट",
-      "dharan": "धरान"
-    },
-  
-    "hotel": {
-      "Dwarika's Hotel": "द्वारिका होटल",
-      "Pokhara Grande": "पोखरा ग्रान्डे",
-      "Hyatt Regency Kathmandu": "हायाट रिजेन्सी काठमाडौं",
-      "Marriott Kathmandu": "मारियट काठमाडौं", 
-      "Fish Tail Lodge": "फिस टेल लज",
-      "Hotel Grande International": "होटल ग्रान्डे इन्टरनेशनल",
-      "Bhaktapur Paradise Hotel": "भक्तपुर प्याराडाइज होटल",
-      "Lumbini Hokke Hotel": "लुम्बिनी होक्के होटल",
-      "Yak & Yeti Hotel": "याक एन्ड येती होटल",
-      "Temple Tree Resort": "टेम्पल ट्री रिसोर्ट",
-      "Aloft Kathmandu Thamel": "एलोफ्ट काठमाडौं ठमेल",
-      "Hotel Mulberry": "होटल मलबेरी",
-      "Hotel Annapurna": "होटल अन्नपूर्ण",
-      "Hotel Himalaya": "होटल हिमालय",
-      "Soaltee Kathmandu": "सोल्टी काठमाडौं",
-      "Hotel Shangri-La": "होटल शांग्री-ला"
-    },
-  
-    "location": {
+
+  "hotel": {
+    "Dwarika's Hotel": "द्वारिका होटल",
+    "Pokhara Grande": "पोखरा ग्रान्डे",
+    "Hyatt Regency Kathmandu": "हायाट रिजेन्सी काठमाडौं",
+    "Marriott Kathmandu": "मारियट काठमाडौं", 
+    "Fish Tail Lodge": "फिस टेल लज",
+    "Hotel Grande International": "होटल ग्रान्डे इन्टरनेशनल",
+    "Bhaktapur Paradise Hotel": "भक्तपुर प्याराडाइज होटल",
+    "Lumbini Hokke Hotel": "लुम्बिनी होक्के होटल",
+    "Yak & Yeti Hotel": "याक एन्ड येती होटल",
+    "Temple Tree Resort": "टेम्पल ट्री रिसोर्ट",
+    "Aloft Kathmandu Thamel": "एलोफ्ट काठमाडौं ठमेल",
+    "Hotel Mulberry": "होटल मलबेरी",
+    "Hotel Annapurna": "होटल अन्नपूर्ण",
+    "Hotel Himalaya": "होटल हिमालय",
+    "Soaltee Kathmandu": "सोल्टी काठमाडौं",
+    "Hotel Shangri-La": "होटल शांग्री-ला",
+    "Hotel Barahi": "होटल बराही",
+    "Waterfront Resort": "वाटरफ्रन्ट रिसोर्ट",
+    "Hotel Lake Shore": "होटल लेक शोर",
+    "Atithi Resort & Spa": "अतिथि रिसोर्ट एन्ड स्पा",
+    "Hotel Mountain View": "होटल माउन्टेन भ्यू",
+    "Hotel Middle Path": "होटल मिडल पाथ",
+    "Testing": "टेस्टिङ",
+      "Heritage Hotel Bhaktapur": "हेरिटेज होटल भक्तपुर",
+      "Royal Bhaktapur": "रोयल भक्तपुर",
+      "Hotel Heritage Palace": "होटल हेरिटेज प्यालेस",
+      "Cultural Resort Bhaktapur": "कल्चरल रिसोर्ट भक्तपुर",
+      "Planet Bhaktapur Hotel": "प्लानेट भक्तपुर होटल",
+      "Vajra Guest House": "वज्र गेस्ट हाउस",
+      "Traditional Stay": "परम्परागत बसाई",
+      "Bhaktapur Homestay": "भक्तपुर होमस्टे",
+      "Hotel Sweet Home": "होटल स्विट होम",  
+        "The Inn Patan": "द इन पाटन",
+        "Maya Boutique Hotel": "माया बुटिक होटल",
+        "Hotel Summit Patan": "होटल समिट पाटन",
+        "Hotel Patan Square": "होटल पाटन स्क्वायर",
+        "Greenwich Village Hotel": "ग्रीनविच भिलेज होटल",
+        "Hotel Goodday": "होटल गुड्डे",
+        "Buddha Maya Garden Hotel": "बुद्ध माया गार्डेन होटल",
+        "Zen International Hotel": "जेन इन्टरनेशनल होटल",
+        "Lumbini Garden New Crystal Hotel": "लुम्बिनी गार्डेन न्यू क्रिस्टल होटल",
+        "Hotel Nirvana": "होटल निर्वाण",
+        "Hotel Ananda Inn": "होटल आनन्द इन",
+        "Hotel Peace Palace": "होटल पिस प्यालेस",
+          "Ram Janaki Heritage Hotel": "राम जानकी हेरिटेज होटल",
+          "Hotel Sita Palace": "होटल सीता प्यालेस",
+          "Mithila Cultural Resort": "मिथिला सांस्कृतिक रिसोर्ट",
+          "Janaki Temple View Hotel": "जानकी मन्दिर भ्यू होटल",
+          "Hotel Divine": "होटल डिभाइन",
+          "Hotel Ramayana": "होटल रामायण",
+          "Hotel Shree Ram": "होटल श्री राम",
+          "Hotel Himalayan Villa": "होटल हिमालयन भिला",
+          "Sunrise Peak Hotel": "सनराइज पिक होटल",
+          "Himalayan View Resort": "हिमालयन भ्यू रिसोर्ट",
+          "Cloud Valley Resort": "क्लाउड भ्याली रिसोर्ट",
+          "Mountain Horizon Hotel": "माउन्टेन होराइजन होटल",
+          "Mountain Breeze Hotel": "माउन्टेन ब्रिज होटल",
+          "Himalayan Eco Lodge": "हिमालयन इको लज",
+          "Hotel Aangan": "होटल आँगन",
+          "Hotel Gajur": "होटल गजुर",
+          "Hotel Gorakha": "होटल गोरखा",
+          "Hotel Xenial": "होटल जेनियल",
+          "Hotel Ambassaddor": "होटल एम्बेसडर",
+          "Hotel Sungava": "होटल सुनगाभा",
+          "Hotel City Plaza": "होटल सिटी प्लाजा"
+
+  },
+
+  "location": {
     "Battisputali Road": "बत्तीसपुतली सडक",
     "North Lake Side": "उत्तर लेक साइड",
     "Taragaon, Boudha": "तारागाउँ, बौद्ध",
@@ -227,7 +550,7 @@
     "Durbar Square": "दरबार चौक",
     "Near Mayadevi Temple": "मायादेवी मन्दिर नजिकै",
     "Durbar Marg": "दरबार मार्ग",
-    "Gaurighat Lakeside": "गौरीघाट लेकसाइड",
+    "Gaurighat, Lakeside": "गौरीघाट लेकसाइड",
     "Thamel": "ठमेल",
     "Lakeside": "लेकसाइड",
     "durbar square": "दरबार स्क्वायर",
@@ -238,7 +561,1003 @@
       "dharan clock tower": "धरान घडी टावर",
       "Kupondole": "कुपण्डोल",
       "Tahachal": "ताहाचल",
-      "Lazimpat": "लाजिम्पाट"
-  }
+      "Lazimpat": "लाजिम्पाट",
+      "Gaurighat": "गौरीघाट",
+      "Lakeside South": "लेकसाइड दक्षिण",
+      "South Lake Side": "दक्षिण लेक साइड",
+      "Sarangkot Road": "सारांगकोट सडक",
+      "Central Lakeside": "केन्द्रीय लेकसाइड",
+    "pokhara, taal": "पोखरा ताल",
+    "Durbar Square Area": "दरबार स्क्वायर क्षेत्र",
+    "Near Nyatapola Temple": "न्यातपोल मन्दिर नजिकै",
+    "Changu Narayan Road": "चाँगुनारायण सडक",
+    "Pottery Square": "कुमाले चोक",
+    "Taumadhi Square": "टौमढी चोक",
+    "Old Town": "पुरानो शहर",
+    "Dattatreya Square": "दत्तात्रय चोक",
+    "Mangal Bazaar, Lalitpur": "मंगल बजार ललितपुर",
+    "Patan Durbar Square, Lalitpur": "पाटन दरबार स्क्वायर ललितपुर",
+    "Sanepa, Lalitpur": "सानेपा ललितपुर",
+    "Patan Durbar Square Area": "पाटन दरबार स्क्वायर क्षेत्र",
+    "Kupondole, Lalitpur": "कुपण्डोल ललितपुर",
+    "Jhamsikhel, Lalitpur": "झम्सीखेल ललितपुर",
+    "Pulchowk, Lalitpur": "पुल्चोक ललितपुर",
+    "Maya Devi Temple Road": "मायादेवी मन्दिर मार्ग",
+    "International Zone, Lumbini": "अन्तर्राष्ट्रिय क्षेत्र लुम्बिनी",
+    "Near Japanese Peace Stupa": "जापानी शान्ति नजिकै",
+    "Lumbini Cultural Municipality": "लुम्बिनी सांस्कृतिक नगरपालिका",
+    "Buddha Path, Lumbini": "बुद्ध पथ लुम्बिनी",
+    "Peace Road, Lumbini": "शान्ति मार्ग लुम्बिनी",
+    "Cultural District": "सांस्कृतिक जिल्ला",
+    "Near Janaki Temple": "जानकी मन्दिर नजिकै",
+    "Janakpur Cultural Zone": "जनकपुर सांस्कृतिक क्षेत्र",
+    "Janakpur": "जनकपुर",
+    "Temple Complex Area": "मन्दिर परिसर क्षेत्र",
+    "Nagarkot Viewpoint": "नगरकोट भ्यूपोइन्ट",
+    "Nagarkot Sunrise Point": "नगरकोट सूर्योदय पोइन्ट",
+    "Nagarkot Forest Edge": "नगरकोट वन किनार",
+    "Nagarkot Village": "नगरकोट गाउँ",
+    "Nagarkot Eco Zone": "नगरकोट इको जोन",
+    "Aangan, Dharan": "आँगन धरान",
+    "Bijaypur Hill, Dharan": "विजयपुर डाँडा धरान",
+    "Dharan-Bhedetar Road": "धरान-भेडेटार सडक",
+    "Dharan Market": "धरान बजार",
+    "Near BP Koirala Institute": "बीपी कोइराला संस्थान नजिकै",
+    "Putali Line Market": "पुतली लाइन बजार",
+    "Putali Line, Dharan": "पुतली लाइन धरान"
+  },
+    "aboutHotelTitle": "यस होटलको बारेमा",
+    "hotelDescription": {
+      "DwarikasHotel": "परम्परागत सजावटको साथ सुन्दर डिजाइन गरिएको सुइटमा पुरातात्विक र विलासिता अनुभव गर्नुहोस्।",
+      "HyattRegencyKathmandu": "यो विलासी कोठाले हिमालयको मनमोहक दृश्य प्रदान गर्दछ, आरामदायी बिदाको लागि उपयुक्त।",
+      "MarriottKathmandu": "निजी बालकोनी र प्रिमियम सेवाहरू समावेश भएको यो विशाल सुइटमा विलासिता अनुभव गर्नुहोस्।",
+      "YakYetiHotel": "आरामदायी अनुभवको लागि सबै सुविधाहरू सहित सजिएको यो फराकिलो कोठामा आधुनिक बसाईको आनन्द लिनुहोस्।",
+      "AloftKathmanduThamel": "यो समकालीन कोठामा छतको दृश्य छ र फुर्सदिलो र व्यावसायिक यात्रुहरू दुवैको लागि उपयुक्त छ।",
+      "HotelMulberry": "आधुनिक फर्निचर र शान्त वातावरण सहितको यो सुसज्जित कोठामा शान्तिको अनुभव गर्नुहोस्।",
+      "HotelAnnapurna": "यो आकर्षक कोठाले आराम र शैलीको सिद्ध मिश्रण प्रदान गर्दछ, रोमान्टिक बिदाको लागि उपयुक्त।",
+      "HotelHimalaya": "यो कोठाले परम्परागत र आधुनिक डिजाइनको अनौठो मिश्रण प्रदान गर्दछ, यादगार बसाइँ सुनिश्चित गर्दछ।",
+      "SoalteeKathmandu": "परिवारहरूको लागि उपयुक्त, आधुनिक सुविधाहरूसँग आराम मिश्रण गरिएको यो आरामदायी कोठामा आराम गर्नुहोस्।",
+      "HotelShangriLa": "यो भव्य कोठाले होटलको सुन्दर बगैंचामा पहुँचको साथ शान्त वातावरण प्रदान गर्दछ।",
+        "PokharaGrande": "यो लग्जरी होटलले फराकिलो कोठाहरू र उच्च स्तरीय सुविधाहरू प्रदान गर्दछ, यादगार बसाइँ सुनिश्चित गर्दछ।",
+        "FishTailLodge": "यो आरामदायी लजबाट तालको मनमोहक दृश्य मनाउनुहोस्, शान्तिपूर्ण बिश्रामको लागि उपयुक्त।",
+        "HotelGrandeInternational": "व्यावसायिक यात्रुहरूको लागि आदर्श, यो होटलले आराम र आधुनिक सुविधाहरूसँग उत्कृष्ट सेवा मिश्रण गर्दछ।",
+        "TempleTreeResort": "हिमालको मनमोहक दृश्य र विलासी सुविधाहरू प्रदान गर्ने यो शान्त रिसोर्टमा आराम गर्नुहोस्।",
+        "HotelBarahi": "सुन्दर पूल र वरिपरिको हिमालको मनमोहक दृश्य सहितको यो होटलमा विलासिता अनुभव गर्नुहोस्।",
+        "WaterfrontResort": "यो रिसोर्टमा तालमा सिधा पहुँच छ, जल खेलकुद उत्साहीहरूको लागि आदर्श।",
+        "HotelLakeShore": "तालमा सिधा पहुँच भएको यो होटल जल खेलकुद र आराम मनपराउनेहरूको लागि उपयुक्त छ।",
+        "AtitheResortSpa": "यो रिसोर्टले पूर्ण-सेवा स्पा र बाह्य गतिविधिहरूसँग आराम र साहसको सिद्ध मिश्रण प्रदान गर्दछ।",
+        "HotelMountainView": "यो होटलबाट हिमालको मनमोहक दृश्य मनाउनुहोस्, जुन ट्रेकिङ साहसको लागि पनि उत्तम आधार हो।",
+        "HotelMiddlePath": "यो होटलमा तालमाथि सूर्यास्त मनाउन उपयुक्त छतको बार छ जसले मनमोहक दृश्य प्रदान गर्दछ।",
+        "Testing": "ताल को ठूलो दृश्य सहित राम्रो र फराकिलो होटल",
+        "BhaktapurParadiseHotel": "भक्तपुरको ऐतिहासिक क्षेत्रको मुटुमा विलासिता र सम्पदाको अनुभव गर्नुहोस्।",
+        "HeritageHotelBhaktapur": "यो सुन्दर संरक्षित ऐतिहासिक होटलमा भक्तपुरको समृद्ध सांस्कृतिक सम्पदाको अनुभव गर्नुहोस्।",
+        "RoyalBhaktapur": "दरबार स्क्वायर नजिकै परम्परागत वास्तुकला र आधुनिक सुविधाहरू मिश्रित विलासी आवास।",
+        "HotelHeritagePalace": "प्रतिष्ठित न्यातपोल मन्दिरको मनमोहक दृश्य सहितको विलासी आवास।",
+        "CulturalResortBhaktapur": "पर्वतीय दृश्यहरूसँग सांस्कृतिक अनुभवहरू र आधुनिक आरामको सिद्ध मिश्रण।",
+        "PlanetBhaktapurHotel": "कुमाले जिल्लाको मुटुमा आधुनिक आराम र परम्परागत आकर्षणको मिलन।",
+        "VajraGuestHouse": "मनमोहक मन्दिर दृश्य र शान्त बगैंचा वातावरणसँग परम्परागत नेवारी पाहुना सत्कारको अनुभव गर्नुहोस्।",
+        "TraditionalStay": "व्यावहारिक अनुभवहरूसँग भक्तपुरको कुमाले संस्कृतिमा डुब्नुहोस्।",
+        "BhaktapurHomestay": "पुरानो शहरको मुटुमा यस स्वागतयोग्य होमस्टेमा प्रामाणिक नेपाली पारिवारिक जीवनको अनुभव गर्नुहोस्।",
+        "HotelSweetHome": "ऐतिहासिक दत्तात्रय स्क्वायरको मुटुमा सांस्कृतिक अन्वेषणको लागि उपयुक्त पारिवारिक-मैत्री होटल।",
+          "TheInnPatan": "ललितपुरको समृद्ध संस्कृतिको झलक दिने सुन्दर पुनर्स्थापित सम्पदा भवनमा बस्नुहोस्।",
+          "MayaBoutiqueHotel": "सुन्दर बगैंचा र उत्कृष्ट खाना विकल्पहरू सहितको यो स्टाइलिश होटलमा बुटिक विलासिताको अनुभव गर्नुहोस्।",
+          "HotelSummitPatan": "यो होटलले पाटन दरबार स्क्वायरको मनमोहक दृश्य र विशिष्ट खाना अनुभवको लागि छतमाथिको रेस्टुरेन्ट प्रदान गर्दछ।",
+          "HotelPatanSquare": "यो होटलले सांस्कृतिक भ्रमणहरू र पाटन दरबार स्क्वायरको मनमोहक दृश्य सहितको छतमाथिको क्याफे प्रदान गर्दछ।",
+          "HotelHimalaya": "यो होटलमा पौडी पोखरी र धेरै खाना विकल्पहरू छन्, आराम र व्यवसायको लागि उपयुक्त।",
+          "GreenwichVillageHotel": "अन्वेषण गरेको दिनपछि आराम गर्न उपयुक्त बगैंचा र बार सहितको आरामदायी वातावरणको आनन्द लिनुहोस्।",
+          "HotelGoodday": "यो बजेट-मैत्री होटलले नि:शुल्क नाश्ता र व्यावसायिक सेवाहरू सहितको आरामदायी आवास प्रदान गर्दछ।",
+            "LumbiniHokkeHotel": "यो होटलले जापानी खाना अनुभव प्रदान गर्दछ र पवित्र मायादेवी मन्दिर नजिकै अवस्थित छ।",
+            "BuddhaMayaGardenHotel": "यो होटलले ध्यान केन्द्र र मायादेवी मन्दिरको सुन्दर दृश्यसहित शान्तिपूर्ण आश्रय प्रदान गर्दछ।",
+            "ZenInternationalHotel": "यो अन्तर्राष्ट्रिय होटलले मन्दिर भ्रमण र स्पा प्रदान गर्दै विलासिता र सांस्कृतिक अनुभवहरू मिश्रण गर्दछ।",
+            "LumbiniGardenNewCrystalHotel": "यो होटलमा सुन्दर बगैंचा दृश्य छ र फुर्सदिलो र व्यावसायिक यात्रुहरू दुवैको लागि उपयुक्त छ।",
+            "HotelNirvana": "आध्यात्मिक यात्रुहरूको लागि उपयुक्त योग कक्षाहरू र ध्यान केन्द्र प्रदान गर्ने शान्त होटल।",
+            "HotelAnandaInn": "मन्दिर भ्रमण र सांस्कृतिक अनुभवहरूमा सजिलो पहुँचका साथ आरामदायी आवास।",
+            "HotelPeacePalace": "ध्यान हल र शाकाहारी रेस्टुरेन्ट सहितको शान्त होटल, शान्तिपूर्ण बसाइँको लागि उपयुक्त।",
+              "RamJanakiHeritageHotel": "जानकी मन्दिर र स्थानीय बजारहरूमा सजिलो पहुँचका साथ आरामदायी बसाइँको आनन्द लिनुहोस्।",
+              "HotelSitaPalace": "प्रतिष्ठित जानकी मन्दिर नजिकै बसेर जनकपुरको समृद्ध सांस्कृतिक सम्पदाको अनुभव गर्नुहोस्।",
+              "MithilaCulturalResort": "कलात्मक र सांस्कृतिक अनुभवहरू प्रदान गर्दै मिथिला संस्कृतिको समृद्ध परम्परा मनाउने अनौठो रिसोर्ट।",
+              "JanakiTempleViewHotel": "सांस्कृतिक समावेश र स्थानीय अनुभवहरूसँग जानकी मन्दिरको अतुलनीय नजिकता मनाउनुहोस्।",
+              "HotelDivine": "जनकपुरको मुटुमा स्पा सेवाहरू र सांस्कृतिक अनुभवहरू प्रदान गर्ने विलासी होटल।",
+              "HotelRamayana": "जानकी मन्दिर नजिकैको यो आकर्षक होटलमा स्थानीय संस्कृति र पाहुना सत्कारको अनुभव गर्नुहोस्।",
+              "HotelShreeRam": "यो बजेट-मैत्री होटलले आरामदायी आवास र स्थानीय आकर्षणहरूमा सजिलो पहुँच प्रदान गर्दछ।",
+                "HotelHimalayanVilla": "यो भिलाले प्रिमियम दृश्यहरू प्रदान गर्दछ र साहसिक खेलकुद उत्साहीहरूको लागि आदर्श स्थान हो।",
+                "SunrisePeakHotel": "सूर्योदय प्रेमी र पर्वत उत्साहीहरूको लागि उत्कृष्ट गन्तव्य।",
+                "HimalayanViewResort": "यस पर्वतीय आश्रयमा हिमालयको मनमोहक दृश्य र अविस्मरणीय सूर्योदय क्षणहरूको अनुभव गर्नुहोस्।",
+                "CloudValleyResort": "वनको किनारमा अवस्थित शान्त रिसोर्ट, शान्ति र प्राकृतिक सौन्दर्य प्रदान गर्दछ।",
+                "MountainHorizonHotel": "यस गतिशील पर्वतीय होटलमा साहस र मनमोहक पर्वत दृश्यहरूको अनुभव गर्नुहोस्।",
+                "MountainBreezeHotel": "न्यानो पाहुना सत्कार र मनमोहक पर्वतीय परिदृश्य प्रदान गर्ने आरामदायी होटल।",
+                "HimalayanEcoLodge": "दिगो पर्यटन र वातावरण संरक्षणप्रति प्रतिबद्ध वातावरण-मैत्री लज।",
+                  "HotelAangan": "यो प्रिमियम होटलमा पौडी पोखरी र बहु-व्यञ्जन रेस्टुरेन्ट छ जसले विलासी बसाइँ प्रदान गर्दछ।",
+                  "HotelGajur": "यो आरामदायी होटलमा पहाडी दृश्य र साहसिक खेलकुद व्यवस्थाको आनन्द लिनुहोस्।",
+                  "HotelGorakha": "यो होटलले पर्वतीय दृश्य र साहसिक भ्रमणहरू प्रदान गर्दछ, बाह्य उत्साहीहरूको लागि उपयुक्त।",
+                  "HotelXenial": "व्यावसायिक यात्रुहरूको लागि आदर्श, यो होटलमा तपाईंको सुविधाको लागि जिम र व्यावसायिक केन्द्र छ।",
+                  "HotelAmbassaddor": "यो होटलले बिरामी र परिवारहरूको लागि मेडिकल पर्यटन सहयोग र आरामदायी आवास प्रदान गर्दछ।",
+                  "HotelSungava": "यो होटलले शहरी दृश्य र आधुनिक सुविधाहरूसँग आरामदायी आवास प्रदान गर्दछ।",
+                  "HotelCityPlaza": "केन्द्रीय स्थानमा रहेको यो होटलले स्थानीय आकर्षणहरूमा सजिलो पहुँच र आरामदायी आवास प्रदान गर्दछ।"
+    },
+
+    "roomType": {
+      "Dwarika's Hotel": {
+        "Heritage Deluxe Room": "हेरिटेज डिलक्स कोठा",
+        "Cultural Heritage Suite": "सांस्कृतिक हेरिटेज सुट",
+        "Garden View Room": "बगैंचा दृश्य कोठा"
+      },
+      "Hyatt Regency Kathmandu": {
+      "Himalayan View Room": "हिमालयन दृश्य कोठा",
+      "Executive Luxury Suite": "एक्जिक्युटिभ लग्जरी सुट",
+      "Family Interconnected Rooms": "पारिवारिक इन्टरकनेक्टेड कोठाहरू"
+    },
+    "Marriott Kathmandu": {
+      "Executive Lounge Access Room": "एक्जिक्युटिभ लाउन्ज पहुँच कोठा",
+      "Luxury Mountain View Suite": "लग्जरी माउन्टेन भ्यू सुट", 
+      "Business Traveler's Retreat": "व्यवसायिक यात्रीहरूको लागि कोठा"
+    },
+    "Yak & Yeti Hotel": {
+      "Casino Deluxe Room": "क्यासिनो डिलक्स कोठा",
+      "Business Executive Suite": "बिजनेस एक्जिक्युटिभ सुट", 
+      "Riverside Luxury Room": "नदी किनार लग्जरी कोठा"
+    },
+    "Aloft Kathmandu Thamel": {
+      "Urban Loft Room": "अर्बन लफ्ट कोठा",
+      "Rooftop Experience Suite": "रूफटप अनुभव सुट", 
+      "Social Traveler Room": "सामाजिक यात्री कोठा"
+    },
+    "Hotel Mulberry": {
+      "Rooftop Pool Access Room": "रूफटप पूल पहुँच कोठा",
+      "Wellness Spa Suite": "वेल्नेस स्पा सुट",
+      "Social Traveler's Loft": "सामाजिक यात्री लफ्ट"
+    },
+    "Hotel Annapurna": {
+      "Poolside Comfort Room": "पूलसाइड आराम कोठा",
+      "Culinary Enthusiast Suite": "कलिनरी उत्साही सुट", 
+      "Urban Elegance Room": "अर्बन एलिगन्स कोठा"
+    },
+    "Hotel Himalaya": {
+      "Garden Retreat Room": "बगैंचा शान्ति कोठा",
+      "Conference Companion Suite": "सम्मेलन साथी सुट",
+      "Tennis Court View Room": "टेनिस कोर्ट दृश्य कोठा"
+    },
+    "Soaltee Kathmandu": {
+      "Family Comfort Room": "पारिवारिक आराम कोठा",
+      "Tennis Court View Suite": "टेनिस कोर्ट दृश्य सुट",
+      "Wellness Retreat Room": "स्वास्थ्य शान्ति कोठा"
+    },
+    "Hotel Shangri-La": {
+      "Garden Serenity Room": "बगैंचा शान्ति कोठा",
+      "Executive Heritage Suite": "एक्जिक्युटिभ हेरिटेज सुट",
+      "City View Comfort Room": "सहर दृश्य आराम कोठा"
+    },
+    "Pokhara Grande": {
+      "Luxury Lakeside Room": "लग्जरी लेकसाइड कोठा",
+      "Royal Spa Suite": "रोयल स्पा सुट",
+      "Gourmet Culinary Room": "गोरमेट कलिनरी कोठा"
+    },
+    "Fish Tail Lodge": {
+      "Lakeside Deluxe Room": "लेकसाइड डिलक्स कोठा",
+      "Fisherman's Suite": "फिसरम्यान सुट",
+      "Romantic Waterfront Retreat": "रोमान्टिक वाटरफ्रन्ट रिट्रिट"
+    },
+    "Hotel Grande International": {
+      "Business Executive Room": "बिजनेस एक्जिक्युटिभ कोठा",
+      "Corporate Conference Suite": "कर्पोरेट सम्मेलन सुट",
+      "Digital Nomad Workspace Room": "डिजिटल नोमाड वर्कस्पेस कोठा"
+    },
+    "Temple Tree Resort": {
+      "Mountain View Zen Room": "पर्वत दृश्य जेन कोठा",
+      "Wellness Sanctuary Suite": "वेल्नेस स्यान्क्चुअरी सुट",
+      "Garden Meditation Room": "बगैंचा ध्यान कोठा"
+    },
+    "Hotel Barahi": {
+      "Poolside Relaxation Room": "पूलसाइड आराम कोठा",
+      "Cultural Heritage Suite": "सांस्कृतिक हेरिटेज सुट",
+      "Mountain Panorama Room": "पर्वत प्यानोरमा कोठा"
+    },
+    "Waterfront Resort": {
+      "Water Sports Enthusiast Room": "जल खेल उत्साही कोठा",
+      "Sunset Lounge Suite": "सनसेट लाउन्ज सुट",
+      "Kayaker's Retreat": "कयाकर रिट्रिट"
+    },
+    "Hotel Lake Shore": {
+      "Water Sports Lover's Room": "जल खेल प्रेमी कोठा",
+      "Fishing Enthusiast Suite": "माछा मार्ने उत्साही सुट",
+      "Romantic Lakeside Retreat": "रोमान्टिक लेकसाइड रिट्रिट"
+    },
+    "Atithi Resort & Spa": {
+      "Wellness Rejuvenation Room": "स्वास्थ्य पुनर्जीवन कोठा",
+      "Family Garden Suite": "पारिवारिक बगैंचा सुट",
+      "Lakeside Meditation Room": "लेकसाइड ध्यान कोठा"
+    },
+    "Hotel Mountain View": {
+      "Trekkers' Base Camp Room": "ट्रेकर बेस क्याम्प कोठा",
+      "Panoramic Peak Suite": "प्यानोरमिक पिक सुट",
+      "Yoga and Meditation Retreat Room": "योग र ध्यान रिट्रिट कोठा"
+    },
+    "Hotel Middle Path": {
+      "Rooftop Sunset Room": "रूफटप सनसेट कोठा",
+      "Cultural Immersion Suite": "सांस्कृतिक इमर्सन सुट",
+      "Backpacker's Social Room": "ब्याकप्याकर सोसल कोठा"
+    },
+    "Bhaktapur Paradise Hotel": {
+      "Paradise Heritage Room": "स्वर्गीय सम्पदा कोठा",
+      "Royal Spa Suite": "शाही स्पा सुट",
+      "Cultural Luxury Room": "सांस्कृतिक लग्जरी कोठा"
+    },
+    
+    "Heritage Hotel Bhaktapur": {
+      "Heritage Deluxe Room": "धरोहर डिलक्स कोठा",
+      "Royal Heritage Suite": "शाही धरोहर सुट",
+      "Cultural Experience Room": "सांस्कृतिक अनुभव कोठा"
+    },
+    "Royal Bhaktapur": {
+      "Royal Heritage Room": "शाही धरोहर कोठा",
+      "Maharaja Suite": "महाराजा सुट",
+      "Durbar View Deluxe": "दरबार दृश्य डिलक्स"
+    },
+    "Hotel Heritage Palace": {
+      "Temple View Luxury Room": "मन्दिर दृश्य लग्जरी कोठा",
+      "Heritage Palace Suite": "धरोहर महल सुट",
+      "Cultural Luxury Room": "सांस्कृतिक लग्जरी कोठा"
+    },
+    "Cultural Resort Bhaktapur": {
+      "Mountain Vista Room": "पहाडी दृश्य कोठा",
+      "Cultural Program Suite": "सांस्कृतिक कार्यक्रम सुट",
+      "Garden Retreat Room": "बगैंचा आश्रय कोठा"
+    },
+    "Planet Bhaktapur Hotel": {
+      "Pottery View Room": "माटोका भाँडा दृश्य कोठा",
+      "Artisan Suite": "कारीगर सुट",
+      "City View Deluxe": "शहर दृश्य डिलक्स"
+    },
+    "Vajra Guest House": {
+      "Temple View Traditional Room": "मन्दिर दृश्य पारम्परिक कोठा",
+      "Garden Retreat Suite": "बगैंचा आश्रय सुट",
+      "Cultural Heritage Room": "सांस्कृतिक धरोहर कोठा"
+    },
+    "Traditional Stay": {
+      "Pottery Artist Room": "माटो कलाकार कोठा",
+      "Artisan Suite": "कारीगर सुट",
+      "Garden Craft Room": "बगैंचा शिल्प कोठा"
+    },
+    "Bhaktapur Homestay": {
+      "Family Home Room": "पारिवारिक घर कोठा",
+      "Garden View Homestay Suite": "बगैंचा दृश्य होमस्टे सुट",
+      "Cultural Living Room": "सांस्कृतिक बस्ने कोठा"
+    },
+    "Hotel Sweet Home": {
+      "Family Comfort Room": "पारिवारिक आराम कोठा",
+      "Cultural Explorer Suite": "सांस्कृतिक अन्वेषक सुट",
+      "Cozy Heritage Room": "आरामदायी धरोहर कोठा"
+    },
+    "The Inn Patan": {
+      "Artisan's Garden Retreat": "कारीगरको बगैंचा आश्रय",
+      "Heritage Living Suite": "धरोहर बसाइँ सुट", 
+      "Mangal Bazaar View Room": "मंगल बजार दृश्य कोठा"
+    },
+    "Maya Boutique Hotel": {
+      "Garden Serenity Boutique Room": "बगैंचा शान्ति बुटिक कोठा",
+      "Urban Luxury Lifestyle Suite": "शहरी लग्जरी जीवनशैली सुट",
+      "Culinary Design Experience Room": "पाककला डिजाइन अनुभव कोठा"
+    },
+    "Hotel Summit Patan": {
+      "Patan Square Heritage Room": "पाटन चौक सम्पदा कोठा",
+      "Cultural Immersion Suite": "सांस्कृतिक इमर्सन सुट",
+      "Rooftop Dining Experience Room": "छतमाथिको डाइनिङ अनुभव कोठा"
+    },
+    "Hotel Patan Square": {
+      "Patan Durbar Square Heritage Room": "पाटन दरबार चौक सम्पदा कोठा",
+      "Rooftop Cultural Experience Suite": "छतमाथिको सांस्कृतिक अनुभव सुट",
+      "Artisan's Inspiration Room": "कारीगर प्रेरणा कोठा"
+    },
+    "Hotel Himalaya": {
+      "Wellness Sanctuary Room": "स्वास्थ्य आश्रय कोठा",
+      "Business Executive Suite": "व्यवसाय कार्यकारी सुट",
+      "Poolside Relaxation Room": "पूल किनार आराम कोठा"
+    },
+    "Greenwich Village Hotel": {
+      "Garden Serenity Room": "बगैंचा शान्ति कोठा",
+      "Urban Socialite Suite": "शहरी सामाजिक सुट",
+      "Culinary Explorer's Room": "कलिनरी अन्वेषक कोठा"
+    },
+    "Hotel Goodday": {
+      "Business Traveler's Compact Room": "व्यवसायिक यात्री संक्षिप्त कोठा",
+      "Family Comfort Suite": "पारिवारिक आराम सुट",
+      "Budget-Friendly City View Room": "बजेट-अनुकूल शहर दृश्य कोठा"
+    },
+    "Lumbini Hokke Hotel": {
+      "Zen Meditation Room": "जेन ध्यान कोठा",
+      "Culinary Spiritual Suite": "आध्यात्मिक कलिनरी सुट",
+      "Temple Harmony Room": "मन्दिर सामंजस्य कोठा"
+    },
+    "Buddha Maya Garden Hotel": {
+      "Spiritual Serenity Room": "आध्यात्मिक शान्ति कोठा",
+      "Temple View Wellness Suite": "मन्दिर दृश्य स्वास्थ्य सुट",
+      "Enlightenment Retreat Room": "ज्ञानोदय आश्रय कोठा"
+    },
+    "Zen International Hotel": {
+      "International Spiritual Retreat Room": "अन्तर्राष्ट्रिय आध्यात्मिक आश्रय कोठा",
+      "Luxury Pilgrimage Suite": "लग्जरी तीर्थयात्रा सुट",
+      "Mindful Business Traveler's Room": "सचेत व्यवसायी यात्री कोठा"
+    },
+    "Lumbini Garden New Crystal Hotel": {
+      "Zen Garden Retreat Room": "जेन बगैंचा आश्रय कोठा",
+      "Business and Wellness Suite": "व्यवसाय र स्वास्थ्य सुट",
+      "Cultural Harmony Room": "सांस्कृतिक सामंजस्य कोठा"
+    },
+    "Hotel Nirvana": {
+      "Yoga Wellness Room": "योग स्वास्थ्य कोठा",
+      "Spiritual Transformation Suite": "आध्यात्मिक रूपान्तरण सुट",
+      "Mindful Living Room": "सचेत बसोबास कोठा"
+    },
+    "Hotel Ananda Inn": {
+      "Cultural Immersion Room": "सांस्कृतिक निमग्नता कोठा",
+      "Pilgrimage Experience Suite": "तीर्थयात्रा अनुभव सुट",
+      "Peaceful Traveler's Room": "शान्त यात्री कोठा"
+    },
+    "Hotel Peace Palace": {
+      "Mindfulness Sanctuary Room": "माइन्डफुलनेस सेन्चुरी कोठा",
+      "Vegetarian Wellness Suite": "शाकाहारी वेलनेस सुइट",
+      "Inner Peace Retreat Room": "आन्तरिक शान्ति रिट्रिट कोठा"
+    },
+    "Ram Janaki Heritage Hotel": {
+      "Mythological Heritage Room": "पौराणिक सम्पदा कोठा",
+      "Cultural Immersion Suite": "सांस्कृतिक समावेश सुइट",
+      "Artisan's Cultural Room": "कलाकारको सांस्कृतिक कोठा"
+    },
+    "Hotel Sita Palace": {
+      "Ramayana Heritage Room": "रामायण सम्पदा कोठा",
+      "Royal Mythological Suite": "राजकीय पौराणिक सुइट",
+      "Cultural Storyteller's Room": "सांस्कृतिक कथावाचक कोठा"
+    },
+    "Mithila Cultural Resort": {
+      "Mithila Art Heritage Room": "मिथिला कला सम्पदा कोठा",
+      "Cultural Immersion Masterclass Suite": "सांस्कृतिक समावेश मास्टरक्लास सुइट",
+      "Artisan's Creative Sanctuary": "कलाकारको सृजनात्मक आश्रय"
+    },
+    "Janaki Temple View Hotel": {
+      "Temple Panorama Room": "मन्दिर परिदृश्य कोठा",
+      "Spiritual Journey Suite": "आध्यात्मिक यात्रा सुइट",
+      "Local Artisan's Retreat": "स्थानीय कलाकारको विश्राम स्थल"
+    },
+    "Hotel Divine": {
+      "Spiritual Luxury Room": "आध्यात्मिक विलासी कोठा",
+      "Royal Wellness Sanctuary Suite": "राजकीय स्वास्थ्य आश्रय सुइट",
+      "Holistic Healing Room": "समग्र उपचार कोठा"
+    },
+    "Hotel Ramayana": {
+      "Garden Cultural Retreat Room": "बगैंचा सांस्कृतिक विश्राम कोठा",
+      "Mythological Wellness Suite": "पौराणिक स्वास्थ्य सुइट",
+      "Local Hospitality Room": "स्थानीय आतिथ्य कोठा"
+    },
+    "Hotel Shree Ram": {
+      "Budget Cultural Explorer Room": "किफायती सांस्कृतिक अन्वेषक कोठा",
+      "Family Cultural Experience Suite": "पारिवारिक सांस्कृतिक अनुभव सुइट",
+      "Local Traveler's Compact Room": "स्थानीय यात्री कम्प्याक्ट कोठा"
+    },
+        "Hotel Himalayan Villa": {
+          "Luxury Mountain Panorama Room": "लक्जरी माउन्टेन प्यानोरामा कोठा",
+          "Adventure Elite Suite": "एडभेन्चर एलिट सुइट",
+          "Mountain Luxury Retreat": "माउन्टेन लक्जरी रिट्रिट"
+        },
+        "Sunrise Peak Hotel": {
+          "Sunrise Observation Room": "सूर्योदय अवलोकन कोठा",
+          "Himalayan Explorer's Suite": "हिमालयन एक्सप्लोरर सुइट",
+          "Mountain Wellness Retreat": "माउन्टेन वेलनेस रिट्रिट"
+        },
+        "Himalayan View Resort": {
+          "Himalayan Sunrise Observation Room": "हिमालयन सूर्योदय अवलोकन कोठा",
+          "Mountain Meditation Suite": "माउन्टेन मेडिटेशन सुइट",
+          "Photography Explorer's Room": "फोटोग्राफी एक्सप्लोरर कोठा"
+        },
+        "Cloud Valley Resort": {
+          "Forest Harmony Room": "वन हार्मोनी कोठा",
+          "Wellness Forest Suite": "वेलनेस फरेस्ट सुइट",
+          "Nature Explorer's Retreat": "नेचर एक्सप्लोरर रिट्रिट"
+        },
+        "Mountain Horizon Hotel": {
+          "Adventure Base Camp Room": "एडभेन्चर बेस क्याम्प कोठा",
+          "Extreme Sports Wellness Suite": "एक्सट्रिम स्पोर्ट्स वेलनेस सुइट",
+          "Mountain Expedition Retreat": "माउन्टेन एक्सपेडिशन रिट्रिट"
+        },
+        "Mountain Breeze Hotel": {
+          "Mountain Serenity Room": "माउन्टेन सेरेनिटी कोठा",
+          "Trekkers' Comfort Suite": "ट्रेकर्स कम्फर्ट सुइट",
+          "Cultural Mountain Retreat": "कल्चरल माउन्टेन रिट्रिट"
+        },
+        "Himalayan Eco Lodge": {
+          "Sustainable Living Room": "सस्टेनेबल लिभिङ कोठा",
+          "Conservation Research Suite": "कन्जर्भेशन रिसर्च सुइट",
+          "Green Traveler's Retreat": "ग्रीन ट्राभलर्स रिट्रिट"
+        },
+        "Hotel Aangan": {
+          "Luxury Wellness Retreat Room": "लक्जरी वेलनेस रिट्रिट कोठा",
+          "Culinary and Spa Experience Suite": "कुलिनरी एण्ड स्पा एक्सपेरियन्स सुइट",
+          "Lifestyle Luxury Room": "लाइफस्टाइल लक्जरी कोठा"
+        },
+        "Hotel Gajur": {
+          "Hill Adventure Base Room": "हिल एडभेन्चर बेस कोठा",
+          "Extreme Sports Wellness Suite": "एक्सट्रिम स्पोर्ट्स वेलनेस सुइट",
+          "Nature Explorer's Retreat": "नेचर एक्सप्लोरर रिट्रिट"
+        },
+        "Hotel Gorakha": {
+          "Mountain Adventure Base Room": "माउन्टेन एडभेन्चर बेस कोठा",
+          "Outdoor Expedition Suite": "आउटडोर एक्सपेडिशन सुइट",
+          "Nature Explorer's Retreat": "नेचर एक्सप्लोरर रिट्रिट"
+        },
+        "Hotel Xenial": {
+          "Professional Performance Room": "प्रोफेसनल परफरमेन्स कोठा",
+          "Wellness Business Suite": "वेलनेस बिजनेस सुइट",
+          "Market Pulse Traveler's Room": "मार्केट पल्स ट्राभलर्स कोठा"
+        },
+        "Hotel Ambassador": {
+          "Medical Care Comfort Room": "मेडिकल केयर कम्फर्ट कोठा",
+          "Healing and Recovery Suite": "हिलिङ एण्ड रिकभरी सुइट",
+          "Patient Care Companion Room": "पेशेन्ट केयर कम्पेनियन कोठा"
+        },
+        "Hotel Sungava": {
+          "Urban Panorama Room": "अर्बन प्यानोरामा कोठा",
+          "Business Connectivity Suite": "बिजनेस कनेक्टिभिटी सुइट",
+          "Local Culture Insight Room": "लोकल कल्चर इनसाइट कोठा"
+        },
+        "Hotel City Plaza": {
+          "Urban Explorer's Compact Room": "अर्बन एक्सप्लोरर कम्प्याक्ट कोठा",
+          "Business Traveler's Central Suite": "बिजनेस ट्राभलर सेन्ट्रल सुइट",
+          "Local Experience Room": "लोकल एक्सपेरियन्स कोठा"
+        },
+        "Testing": {
+          "Pokhara Taal": "पोखरा ताल"
+        }
+    
+    
+    },
+    "roomDescription": {
+      "Dwarika's Hotel": {
+        "Heritage Deluxe Room": "प्रामाणिक नेवारी वास्तुकला तत्वहरू देखाउने पारम्परिक सजिएको कोठा",
+        "Cultural Heritage Suite": "हातले बनेका काठका फर्निचर र विशेष सांस्कृतिक अनुभवहरूसहितको लग्जरी सुट",
+        "Garden View Room": "होटेलको सावधानीपूर्वक व्यवस्थित पारम्परिक बगैंचाको मनोरम दृश्य हेर्न सकिने शान्त कोठा"
+      },
+      "Hyatt Regency Kathmandu": {
+      "Himalayan View Room": "आधुनिक सुविधाहरू र हिमालयको मनमोहक दृश्य सहितको ठूलो कोठा",
+      "Executive Luxury Suite": "अलग बस्ने क्षेत्र, ३६० डिग्री पर्वत दृश्य र प्रिमियम सेवाहरू सहितको विशाल सुट",
+      "Family Interconnected Rooms": "शहर र पर्वत दृश्य सहित पारिवारिक प्रयोगको लागि उपयुक्त जोडिएका दुई कोठाहरू"
+    },
+    "Marriott Kathmandu": {
+      "Executive Lounge Access Room": "मारियट एक्जिक्युटिभ लाउन्जको विशेष पहुँच र प्रिमियम सुविधाहरू सहितको परिष्कृत कोठा",
+      "Luxury Mountain View Suite": "अलग बस्ने क्षेत्र र प्रिमियम सेवाहरू सहित हिमालको मनमोहक दृश्य भएको विशाल सुट",
+      "Business Traveler's Retreat": "समर्पित कार्य क्षेत्र र उच्च गतिको इन्टरनेट सहित व्यवसायिक यात्रीहरूको लागि डिजाइन गरिएको पूर्ण सुसज्जित कोठा"
+    },
+    "Yak & Yeti Hotel": {
+      "Casino Deluxe Room": "होटेलको प्रख्यात क्यासिनो र मनोरञ्जन क्षेत्रमा सिधा पहुँच सहितको आरामदायी कोठा",
+      "Business Executive Suite": "कार्य डेस्क, बैठक क्षेत्र र प्रिमियम व्यवसाय सुविधाहरू सहित पूर्ण सुसज्जित सुट",
+      "Riverside Luxury Room": "नजिकैको खोला र शहरको दृश्य सहित सुन्दर डिजाइन गरिएको लग्जरी कोठा"
+    },
+    "Aloft Kathmandu Thamel": {
+      "Urban Loft Room": "आधुनिक डिजाइन र शहर दृश्य सहितको साधारण र न्यूनतम कोठा",
+      "Rooftop Experience Suite": "काठमाडौंको विस्तृत दृश्य सहित निजी रूफटप पहुँच भएको विशेष सुट",
+      "Social Traveler Room": "युवा यात्रीहरूको लागि डिजाइन गरिएको सामाजिक स्थान र आधुनिक सुविधाहरू सहित स्टाइलिश कोठा"
+    },
+    "Hotel Mulberry": {
+      "Rooftop Pool Access Room": "होटलको आकर्षक रूफटप पूल र शहरको विस्तृत दृश्य सहित स्टाइलिश कोठा",
+      "Wellness Spa Suite": "होटलको स्पामा सिधा पहुँच सहित आराम र पुनर्जीवन सुविधाहरू भएको लग्जरी सुट",
+      "Social Traveler's Loft": "सामाजिक स्थान र आधुनिक कनेक्टिविटी सहित युवा यात्रीहरूको लागि डिजाइन गरिएको जीवन्त कोठा"
+    },
+    "Hotel Annapurna": {
+      "Poolside Comfort Room": "होटेलको पौडी पोखरीको सीधा दृश्य सहितको आरामदायी कोठा र मनोरञ्जन क्षेत्रमा सजिलो पहुँच",
+      "Culinary Enthusiast Suite": "होटेलको प्रख्यात रेस्टुरेन्ट नजिकैको विशाल सुट, खाना प्रेमीहरू र ठूलो समूहहरूको लागि उपयुक्त",
+      "Urban Elegance Room": "आधुनिक सजावट सहित स्टाइलिश कोठा, आराम र समकालीन डिजाइनको उत्तम मिश्रण"
+    },
+    "Hotel Himalaya": {
+      "Garden Retreat Room": "होटेलको सुन्दर बगैंचाको दृश्य सहित शान्तिपूर्ण बसाइँ, शान्तिको अनुभवको लागि उपयुक्त",
+      "Conference Companion Suite": "सम्मेलन सुविधाहरू नजिकैको विशाल सुट, व्यवसाय समूह वा परिवारहरूको लागि आदर्श",
+      "Tennis Court View Room": "होटेलको पेशेवर टेनिस कोर्टको सीधा दृश्य सहितको अनौठो कोठा, खेलकुद उत्साहीहरूको लागि उपयुक्त"
+    },
+    "Soaltee Kathmandu": {
+      "Family Comfort Room": "अतिरिक्त बेड र पारिवारिक सुविधाहरू सहित फराकिलो कोठा",
+      "Tennis Court View Suite": "होटेलको पेशेवर टेनिस कोर्टको दृश्य सहित विलासी सुट",
+      "Wellness Retreat Room": "स्पा र स्वास्थ्य केन्द्रमा सीधा पहुँच सहित शान्त कोठा"
+    },
+    "Hotel Shangri-La": {
+      "Garden Serenity Room": "होटेलको हरियाली बगैंचामा सिधा पहुँच सहित शान्तिपूर्ण बसाइँको लागि उपयुक्त कोठा",
+      "Executive Heritage Suite": "पारम्परिक नेपाली सजावट र आधुनिक लग्जरी सहितको विशाल सुट, अलग बस्ने क्षेत्र सहित",
+      "City View Comfort Room": "काठमाडौंको जीवन्त शहर दृश्य सहित उज्यालो र हावादार कोठा"
+    },
+    "Pokhara Grande": {
+      "Luxury Lakeside Room": "फेवा तालको सीधा दृश्य सहित स्टाइलिश कोठा, प्रिमियम फर्निचर र व्यक्तिगत सेवा",
+      "Royal Spa Suite": "निजी स्पा सुविधा, ज्याकुजी र २४-घण्टा बटलर सेवा सहित अन्तिम लग्जरी सुट",
+      "Gourmet Culinary Room": "निजी डाइनिङ क्षेत्र, शेफको किचन र क्युरेटेड कलिनरी अनुभव सहित विशेष कोठा"
+    },
+    "Fish Tail Lodge": {
+      "Lakeside Deluxe Room": "फेवा तालको विस्तृत दृश्य सहित फराकिलो कोठा, निजी बाल्कनी र आधुनिक सुविधाहरू",
+      "Fisherman's Suite": "सीधा लेक पहुँच, माछा मार्ने उपकरण भाडा र ताल दृश्य सहित निजी बस्ने क्षेत्र भएको सुट",
+      "Romantic Waterfront Retreat": "जोडीहरूको लागि डिजाइन गरिएको कोठा, अबाधित ताल र पर्वत दृश्य सहित"
+    },
+    "Hotel Grande International": {
+      "Business Executive Room": "व्यवसायिक यात्रीहरूको लागि पूर्ण सुसज्जित कोठा, समर्पित कार्य क्षेत्र र उच्च गतिको इन्टरनेट",
+      "Corporate Conference Suite": "बैठक सुविधा, निजी कार्य क्षेत्र र व्यापक व्यवसाय सेवाहरू सहित विशाल सुट",
+      "Digital Nomad Workspace Room": "रिमोट कामगारहरूको लागि एर्गोनोमिक वर्कस्पेस र उन्नत कनेक्टिविटी सहित आधुनिक कोठा"
+    },
+    "Temple Tree Resort": {
+      "Mountain View Zen Room": "अन्नपूर्णा पर्वत शृङ्खलाको विस्तृत दृश्य सहित ध्यान कोना भएको शान्त कोठा",
+      "Wellness Sanctuary Suite": "निजी योग क्षेत्र, स्पा-जस्तो बाथरूम र नि:शुल्क स्वास्थ्य उपचार सहित लग्जरी सुट",
+      "Garden Meditation Room": "रिसोर्टको जेन बगैंचाको दृश्य सहित ध्यान र विश्रामको लागि उपयुक्त कोठा"
+    },
+    "Hotel Barahi": {
+      "Poolside Relaxation Room": "होटेलको पौडी पोखरीमा सिधा पहुँच र उष्णकटिबन्धीय बगैंचाको दृश्य सहित आरामदायी कोठा",
+      "Cultural Heritage Suite": "पारम्परिक नेपाली कलाको सजावट सहितको लग्जरी सुट, सांस्कृतिक अनुभव र आधुनिक आराम प्रदान गर्दछ",
+      "Mountain Panorama Room": "१८० डिग्री पर्वतीय दृश्य प्रदर्शन गर्ने फ्लोर-टु-सिलिङ झ्याल सहित उज्यालो कोठा"
+    },
+    "Waterfront Resort": {
+      "Water Sports Enthusiast Room": "निःशुल्क जल खेल उपकरण र सिधा ताल पहुँच सहित साहसिक कोठा",
+      "Sunset Lounge Suite": "फेवा तालमा सूर्यास्तको मनमोहक दृश्य प्रदान गर्ने निजी टेरेस सहितको विशाल सुट",
+      "Kayaker's Retreat": "जल खेल प्रेमीहरूको लागि विशेष रूपमा डिजाइन गरिएको कोठा, सुरक्षित उपकरण भण्डारण र ताल पहुँच"
+    },
+    "Hotel Lake Shore": {
+      "Water Sports Lover's Room": "निःशुल्क जल खेल उपकरण र सिधा ताल समुद्र तट पहुँच सहित साहसिक कोठा",
+      "Fishing Enthusiast Suite": "माछा मार्ने उपकरण भाडा, ताल दृश्य र स्थानीय गाईड जडान सहित फराकिलो सुट",
+      "Romantic Lakeside Retreat": "जोडीहरूको लागि डिजाइन गरिएको कोठा, निजी बाल्कनी र अबाधित ताल र पर्वत दृश्य"
+    },
+    "Atithi Resort & Spa": {
+      "Wellness Rejuvenation Room": "सुगन्धित चिकित्सा सेटअप, ध्यान कोना र निःशुल्क स्वास्थ्य उपचार सहित स्पा-प्रेरित कोठा",
+      "Family Garden Suite": "निजी बगैंचा क्षेत्र, बच्चाहरूको खेल क्षेत्र र जोडिएका कोठाहरू सहित पारिवारिक सुट",
+      "Lakeside Meditation Room": "आंशिक ताल दृश्य र योग म्याट प्रावधान सहित जेन-जस्तो वातावरण भएको शान्त कोठा"
+    },
+    "Hotel Mountain View": {
+      "Trekkers' Base Camp Room": "ट्रेकिङ गियर भण्डारण, नक्शा र पर्वत भ्रमण स्रोतहरू सहित साहसिक कोठा",
+      "Panoramic Peak Suite": "अन्नपूर्ण र माछापुच्छ्रे पर्वत शृङ्खलाको अबाधित दृश्य सहित लग्जरी सुट",
+      "Yoga and Meditation Retreat Room": "योग म्याट, ध्यान कुशन र पर्वत दृश्य सहित चेतना कोठा"
+    },
+    "Hotel Middle Path": {
+      "Rooftop Sunset Room": "पोखराको विस्तृत सूर्यास्त दृश्य सहित निजी रूफटप बार पहुँच भएको कोठा",
+      "Cultural Immersion Suite": "स्थानीय कला प्रदर्शन गर्ने विशाल सुट, सांस्कृतिक कार्यशाला र परम्परागत सजावट",
+      "Backpacker's Social Room": "एकल यात्री र सामाजिक अन्तरक्रियाको लागि उपयुक्त सामुदायिक स्थान सहित बजेट-मैत्री कोठा"
+    },
+    "Bhaktapur Paradise Hotel": {
+      "Paradise Heritage Room": "पारम्परिक वास्तुकला र आधुनिक स्पा सुविधाहरूको संयोजन भएको विलासी कोठा जसले ऐतिहासिक सम्पदाको मनोरम दृश्य प्रदान गर्दछ",
+      "Royal Spa Suite": "निजी स्पा सुविधा, पारम्परिक सजावट र व्यक्तिगत धरोहर भ्रमण सेवाहरू सहितको प्रिमियम सुट",
+      "Cultural Luxury Room": "सांस्कृतिक कलाकृतिहरू, प्रिमियम सुविधाहरू र धरोहर स्थलहरूमा सजिलो पहुँच भएको सुन्दर कोठा"
+    },
+    "Heritage Hotel Bhaktapur": {
+      "Heritage Deluxe Room": "प्रामाणिक नेवारी वास्तुकला र हातले बनेका फर्निचरहरू सहितको पारम्परिक कोठा",
+      "Royal Heritage Suite": "नक्काशीदार काठका झ्यालहरू, निजी आँगन दृश्य र सांस्कृतिक कलाकृतिहरू सहितको विलासी सुट",
+      "Cultural Experience Room": "पारम्परिक सजावट र दरबार चौकको प्रत्यक्ष दृश्य भएको निमग्न अनुभव कोठा"
+    },
+    "Royal Bhaktapur": {
+      "Royal Heritage Room": "पारम्परिक शाही सजावट र आधुनिक सुविधाहरू सहितको विलासी कोठा जसले धरोहर दृश्य प्रदान गर्दछ",
+      "Maharaja Suite": "अलग बस्ने क्षेत्र, स्पा बाथरूम र व्यक्तिगत बटलर सेवा सहितको भव्य सुट",
+      "Durbar View Deluxe": "दरबार चौकको आकर्षक दृश्य र लग्जरी सुविधाहरू सहितको प्रिमियम कोठा"
+    },
+    "Hotel Heritage Palace": {
+      "Temple View Luxury Room": "न्यातापोला मन्दिरको विस्तृत दृश्य र लग्जरी सुविधाहरू सहितको सुन्दर कोठा",
+      "Heritage Palace Suite": "पारम्परिक महल सजावट, मन्दिर दृश्य र प्रिमियम डाइनिङ सेवाहरू सहितको विशाल सुट",
+      "Cultural Luxury Room": "लग्जरी आराम र सांस्कृतिक अनुभवहरूको संयोजन भएको परिष्कृत कोठा जसले मन्दिर भ्रमण पहुँच प्रदान गर्दछ"
+    },
+    "Cultural Resort Bhaktapur": {
+      "Mountain Vista Room": "पहाडी दृश्य र पारम्परिक सजावट तत्वहरू सहितको आरामदायी कोठा",
+      "Cultural Program Suite": "सांस्कृतिक गतिविधिहरू र कार्यशालाहरूको लागि निजी स्थान सहित सांस्कृतिक निमग्नताको लागि डिजाइन गरिएको सुट",
+      "Garden Retreat Room": "आधुनिक आराम र सांस्कृतिक आकर्षणको उत्तम मिश्रण भएको बगैंचा पहुँच सहित शान्त कोठा"
+    },
+    "Planet Bhaktapur Hotel": {
+      "Pottery View Room": "ऐतिहासिक माटोका भाँडा चौकको दृश्य भएको आरामदायी कोठा, सांस्कृतिक उत्साहीहरूको लागि उपयुक्त",
+      "Artisan Suite": "स्थानीय माटोका कलाकृतिहरू र पारम्परिक शिल्प प्रदर्शनहरू सहितको विशाल सुट",
+      "City View Deluxe": "भक्तपुरको प्राचीन आकाशभेरीको विस्तृत दृश्य भएको आधुनिक कोठा"
+    },
+    "Vajra Guest House": {
+      "Temple View Traditional Room": "तौमाधी चौकका मन्दिरहरूको प्रत्यक्ष दृश्य र पारम्परिक नेवारी सजावट सहितको प्रामाणिक कोठा",
+      "Garden Retreat Suite": "शान्त बगैंचाको दृश्य भएको विशाल सुट, सांस्कृतिक अनुभव खोज्ने परिवारहरूको लागि उपयुक्त",
+      "Cultural Heritage Room": "सांस्कृतिक भ्रमण र स्थानीय अनुभवहरूमा सजिलो पहुँच भएको पारम्परिक वास्तुकला भएको आरामदायी कोठा"
+    },
+    "Traditional Stay": {
+      "Pottery Artist Room": "माटो कला कार्यक्षेत्र, पारम्परिक उपकरणहरू र माटोका भाँडा चौकको दृश्य भएको सृजनात्मक कोठा",
+      "Artisan Suite": "निजी माटो कार्यशाला स्थान र पारम्परिक शिल्प प्रदर्शनहरू सहितको विशाल सुट",
+      "Garden Craft Room": "सांस्कृतिक गतिविधिहरूको लागि समर्पित स्थान सहित बगैंचाको दृश्य भएको शान्त कोठा"
+    },
+    "Bhaktapur Homestay": {
+      "Family Home Room": "घरायली खाना र वास्तविक स्थानीय जीवन अनुभव भएको पारम्परिक नेवारी घरको आरामदायी कोठा",
+      "Garden View Homestay Suite": "पारम्परिक नेवारी जीवनशैली र रीतिरिवाजहरू अनुभव गर्न उपयुक्त बगैंचा दृश्य भएको विशाल परिवार सुट",
+      "Cultural Living Room": "स्थानीय सजावट र सांस्कृतिक गतिविधिहरूमा प्रत्यक्ष पहुँच भएको प्रामाणिक कोठा"
+    },
+    "Hotel Sweet Home": {
+      "Family Comfort Room": "भक्तपुरको सम्पदा अन्वेषण गर्ने परिवारहरूको लागि पारम्परिक स्पर्शहरू सहितको विशाल कोठा",
+      "Cultural Explorer Suite": "स्थानीय कला र सम्पदा स्थलहरूमा सजिलो पहुँच भएको सांस्कृतिक उत्साहीहरूको लागि डिजाइन गरिएको सुट",
+      "Cozy Heritage Room": "आधुनिक सुविधाहरू र पारम्परिक आकर्षणको संयोजन भएको आरामदायी कोठा, जोडाहरूको लागि आदर्श"
+    },
+    "The Inn Patan": {
+      "Artisan's Garden Retreat": "होटलको पारम्परिक बगैंचाको दृश्य भएको शान्त कोठा, स्थानीय शिल्प प्रदर्शन र कारीगर कार्यशालाहरूमा प्रत्यक्ष पहुँच सहित",
+      "Heritage Living Suite": "प्रामाणिक नेवारी घरको पुनरुत्पादन गरिएको विस्तृत सुट, ऐतिहासिक अनुभवहरू र सांस्कृतिक कलाकृतिहरू सहित",
+      "Mangal Bazaar View Room": "ललितपुरको व्यस्त स्थानीय जीवन र सांस्कृतिक सम्पदाको दृश्य भएको जीवन्त कोठा"
+    },
+    "Maya Boutique Hotel": {
+      "Garden Serenity Boutique Room": "होटलको उत्कृष्ट रूपमा डिजाइन गरिएको बगैंचाको दृश्य भएको शान्त कोठा, प्राकृतिक सौन्दर्य र बुटिक डिजाइन सहित",
+      "Urban Luxury Lifestyle Suite": "निजी बार क्षेत्र, क्युरेटेड कलाकृतिहरू र व्यक्तिगत खरिद अनुभव सहितको आधुनिक सुट",
+      "Culinary Design Experience Room": "होटलको रेस्टुरेन्ट नजिकैको अनौठो कोठा, गोरमेट खानपान र पाककला कक्षाहरू सहित"
+    },
+    "Hotel Summit Patan": {
+      "Patan Square Heritage Room": "पाटन दरबार चौकको विस्तृत दृश्य भएको पारम्परिक नेवारी वास्तुकला सहितको सुन्दर कोठा",
+      "Cultural Immersion Suite": "ललितपुरको समृद्ध सांस्कृतिक सम्पदा प्रदर्शन गर्ने विस्तृत सुट, अन्तरक्रियात्मक प्रदर्शनिहरू सहित",
+      "Rooftop Dining Experience Room": "ललितपुरको ऐतिहासिक परिदृश्यको दृश्य भएको रूफटप रेस्टुरेन्ट पहुँच सहितको अनौठो कोठा"
+    },
+    "Hotel Patan Square": {
+      "Patan Durbar Square Heritage Room": "पाटन दरबार चौकको पैनोरामिक दृश्य भएको पारम्परिक नेवारी वास्तुकला सहितको कोठा",
+      "Rooftop Cultural Experience Suite": "सांस्कृतिक अनुभवहरू र लाइभ संगीत सहितको रूफटप कफे पहुँच भएको विस्तृत सुट",
+      "Artisan's Inspiration Room": "स्थानीय शिल्पकारहरूसँग जोडिएको रचनात्मक कोठा, समर्पित कार्यक्षेत्र र कलाकृतिहरू सहित"
+    },
+    "Hotel Himalaya": {
+      "Wellness Sanctuary Room": "होटलको स्पामा प्रत्यक्ष पहुँच भएको शान्त कोठा, स्वास्थ्य सम्बन्धी सुविधाहरू सहित",
+      "Business Executive Suite": "सम्मेलन सुविधा र प्रिमियम कनेक्टिभिटी सहित व्यवसायिकहरूको लागि डिजाइन गरिएको सुट",
+      "Poolside Relaxation Room": "स्विमिङ पुलको प्रत्यक्ष दृश्य भएको आरामदायी कोठा, आराम र मनोरञ्जनको उत्तम मिश्रण"
+    },
+    "Greenwich Village Hotel": {
+      "Garden Serenity Room": "हरियाली बगैंचाको दृश्य भएको शान्त कोठा, आराम र शान्तिको लागि उत्तम",
+      "Urban Socialite Suite": "सामाजिक सभाहरूको लागि उपयुक्त जीवन्त सुट, निजी बार क्षेत्र र आधुनिक डिजाइन सहित",
+      "Culinary Explorer's Room": "स्थानीय खानपान संस्कृति र पाककला अनुभवहरू प्रदान गर्ने अनौठो कोठा"
+    },
+    "Hotel Goodday": {
+      "Business Traveler's Compact Room": "व्यवसायिक यात्रीहरूको लागि डिजाइन गरिएको कार्यक्षेत्र र आवश्यक सुविधाहरू सहितको कोठा",
+      "Family Comfort Suite": "पारिवारिक सुविधाहरू र जडान भएका कक्षाहरू सहितको विशाल सुट",
+      "Budget-Friendly City View Room": "शहरको दृश्य र आवश्यक सुविधाहरू सहित बजेट-अनुकूल कोठा"
+    },
+    "Lumbini Hokke Hotel": {
+      "Zen Meditation Room": "जापानी प्रेरित डिजाइन र जेन बगैंचाको दृश्य सहितको आध्यात्मिक शान्ति कोठा",
+      "Culinary Spiritual Suite": "जापानी कलिनरी अनुभव, स्पा उपचार र आध्यात्मिक स्वास्थ्य कार्यक्रम सहितको विस्तृत सुट",
+      "Temple Harmony Room": "जापानी र बौद्ध परम्पराको सांस्कृतिक सम्पर्क प्रदर्शन गर्ने सांस्कृतिक कलाकृतिहरू सहितको कोठा"
+    },
+    "Buddha Maya Garden Hotel": {
+      "Spiritual Serenity Room": "ध्यान कोना र बौद्ध कला सहितको सचेतनताको लागि डिजाइन गरिएको शान्त कोठा",
+      "Temple View Wellness Suite": "माया देवी मन्दिरको पैनोरामिक दृश्य र निजी योग क्षेत्र सहितको स्वास्थ्य सुट",
+      "Enlightenment Retreat Room": "पवित्र ग्रन्थहरू र व्यक्तिगत चिन्तनको लागि शान्त वातावरण भएको आश्रय कोठा"
+    },
+    "Zen International Hotel": {
+      "International Spiritual Retreat Room": "अन्तर्राष्ट्रिय डिजाइन र लुम्बिनीको आध्यात्मिक सारको संयोजन भएको कोठा",
+      "Luxury Pilgrimage Suite": "व्यक्तिगत सांस्कृतिक मार्गदर्शन र अन्तर्राष्ट्रिय स्वास्थ्य सुविधाहरू सहितको लग्जरी सुट",
+      "Mindful Business Traveler's Room": "काम र आध्यात्मिक स्वास्थ्यको सन्तुलन खोज्ने पेशेवरहरूको लागि एकीकृत कार्यक्षेत्र सहितको कोठा"
+    },
+    "Lumbini Garden New Crystal Hotel": {
+      "Zen Garden Retreat Room": "जापानी प्रेरित बगैंचाको दृश्य सहित न्यूनतम डिजाइन भएको शान्त कोठा",
+      "Business and Wellness Suite": "समर्पित कार्यक्षेत्र र ध्यान क्षेत्र सहित व्यवसाय र आध्यात्मिकता संयुक्त सुट",
+      "Cultural Harmony Room": "अन्तर्राष्ट्रिय सांस्कृतिक समझदारी प्रदर्शन गर्ने कला प्रदर्शन सहितको कोठा"
+    },
+    "Hotel Nirvana": {
+      "Yoga Wellness Room": "प्रिमियम योग उपकरण र समग्र स्वास्थ्य स्रोतहरू सहितको समर्पित योग क्षेत्र",
+      "Spiritual Transformation Suite": "निजी योग सत्र र रूपान्तरणकारी अनुभवहरू सहितको गहन स्वास्थ्य कार्यक्रम सुट",
+      "Mindful Living Room": "प्रेरणादायक साहित्य र शान्त वातावरण सहित समग्र व्यक्तिगत विकासको लागि कोठा"
+    },
+    "Hotel Ananda Inn": {
+      "Cultural Immersion Room": "लुम्बिनीको समृद्ध सांस्कृतिक धरोहरसँग जोडिने स्थानीय कला सहितको कोठा",
+      "Pilgrimage Experience Suite": "मार्गदर्शित ध्यान र सांस्कृतिक कार्यशाला सहितको तीर्थयात्रा अनुभव सुट",
+      "Peaceful Traveler's Room": "शान्त सजावट र व्यक्तिगत आध्यात्मिक अन्वेषण स्रोतहरू सहितको कोठा"
+    },
+
+       "Hotel Peace Palace": {
+        "Mindfulness Sanctuary Room": "आन्तरिक शान्तिको लागि समर्पित स्थान, ध्यान कुशन, शान्त सजावट र माइन्डफुलनेस स्रोतहरू सहित",
+        "Vegetarian Wellness Suite": "शाकाहारी पाककला अनुभव, पोषण कार्यशाला र व्यापक स्वास्थ्य सुविधाहरू प्रदान गर्ने समग्र सुट",
+        "Inner Peace Retreat Room": "आध्यात्मिक साहित्य, ध्यान सहायक र शान्त वातावरण सहित व्यक्तिगत चिन्तनको लागि डिजाइन गरिएको शान्त कोठा"
+      },
+      "Ram Janaki Heritage Hotel": {
+        "Mythological Heritage Room": "क्युरेट गरिएका कलाकृतिहरू, पारम्परिक कलाकृति र ऐतिहासिक कथाहरू मार्फत रामायण महाकाव्य प्रदर्शन गर्ने सुन्दर कोठा",
+        "Cultural Immersion Suite": "पारम्परिक शिल्प कार्यशाला, कथा वाचन सत्र र स्थानीय कला प्रदर्शनी सहित गहिरो सांस्कृतिक अनुभव प्रदान गर्ने व्यापक सुट",
+        "Artisan's Cultural Room": "अन्तरक्रियात्मक कला प्रदर्शन र पारम्परिक सीप प्रदर्शन सहित स्थानीय कारीगरीसँग पाहुनाहरूलाई जोड्न डिजाइन गरिएको रचनात्मक स्थान"
+      },
+      "Hotel Sita Palace": {
+        "Ramayana Heritage Room": "कलात्मक प्रदर्शन, पारम्परिक सजावट र सांस्कृतिक कलाकृतिहरू मार्फत रामायण महाकाव्य प्रदर्शन गर्ने निमग्न कोठा",
+        "Royal Mythological Suite": "व्यापक कथा वाचन स्रोतहरू र पौराणिक कला स्थापना सहित जनकपुरको शाही विरासतको उत्सव मनाउने विशाल सुट",
+        "Cultural Storyteller's Room": "अन्तरक्रियात्मक कथा वाचन सत्र, स्थानीय साहित्य र पौराणिक अनुसन्धान स्रोतहरू प्रदान गर्ने सांस्कृतिक उत्साहीहरूको लागि समर्पित स्थान"
+      },
+      "Mithila Cultural Resort": {
+        "Mithila Art Heritage Room": "हातले पेन्ट गरिएका भित्ताहरू, पारम्परिक कलाकृति र अन्तरक्रियात्मक सांस्कृतिक प्रदर्शन सहित मिथिला कलाको लागि समर्पित कोठा",
+        "Cultural Immersion Masterclass Suite": "पारम्परिक कला कार्यशाला, शिल्प प्रदर्शन र क्युरेट गरिएका मिथिला सांस्कृतिक स्रोतहरू सहित गहिरो सांस्कृतिक अनुभव प्रदान गर्ने व्यापक सुट",
+        "Artisan's Creative Sanctuary": "पेशेवर-ग्रेड कला आपूर्ति, स्थानीय शिल्प उपकरण र प्रेरणादायक सांस्कृतिक वातावरण सहित कलाकार र संस्कृति उत्साहीहरूको लागि समर्पित रचनात्मक स्थान"
+      },
+      "Janaki Temple View Hotel": {
+        "Temple Panorama Room": "निजी बालकोनी र सांस्कृतिक व्याख्या स्रोतहरू सहित जानकी मन्दिरको मनमोहक दृश्य प्रदान गर्ने कोठा",
+        "Spiritual Journey Suite": "ध्यान स्थान, धार्मिक साहित्य र निर्देशित सांस्कृतिक अनुभवहरू सहित आध्यात्मिक खोजकर्ताहरूको लागि डिजाइन गरिएको व्यापक सुट",
+        "Local Artisan's Retreat": "कार्यस्थल, पारम्परिक कला प्रदर्शन र कारीगर कार्यशाला अन्तर्दृष्टि सहित स्थानीय शिल्पसँग पाहुनाहरूलाई जोड्ने रचनात्मक कोठा"
+      },
+      "Hotel Divine": {
+        "Spiritual Luxury Room": "प्रिमियम स्वास्थ्य सुविधाहरू र सांस्कृतिक स्पर्शहरू सहित विलासिता र आध्यात्मिक वातावरणलाई संयोजन गर्ने सुन्दर कोठा",
+        "Royal Wellness Sanctuary Suite": "निजी स्पा सुविधाहरू र व्यक्तिगत सांस्कृतिक उपचार कार्यक्रमहरू सहित व्यापक स्वास्थ्य अनुभवहरू प्रदान गर्ने विशाल सुट",
+        "Holistic Healing Room": "ध्यान स्रोतहरू, स्पा उपचार र आध्यात्मिक मार्गदर्शन सहित समग्र स्वास्थ्यको लागि समर्पित कोठा"
+      },
+      "Hotel Ramayana": {
+        "Garden Cultural Retreat Room": "सांस्कृतिक चिन्तन र स्थानीय अनुभवहरूको लागि शान्त स्थान प्रदान गर्ने होटलको बगैंचाको दृश्य भएको शान्त कोठा",
+        "Mythological Wellness Suite": "ध्यान स्थान र समग्र सांस्कृतिक स्रोतहरू सहित सांस्कृतिक अनुभवहरू र स्वास्थ्यलाई मिश्रण गर्ने व्यापक सुट",
+        "Local Hospitality Room": "पारम्परिक सजावट र व्यक्तिगत सांस्कृतिक अन्तरक्रिया अवसरहरू सहित स्थानीय आतिथ्य प्रदर्शन गर्न डिजाइन गरिएको आत्मीय कोठा"
+      },
+      "Hotel Shree Ram": {
+        "Budget Cultural Explorer Room": "स्थानीय सांस्कृतिक अन्तर्दृष्टि र आवश्यक आराम सुविधाहरू प्रदान गर्ने बजेट यात्रीहरूको लागि किफायती कोठा",
+        "Family Cultural Experience Suite": "जोडिएका स्थानहरू र स्थानीय कथा वाचन स्रोतहरू सहित परिवार-मैत्री सांस्कृतिक अनुभवहरू प्रदान गर्ने विशाल सुट",
+        "Local Traveler's Compact Room": "आवश्यक सुविधाहरू र स्थानीय सांस्कृतिक जडानहरू प्रदान गर्ने एकल यात्री र ब्याकप्याकरहरूको लागि कुशल कोठा"
+      },
+    "Hotel Himalayan Villa": {
+      "Luxury Mountain Panorama Room": "हिटेड फ्लोर र उन्नत आराम प्रविधिहरू सहित अतुलनीय पर्वतीय दृश्य प्रदान गर्ने प्रिमियम कोठा",
+      "Adventure Elite Suite": "व्यक्तिगत गियर तयारी क्षेत्र र उच्च-स्तरीय स्वास्थ्य सुविधाहरू सहित प्रिमियम साहसिक अनुभवहरूको लागि व्यापक सुट",
+      "Mountain Luxury Retreat": "व्यक्तिगत पर्वतीय अनुभवहरू र प्रिमियम आराम सुविधाहरू प्रदान गर्ने विशेष यात्रीहरूको लागि डिजाइन गरिएको विशेष कोठा"
+    },
+    "Sunrise Peak Hotel": {
+      "Sunrise Observation Room": "उन्नत सूर्योदय हेर्ने प्रविधि र पेशेवर फोटोग्राफी उपकरण सहित उत्कृष्ट स्थानमा रहेको कोठा",
+      "Himalayan Explorer's Suite": "पर्वत अनुसन्धान स्रोतहरू, ट्रेकिङ योजना क्षेत्र र निमग्न परिदृश्य अनुभवहरू सहित व्यापक साहसिक सुट",
+      "Mountain Wellness Retreat": "ध्यान स्थान र प्राकृतिक उपचार स्रोतहरू सहित पर्वत-प्रेरित स्वास्थ्यमा केन्द्रित समग्र कोठा"
+    },
+    "Himalayan View Resort": {
+      "Himalayan Sunrise Observation Room": "निरन्तर पैनोरामिक पर्वत र सूर्योदय दृश्य प्रदान गर्ने फ्लोर-टु-सिलिङ झ्यालहरू सहित रणनीतिक रूपमा डिजाइन गरिएको कोठा",
+      "Mountain Meditation Suite": "निजी ध्यान स्थान, पर्वत दृश्य योग डेक र समग्र उपचार स्रोतहरू सहित व्यापक स्वास्थ्य सुट",
+      "Photography Explorer's Room": "पेशेवर-ग्रेड क्यामेरा उपकरण र सम्पादन कार्यक्षेत्र सहित फोटोग्राफर र प्रकृति उत्साहीहरूको लागि विशेष कोठा"
+    },
+    "Cloud Valley Resort": {
+      "Forest Harmony Room": "दिगो सामग्री र प्रकृति-प्रेरित सजावट सहित वन वातावरणसँग निर्बाध रूपमा मिश्रित इको-डिजाइन कोठा",
+      "Wellness Forest Suite": "वन थेरापी, ध्यान स्थान र समग्र उपचार अनुभवहरू प्रदान गर्ने व्यापक स्वास्थ्य सुट",
+      "Nature Explorer's Retreat": "अनुसन्धान स्रोतहरू, वन्यजन्तु अवलोकन उपकरण र वन संरक्षण जानकारी सहित प्रकृति उत्साहीहरूको लागि विशेष कोठा"
+    },
+    "Mountain Horizon Hotel": {
+      "Adventure Base Camp Room": "गियर भण्डारण, ट्रेल नक्शा र पर्वतीय गतिविधि योजना स्रोतहरू सहित साहसिक उत्साहीहरूको लागि विशेष कोठा",
+      "Extreme Sports Wellness Suite": "रिकभरी सुविधाहरू, उपकरण मर्मत क्षेत्र र प्रदर्शन ट्र्याकिङ स्रोतहरू सहित एक्स्ट्रिम स्पोर्ट्स प्रेमीहरूको लागि व्यापक सुट",
+      "Mountain Expedition Retreat": "पेशेवर योजना स्रोतहरू र निमग्न पर्वत अनुभव उपकरणहरू सहित पर्वतारोहण तयारीको लागि समर्पित कोठा"
+    },
+    "Mountain Breeze Hotel": {
+      "Mountain Serenity Room": "स्थानीय कलाकृति र सिधा पर्वत दृश्य बालकोनी सहित पाहुनाहरूलाई प्रकृतिसँग जोड्न डिजाइन गरिएको शान्त कोठा",
+      "Trekkers' Comfort Suite": "गियर भण्डारण, रिकभरी क्षेत्र र पर्वत पदमार्ग सूचना केन्द्र सहित साहसिक उत्साहीहरूको लागि व्यापक सुट",
+      "Cultural Mountain Retreat": "पारम्परिक सजावट र सांस्कृतिक अन्तरक्रिया स्रोतहरू सहित स्थानीय पर्वतीय संस्कृति प्रदर्शन गर्ने निमग्न कोठा"
+    },
+    "Himalayan Eco Lodge": {
+      "Sustainable Living Room": "नवीकरणीय ऊर्जा प्रदर्शन र इको-शिक्षा स्रोतहरू सहित दिगो जीवन अभ्यासहरू प्रदर्शन गर्ने नवीन कोठा",
+      "Conservation Research Suite": "अध्ययन स्थान र पारिस्थितिक स्रोतहरू सहित वातावरणीय अनुसन्धानकर्ता र संरक्षण उत्साहीहरूको लागि व्यापक सुट",
+      "Green Traveler's Retreat": "दिगो सुविधाहरू र संरक्षण अन्तर्दृष्टि सहित वातावरण-सचेत यात्रीहरूको लागि डिजाइन गरिएको इको-सचेत कोठा"
+    },
+    "Hotel Aangan": {
+      "Luxury Wellness Retreat Room": "स्पा पहुँच र व्यक्तिगत आराम सुविधाहरू सहित व्यापक स्वास्थ्य अनुभवहरू प्रदान गर्ने प्रिमियम कोठा",
+      "Culinary and Spa Experience Suite": "निजी डाइनिङ र स्वास्थ्य उपचार क्षेत्रहरू सहित गोरमेट खानपान र स्पा अनुभवहरू मिश्रण गर्ने विशाल सुट",
+      "Lifestyle Luxury Room": "क्युरेटेड सुविधाहरू र व्यक्तिगत सेवा सहित प्रिमियम जीवनशैली अनुभवहरू प्रदर्शन गर्ने सुन्दर कोठा"
+    },
+    "Hotel Gajur": {
+      "Hill Adventure Base Room": "गियर भण्डारण, ट्रेल नक्शा र स्थानीय साहसिक योजना स्रोतहरू सहित साहसिक उत्साहीहरूको लागि विशेष कोठा",
+      "Extreme Sports Wellness Suite": "रिकभरी सुविधाहरू, उपकरण मर्मत क्षेत्र र प्रदर्शन ट्र्याकिङ स्रोतहरू सहित साहसिक प्रेमीहरूको लागि व्यापक सुट",
+      "Nature Explorer's Retreat": "निमग्न स्थानीय परिदृश्य अनुभवहरू र बाह्य गतिविधि अन्तर्दृष्टि प्रदान गर्ने प्रकृति र साहसिक उत्साहीहरूको लागि समर्पित कोठा"
+    },
+    "Hotel Gorakha": {
+      "Mountain Adventure Base Room": "गियर भण्डारण, ट्रेल नक्शा र पर्वतीय गतिविधि योजना स्रोतहरू सहित साहसिक उत्साहीहरूको लागि विशेष कोठा",
+      "Outdoor Expedition Suite": "उपकरण मर्मत क्षेत्र, रिकभरी सुविधाहरू र प्रदर्शन ट्र्याकिङ स्रोतहरू सहित साहसिक प्रेमीहरूको लागि व्यापक सुट",
+      "Nature Explorer's Retreat": "निमग्न स्थानीय परिदृश्य अनुभवहरू र बाह्य गतिविधि अन्तर्दृष्टि प्रदान गर्ने प्रकृति उत्साहीहरूको लागि समर्पित कोठा"
+    },
+    "Hotel Xenial": {
+      "Professional Performance Room": "उन्नत कनेक्टिभिटी र उत्पादकता-वृद्धि सुविधाहरू सहित व्यवसायिक पेशेवरहरूको लागि एर्गोनोमिक डिजाइन कोठा",
+      "Wellness Business Suite": "निजी जिम पहुँच र समग्र कार्य-जीवन सन्तुलन स्रोतहरू सहित व्यवसाय कार्यक्षमता र स्वास्थ्यलाई मिश्रण गर्ने व्यापक सुट",
+      "Market Pulse Traveler's Room": "स्थानीय व्यवसाय स्रोतहरू र नेटवर्किङ स्थानहरू सहित धरानको बजार संस्कृतिमा अन्तर्दृष्टि प्रदान गर्ने गतिशील कोठा"
+    },
+    "Hotel Ambassador": {
+      "Medical Care Comfort Room": "मेडिकल यात्रीहरूको लागि सुविधाजनक कोठा, बिरामी र परिवारको लागि आराम, गोपनीयता र सहयोग सुविधाहरू प्रदान गर्दछ",
+      "Healing and Recovery Suite": "मेडिकल सहयोग सुविधाहरू र स्वास्थ्य पुनर्स्थापना संसाधनहरू सहित समग्र उपचार वातावरण प्रदान गर्ने व्यापक सुइट",
+      "Patient Care Companion Room": "मेडिकल सहायकहरूको लागि डिजाइन गरिएको कोठा, आराम क्षेत्र, मेडिकल जानकारी र सुविधाहरू सहित"
+    },
+    "Hotel Sungava": {
+      "Urban Panorama Room": "समकालीन डिजाइन र स्थानीय शहरी कला प्रदर्शनीहरू सहित विशाल शहर दृश्य प्रदान गर्ने फराकिलो कोठा",
+      "Business Connectivity Suite": "एकीकृत कार्यस्थल, सम्मेलन सुविधाहरू र शहर परिदृश्य दृश्यहरू सहित व्यावसायिक यात्रीहरूको लागि डिजाइन गरिएको व्यापक सुइट",
+      "Local Culture Insight Room": "स्थानीय कलाकृतिहरू, सांस्कृतिक स्रोतहरू र इन्टरएक्टिभ शहर अनुभव प्रदर्शनहरू सहित धरानको सांस्कृतिक विविधता प्रदर्शन गर्ने कोठा"
+    },
+    "Hotel City Plaza": {
+      "Urban Explorer's Compact Room": "शहर यात्रीहरूको लागि आवश्यक सुविधाहरू र स्थानीय शहर अन्वेषण स्रोतहरू प्रदान गर्ने कुशलतापूर्वक डिजाइन गरिएको कोठा",
+      "Business Traveler's Central Suite": "एकीकृत कार्यस्थल र शहर कनेक्टिभिटी सुविधाहरू सहित केन्द्रीय स्थान फाइदाहरू प्रदान गर्ने व्यापक सुइट",
+      "Local Experience Room": "शहर गाइडहरू, स्थानीय कला र सांस्कृतिक अन्तरक्रिया स्थानहरू सहित धरानको स्थानीय संस्कृतिसँग जोड्न डिजाइन गरिएको कोठा"
+    },
+    "Testing": {
+      "Pokhara Taal": "साँच्चै राम्रो होटल। क्षमता: २ वयस्क"
+    }
+
+    },
+      "login": "लगइन",
+      "register": "दर्ता",
+      "firstName": "पहिलो नाम",
+      "enterFirstName": "तपाईंको पहिलो नाम प्रविष्ट गर्नुहोस्",
+      "lastName": "थर",
+      "enterLastName": "तपाईंको थर प्रविष्ट गर्नुहोस्",
+      "country": "देश",
+      "mobileNumber": "मोबाइल नम्बर",
+      "enterMobileNumber": "तपाईंको मोबाइल नम्बर प्रविष्ट गर्नुहोस्",
+      "email": "इमेल",
+      "enterEmail": "तपाईंको इमेल प्रविष्ट गर्नुहोस्",
+      "password": "पासवर्ड",
+      "enterPassword": "तपाईंको पासवर्ड प्रविष्ट गर्नुहोस्",
+      "confirmPassword": "पासवर्ड पुष्टि गर्नुहोस्",
+      "enterConfirmPassword": "तपाईंको पासवर्ड पुष्टि गर्नुहोस्",
+      "submit": "पेश गर्नुहोस्",
+      "alreadyHaveAccount": "पहिले नै खाता छ?",
+      "dontHaveAccount": "खाता छैन?",
+      "loginHere": "यहाँ लगइन गर्नुहोस्",
+      "registerHere": "यहाँ दर्ता गर्नुहोस्",
+      "orContinueWith": "वा यससँग जारी राख्नुहोस्",
+      "googleLogin": "गूगलसँग लगइन गर्नुहोस्",
+      "forgotPassword": "पासवर्ड बिर्सनुभयो?",
+  "signUpWith": "यससँग साइन अप गर्नुहोस्",
+  "selectedFlag": "चयनित झण्डा",
+  "nepal": "नेपाल",
+  "searchCountry": "देश खोज्नुहोस्",
+    "passwordsDoNotMatch": "पासवर्डहरू मेल खाँदैनन्!",
+    "enterValidEmail": "कृपया मान्य इमेल ठेगाना प्रविष्ट गर्नुहोस्।",
+    "passwordRequirements": "पासवर्ड कम्तिमा ८ वर्ण लामो हुनुपर्छ र कम्तिमा एउटा अक्षर र एउटा नम्बर समावेश हुनुपर्छ।",
+    "mobileNumberRequirements": "मोबाइल नम्बर ठीक १० अंकको हुनुपर्छ।",
+  "resetPasswordError": "एउटा त्रुटि भयो।",
+  "forgotPasswordTitle": "पासवर्ड बिर्सनुभयो",
+  "forgotPasswordSubtitle": "पासवर्ड रिसेट गर्न आफ्नो इमेल प्रविष्ट गर्नुहोस्",
+  "emailPlaceholder": "आफ्नो इमेल ठेगाना प्रविष्ट गर्नुहोस्",
+  "resetPasswordButton": "पासवर्ड रिसेट गर्नुहोस्",
+  "invalidToken": "अमान्य टोकन।",
+  "passwordChangeSuccess": "पासवर्ड सफलतापूर्वक परिवर्तन भयो। लगइन पृष्ठमा पुनर्निर्देशित गर्दै...",
+    "changePassword": "पासवर्ड परिवर्तन",
+    "enterNewPassword": "तपाईंको नयाँ पासवर्ड प्रविष्ट गर्नुहोस्",
+    "newPassword": "नयाँ पासवर्ड",
+    "enterNewPasswordPlaceholder": "नयाँ पासवर्ड प्रविष्ट गर्नुहोस्",
+    "confirmNewPasswordPlaceholder": "नयाँ पासवर्ड पुष्टि गर्नुहोस्",
+    "successfully": "सफलतापूर्वक",
+      "pleaseLoginToBook": "बुकिङ गर्न कृपया लगइन गर्नुहोस्",
+      "failedToCreateBooking": "बुकिङ सिर्जना गर्न असफल",
+      "bookingConfirmed": "बुकिङ सफलतापूर्वक पुष्टि भयो!",
+      "bookingError": "बुकिङ त्रुटि",
+      "failedToCreateBookingTryAgain": "बुकिङ सिर्जना गर्न असफल। कृपया पुन: प्रयास गर्नुहोस्।",
+      "enterYourDetails": "आफ्नो विवरण प्रविष्ट गर्नुहोस्",
+      "bookingDetails": "बुकिङ विवरणहरू",
+      "roomTypes": "कोठाको प्रकार",
+      "rooms": "कोठाहरू",
+      "totalPrice": "कुल मूल्य",
+      "loyaltyDiscountApplied": "20% लोयल्टी छुट लागू गरिएको छ",
+        "form": {
+          "checkInDate": "चेक-इन मिति",
+          "checkOutDate": "चेक-आउट मिति",
+          "guestInformation": "पाहुना जानकारी",
+          "firstName": "पहिलो नाम",
+          "lastName": "थर",
+          "email": "इमेल ठेगाना",
+          "phone": "फोन नम्बर प्रविष्ट गर्नुहोस्",
+          "bookingFor": "तपाईं कसको लागि बुकिङ गर्दै हुनुहुन्छ? (वैकल्पिक)",
+          "mainGuest": "म मुख्य पाहुना हुँ",
+          "searchCountry": "देश खोज्नुहोस्",
+          "bookingForSomeoneElse": "म कसैको लागि बुकिङ गर्दैछु",
+          "travelingForWork": "के तपाईं कामको लागि यात्रा गर्दै हुनुहुन्छ? (वैकल्पिक)",
+          "yes": "हो",
+          "no": "होइन",
+          "processing": "प्रक्रिया हुँदैछ...",
+          "confirmBooking": "बुकिङ पुष्टि गर्नुहोस्",
+          "cancel": "रद्द गर्नुहोस्"
+        },
+
+          "profile": {
+            "imageSizeError": "तस्विरको साइज ५ एमबी भन्दा कम हुनुपर्छ",
+            "invalidFileType": "अमान्य फाइल प्रकार। कृपया JPEG, PNG, GIF, वा WebP अपलोड गर्नुहोस्।",
+            "uploadSuccess": "प्रोफाइल तस्विर सफलतापूर्वक अपडेट गरियो!",
+            "uploadError": "प्रोफाइल तस्विर अपलोड गर्न असफल",
+            "nameUpdateSuccess": "नाम सफलतापूर्वक अपडेट गरियो!",
+            "nameUpdateError": "नाम अपडेट गर्न असफल",
+            "passwordMismatch": "नयाँ पासवर्डहरू मेल खाँदैनन्",
+            "passwordRequirements": "पासवर्ड कम्तिमा ८ वर्णको हुनुपर्छ र कम्तिमा एउटा अक्षर र एउटा नम्बर समावेश हुनुपर्छ",
+            "passwordChangeError": "पासवर्ड परिवर्तन गर्न असफल",
+            "generalError": "पासवर्ड परिवर्तन गर्दा त्रुटि भयो",
+            "personalDetails": "व्यक्तिगत विवरण",
+            "viewInfoText": "तपाईंको जानकारी हेर्नुहोस् र यसको प्रयोगहरू पत्ता लगाउनुहोस्।",
+            "name": "नाम",
+    "edit": "सम्पादन",
+    "email": "इमेल",
+    "verified": "प्रमाणित",
+    "mobileNumber": "मोबाइल नम्बर",
+    "notProvided": "प्रदान गरिएको छैन",
+    "country": "देश",
+    "password": "पासवर्ड",
+    "changePassword": "पासवर्ड परिवर्तन गर्नुहोस्"
+          },
+          "modal": {
+    "editName": "नाम सम्पादन",
+    "firstName": "पहिलो नाम",
+    "lastName": "थर",
+    "save": "सुरक्षित गर्नुहोस्"
+  },
+  "passwordModal": {
+    "title": "पासवर्ड परिवर्तन",
+    "currentPassword": "हालको पासवर्ड:",
+    "newPassword": "नयाँ पासवर्ड:",
+    "confirmPassword": "नयाँ पासवर्ड पुष्टि:",
+    "enterCurrent": "हालको पासवर्ड प्रविष्ट गर्नुहोस्",
+    "enterNew": "नयाँ पासवर्ड प्रविष्ट गर्नुहोस्",
+    "confirmNew": "नयाँ पासवर्ड पुष्टि गर्नुहोस्",
+    "changePassword": "पासवर्ड परिवर्तन गर्नुहोस्"
+},
+
+  "favourites1": {
+    "loading": "तपाईंको मनपर्ने लोड हुँदैछ...",
+    "title": "मेरो मनपर्ने",
+    "empty": "अहिलेसम्म कुनै मनपर्ने थपिएको छैन",
+    "viewDetails": "विवरण हेर्नुहोस्",
+    "loadError": "मनपर्ने लोड गर्न असफल"
+},
+
+  "reservation1": {
+    "loginRequired": "तपाईंको बुकिंगहरू हेर्न कृपया लगइन गर्नुहोस्",
+    "loadError": "बुकिंगहरू लोड गर्न असफल",
+    "cancelError": "बुकिंग रद्द गर्न असफल",
+    "cancelSuccess": "बुकिंग सफलतापूर्वक रद्द गरियो",
+    "hotelDetailsError": "होटल विवरण उपलब्ध छैन",
+    "loading": "लोड हुँदैछ...",
+    "myBookings": "मेरो बुकिंगहरू",
+    "recent": "हालैको",
+    "past": "बितेको",
+        "roomType": "कोठाको प्रकार",
+        "numberOfRooms": "कोठाहरूको संख्या",
+        "checkIn": "चेक-इन",
+        "checkOut": "चेक-आउट",
+        "totalPrice": "कुल मूल्य",
+        "status": "स्थिति",
+        "viewHotel": "होटल हेर्नुहोस्",
+        "cancelBooking": "बुकिङ रद्द गर्नुहोस्",
+        "noRecentBookings": "कुनै हालैका बुकिङहरू फेला परेनन्।",
+        "noPastBookings": "कुनै पुराना बुकिङहरू फेला परेनन्।",
+        "currency": "रु"
+},
+"bookingStatus": {
+  "Confirmed": "पुष्टि गरिएको",
+  "Cancelled": "रद्द गरिएको",
+  "Completed": "सम्पन्न भएको"
+},
+"common": {
+  "getXOff": "{{percent}}% छुट प्राप्त गर्नुहोस्",
+  "cancelledPoints": "-{{points}} (रद्द गरियो)",
+  "earnedPoints": "+{{points}} (कमाइयो)",
+  "redeemedPoints": "-{{points}} (रिडिम गरियो)"
+},
+
+  "loyaltyPoints1": {
+    "pointsNeeded": "यो डिल रिडिम गर्न तपाईंलाई {{points}} पोइन्ट चाहिन्छ। बुकिङ गरेर पोइन्ट कमाउनुहोस्!",
+    "redeemSuccess": "{{hotel}} को लागि {{points}} पोइन्ट सफलतापूर्वक रिडिम गरियो! तपाईंको छुट ७ दिनसम्म मान्य हुनेछ।",
+    "redeemError": "पोइन्ट रिडिम गर्न असफल। कृपया पुन: प्रयास गर्नुहोस्।",
+    "loading": "साप्ताहिक डिलहरू लोड गर्दै...",
+    "weeklyDealsTitle": "यस हप्ताको विशेष होटल डिलहरू",
+    "dealsDescription": "हाम्रा चयनित होटलहरूमा विशेष छुटको लागि पछि फेरि जाँच गर्नुहोस्।",
+    "redeemButton": "पोइन्ट रिडिम गर्नुहोस्",
+    "greeting": "नमस्ते, {{name}}",
+    "loyaltyPoints": "लोयाल्टी पोइन्टहरू",
+    "faqTitle": "बारम्बार सोधिने प्रश्नहरू",
+    "rewards": "पुरस्कार",
+     "faqs": "प्रश्नहरू",
   
-  }
+    "bookingPoints": {
+      "cancelled": -100,
+      "redeemed": -500,
+      "earned": 100
+    },
+    "pointTypes": {
+      "redeemed": "रिडिम गरिएको",
+      "earned": "कमाइएको"
+    },
+    "tabs": {
+        "all": "सबै",
+        "earned": "कमाइएको",
+        "redeemed": "रिडिम गरिएको",
+        "loyaltyPoints": "लोयाल्टी पोइन्ट",
+        "rewards": "पुरस्कार",
+        "faqs": "प्रश्नहरू"
+    },
+    "emptyState": {
+        "redeemed": "अहिले सम्म कुनै पोइन्ट रिडिम गरिएको छैन",
+        "earned": "पोइन्ट कमाउन होटल बुक गर्न सुरु गर्नुहोस्",
+        "general": "कुनै पोइन्ट इतिहास उपलब्ध छैन"
+    }
+},
+"faq": {
+  "earnQuestion": "म लोयल्टी पोइन्ट कसरी कमाउन सक्छु?",
+  "earnAnswer": "तपाईंले गरेको प्रत्येक होटल बुकिङमा तपाईंले १०० पोइन्ट कमाउनुहुनेछ जुन होटल छुटहरू रिडिम गर्न प्रयोग गर्न सकिन्छ।",
+  "redeemQuestion": "म लोयल्टी पोइन्ट कसरी रिडिम गर्न सक्छु?",
+  "redeemAnswer": "तपाईंले रिडिम गर्न सक्ने छुटहरू देख्ने रिडिम सेक्सनमा जाँदै पोइन्ट रिडिम गर्न सक्नुहुनेछ।",
+  "whenQuestion": "म कहिले लोयल्टी पोइन्ट रिडिम गर्न सक्छु?",
+  "whenAnswer": "तपाईंसँग कम्तिमा ५०० पोइन्ट भएपछि तपाईंले पोइन्ट रिडिम गर्न सक्नुहुनेछ।"
+},
+"bookingPoints": {
+  "cancelled": "रद्द गरिएको बुकिङ (-{{points}} पोइन्ट)",
+  "earned": "{{points}} पोइन्ट कमाइयो",
+  "redeemed": "{{points}} पोइन्ट रिडिम गरियो"
+},
+"chatbot": {
+  "title": "च्याटबट",
+  "welcomeMessage": "तपाईंलाई यहाँ देखेर खुसी लाग्यो!<br/>तपाईं कुन जानकारी खोज्दै हुनुहुन्छ? कृपया तलको खोज प्रयोग गर्नुहोस् वा हेभनहब.__ को बारेमा मलाई केही सोध्नुहोस् ✨",
+  "inputPlaceholder": "सन्देश लेख्नुहोस्...",
+  "sendButton": "पठाउनुहोस्"
+},
+
+"notificationPanel": {
+  "title": "सबै सूचनाहरू",
+  "closeButton": "बन्द गर्नुहोस्"
+}
+  
+}

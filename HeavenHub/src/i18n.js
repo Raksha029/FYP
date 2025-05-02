@@ -3,6 +3,9 @@ import { initReactI18next } from 'react-i18next';
 import enTranslations from './translations/en.json';
 import neTranslations from './translations/ne.json';
 
+// Get the saved language from localStorage or default to 'en'
+const savedLanguage = localStorage.getItem('language') || 'en';
+
 i18n
   .use(initReactI18next)
   .init({
@@ -10,6 +13,7 @@ i18n
       en: { translation: enTranslations },
       ne: { translation: neTranslations },
     },
+    lng: savedLanguage, // Use the saved language
     fallbackLng: 'en',
     debug: false,
     interpolation: {

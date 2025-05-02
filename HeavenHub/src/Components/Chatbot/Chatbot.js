@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styles from "./Chatbot.module.css"; // Ensure this CSS file is updated
 import chatbot from "../Assets/chatbot.png";
 
+// Add at the top with other imports
+import { useTranslation } from 'react-i18next';
+
 const Chatbot = ({ onClose }) => {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
@@ -37,9 +41,9 @@ const Chatbot = ({ onClose }) => {
     <div className={styles.chatbotContainer}>
       <div className={styles.chatHeader}>
         <div className={styles.chatLogo}>
-          <img src={chatbot} alt="ChatBot" /> {/* Replace with your logo */}
+          <img src={chatbot} alt={t('chatbot.title')} />
         </div>
-        <h2 className={styles.chatTitle}>ChatBot</h2>
+        <h2 className={styles.chatTitle}>{t('chatbot.title')}</h2>
         <button onClick={onClose} className={styles.closeButton}>
           ✖
         </button>
@@ -47,10 +51,7 @@ const Chatbot = ({ onClose }) => {
       <div className={styles.chatMessages}>
         {messages.length === 0 && (
           <div className={styles.botMessage}>
-            Great to see you here!
-            <br />
-            What information are you looking for? Please use the search below or
-            ask me anything about HeavenHub.__ ✨
+            {t('chatbot.welcomeMessage')}
           </div>
         )}
         {messages.map((msg, index) => (
@@ -69,11 +70,11 @@ const Chatbot = ({ onClose }) => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Write a message..."
+          placeholder={t('chatbot.inputPlaceholder')}
           className={styles.inputField}
         />
         <button onClick={handleSend} className={styles.sendButton}>
-          Send
+          {t('chatbot.sendButton')}
         </button>
       </div>
     </div>

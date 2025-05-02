@@ -1,225 +1,497 @@
 {
-    "selectLanguage": "Select your language",
-    "close": "Close",
-    "home": "Home",
-    "about": "About Us",
-    "contact": "Contact Us",
-    "signIn": "Sign In",
-    "notifications": "Notifications",
-  "favourites": "Favourites",
-  "reservation": "Reservation",
-  "account": "Account",
-  "viewProfile": "View Profile",
-  "loyaltyPoints": "Loyalty Points",
-  "logout": "Logout",
-    
-    "welcomeMessage": "Welcome to HeavenHub",
-    "tagline": "Your gateway to the best hotels and exclusive experiences",
-    "searchPlaceholder": "Enter city name...",
-    "searchButton": "Search",
-    "whyChooseUs": "Why Choose Us?",
-    "whyChooseUsDesc": "Discover the many reasons our guests choose us for their memorable stays and return time after time.",
-    "premiumExperience": "Premium Experience",
-    "premiumExperienceDesc": "Enjoy 5-star luxury accommodations with exceptional service and amenities.",
-    "adult": "Adult",
-    "adult_plural": "Adults",
-    "child": "Child",
-    "child_plural": "Children",
-    "room": "Room",
-    "room_plural": "Rooms",
-    "comfortableStays": "Comfortable Stays",
-    "comfortableStaysDesc": "Relax in our meticulously designed rooms with premium bedding and furnishings",
-    "secureBooking": "Secure Booking",
-    "secureBookingDesc": "Book with confidence knowing your reservation and payment are fully secured",
-    "primeLocations": "Prime Locations",
-    "primeLocationsDesc": "Our hotels are situated in the most desirable and convenient locations",
-    "support247": "24/7 Support",
-    "support247Desc": "Our dedicated team is available around the clock to assist with your needs",
-    "priceGuarantee": "Best Price Guarantee",
-    "priceGuaranteeDesc": "Find a lower rate elsewhere? We'll match it and give you an additional discount through points",
-    "popularPlaces": "Popular Places",
-    "loading": "Loading...",
-    "noPopularPlaces": "No popular places available",
+  "selectLanguage": "Select your language",
+  "close": "Close",
+  "home": "Home",
+  "about": "About Us",
+  "contact": "Contact Us",
+  "signIn": "Sign In",
+  "notifications": "Notifications",
+"favourites": "Favourites",
+"reservation": "Reservation",
+"account": "Account",
+"viewProfile": "View Profile",
+"loyaltyPoints": "Loyalty Points",
+"logout": "Logout",
   
-    "topRatedProperties": "Top Rated Properties",
-    "currency": "NPR",
-    "perNight": "per night",
-    "rating": "Rating",
-  
-    "copyright": "© 2024 HeavenHub. All rights reserved.",
-  "facebook": "Facebook",
-  "instagram": "Instagram", 
-  "twitter": "Twitter",
-  
-  "aboutTitle": "About HeavenHub",
-  "aboutDescription": "At HeavenHub, we maintain a strict policy of transparency, security, and customer satisfaction. We ensure that all hotels listed on our platform provide accurate details, fair pricing, and quality service. Our secure payment system protects user transactions, and we safeguard personal information through advanced security protocols.",
-  "visionTitle": "Our Vision",
-  "visionDescription": "At HeavenHub, our vision is to revolutionize the way travelers discover and book accommodations. We aim to create a seamless, intuitive, and rewarding experience that connects guests with the perfect stay—whether for leisure or business.",
-  "missionTitle": "Our Mission", 
-  "missionDescription": "Our mission at HeavenHub is to simplify and enhance the hotel booking experience by offering a user-friendly platform that connects travelers with the best accommodations.",
-  
-  "teamTitle": "Our Team",
-  "teamMemberAlt": "Team member",
-  "ceoRole": "CEO & Founder",
-  "opsRole": "Operations Manager", 
-  "crRole": "Customer Relations",
-  "teamMember1Name": "John Doe",
-  "teamMember1Email": "john@HeavenHub.com",
-  "teamMember2Name": "Jane Smith", 
-  "teamMember2Email": "jane@HeavenHub.com",
-  "teamMember3Name": "Mike Johnson",
-  "teamMember3Email": "mike@HeavenHub.com",
-  "policiesTitle": "Our Policies",
-  "bookingPolicyTitle": "Booking Policy",
-  "bookingPolicy1": "Guaranteed best price for direct bookings",
-  "bookingPolicy2": "Free cancellation up to 24 hours before check-in",
-  "bookingPolicy3": "Secure payment and get 100 loyalty points per booking", 
-  "bookingPolicy4": "Instant confirmation of bookings",
-  "privacyPolicyTitle": "Privacy & Security",
-  "privacyPolicy1": "Secure payment processing",
-  "privacyPolicy2": "Protection of personal information",
-  "privacyPolicy3": "No sharing of guest details with third parties",
-  "privacyPolicy4": "Encrypted data transmission",
-  "customerServiceTitle": "Customer Service",
-  "customerService1": "24/7 customer support",
-  "customerService2": "Multilingual assistance available",
-  "customerService3": "Quick response to inquiries", 
-  "customerService4": "Dedicated support for special requests",
-  "qualityAssuranceTitle": "Quality Assurance",
-  "qualityAssurance1": "Regular hotel quality inspections",
-  "qualityAssurance2": "Verified guest reviews",
-  "qualityAssurance3": "Satisfaction guarantee",
-  "qualityAssurance4": "Price match guarantee",
-  
-  "contactTitle": "Get in Touch",
-  "contactSubtitle": "We'd love to hear from you. Contact our friendly team for any inquiries, assistance with bookings, or special requests.",
-  "callUsTitle": "Call Us",
-  "callUsContent": "+1 (555) 123-4567",
-  "emailUsTitle": "Email Us", 
-  "emailUsContent": "contact@luxestay.com",
-  "visitUsTitle": "Visit Us",
-  "visitUsContent": "123 Luxury Blvd, Beverly Hills, CA 90210",
-  "receptionHoursTitle": "Reception Hours",
-  "receptionHoursContent": "24 Hours / 7 Days a Week",
-  "formNameLabel": "Full Name",
-  "formNamePlaceholder": "Enter your full name",
-  "formEmailLabel": "Email Address",
-  "formEmailPlaceholder": "Enter your email",
-  "formPhoneLabel": "Phone Number",
-  "formPhonePlaceholder": "Enter your phone number",
-  "formSubjectLabel": "Subject",
-  "formSubjectPlaceholder": "Enter message subject",
-  "formMessageLabel": "Message",
-  "formMessagePlaceholder": "Type your message here...",
-  "formSubmitButton": "Send Message",
-  "formSubmitting": "Sending...",
-  "faq1Question": "What are your check-in and check-out times?",
-  "faq1Answer": "Check-in time is from 3:00 PM, and check-out time is until 11:00 AM. Early check-in or late check-out may be available upon request.",
-  "faq2Question": "How do you offer loyalty points?",
-  "faq2Answer": "Yes, we offer loyalty points for every stay. You can earn points by making reservations and redeem them for discounts on future stays.",
-  "faq3Question": "Is breakfast included in the room rate?",
-  "faq3Answer": "Yes, all our room rates include complimentary breakfast served at our restaurant from 6:30 AM to 10:30 AM daily.",
-  "faq4Question": "What is your cancellation policy?",
-  "faq4Answer": "Our standard cancellation policy allows free cancellation up to 48 hours before check-in. Cancellations made later may incur a fee equivalent to one night's stay.",
-  "contactFormTitle": "Send us a Message",
-  "contactFormSubtitle": "Fill out the form below and we'll get back to you shortly.",
-  "contactFormNameLabel": "Your Name*",
-  "contactFormNamePlaceholder": "John Doe",
-  "contactFormEmailLabel": "Your Email*",
-  "contactFormEmailPlaceholder": "john@example.com",
-  "contactFormPhoneLabel": "Phone Number",
-  "contactFormPhonePlaceholder": "+1 (555) 123-4567",
-  "contactFormSubjectLabel": "Subject",
-  "contactFormSubjectPlaceholder": "Booking inquiry",
-  "contactFormMessageLabel": "Your Message*",
-  "contactFormMessagePlaceholder": "Please let us know how we can help you...",
-  "faqTitle": "Frequently Asked Questions",
-  "faqSubtitle": "Find quick answers to common questions about our services",
-  
-  "viewDetails": "View Details",
-  "showOnMap": "Show on Map",
-  "cityHotelsHeader": "{{name}} with {{count}} hotels found",
-  "searchHotelsPlaceholder": "Search hotels...",
-  
-  "distanceFrom": "Distance from {{centerName}}: {{distance}} km",
+"welcomeMessage": "Welcome to HeavenHub",
+  "tagline": "Your gateway to the best hotels and exclusive experiences",
+  "searchPlaceholder": "Enter city name...",
+  "searchButton": "Search",
+  "whyChooseUs": "Why Choose Us?",
+  "whyChooseUsDesc": "Discover the many reasons our guests choose us for their memorable stays and return time after time.",
+  "premiumExperience": "Premium Experience",
+  "premiumExperienceDesc": "Enjoy 5-star luxury accommodations with exceptional service and amenities.",
+  "adult": "Adult",
+  "adult_plural": "Adults",
+  "child": "Child",
+  "child_plural": "Children",
+  "room": "Room",
+  "room_plural": "Rooms",
+  "comfortableStays": "Comfortable Stays",
+  "comfortableStaysDesc": "Relax in our meticulously designed rooms with premium bedding and furnishings",
+  "secureBooking": "Secure Booking",
+  "secureBookingDesc": "Book with confidence knowing your reservation and payment are fully secured",
+  "primeLocations": "Prime Locations",
+  "primeLocationsDesc": "Our hotels are situated in the most desirable and convenient locations",
+  "support247": "24/7 Support",
+  "support247Desc": "Our dedicated team is available around the clock to assist with your needs",
+  "priceGuarantee": "Best Price Guarantee",
+  "priceGuaranteeDesc": "Find a lower rate elsewhere? We'll match it and give you an additional discount through points",
+  "popularPlaces": "Popular Places",
+  "loading": "Loading...",
+  "noPopularPlaces": "No popular places available",
+
+  "topRatedProperties": "Top Rated Properties",
+  "currency": "NPR",
+  "perNight": "per night",
+  "rating": "Rating",
   "reviews": "{{count}} review",
   "reviews_plural": "{{count}} reviews",
+  "copyright": "© 2024 Heavenhub. All rights reserved.",
+"facebook": "Facebook",
+"instagram": "Instagram", 
+"twitter": "Twitter",
+"startingFrom": "Starting from",
+
+"aboutTitle": "About Heavenhub",
+"aboutDescription": "At Heavenhub, we maintain a strict policy of transparency, security, and customer satisfaction. We ensure that all hotels listed on our platform provide accurate details, fair pricing, and quality service. Our secure payment system protects user transactions, and we safeguard personal information through advanced security protocols.",
+"visionTitle": "Our Vision",
+"visionText": "At HeavenHub, our vision is to revolutionize the way travelers discover and book accommodations. We aim to create a seamless, intuitive, and rewarding experience that connects guests with the perfect stay—whether for leisure or business. By leveraging innovation and customer-centric solutions, we strive to make travel planning effortless, reliable, and enjoyable for everyone.",
+
+"missionTitle": "Our Mission", 
+"missionText": "Our mission at HeavenHub is to simplify and enhance the hotel booking experience by offering a user-friendly platform that connects travelers with the best accommodations. We are committed to providing seamless navigation, secure transactions, and personalized recommendations to ensure every stay is memorable. Through innovation, transparency, and exceptional customer service, we aim to make booking hotels easy, affordable, and rewarding for all.",
+
+"teamTitle": "Our Team",
+"teamMemberAlt": "Team member",
+"ceoRole": "CEO & Founder",
+"opsRole": "Operations Manager", 
+"crRole": "Customer Relations",
+"teamMember1Name": "John Doe",
+"teamMember1Email": "john@Heavenhub.com",
+"teamMember2Name": "Jane Smith", 
+"teamMember2Email": "jane@Heavenhub.com",
+"teamMember3Name": "Mike Johnson",
+"teamMember3Email": "mike@Heavenhub.com",
+"policiesTitle": "Our Policies",
+"bookingPolicyTitle": "Booking Policy",
+"bookingPolicy1": "Guaranteed best price for direct bookings",
+"bookingPolicy2": "Free cancellation up to 24 hours before check-in",
+"bookingPolicy3": "Secure payment and get 100 loyalty points per booking", 
+"bookingPolicy4": "Instant confirmation of bookings",
+"privacyPolicyTitle": "Privacy & Security",
+"privacyPolicy1": "Secure payment processing",
+"privacyPolicy2": "Protection of personal information",
+"privacyPolicy3": "No sharing of guest details with third parties",
+"privacyPolicy4": "Encrypted data transmission",
+"customerServiceTitle": "Customer Service",
+"customerService1": "24/7 customer support",
+"customerService2": "Multilingual assistance available",
+"customerService3": "Quick response to inquiries", 
+"customerService4": "Dedicated support for special requests",
+"qualityAssuranceTitle": "Quality Assurance",
+"qualityAssurance1": "Regular hotel quality inspections",
+"qualityAssurance2": "Verified guest reviews",
+"qualityAssurance3": "Satisfaction guarantee",
+"qualityAssurance4": "Price match guarantee",
+"logoText": "Heaven Hub",
+
+
+  "policies": {
+    "cancellation": {
+      "title": "Cancellation Policy",
+      "free": "Free cancellation up to 24 hours before check-in",
+      "charges": "Cancellations within 24 hours of check-in may incur charges",
+      "noShow": "No-shows will be charged the first night's stay",
+      "special": "Special rates may have different cancellation terms"
+    },
+    "booking": {
+      "title": "Booking & Payment Policy",
+      "secure": "Secure payment gateway for all transactions",
+      "payment": "Multiple payment options accepted (Credit Cards, PayPal, etc.)",
+      "guarantee": "Price guarantee on all confirmed bookings",
+      "transparent": "Transparent pricing with no hidden fees"
+    },
+    "checkInOut": {
+      "title": "Check-in & Check-out Policy",
+      "checkIn": "Standard check-in time: 2:00 PM",
+      "checkOut": "Standard check-out time: 11:00 AM",
+      "early": "Early check-in and late check-out subject to availability",
+      "id": "Valid ID required at check-in"
+    },
+    "privacy": {
+      "title": "Privacy & Security Policy",
+      "protection": "Strict data protection measures",
+      "encryption": "Secure encryption for all personal information",
+      "sharing": "No sharing of customer data with third parties",
+      "audits": "Regular security audits and updates"
+    },
+    "bestPrice": {
+      "title": "Best Price Guarantee",
+      "match": "We match any lower price found online",
+      "claims": "Price matching claims must be submitted within 24 hours of booking",
+      "conditions": "Comparable room type and conditions must apply",
+      "rates": "Valid only for publicly available rates"
+    },
+    "support": {
+      "title": "Customer Support Policy",
+      "available": "24/7 customer support available",
+      "channels": "Multiple support channels (phone, email, chat)",
+      "emergency": "Dedicated support for emergency situations",
+      "multilingual": "Multilingual support team"
+    },
+    "special": {
+      "title": "Special Requests Policy",
+      "availability": "Special requests subject to availability",
+      "notification": "Early notification recommended for special needs",
+      "accessibility": "Accessibility requirements handled with priority",
+      "charges": "Additional charges may apply for certain requests"
+    }
+},
+
+
+  "team": {
+    "member1": {
+      "name": "John Doe",
+      "role": "CEO & Founder",
+      "email": "john@HeavenHub.com",
+      "phone": "(123) 456-7890"
+    },
+    "member2": {
+      "name": "Jane Smith",
+      "role": "Operations Manager",
+      "email": "jane@HeavenHub.com",
+      "phone": "(123) 456-7891"
+    },
+    "member3": {
+      "name": "Mike Johnson",
+      "role": "Customer Relations",
+      "email": "mike@HeavenHub.com",
+      "phone": "(123) 456-7892"
+    },
   
-  "filters": "Filters",
-  "priceRange": "Price Range",
-  "priceRangeDisplay": "NPR {{min}} - NPR {{max}}",
-  "maxDistance": "Max Distance (km)",
-  "maxDistanceDisplay": "Up to {{distance}} km",
-  "minimumRating": "Minimum Rating",
-  "all": "All",
-  "rating3Plus": "3 Stars & Above",
-  "rating4Plus": "4 Stars & Above",
-  "rating5": "5 Stars",
-  "sortBy": "Sort By",
-  "none": "None",
-  "priceLowToHigh": "Price (Low to High)",
-  "ratingHighToLow": "Rating (High to Low)",
-  "amenities1": "Amenities",
-  
-  "amenities": {
-    "5-Star Luxury": "5-Star Luxury",
-    "Multiple Restaurants": "Multiple Restaurants",
-    "Spa": "Spa",
-    "Pool": "Pool",
-    "Tennis Court": "Tennis Court",
-    "Heritage Property": "Heritage Property",
-    "Luxury Spa": "Luxury Spa",
-    "Cultural Tours": "Cultural Tours",
-    "Fine Dining": "Fine Dining",
-    "Casino": "Casino",
-    "Business Center": "Business Center",
-    "Modern Design": "Modern Design",
-    "Rooftop Bar": "Rooftop Bar",
-    "Gym": "Gym",
-    "Meeting Rooms": "Meeting Rooms",
-    "Garden": "Garden",
-    "Restaurant": "Restaurant",
-    "Executive Lounge": "Executive Lounge",
-    "Coffee Shop": "Coffee Shop",
-    "Bar": "Bar",
-    "Conference Facilities": "Conference Facilities",
-    "Lake View": "Lake View",
-    "Private Beach": "Private Beach",
-    "Boat Service": "Boat Service",
-    "Mountain Views": "Mountain Views"
+        "labels": {
+          "email": "Email:",
+          "phone": "Phone:"
+        }
+      
+
   },
+
+
+  "aboutMenu": {
+    "aboutHeavenHub": "About HeavenHub",
+    "vision": "Our Vision",
+    "mission": "Our Mission",
+    "policies": "Our Policies",
+    "team": "Our Team"
+  },
+  "aboutContent": {
   
-    "city": {
-      "kathmandu": "Kathmandu",
-      "pokhara": "Pokhara",
-      "lumbini": "Lumbini",
-      "baktapur": "Bhaktapur",
-      "lalitpur": "Lalitpur",
-      "janakpur": "Janakpur",
-      "nagarkot": "Nagarkot",
-      "dharan": "Dharan"
+        "aboutTitle": "About Heaven Hub",
+        "aboutText": "At Heaven Hub, we maintain a strict policy of transparency, security, and customer satisfaction. We ensure that all hotels listed on our platform provide accurate details, fair pricing, and quality service. Our secure payment system protects user transactions, and we safeguard personal information through advanced security protocols. We support fair business practices, ensuring that both travelers and hoteliers have a smooth and trustworthy experience. Cancellations, refunds, and booking modifications are handled with clarity and fairness. Our commitment to reliability and integrity makes Heaven Hub a platform travelers can trust for safe and convenient hotel bookings worldwide.",
+    "visionTitle": "Our Vision",
+    "visionText": "At HeavenHub, our vision is to revolutionize the way travelers discover and book accommodations. We aim to create a seamless, personalized experience that connects travelers with their perfect stay.",
+    "missionTitle": "Our Mission",
+    "missionText": "Our mission is to provide exceptional hospitality experiences through innovative technology and personalized service.",
+    "policiesTitle": "Our Policies",
+    "policiesText": "We are committed to maintaining the highest standards of service, security, and transparency in all our operations.",
+    "teamTitle": "Our Team"
+  },
+"contactTitle": "Get in Touch",
+"contactSubtitle": "We'd love to hear from you. Contact our friendly team for any inquiries, assistance with bookings, or special requests.",
+"callUsTitle": "Call Us",
+"callUsContent": "+1 (555) 123-4567",
+"emailUsTitle": "Email Us", 
+"emailUsContent": "contact@luxestay.com",
+"visitUsTitle": "Visit Us",
+"visitUsContent": "123 Luxury Blvd, Beverly Hills, CA 90210",
+"receptionHoursTitle": "Reception Hours",
+"receptionHoursContent": "24 Hours / 7 Days a Week",
+"formNameLabel": "Full Name",
+"formNamePlaceholder": "Enter your full name",
+"formEmailLabel": "Email Address",
+"formEmailPlaceholder": "Enter your email",
+"formPhoneLabel": "Phone Number",
+"formPhonePlaceholder": "Enter your phone number",
+"formSubjectLabel": "Subject",
+"formSubjectPlaceholder": "Enter message subject",
+"formMessageLabel": "Message",
+"formMessagePlaceholder": "Type your message here...",
+"formSubmitButton": "Send Message",
+"formSubmitting": "Sending...",
+"faq1Question": "What are your check-in and check-out times?",
+"faq1Answer": "Check-in time is from 3:00 PM, and check-out time is until 11:00 AM. Early check-in or late check-out may be available upon request.",
+"faq2Question": "How do you offer loyalty points?",
+"faq2Answer": "Yes, we offer loyalty points for every stay. You can earn points by making reservations and redeem them for discounts on future stays.",
+"faq3Question": "Is breakfast included in the room rate?",
+"faq3Answer": "Yes, all our room rates include complimentary breakfast served at our restaurant from 6:30 AM to 10:30 AM daily.",
+"faq4Question": "What is your cancellation policy?",
+"faq4Answer": "Our standard cancellation policy allows free cancellation up to 48 hours before check-in. Cancellations made later may incur a fee equivalent to one night's stay.",
+"contactFormTitle": "Send us a Message",
+"contactFormSubtitle": "Fill out the form below and we'll get back to you shortly.",
+"contactFormNameLabel": "Your Name*",
+"contactFormNamePlaceholder": "John Doe",
+"contactFormEmailLabel": "Your Email*",
+"contactFormEmailPlaceholder": "john@example.com",
+"contactFormPhoneLabel": "Phone Number",
+"contactFormPhonePlaceholder": "+1 (555) 123-4567",
+"contactFormSubjectLabel": "Subject",
+"contactFormSubjectPlaceholder": "Booking inquiry",
+"contactFormMessageLabel": "Your Message*",
+"contactFormMessagePlaceholder": "Please let us know how we can help you...",
+"faqTitle": "Frequently Asked Questions",
+"faqSubtitle": "Find quick answers to common questions about our services",
+
+"viewDetails": "View Details",
+"showOnMap": "Show on Map",
+"cityHotelsHeader": "{{name}} with {{count}} hotels found",
+"searchHotelsPlaceholder": "Search hotels...",
+
+
+"noHotelsFound": "No hotels found matching \"{{searchTerm}}\"",
+
+
+"distanceFrom": "Distance from {{centerName}}: {{distance}} km",
+"filters": "Filters",
+"priceRange": "Price Range",
+"priceRangeDisplay": "NPR {{min}} - NPR {{max}}",
+"maxDistance": "Max Distance (km)",
+"maxDistanceDisplay": "Up to {{distance}} km",
+"minimumRating": "Minimum Rating",
+"all": "All",
+"rating3Plus": "3 Stars & Above",
+"rating4Plus": "4 Stars & Above",
+"rating5": "5 Stars",
+"sortBy": "Sort By",
+"none": "None",
+"priceLowToHigh": "Price (Low to High)",
+"ratingHighToLow": "Rating (High to Low)",
+"amenities1": "Amenities",
+
+
+
+  "error": "Error: {{message}}",
+  "notFound": "Hotel not found",
+  
+    "loginToFavorite": "Please log in to add favorites",
+    "addedToFavorites": "Added to favorites",
+    "removedFromFavorites": "Removed from favorites",
+    "failedToUpdateFavorites": "Failed to update favorites",
+
+      "addCommentPrompt": "Please add a comment to your review",
+      "loginToReview": "Please log in to submit a review",
+      "reviewSubmitSuccess": "Review submitted successfully!",
+      "reviewSubmitError": "Failed to submit review",
+
+    "hotelName": "{{name}}",
+    "hotelLocation": "{{location}}",
+    "hotelRating": "Rating: {{rating}} ★",
+
+"popularAmenities": "Popular Amenities",
+"locationTitle": "Location",
+"mapNotAvailable": "Map location not available",
+
+  "guestReviews": "Guest Reviews",
+  "reviewRating": "{{rating}} ★",
+  "showLess": "Show Less",
+  "seeMoreReviews": "See More Reviews",
+ 
+    "reviewerName": "{{name}}",
+    "reviewComment": "{{comment}}",
+    "leaveReview": "Leave a Review",
+    "yourRating": "Your Rating:",
+    "shareExperience": "Share your experience...",
+    "submitReview": "Submit Review",
+    "availableRooms": "Available Rooms",
+    "capacity": "Capacity:",
+    "roomsAvailable": "{{count}} rooms available",
+    "currentlyUnavailable": "Currently unavailable",
+    "limitedAvailabilityPricing": "Limited availability pricing",
+     "numberOfRooms": "Number of rooms:",
+     "reserveNow": "Reserve Now",
+  "total": "Total: NPR",
+    "loginToShare": "Please login to share this property",
+    "linkCreatedSuccess": "Link created successfully!",
+    "shareLinkFailed": "Failed to share link.",
+    "linkCopiedSuccess": "Link copied to clipboard!",
+    "copyLinkFailed": "Failed to copy link. Please copy manually.",
+
+"amenities": {
+  "5-Star Luxury": "5-Star Luxury",
+  "Multiple Restaurants": "Multiple Restaurants",
+  "Spa": "Spa",
+  "Pool": "Pool",
+  "Tennis Court": "Tennis Court",
+  "Heritage Property": "Heritage Property",
+  "Luxury Spa": "Luxury Spa",
+  "Cultural Tours": "Cultural Tours",
+  "Fine Dining": "Fine Dining",
+  "Casino": "Casino",
+  "Business Center": "Business Center",
+  "Modern Design": "Modern Design",
+  "Rooftop Bar": "Rooftop Bar",
+  "Gym": "Gym",
+  "Meeting Rooms": "Meeting Rooms",
+  "Garden": "Garden",
+  "Restaurant": "Restaurant",
+  "Executive Lounge": "Executive Lounge",
+  "Coffee Shop": "Coffee Shop",
+  "Bar": "Bar",
+  "Conference Facilities": "Conference Facilities",
+  "Lake View": "Lake View",
+  "Private Beach": "Private Beach",
+  "Boat Service": "Boat Service",
+  "Mountain Views": "Mountain Views",
+  "Luxury Rooms": "Luxury Rooms",
+  "Rooftop Pool": "Rooftop Pool",
+  "Water Sports": "Water Sports",
+  "Lake Access": "Lake Access",
+  "Trekking Desk": "Trekking Desk",
+  "Rooftop": "Rooftop",
+  "Premium Rooms": "Premium Rooms",
+  "Heritage Tours": "Heritage Tours",
+  "Heritage Building": "Heritage Building",
+  "Temple View": "Temple View",
+  "Mountain View": "Mountain View",
+  "Cultural Programs": "Cultural Programs",
+  "City View": "City View",
+  "Cultural Activities": "Cultural Activities",
+  "Free Wi-Fi": "Free Wi-Fi",
+  "Traditional Rooms": "Traditional Rooms",
+  "Cultural Experience": "Cultural Experience",
+  "Pottery Classes": "Pottery Classes",
+  "Home Cooking": "Home Cooking",
+  "Local Experience": "Local Experience",
+  "Family Rooms": "Family Rooms",
+  "Boutique Design": "Boutique Design",
+  "Rooftop Restaurant": "Rooftop Restaurant",
+  "Heritage Views": "Heritage Views",
+  "Rooftop Cafe": "Rooftop Cafe",
+  "Swimming Pool": "Swimming Pool",
+  "Conference Room": "Conference Room",
+  "Conference Rooms": "Conference Room",
+  "Free Breakfast": "Free Breakfast",
+  "Laundry": "Laundry",
+  "Japanese Restaurant": "Japanese Restaurant",
+  "Meditation Center": "Meditation Center",
+  "International Restaurant": "International Restaurant",
+  "Garden View": "Garden View",
+  "Conference Hall": "Conference Hall",
+  "Tour Desk": "Tour Desk",
+  "Yoga Classes": "Yoga Classes",
+  "Vegetarian Restaurant": "Vegetarian Restaurant",
+  "Temple Tours": "Temple Tours",
+  "Meditation Hall": "Meditation Hall",
+  "Free Parking": "Free Parking",
+  "Cultural Museum": "Cultural Museum",
+  "Art Gallery": "Art Gallery",
+  "Temple Proximity": "Temple Proximity",
+  "Air Conditioning": "Air Conditioning",
+  "Laundry Service": "Laundry Service",
+  "Premium Views": "Premium Views",
+  "Heated Rooms": "Heated Rooms",
+  "Adventure Sports Desk": "Adventure Sports Desk",
+  "Sunrise Deck": "Sunrise Deck",
+  "Panoramic Views": "Panoramic Views",
+  "Panoramic Mountain Views": "Panoramic Mountain Views",
+  "Forest Views": "Forest Views",
+  "Nature Trails": "Nature Trails",
+  "Adventure Desk": "Adventure Desk",
+  "Sustainable Design": "Sustainable Design",
+  "Organic Restaurant": "Organic Restaurant",
+  "Multi-cuisine Restaurant": "Multi-cuisine Restaurant",
+  "Hill View": "Hill View",
+  "Garden Restaurant": "Garden Restaurant",
+  "Adventure Tours": "Adventure Tours",
+  "Parking": "Parking",
+  "Medical Tourism Support": "Medical Tourism Support",
+  "Shuttle Service": "Shuttle Service",
+  "Central Location": "Central Location",
+  "Cultural Restaurant": "Cultural Restaurant",
+  "Traditional Restaurant": "Traditional Restaurant",
+  "Meditation Room": "Meditation Room"
+},
+
+  "city": {
+    "kathmandu": "Kathmandu",
+    "pokhara": "Pokhara",
+    "lumbini": "Lumbini",
+    "baktapur": "Bhaktapur",
+    "lalitpur": "Lalitpur",
+    "janakpur": "Janakpur",
+    "nagarkot": "Nagarkot",
+    "dharan": "Dharan"
+  },
+
+  "hotel": {
+    "Dwarika's Hotel": "Dwarika's Hotel",
+    "Pokhara Grande": "Pokhara Grande",
+    "Hyatt Regency Kathmandu": "Hyatt Regency Kathmandu",
+    "Marriott Kathmandu": "Marriott Kathmandu",
+    "Fish Tail Lodge": "Fish Tail Lodge",
+    "Hotel Grande International": "Hotel Grande International",
+    "Bhaktapur Paradise Hotel": "Bhaktapur Paradise Hotel",
+    "Lumbini Hokke Hotel": "Lumbini Hokke Hotel",
+    "Yak & Yeti Hotel": "Yak & Yeti Hotel",
+    "Temple Tree Resort": "Temple Tree Resort",
+    "Aloft Kathmandu Thamel": "Aloft Kathmandu Thamel",
+    "Hotel Mulberry": "Hotel Mulberry",
+    "Hotel Annapurna": "Hotel Annapurna",
+    "Hotel Himalaya": "Hotel Himalaya",
+     "Soaltee Kathmandu": "Soaltee Kathmandu",
+    "Hotel Shangri-La": "Hotel Shangri-La",
+    "Hotel Barahi": "Hotel Barahi",
+    "Waterfront Resort": "Waterfront Resort",
+    "Hotel Lake Shore": "Hotel Lake Shore",
+    "Atithi Resort & Spa": "Atithi Resort & Spa",
+    "Hotel Mountain View": "Hotel Mountain View",
+    "Hotel Middle Path": "Hotel Middle Path",
+    "Testing": "Testing",
+      "Heritage Hotel Bhaktapur": "Heritage Hotel Bhaktapur",
+      "Royal Bhaktapur": "Royal Bhaktapur",
+      "Hotel Heritage Palace": "Hotel Heritage Palace",
+      "Cultural Resort Bhaktapur": "Cultural Resort Bhaktapur",
+      "Planet Bhaktapur Hotel": "Planet Bhaktapur Hotel",
+      "Vajra Guest House": "Vajra Guest House",
+      "Traditional Stay": "Traditional Stay",
+      "Bhaktapur Homestay": "Bhaktapur Homestay",
+      "Hotel Sweet Home": "Hotel Sweet Home",
+      "The Inn Patan": "The Inn Patan",
+      "Maya Boutique Hotel": "Maya Boutique Hotel",
+      "Hotel Summit Patan": "Hotel Summit Patan",
+      "Hotel Patan Square": "Hotel Patan Square",
+      "Greenwich Village Hotel": "Greenwich Village Hotel",
+      "Hotel Goodday": "Hotel Goodday",
+      "Buddha Maya Garden Hotel": "Buddha Maya Garden Hotel",
+      "Zen International Hotel": "Zen International Hotel",
+      "Lumbini Garden New Crystal Hotel": "Lumbini Garden New Crystal Hotel",
+      "Hotel Nirvana": "Hotel Nirvana",
+      "Hotel Ananda Inn": "Hotel Ananda Inn",
+      "Hotel Peace Palace": "Hotel Peace Palace",
+      "Ram Janaki Heritage Hotel": "Ram Janaki Heritage Hotel",
+      "Hotel Sita Palace": "Hotel Sita Palace",
+      "Mithila Cultural Resort": "Mithila Cultural Resort",
+      "Janaki Temple View Hotel": "Janaki Temple View Hotel",
+      "Hotel Divine": "Hotel Divine",
+      "Hotel Ramayana": "Hotel Ramayana",
+      "Hotel Shree Ram": "Hotel Shree Ram",
+      "Hotel Himalayan Villa": "Hotel Himalayan Villa",
+      "Sunrise Peak Hotel": "Sunrise Peak Hotel",
+      "Himalayan View Resort": "Himalayan View Resort",
+      "Cloud Valley Resort": "Cloud Valley Resort",
+      "Mountain Horizon Hotel": "Mountain Horizon Hotel",
+      "Mountain Breeze Hotel": "Mountain Breeze Hotel",
+      "Himalayan Eco Lodge": "Himalayan Eco Lodge",
+      "Hotel Aangan": "Hotel Aangan",
+      "Hotel Gajur": "Hotel Gajur",
+      "Hotel Gorakha": "Hotel Gorakha",
+      "Hotel Xenial": "Hotel Xenial",
+      "Hotel Ambassaddor": "Hotel Ambassaddor",
+      "Hotel Sungava": "Hotel Sungava",
+      "Hotel City Plaza": "Hotel City Plaza"
     },
-  
-    "hotel": {
-      "Dwarika's Hotel": "Dwarika's Hotel",
-      "Pokhara Grande": "Pokhara Grande",
-      "Hyatt Regency Kathmandu": "Hyatt Regency Kathmandu",
-      "Marriott Kathmandu": "Marriott Kathmandu",
-      "Fish Tail Lodge": "Fish Tail Lodge",
-      "Hotel Grande International": "Hotel Grande International",
-      "Bhaktapur Paradise Hotel": "Bhaktapur Paradise Hotel",
-      "Lumbini Hokke Hotel": "Lumbini Hokke Hotel",
-      "Yak & Yeti Hotel": "Yak & Yeti Hotel",
-      "Temple Tree Resort": "Temple Tree Resort",
-      "Aloft Kathmandu Thamel": "Aloft Kathmandu Thamel",
-      "Hotel Mulberry": "Hotel Mulberry",
-      "Hotel Annapurna": "Hotel Annapurna",
-      "Hotel Himalaya": "Hotel Himalaya",
-       "Soaltee Kathmandu": "Soaltee Kathmandu",
-      "Hotel Shangri-La": "Hotel Shangri-La"
-    },
-  
-    "location": {
+
+  "location": {
     "Battisputali Road": "Battisputali Road",
     "North Lake Side": "North Lake Side",
     "Taragaon, Boudha": "Taragaon, Boudha",
@@ -229,7 +501,7 @@
     "Durbar Square": "Durbar Square",
     "Near Mayadevi Temple": "Near Mayadevi Temple",
     "Durbar Marg": "Durbar Marg",
-    "Gaurighat Lakeside": "Gaurighat Lakeside",
+    "Gaurighat, Lakeside": "Gaurighat, Lakeside",
     "Lakeside": "Lakeside",
     "Thamel": "Thamel",
     "durbar square": "Durbar Square",
@@ -240,7 +512,1014 @@
     "dharan clock tower": "Dharan Clock Tower",
     "Kupondole": "Kupondole",
     "Tahachal": "Tahachal",
-    "Lazimpat": "Lazimpat"
-  }
+    "Lazimpat": "Lazimpat",
+    "Gaurighat": "Gaurighat",
+    "Lakeside South": "Lakeside South",
+    "South Lake Side": "South Lake Side",
+    "Sarangkot Road": "Sarangkot Road",
+    "Central Lakeside": "Central Lakeside",
+    "pokhara, taal": "pokhara, taal",
+    "Durbar Square Area": "Durbar Square Area",
+    "Near Nyatapola Temple": "Near Nyatapola Temple",
+    "Changu Narayan Road": "Changu Narayan Road",
+    "Pottery Square": "Pottery Square",
+    "Taumadhi Square": "Taumadhi Square",
+    "Old Town": "Old Town",
+    "Dattatreya Square": "Dattatreya Square",
+    "Mangal Bazaar, Lalitpur": "Mangal Bazaar Lalitpur",
+    "Patan Durbar Square, Lalitpur": "Patan Durbar Square Lalitpur",
+    "Sanepa, Lalitpur": "Sanepa Lalitpur",
+    "Patan Durbar Square Area": "Patan Durbar Square Area",
+    "Kupondole, Lalitpur": "Kupondole Lalitpur",
+    "Jhamsikhel, Lalitpur": "Jhamsikhel Lalitpur",
+    "Pulchowk, Lalitpur": "Pulchowk Lalitpur",
+    "Maya Devi Temple Road": "Maya Devi Temple Road",
+    "International Zone, Lumbini": "International Zone Lumbini",
+    "Near Japanese Peace Stupa": "Near Japanese Peace Stupa",
+    "Lumbini Cultural Municipality": "Lumbini Cultural Municipality",
+    "Buddha Path, Lumbini": "Buddha Path Lumbini",
+    "Peace Road, Lumbini": "Peace Road Lumbini",
+    "Cultural District": "Cultural District",
+    "Near Janaki Temple": "Near Janaki Temple",
+    "Janakpur Cultural Zone": "Janakpur Cultural Zone",
+    "Janakpur": "Janakpur",
+    "Temple Complex Area": "Temple Complex Area",
+    "Nagarkot Viewpoint": "Nagarkot Viewpoint",
+    "Nagarkot Sunrise Point": "Nagarkot Sunrise Point",
+    "Nagarkot Forest Edge": "Nagarkot Forest Edge",
+    "Nagarkot Village": "Nagarkot Village",
+    "Nagarkot Eco Zone": "Nagarkot Eco Zone",
+    "Aangan, Dharan": "Aangan Dharan",
+    "Bijaypur Hill, Dharan": "Bijaypur Hill Dharan",
+    "Dharan-Bhedetar Road": "Dharan-Bhedetar Road",
+    "Dharan Market": "Dharan Market",
+    "Near BP Koirala Institute": "Near BP Koirala Institute",
+    "Putali Line Market": "Putali Line Market",
+    "Putali Line, Dharan": "Putali Line Dharan"
+  },
+    "aboutHotelTitle": "About this hotel",
+    
+      "hotelDescription": {
+        "DwarikasHotel": "Experience heritage and luxury in this beautifully designed suite with traditional decor.",
+        "HyattRegencyKathmandu": "This luxurious room offers stunning views of the Himalayas, perfect for a relaxing getaway.",
+        "MarriottKathmandu": "Indulge in luxury with this spacious suite that includes a private balcony and premium services.",
+        "YakYetiHotel": "Enjoy a modern stay in this spacious room equipped with all the amenities for a comfortable experience.",
+        "AloftKathmanduThamel": "This contemporary room features a rooftop view and is ideal for both leisure and business travelers.",
+        "HotelMulberry": "Experience tranquility in this well-appointed room with modern furnishings and a relaxing ambiance.",
+        "HotelAnnapurna": "This charming room provides a perfect blend of comfort and style, ideal for a romantic getaway.",
+        "HotelHimalaya": "This room offers a unique blend of traditional and modern design, ensuring a memorable stay.",
+        "SoalteeKathmandu": "Relax in this cozy room that combines comfort with modern amenities, perfect for families.",
+        "HotelShangriLa": "This elegant room offers a serene atmosphere with access to the hotel's beautiful garden.",
+          "PokharaGrande": "This luxury hotel offers spacious rooms and top-notch amenities, ensuring a memorable stay.",
+          "FishTailLodge": "Enjoy breathtaking views of the lake from this cozy lodge, perfect for a peaceful retreat.",
+          "HotelGrandeInternational": "Ideal for business travelers, this hotel combines comfort with modern amenities and excellent service.",
+          "TempleTreeResort": "Relax in this serene resort that offers stunning mountain views and luxurious amenities.",
+          "HotelBarahi": "Experience luxury in this hotel with a beautiful pool and stunning views of the surrounding mountains.",
+          "WaterfrontResort": "This resort features direct access to the lake, making it ideal for water sports enthusiasts.",
+          "HotelLakeShore": "With direct lake access, this hotel is perfect for those looking to enjoy water sports and relaxation.",
+          "AtitheResortSpa": "This resort offers a perfect blend of relaxation and adventure, with a full-service spa and outdoor activities.",
+          "HotelMountainView": "Enjoy breathtaking mountain views from this hotel, which is also a great base for trekking adventures.",
+          "HotelMiddlePath": "This hotel features a rooftop bar with stunning views, perfect for enjoying the sunset over the lake.",
+          "Testing": "Very good and spacious hotel with big view of taal",
+            "BhaktapurParadiseHotel": "Experience luxury and heritage in the heart of Bhaktapur's historic district.",
+            "HeritageHotelBhaktapur": "Experience the rich cultural heritage of Bhaktapur in this beautifully preserved historic hotel.",
+            "RoyalBhaktapur": "Luxury accommodation combining traditional architecture with modern comforts near Durbar Square.",
+            "HotelHeritagePalace": "Luxury accommodation with stunning views of the iconic Nyatapola Temple.",
+            "CulturalResortBhaktapur": "A perfect blend of cultural experiences and modern comfort with mountain views.",
+            "PlanetBhaktapurHotel": "Modern comfort meets traditional charm in the heart of the pottery district.",
+            "VajraGuestHouse": "Experience traditional Newari hospitality with stunning temple views and peaceful garden setting.",
+            "TraditionalStay": "Immerse yourself in the pottery culture of Bhaktapur with hands-on experiences.",
+            "BhaktapurHomestay": "Experience authentic Nepali family life in this welcoming homestay in the heart of Old Town.",
+            "HotelSweetHome": "Family-friendly hotel in the heart of historic Dattatreya Square, perfect for cultural exploration.",
+              "TheInnPatan": "Stay in a beautifully restored heritage building that offers a glimpse into the rich culture of Lalitpur.",
+              "MayaBoutiqueHotel": "Experience boutique luxury in this stylish hotel with a beautiful garden and excellent dining options.",
+              "HotelSummitPatan": "This hotel offers stunning views of Patan Durbar Square and a rooftop restaurant for a unique dining experience.",
+              "HotelPatanSquare": "This hotel offers cultural tours and a rooftop cafe with stunning views of Patan Durbar Square.",
+              "HotelHimalaya": "This hotel features a swimming pool and multiple dining options, perfect for both relaxation and business.",
+              "GreenwichVillageHotel": "Enjoy a cozy atmosphere with a garden and bar, ideal for unwinding after a day of exploring.",
+              "HotelGoodday": "This budget-friendly hotel offers comfortable accommodations with complimentary breakfast and business services.",
+                "LumbiniHokkeHotel": "This hotel offers a unique Japanese dining experience and is located near the sacred Mayadevi Temple.",
+                "BuddhaMayaGardenHotel": "This hotel offers a peaceful retreat with a meditation center and beautiful views of the Maya Devi Temple.",
+                "ZenInternationalHotel": "This international hotel combines luxury with cultural experiences, offering temple tours and a spa.",
+                "LumbiniGardenNewCrystalHotel": "This hotel features a beautiful garden view and is perfect for both leisure and business travelers.",
+                "HotelNirvana": "A serene hotel offering yoga classes and a meditation center, perfect for spiritual travelers.",
+                "HotelAnandaInn": "Enjoy comfortable accommodations with easy access to temple tours and cultural experiences.",
+                "HotelPeacePalace": "A tranquil hotel with a meditation hall and vegetarian restaurant, ideal for a peaceful stay.",
+                  "RamJanakiHeritageHotel": "Enjoy a comfortable stay with easy access to the Janaki Temple and local markets.",
+                  "HotelSitaPalace": "Experience the rich cultural heritage of Janakpur with a stay near the iconic Janaki Temple.",
+                  "MithilaCulturalResort": "A unique resort celebrating the rich Mithila culture, offering immersive artistic and cultural experiences.",
+                  "JanakiTempleViewHotel": "Enjoy unparalleled proximity to the Janaki Temple with cultural immersion and local experiences.",
+                  "HotelDivine": "A luxurious hotel offering spa services and cultural experiences in the heart of Janakpur.",
+                  "HotelRamayana": "Experience the local culture and hospitality in this charming hotel near Janaki Temple.",
+                  "HotelShreeRam": "This budget-friendly hotel offers comfortable accommodations and easy access to local attractions.",
+                    "HotelHimalayanVilla": "This villa offers premium views and is an ideal spot for adventure sports enthusiasts.",
+                    "SunrisePeakHotel": "The ultimate destination for sunrise lovers and mountain enthusiasts.",
+                    "HimalayanViewResort": "Experience breathtaking Himalayan views and unforgettable sunrise moments in this mountain retreat.",
+                    "CloudValleyResort": "A serene resort nestled at the forest's edge, offering tranquility and natural beauty.",
+                    "MountainHorizonHotel": "Experience adventure and breathtaking mountain views in this dynamic mountain hotel.",
+                    "MountainBreezeHotel": "A cozy hotel offering warm hospitality and stunning mountain landscapes.",
+                    "HimalayanEcoLodge": "An eco-friendly lodge committed to sustainable tourism and environmental conservation.",
+                      "HotelAangan": "This premium hotel features a swimming pool and multi-cuisine restaurant for a luxurious stay.",
+                      "HotelGajur": "Enjoy hill views and adventure sports arrangements at this comfortable hotel.",
+                      "HotelGorakha": "This hotel offers mountain views and adventure tours, making it perfect for outdoor enthusiasts.",
+                      "HotelXenial": "Ideal for business travelers, this hotel features a gym and business center for your convenience.",
+                      "HotelAmbassaddor": "This hotel offers medical tourism support and comfortable accommodations for patients and families.",
+                      "HotelSungava": "This hotel offers comfortable accommodations with city views and modern amenities.",
+                      "HotelCityPlaza": "Centrally located, this hotel offers easy access to local attractions and comfortable accommodations."
+              
+      },
+
+      "roomType": {
+        "Dwarika's Hotel": {
+          "Heritage Deluxe Room": "Heritage Deluxe Room",
+          "Cultural Heritage Suite": "Cultural Heritage Suite",
+          "Garden View Room": "Garden View Room"
+        },
+        "Hyatt Regency Kathmandu": {
+      "Himalayan View Room": "Himalayan View Room",
+      "Executive Luxury Suite": "Executive Luxury Suite", 
+      "Family Interconnected Rooms": "Family Interconnected Rooms"
+    },    "Marriott Kathmandu": {
+      "Executive Lounge Access Room": "Executive Lounge Access Room",
+      "Luxury Mountain View Suite": "Luxury Mountain View Suite", 
+      "Business Traveler's Retreat": "Business Traveler's Retreat"
+    },
+    "Yak & Yeti Hotel": {
+      "Casino Deluxe Room": "Casino Deluxe Room",
+      "Business Executive Suite": "Business Executive Suite",
+      "Riverside Luxury Room": "Riverside Luxury Room"
+    },
+    "Aloft Kathmandu Thamel": {
+      "Urban Loft Room": "Urban Loft Room",
+      "Rooftop Experience Suite": "Rooftop Experience Suite",
+      "Social Traveler Room": "Social Traveler Room"
+    },
+    "Hotel Mulberry": {
+      "Rooftop Pool Access Room": "Rooftop Pool Access Room",
+      "Wellness Spa Suite": "Wellness Spa Suite", 
+      "Social Traveler's Loft": "Social Traveler's Loft"
+    },
+    "Hotel Annapurna": {
+      "Poolside Comfort Room": "Poolside Comfort Room",
+      "Culinary Enthusiast Suite": "Culinary Enthusiast Suite", 
+      "Urban Elegance Room": "Urban Elegance Room"
+    },
+    "Hotel Himalaya": {
+      "Garden Retreat Room": "Garden Retreat Room",
+      "Conference Companion Suite": "Conference Companion Suite",
+      "Tennis Court View Room": "Tennis Court View Room"
+    },
+    "Soaltee Kathmandu": {
+      "Family Comfort Room": "Family Comfort Room",
+      "Tennis Court View Suite": "Tennis Court View Suite",
+      "Wellness Retreat Room": "Wellness Retreat Room"
+    },
+    "Hotel Shangri-La": {
+      "Garden Serenity Room": "Garden Serenity Room",
+      "Executive Heritage Suite": "Executive Heritage Suite",
+      "City View Comfort Room": "City View Comfort Room"
+    },
+    "Pokhara Grande": {
+      "Luxury Lakeside Room": "Luxury Lakeside Room",
+      "Royal Spa Suite": "Royal Spa Suite",
+      "Gourmet Culinary Room": "Gourmet Culinary Room"
+    },
+    "Fish Tail Lodge": {
+      "Lakeside Deluxe Room": "Lakeside Deluxe Room",
+      "Fisherman's Suite": "Fisherman's Suite",
+      "Romantic Waterfront Retreat": "Romantic Waterfront Retreat"
+    },
+    "Hotel Grande International": {
+      "Business Executive Room": "Business Executive Room",
+      "Corporate Conference Suite": "Corporate Conference Suite",
+      "Digital Nomad Workspace Room": "Digital Nomad Workspace Room"
+    },
+    "Temple Tree Resort": {
+      "Mountain View Zen Room": "Mountain View Zen Room",
+      "Wellness Sanctuary Suite": "Wellness Sanctuary Suite",
+      "Garden Meditation Room": "Garden Meditation Room"
+    },
+        "Hotel Barahi": {
+          "Poolside Relaxation Room": "Poolside Relaxation Room",
+          "Cultural Heritage Suite": "Cultural Heritage Suite",
+          "Mountain Panorama Room": "Mountain Panorama Room"
+        },
+        "Waterfront Resort": {
+          "Water Sports Enthusiast Room": "Water Sports Enthusiast Room",
+          "Sunset Lounge Suite": "Sunset Lounge Suite",
+          "Kayaker's Retreat": "Kayaker's Retreat"
+        },
+        "Hotel Lake Shore": {
+          "Water Sports Lover's Room": "Water Sports Lover's Room",
+          "Fishing Enthusiast Suite": "Fishing Enthusiast Suite", 
+          "Romantic Lakeside Retreat": "Romantic Lakeside Retreat"
+        },
+        "Atithi Resort & Spa": {
+          "Wellness Rejuvenation Room": "Wellness Rejuvenation Room",
+          "Family Garden Suite": "Family Garden Suite",
+          "Lakeside Meditation Room": "Lakeside Meditation Room"
+        },
+        "Hotel Mountain View": {
+          "Trekkers' Base Camp Room": "Trekkers' Base Camp Room",
+          "Panoramic Peak Suite": "Panoramic Peak Suite",
+          "Yoga and Meditation Retreat Room": "Yoga and Meditation Retreat Room"
+        },
+        "Hotel Middle Path": {
+          "Rooftop Sunset Room": "Rooftop Sunset Room",
+          "Cultural Immersion Suite": "Cultural Immersion Suite",
+          "Backpacker's Social Room": "Backpacker's Social Room"
+        },
+    "Bhaktapur Paradise Hotel": {
+      "Paradise Heritage Room": "Paradise Heritage Room",
+      "Royal Spa Suite": "Royal Spa Suite",
+      "Cultural Luxury Room": "Cultural Luxury Room"
+    },
+    
+    "Heritage Hotel Bhaktapur": {
+      "Heritage Deluxe Room": "Heritage Deluxe Room",
+      "Royal Heritage Suite": "Royal Heritage Suite",
+      "Cultural Experience Room": "Cultural Experience Room"
+    },
+    "Royal Bhaktapur": {
+      "Royal Heritage Room": "Royal Heritage Room",
+      "Maharaja Suite": "Maharaja Suite",
+      "Durbar View Deluxe": "Durbar View Deluxe"
+    },
+    "Hotel Heritage Palace": {
+      "Temple View Luxury Room": "Temple View Luxury Room",
+      "Heritage Palace Suite": "Heritage Palace Suite",
+      "Cultural Luxury Room": "Cultural Luxury Room"
+    },
+    "Cultural Resort Bhaktapur": {
+      "Mountain Vista Room": "Mountain Vista Room",
+      "Cultural Program Suite": "Cultural Program Suite",
+      "Garden Retreat Room": "Garden Retreat Room"
+    },
+    "Planet Bhaktapur Hotel": {
+      "Pottery View Room": "Pottery View Room",
+      "Artisan Suite": "Artisan Suite",
+      "City View Deluxe": "City View Deluxe"
+    },
+    "Vajra Guest House": {
+      "Temple View Traditional Room": "Temple View Traditional Room",
+      "Garden Retreat Suite": "Garden Retreat Suite",
+      "Cultural Heritage Room": "Cultural Heritage Room"
+    },
+    "Traditional Stay": {
+      "Pottery Artist Room": "Pottery Artist Room",
+      "Artisan Suite": "Artisan Suite",
+      "Garden Craft Room": "Garden Craft Room"
+    },
+    "Bhaktapur Homestay": {
+      "Family Home Room": "Family Home Room",
+      "Garden View Homestay Suite": "Garden View Homestay Suite",
+      "Cultural Living Room": "Cultural Living Room"
+    },
+    "Hotel Sweet Home": {
+      "Family Comfort Room": "Family Comfort Room",
+      "Cultural Explorer Suite": "Cultural Explorer Suite",
+      "Cozy Heritage Room": "Cozy Heritage Room"
+    },
+        "The Inn Patan": {
+          "Artisan's Garden Retreat": "Artisan's Garden Retreat",
+          "Heritage Living Suite": "Heritage Living Suite", 
+          "Mangal Bazaar View Room": "Mangal Bazaar View Room"
+        },
+        "Maya Boutique Hotel": {
+          "Garden Serenity Boutique Room": "Garden Serenity Boutique Room",
+          "Urban Luxury Lifestyle Suite": "Urban Luxury Lifestyle Suite",
+          "Culinary Design Experience Room": "Culinary Design Experience Room"
+        },
+        "Hotel Summit Patan": {
+          "Patan Square Heritage Room": "Patan Square Heritage Room",
+          "Cultural Immersion Suite": "Cultural Immersion Suite",
+          "Rooftop Dining Experience Room": "Rooftop Dining Experience Room"
+        },
+        "Hotel Patan Square": {
+          "Patan Durbar Square Heritage Room": "Patan Durbar Square Heritage Room",
+          "Rooftop Cultural Experience Suite": "Rooftop Cultural Experience Suite",
+          "Artisan's Inspiration Room": "Artisan's Inspiration Room"
+        },
+        "Hotel Himalaya": {
+          "Wellness Sanctuary Room": "Wellness Sanctuary Room",
+          "Business Executive Suite": "Business Executive Suite",
+          "Poolside Relaxation Room": "Poolside Relaxation Room"
+        },
+        "Greenwich Village Hotel": {
+          "Garden Serenity Room": "Garden Serenity Room",
+          "Urban Socialite Suite": "Urban Socialite Suite",
+          "Culinary Explorer's Room": "Culinary Explorer's Room"
+        },
+        "Hotel Goodday": {
+          "Business Traveler's Compact Room": "Business Traveler's Compact Room",
+          "Family Comfort Suite": "Family Comfort Suite",
+          "Budget-Friendly City View Room": "Budget-Friendly City View Room"
+        },
+        "Lumbini Hokke Hotel": {
+          "Zen Meditation Room": "Zen Meditation Room",
+          "Culinary Spiritual Suite": "Culinary Spiritual Suite",
+          "Temple Harmony Room": "Temple Harmony Room"
+        },
+        "Buddha Maya Garden Hotel": {
+          "Spiritual Serenity Room": "Spiritual Serenity Room",
+          "Temple View Wellness Suite": "Temple View Wellness Suite",
+          "Enlightenment Retreat Room": "Enlightenment Retreat Room"
+        },
+        "Zen International Hotel": {
+          "International Spiritual Retreat Room": "International Spiritual Retreat Room",
+          "Luxury Pilgrimage Suite": "Luxury Pilgrimage Suite",
+          "Mindful Business Traveler's Room": "Mindful Business Traveler's Room"
+        },
+        "Lumbini Garden New Crystal Hotel": {
+          "Zen Garden Retreat Room": "Zen Garden Retreat Room",
+          "Business and Wellness Suite": "Business and Wellness Suite",
+          "Cultural Harmony Room": "Cultural Harmony Room"
+        },
+        "Hotel Nirvana": {
+          "Yoga Wellness Room": "Yoga Wellness Room",
+          "Spiritual Transformation Suite": "Spiritual Transformation Suite",
+          "Mindful Living Room": "Mindful Living Room"
+        },
+        "Hotel Ananda Inn": {
+          "Cultural Immersion Room": "Cultural Immersion Room",
+          "Pilgrimage Experience Suite": "Pilgrimage Experience Suite",
+          "Peaceful Traveler's Room": "Peaceful Traveler's Room"
+        },
+        "Hotel Peace Palace": {
+          "Mindfulness Sanctuary Room": "Mindfulness Sanctuary Room",
+          "Vegetarian Wellness Suite": "Vegetarian Wellness Suite",
+          "Inner Peace Retreat Room": "Inner Peace Retreat Room"
+        },
+        "Ram Janaki Heritage Hotel": {
+          "Mythological Heritage Room": "Mythological Heritage Room",
+          "Cultural Immersion Suite": "Cultural Immersion Suite",
+          "Artisan's Cultural Room": "Artisan's Cultural Room"
+        },
+        "Hotel Sita Palace": {
+          "Ramayana Heritage Room": "Ramayana Heritage Room",
+          "Royal Mythological Suite": "Royal Mythological Suite",
+          "Cultural Storyteller's Room": "Cultural Storyteller's Room"
+        },
+        "Mithila Cultural Resort": {
+          "Mithila Art Heritage Room": "Mithila Art Heritage Room",
+          "Cultural Immersion Masterclass Suite": "Cultural Immersion Masterclass Suite",
+          "Artisan's Creative Sanctuary": "Artisan's Creative Sanctuary"
+        },
+        "Janaki Temple View Hotel": {
+          "Temple Panorama Room": "Temple Panorama Room",
+          "Spiritual Journey Suite": "Spiritual Journey Suite",
+          "Local Artisan's Retreat": "Local Artisan's Retreat"
+        },
+        "Hotel Divine": {
+          "Spiritual Luxury Room": "Spiritual Luxury Room",
+          "Royal Wellness Sanctuary Suite": "Royal Wellness Sanctuary Suite",
+          "Holistic Healing Room": "Holistic Healing Room"
+        },
+        "Hotel Ramayana": {
+          "Garden Cultural Retreat Room": "Garden Cultural Retreat Room",
+          "Mythological Wellness Suite": "Mythological Wellness Suite",
+          "Local Hospitality Room": "Local Hospitality Room"
+        },
+        "Hotel Shree Ram": {
+          "Budget Cultural Explorer Room": "Budget Cultural Explorer Room",
+          "Family Cultural Experience Suite": "Family Cultural Experience Suite",
+          "Local Traveler's Compact Room": "Local Traveler's Compact Room"
+        },
+          "Hotel Himalayan Villa": {
+            "Luxury Mountain Panorama Room": "Luxury Mountain Panorama Room",
+            "Adventure Elite Suite": "Adventure Elite Suite",
+            "Mountain Luxury Retreat": "Mountain Luxury Retreat"
+          },
+          "Sunrise Peak Hotel": {
+            "Sunrise Observation Room": "Sunrise Observation Room",
+            "Himalayan Explorer's Suite": "Himalayan Explorer's Suite",
+            "Mountain Wellness Retreat": "Mountain Wellness Retreat"
+          },
+          "Himalayan View Resort": {
+            "Himalayan Sunrise Observation Room": "Himalayan Sunrise Observation Room",
+            "Mountain Meditation Suite": "Mountain Meditation Suite",
+            "Photography Explorer's Room": "Photography Explorer's Room"
+          },
+          "Cloud Valley Resort": {
+            "Forest Harmony Room": "Forest Harmony Room",
+            "Wellness Forest Suite": "Wellness Forest Suite",
+            "Nature Explorer's Retreat": "Nature Explorer's Retreat"
+          },
+          "Mountain Horizon Hotel": {
+            "Adventure Base Camp Room": "Adventure Base Camp Room",
+            "Extreme Sports Wellness Suite": "Extreme Sports Wellness Suite",
+            "Mountain Expedition Retreat": "Mountain Expedition Retreat"
+          },
+          "Mountain Breeze Hotel": {
+            "Mountain Serenity Room": "Mountain Serenity Room",
+            "Trekkers' Comfort Suite": "Trekkers' Comfort Suite",
+            "Cultural Mountain Retreat": "Cultural Mountain Retreat"
+          },
+          "Himalayan Eco Lodge": {
+            "Sustainable Living Room": "Sustainable Living Room",
+            "Conservation Research Suite": "Conservation Research Suite",
+            "Green Traveler's Retreat": "Green Traveler's Retreat"
+          },
+          "Hotel Aangan": {
+            "Luxury Wellness Retreat Room": "Luxury Wellness Retreat Room",
+            "Culinary and Spa Experience Suite": "Culinary and Spa Experience Suite",
+            "Lifestyle Luxury Room": "Lifestyle Luxury Room"
+          },
+          "Hotel Gajur": {
+            "Hill Adventure Base Room": "Hill Adventure Base Room",
+            "Extreme Sports Wellness Suite": "Extreme Sports Wellness Suite",
+            "Nature Explorer's Retreat": "Nature Explorer's Retreat"
+          },
+          "Hotel Gorakha": {
+            "Mountain Adventure Base Room": "Mountain Adventure Base Room",
+            "Outdoor Expedition Suite": "Outdoor Expedition Suite",
+            "Nature Explorer's Retreat": "Nature Explorer's Retreat"
+          },
+          "Hotel Xenial": {
+            "Professional Performance Room": "Professional Performance Room",
+            "Wellness Business Suite": "Wellness Business Suite",
+            "Market Pulse Traveler's Room": "Market Pulse Traveler's Room"
+          },
+          "Hotel Xenial": {
+            "Professional Performance Room": "Professional Performance Room",
+            "Wellness Business Suite": "Wellness Business Suite",
+            "Market Pulse Traveler's Room": "Market Pulse Traveler's Room"
+          },
+          "Hotel Ambassador": {
+            "Medical Care Comfort Room": "Medical Care Comfort Room",
+            "Healing and Recovery Suite": "Healing and Recovery Suite",
+            "Patient Care Companion Room": "Patient Care Companion Room"
+          },
+          "Hotel Sungava": {
+            "Urban Panorama Room": "Urban Panorama Room",
+            "Business Connectivity Suite": "Business Connectivity Suite",
+            "Local Culture Insight Room": "Local Culture Insight Room"
+          },
+          "Hotel City Plaza": {
+            "Urban Explorer's Compact Room": "Urban Explorer's Compact Room",
+            "Business Traveler's Central Suite": "Business Traveler's Central Suite",
+            "Local Experience Room": "Local Experience Room"
+          },
+          "Testing": {
+            "Pokhara Taal": "Pokhara Taal"
+          }
+        },
+      
+
+      "roomDescription": {
+        "Dwarika's Hotel": {
+          "Heritage Deluxe Room": "Traditionally decorated room showcasing authentic Newari architectural elements",
+          "Cultural Heritage Suite": "Luxurious suite with handcrafted wooden furnishings and exclusive cultural experiences",
+          "Garden View Room": "Serene room overlooking meticulously maintained traditional gardens"
+        },
+       "Hyatt Regency Kathmandu": {
+      "Himalayan View Room": "Spacious room with breathtaking Himalayan mountain views and modern amenities",
+      "Executive Luxury Suite": "Expansive suite with separate living area, panoramic mountain views, and premium services",
+      "Family Interconnected Rooms": "Two interconnected rooms perfect for families, featuring city and mountain views"
+    },
+    "Marriott Kathmandu": {
+      "Executive Lounge Access Room": "Sophisticated room with exclusive access to the Marriott Executive Lounge and premium amenities",
+      "Luxury Mountain View Suite": "Expansive suite with breathtaking mountain views, featuring a separate living area and premium services",
+      "Business Traveler's Retreat": "Fully equipped room designed for business professionals, with a dedicated work area and high-speed internet"
+    },
+    "Yak & Yeti Hotel": {
+      "Casino Deluxe Room": "Comfortable room with direct access to the hotel's famous casino and entertainment areas",
+      "Business Executive Suite": "Fully equipped suite with work desk, meeting area, and premium business facilities",
+      "Riverside Luxury Room": "Elegantly designed room with scenic views of the nearby river and city landscape"
+    },
+    "Aloft Kathmandu Thamel": {
+      "Urban Loft Room": "Modern, minimalist room with contemporary design and city views",
+      "Rooftop Experience Suite": "Exclusive suite with private rooftop access and panoramic views of Kathmandu",
+      "Social Traveler Room": "Compact, stylish room designed for young travelers with social spaces and modern amenities"
+    },
+    "Hotel Mulberry": {
+      "Rooftop Pool Access Room": "Chic room with exclusive access to the hotel's stunning rooftop pool and panoramic city views",
+      "Wellness Spa Suite": "Luxurious suite with direct access to the hotel's spa, featuring relaxation and rejuvenation amenities",
+      "Social Traveler's Loft": "Compact, vibrant room designed for young travelers, with social spaces and modern connectivity"
+    },
+    "Hotel Annapurna": {
+      "Poolside Comfort Room": "Relaxing room with direct views of the hotel's swimming pool and easy access to recreational",
+      "Culinary Enthusiast Suite": "Spacious suite near the hotel's renowned restaurant, perfect for food lovers and larger groups",
+      "Urban Elegance Room": "Stylish room with modern decor, offering a perfect blend of comfort and contemporary design"
+    },
+    "Hotel Himalaya": {
+      "Garden Retreat Room": "Serene room overlooking the hotel's beautifully maintained garden, offering a peaceful escape",
+      "Conference Companion Suite": "Spacious suite near conference facilities, ideal for business groups or families attending events",
+      "Tennis Court View Room": "Unique room with direct views of the hotel's professional tennis courts, perfect for sports enthusiasts"
+    },
+    "Soaltee Kathmandu": {
+      "Family Comfort Room": "Spacious room with extra beds and family-friendly amenities",
+      "Tennis Court View Suite": "Luxurious suite overlooking the hotel's professional tennis courts",
+      "Wellness Retreat Room": "Tranquil room with direct access to spa and wellness center"
+    },
+    "Hotel Shangri-La": {
+      "Garden Serenity Room": "Peaceful room with direct access to the hotel's lush garden, offering a tranquil retreat",
+      "Executive Heritage Suite": "Spacious suite featuring traditional Nepali decor and modern luxury, with a separate living area",
+      "City View Comfort Room": "Bright and airy room with panoramic views of Kathmandu's vibrant cityscape"
+    },
+    "Pokhara Grande": {
+      "Luxury Lakeside Room": "Elegantly designed room with direct lake views, premium furnishings, and personalized service",
+      "Royal Spa Suite": "Ultimate luxury suite with private spa facilities, jacuzzi, and 24-hour personal butler service",
+      "Gourmet Culinary Room": "Exclusive room with private dining area, chef's kitchen, and curated culinary experiences"
+    },
+    "Fish Tail Lodge": {
+      "Lakeside Deluxe Room": "Spacious room with panoramic views of Phewa Lake, featuring private balcony and modern amenities",
+      "Fisherman's Suite": "Expansive suite with direct lake access, fishing equipment rental, and a private sitting area with lake views",
+      "Romantic Waterfront Retreat": "Intimate room designed for couples, with floor-to-ceiling windows offering uninterrupted lake and mountain scenery"
+    },
+    "Hotel Grande International": {
+      "Business Executive Room": "Fully equipped room for business travelers, featuring a dedicated workspace and high-speed internet",
+      "Corporate Conference Suite": "Expansive suite with meeting facilities, private work area, and comprehensive business services",
+      "Digital Nomad Workspace Room": "Modern room designed for remote workers, with ergonomic workspace and advanced connectivity options"
+    },
+    "Temple Tree Resort": {
+      "Mountain View Zen Room": "Tranquil room with meditation corner and panoramic views of the Annapurna mountain range",
+      "Wellness Sanctuary Suite": "Luxurious suite with private yoga space, spa-like bathroom, and complimentary wellness treatments",
+      "Garden Meditation Room": "Serene room overlooking the resort's zen garden, perfect for mindfulness and relaxation"
+    },
+    "Hotel Barahi": {
+          "Poolside Relaxation Room": "Comfortable room with direct access to the hotel's swimming pool and tropical garden views",
+          "Cultural Heritage Suite": "Luxurious suite decorated with traditional Nepali art, offering cultural immersion and modern comfort",
+          "Mountain Panorama Room": "Bright room with floor-to-ceiling windows showcasing stunning 180-degree mountain landscapes"
+        },
+        "Waterfront Resort": {
+          "Water Sports Enthusiast Room": "Adventure-ready room with complimentary water sports equipment and direct lake access",
+          "Sunset Lounge Suite": "Expansive suite with a private terrace offering breathtaking sunset views over Phewa Lake",
+          "Kayaker's Retreat": "Specially designed room for water sports lovers, with secure equipment storage and quick lake access"
+        },
+        "Hotel Lake Shore": {
+          "Water Sports Lover's Room": "Adventure room with complimentary water sports equipment and direct lake beach access",
+          "Fishing Enthusiast Suite": "Spacious suite for anglers, featuring fishing gear rental, lake view, and local fishing guide connections",
+          "Romantic Lakeside Retreat": "Intimate room designed for couples, with private balcony and uninterrupted lake and mountain scenery"
+        },
+        "Atithi Resort & Spa": {
+          "Wellness Rejuvenation Room": "Spa-inspired room with aromatherapy setup, meditation corner, and complimentary wellness treatments",
+          "Family Garden Suite": "Spacious family suite with a private garden area, children's play zone, and interconnected rooms",
+          "Lakeside Meditation Room": "Tranquil room with a zen-like atmosphere, offering partial lake views and yoga mat provisions"
+        },
+        "Hotel Mountain View": {
+          "Trekkers' Base Camp Room": "Adventure-ready room with trekking gear storage, maps, and mountain expedition resources",
+          "Panoramic Peak Suite": "Luxurious suite with unobstructed views of the Annapurna and Machhapuchhre mountain ranges",
+          "Yoga and Meditation Retreat Room": "Serene room designed for mindfulness, with yoga mat, meditation cushions, and mountain views"
+        },
+        "Hotel Middle Path": {
+          "Rooftop Sunset Room": "Intimate room with exclusive rooftop bar access and panoramic sunset views of Pokhara",
+          "Cultural Immersion Suite": "Spacious suite showcasing local art, offering cultural workshops and traditional decor",
+          "Backpacker's Social Room": "Budget-friendly room with communal spaces, perfect for solo travelers and social interactions"
+        },
+         
+    "Bhaktapur Paradise Hotel": {
+      "Paradise Heritage Room": "Luxurious room combining traditional architecture with modern spa amenities and heritage views",
+      "Royal Spa Suite": "Premium suite with private spa facilities, traditional decor, and personalized heritage tour services",
+      "Cultural Luxury Room": "Elegant room featuring cultural artifacts, premium amenities, and easy access to heritage sites"
+    },
+    "Heritage Hotel Bhaktapur": {
+      "Heritage Deluxe Room": "Traditional room featuring authentic Newari architecture and handcrafted furnishings",
+      "Royal Heritage Suite": "Luxurious suite with carved wooden windows, private courtyard views, and cultural artifacts",
+      "Cultural Experience Room": "Immersive room with traditional decor and direct views of Durbar Square"
+    },
+    "Royal Bhaktapur": {
+      "Royal Heritage Room": "Luxurious room featuring traditional royal decor and modern amenities with heritage views",
+      "Maharaja Suite": "Opulent suite with separate living area, spa bathroom, and personalized butler service",
+      "Durbar View Deluxe": "Premium room offering stunning views of Durbar Square with luxury amenities"
+    },
+    "Hotel Heritage Palace": {
+      "Temple View Luxury Room": "Elegant room offering panoramic views of Nyatapola Temple with luxury amenities",
+      "Heritage Palace Suite": "Grand suite with traditional palace decor, temple views, and premium dining services",
+      "Cultural Luxury Room": "Sophisticated room combining luxury comfort with cultural experiences and temple tour access"
+    },
+    "Cultural Resort Bhaktapur": {
+      "Mountain Vista Room": "Comfortable room with panoramic mountain views and traditional decor elements",
+      "Cultural Program Suite": "Suite designed for cultural immersion with private space for cultural activities and workshops",
+      "Garden Retreat Room": "Serene room with garden access and perfect blend of modern comfort and cultural charm"
+    },
+    "Planet Bhaktapur Hotel": {
+      "Pottery View Room": "Comfortable room overlooking the historic Pottery Square, perfect for cultural enthusiasts",
+      "Artisan Suite": "Spacious suite featuring local pottery displays and traditional craft demonstrations",
+      "City View Deluxe": "Modern room with panoramic views of Bhaktapur's ancient skyline"
+    },
+    "Vajra Guest House": {
+      "Temple View Traditional Room": "Authentic room with direct views of Taumadhi Square temples, featuring traditional Newari decor",
+      "Garden Retreat Suite": "Spacious suite overlooking the peaceful garden, perfect for families seeking a cultural experience",
+      "Cultural Heritage Room": "Cozy room with traditional architecture, offering easy access to cultural tours and local experiences"
+    },
+    "Traditional Stay": {
+      "Pottery Artist Room": "Creative room with pottery workspace, traditional tools, and views of the pottery square",
+      "Artisan Suite": "Spacious suite with private pottery workshop space and traditional craft demonstrations",
+      "Garden Craft Room": "Peaceful room with garden views and dedicated space for cultural activities"
+    },
+    "Bhaktapur Homestay": {
+      "Family Home Room": "Cozy room in a traditional family home, offering authentic local living experience with home-cooked meals",
+      "Garden View Homestay Suite": "Spacious family suite with garden views, perfect for experiencing traditional Newari lifestyle and customs",
+      "Cultural Living Room": "Authentic room featuring local decor, with direct access to cultural activities and cooking demonstrations"
+    },
+    "Hotel Sweet Home": {
+      "Family Comfort Room": "Spacious family room with traditional touches, perfect for families exploring Bhaktapur's heritage",
+      "Cultural Explorer Suite": "Suite designed for cultural enthusiasts, featuring local art and easy access to heritage sites",
+      "Cozy Heritage Room": "Comfortable room blending modern amenities with traditional charm, ideal for couples"
+    },
+    "The Inn Patan": {
+          "Artisan's Garden Retreat": "Serene room overlooking the hotel's traditional garden, featuring local craft displays and direct access to artisan workshops",
+          "Heritage Living Suite": "Comprehensive suite replicating a traditional Newari home, with authentic furnishings, cultural artifacts, and immersive historical experiences",
+          "Mangal Bazaar View Room": "Vibrant room offering stunning views of Mangal Bazaar, capturing the essence of Lalitpur's bustling local life and cultural heritage"
+        },
+        "Maya Boutique Hotel": {
+          "Garden Serenity Boutique Room": "Tranquil room overlooking the hotel's meticulously designed garden, featuring boutique design elements and natural, calming aesthetics",
+          "Urban Luxury Lifestyle Suite": "Comprehensive suite embodying contemporary urban design, with a private bar area, curated art pieces, and personalized boutique shopping experiences",
+          "Culinary Design Experience Room": "Unique room near the hotel's restaurant, offering gourmet dining insights, cooking masterclasses, and a fusion of culinary and design experiences"
+        },
+        "Hotel Summit Patan": {
+          "Patan Square Heritage Room": "Elegantly designed room offering panoramic views of Patan Durbar Square, featuring traditional Newari architectural elements and curated local artwork",
+          "Cultural Immersion Suite": "Expansive suite showcasing Lalitpur's rich cultural heritage, with interactive exhibits, traditional craft displays, and personalized cultural experiences",
+          "Rooftop Dining Experience Room": "Unique room with exclusive access to the hotel's rooftop restaurant, offering gourmet dining and breathtaking views of Lalitpur's historic landscape"
+        },
+        "Hotel Patan Square": {
+          "Patan Durbar Square Heritage Room": "Elegantly designed room offering panoramic views of Patan Durbar Square, featuring traditional Newari architectural elements and curated local artwork",
+          "Rooftop Cultural Experience Suite": "Expansive suite with exclusive rooftop cafe access, offering immersive cultural experiences, live music sessions, and breathtaking views of Lalitpur's historic landscape",
+          "Artisan's Inspiration Room": "Creative room designed to connect guests with local crafts, featuring a dedicated workspace, local art displays, and views of traditional artisan workshops"
+        },
+        "Hotel Himalaya": {
+          "Wellness Sanctuary Room": "Tranquil room with direct access to the hotel's spa, featuring holistic wellness amenities and relaxation-focused design",
+          "Business Executive Suite": "Comprehensive suite designed for business professionals, with integrated work spaces, conference facilities, and premium connectivity",
+          "Poolside Relaxation Room": "Refreshing room with direct views of the swimming pool, offering a perfect blend of leisure and comfort"
+        },
+        "Greenwich Village Hotel": {
+          "Garden Serenity Room": "Peaceful room overlooking the hotel's lush garden, designed for relaxation and tranquility",
+          "Urban Socialite Suite": "Vibrant suite perfect for social gatherings, featuring a private bar area and contemporary urban design",
+          "Culinary Explorer's Room": "Unique room near the hotel's restaurant, offering culinary experiences and local food culture insights"
+        },
+        "Hotel Goodday": {
+          "Business Traveler's Compact Room": "Efficient room designed for business travelers, with ergonomic workspace and essential connectivity features",
+          "Family Comfort Suite": "Spacious suite offering family-friendly amenities, interconnected spaces, and convenient services",
+          "Budget-Friendly City View Room": "Affordable room with city views, offering comfort and essential amenities for budget-conscious travelers"
+        },
+        "Lumbini Hokke Hotel": {
+          "Zen Meditation Room": "Japanese-inspired room blending spiritual tranquility with minimalist design, featuring zen garden views and meditation resources",
+          "Culinary Spiritual Suite": "Comprehensive suite offering Japanese culinary experiences, spa treatments, and immersive spiritual wellness programs",
+          "Temple Harmony Room": "Room celebrating the spiritual connection between Japanese and Buddhist traditions, with cultural artifacts and peaceful design"
+        },
+        "Buddha Maya Garden Hotel": {
+          "Spiritual Serenity Room": "Tranquil room designed for mindfulness, featuring meditation corner, Buddhist art, and direct views of the meditation garden",
+          "Temple View Wellness Suite": "Comprehensive wellness suite with panoramic Maya Devi Temple views, private yoga space, and holistic healing amenities",
+          "Enlightenment Retreat Room": "Contemplative room offering spiritual resources, sacred texts, and a peaceful environment for personal reflection"
+        },
+        "Zen International Hotel": {
+          "International Spiritual Retreat Room": "Globally inspired room blending international design with Lumbini's spiritual essence, featuring multicultural meditation resources",
+          "Luxury Pilgrimage Suite": "Comprehensive suite offering a luxurious spiritual journey experience, with international wellness amenities and personalized cultural guidance",
+          "Mindful Business Traveler's Room": "Unique room designed for professionals seeking balance, with integrated workspace and spiritual wellness resources"
+        },
+        "Lumbini Garden New Crystal Hotel": {
+          "Zen Garden Retreat Room": "Serene room overlooking the Japanese-inspired garden, featuring minimalist design and peaceful meditation spaces",
+          "Business and Wellness Suite": "Comprehensive suite balancing professional needs with spiritual wellness, including a dedicated workspace and meditation area",
+          "Cultural Harmony Room": "Room celebrating international peace and cultural understanding, with art installations and resources for cross-cultural learning"
+        },
+        "Hotel Nirvana": {
+          "Yoga Wellness Room": "Dedicated space for yoga and personal wellness, featuring premium yoga equipment and holistic healing resources",
+          "Spiritual Transformation Suite": "Comprehensive suite offering intensive wellness programs, private yoga sessions, and transformative spiritual experiences",
+          "Mindful Living Room": "Room designed for holistic personal growth, with meditation tools, inspirational literature, and peaceful ambiance"
+        },
+        "Hotel Ananda Inn": {
+          "Cultural Immersion Room": "Room designed to connect guests with Lumbini's rich spiritual heritage, featuring local art and cultural artifacts",
+          "Pilgrimage Experience Suite": "Expansive suite offering comprehensive spiritual journey resources, including guided meditation and cultural workshop spaces",
+          "Peaceful Traveler's Room": "Thoughtfully designed room for mindful travelers, with calming decor and resources for personal spiritual exploration"
+        },
+        "Hotel Peace Palace": {
+          "Mindfulness Sanctuary Room": "Dedicated space for inner peace, featuring meditation cushions, calming decor, and mindfulness resources",
+          "Vegetarian Wellness Suite": "Holistic suite offering vegetarian culinary experiences, nutrition workshops, and comprehensive wellness amenities",
+          "Inner Peace Retreat Room": "Tranquil room designed for personal reflection, with spiritual literature, meditation aids, and peaceful ambiance"
+        },
+        "Ram Janaki Heritage Hotel": {
+          "Mythological Heritage Room": "Elegantly designed room showcasing the epic Ramayana through curated artifacts, traditional artwork, and historical narratives",
+          "Cultural Immersion Suite": "Comprehensive suite offering deep cultural experiences, including traditional craft workshops, storytelling sessions, and local art exhibitions",
+          "Artisan's Cultural Room": "Creative space designed to connect guests with local craftsmanship, featuring interactive art displays and traditional skill demonstrations"
+        },
+        "Hotel Sita Palace": {
+          "Ramayana Heritage Room": "Immersive room showcasing the epic Ramayana through artistic displays, traditional decor, and cultural artifacts",
+          "Royal Mythological Suite": "Expansive suite celebrating the royal legacy of Janakpur, featuring comprehensive storytelling resources and mythological art installations",
+          "Cultural Storyteller's Room": "Dedicated space for cultural enthusiasts, offering interactive storytelling sessions, local literature, and mythological research resources"
+        },
+        "Mithila Cultural Resort": {
+          "Mithila Art Heritage Room": "Room dedicated to Mithila art, featuring hand-painted walls, traditional artwork, and interactive cultural displays",
+          "Cultural Immersion Masterclass Suite": "Comprehensive suite offering deep cultural experiences, including traditional art workshops, craft demonstrations, and curated Mithila cultural resources",
+          "Artisan's Creative Sanctuary": "Dedicated creative space for artists and culture enthusiasts, with professional-grade art supplies, local craft tools, and inspirational cultural environment"
+        },
+        "Janaki Temple View Hotel": {
+          "Temple Panorama Room": "Room offering breathtaking views of the Janaki Temple, with a private balcony and cultural interpretation resources",
+          "Spiritual Journey Suite": "Comprehensive suite designed for spiritual seekers, featuring meditation spaces, religious literature, and guided cultural experiences",
+          "Local Artisan's Retreat": "Creative room connecting guests with local crafts, featuring workspace, traditional art displays, and artisan workshop insights"
+        },
+        "Hotel Divine": {
+          "Spiritual Luxury Room": "Elegantly designed room combining luxury with spiritual ambiance, featuring premium wellness amenities and cultural touches",
+          "Royal Wellness Sanctuary Suite": "Expansive suite offering comprehensive wellness experiences, with private spa facilities and personalized cultural healing programs",
+          "Holistic Healing Room": "Dedicated room for holistic wellness, featuring meditation resources, spa treatments, and spiritual guidance"
+        },
+        "Hotel Ramayana": {
+          "Garden Cultural Retreat Room": "Serene room overlooking the hotel's garden, offering a peaceful space for cultural reflection and local experiences",
+          "Mythological Wellness Suite": "Comprehensive suite blending cultural experiences with wellness, featuring meditation spaces and holistic cultural resources",
+          "Local Hospitality Room": "Intimate room designed to showcase local hospitality, with traditional decor and personalized cultural interaction opportunities"
+        },
+        "Hotel Shree Ram": {
+          "Budget Cultural Explorer Room": "Affordable room designed for budget travelers, offering local cultural insights and essential comfort amenities",
+          "Family Cultural Experience Suite": "Spacious suite providing family-friendly cultural experiences, with interconnected spaces and local storytelling resources",
+          "Local Traveler's Compact Room": "Efficient room for solo travelers and backpackers, offering essential amenities and local cultural connections"
+        },
+       
+    "Hotel Himalayan Villa": {
+      "Luxury Mountain Panorama Room": "Premium room offering unparalleled mountain views, with heated floors and advanced comfort technologies",
+      "Adventure Elite Suite": "Comprehensive suite for premium adventure experiences, featuring personal gear preparation area and high-end wellness facilities",
+      "Mountain Luxury Retreat": "Exclusive room designed for discerning travelers, offering personalized mountain experiences and premium comfort amenities"
+    },
+    "Sunrise Peak Hotel": {
+      "Sunrise Observation Room": "Perfectly positioned room with advanced sunrise viewing technology and professional photography equipment",
+      "Himalayan Explorer's Suite": "Comprehensive adventure suite with mountain research resources, trekking planning area, and immersive landscape experiences",
+      "Mountain Wellness Retreat": "Holistic room focusing on mountain-inspired wellness, featuring meditation spaces and natural healing resources"
+    },
+    "Himalayan View Resort": {
+      "Himalayan Sunrise Observation Room": "Strategically designed room with floor-to-ceiling windows offering uninterrupted panoramic mountain and sunrise views",
+      "Mountain Meditation Suite": "Comprehensive wellness suite with private meditation space, mountain view yoga deck, and holistic healing resources",
+      "Photography Explorer's Room": "Specialized room for photographers and nature enthusiasts, featuring professional-grade camera equipment and editing workspace"
+    },
+    "Cloud Valley Resort": {
+      "Forest Harmony Room": "Eco-designed room blending seamlessly with forest surroundings, featuring sustainable materials and nature-inspired decor",
+      "Wellness Forest Suite": "Comprehensive wellness suite offering forest therapy, meditation spaces, and holistic healing experiences",
+      "Nature Explorer's Retreat": "Specialized room for nature enthusiasts, with research resources, wildlife observation tools, and forest conservation information"
+    },
+    "Mountain Horizon Hotel": {
+      "Adventure Base Camp Room": "Specialized room for adventure enthusiasts, with gear storage, trail maps, and mountain activity planning resources",
+      "Extreme Sports Wellness Suite": "Comprehensive suite for extreme sports lovers, featuring recovery facilities, equipment maintenance area, and performance tracking resources",
+      "Mountain Expedition Retreat": "Dedicated room for mountain expedition preparation, with professional planning resources and immersive mountain experience tools"
+    },
+    "Mountain Breeze Hotel": {
+      "Mountain Serenity Room": "Tranquil room designed to connect guests with nature, featuring local artwork and direct mountain view balcony",
+      "Trekkers' Comfort Suite": "Comprehensive suite for adventure enthusiasts, with gear storage, recovery area, and mountain trail information center",
+      "Cultural Mountain Retreat": "Immersive room showcasing local mountain culture, with traditional decor and cultural interaction resources"
+    },
+    "Himalayan Eco Lodge": {
+      "Sustainable Living Room": "Innovative room showcasing sustainable living practices, with renewable energy demonstrations and eco-education resources",
+      "Conservation Research Suite": "Comprehensive suite for environmental researchers and conservation enthusiasts, with study spaces and ecological resources",
+      "Green Traveler's Retreat": "Eco-conscious room designed for environmentally aware travelers, featuring sustainable amenities and conservation insights"
+    },
+    "Hotel Aangan": {
+      "Luxury Wellness Retreat Room": "Premium room offering comprehensive wellness experiences, with spa access and personalized relaxation amenities",
+      "Culinary and Spa Experience Suite": "Expansive suite blending gourmet dining and spa experiences, with private dining and wellness treatment areas",
+      "Lifestyle Luxury Room": "Elegantly designed room showcasing premium lifestyle experiences, with curated amenities and personalized service"
+    },
+    "Hotel Gajur": {
+      "Hill Adventure Base Room": "Specialized room for adventure enthusiasts, featuring gear storage, trail maps, and local adventure planning resources",
+      "Extreme Sports Wellness Suite": "Comprehensive suite for adventure lovers, with recovery facilities, equipment maintenance area, and performance tracking resources",
+      "Nature Explorer's Retreat": "Dedicated room for nature and adventure enthusiasts, offering immersive local landscape experiences and outdoor activity insights"
+    },
+    "Hotel Gorakha": {
+      "Mountain Adventure Base Room": "Specialized room for adventure enthusiasts, featuring gear storage, trail maps, and mountain activity planning resources",
+      "Outdoor Expedition Suite": "Comprehensive suite for adventure lovers, with equipment maintenance area, recovery facilities, and performance tracking resources",
+      "Nature Explorer's Retreat": "Dedicated room for nature enthusiasts, offering immersive local landscape experiences and outdoor activity insights"
+    },
+    "Hotel Xenial": {
+      "Professional Performance Room": "Ergonomically designed room for business professionals, featuring advanced connectivity and productivity-enhancing amenities",
+      "Wellness Business Suite": "Comprehensive suite blending business functionality with wellness, including private gym access and holistic work-life balance resources",
+      "Market Pulse Traveler's Room": "Dynamic room offering insights into Dharan's market culture, with local business resources and networking opportunities"
+    },
+    "Hotel Ambassador": {
+            "Medical Care Comfort Room": "Thoughtfully designed room for medical travelers, offering comfort, privacy, and support resources for patients and families",
+            "Healing and Recovery Suite": "Comprehensive suite providing holistic healing environment, with medical support facilities and wellness recovery resources",
+            "Patient Care Companion Room": "Supportive room designed for medical caregivers, featuring rest areas, medical information resources, and comfort amenities"
+          },
+          "Hotel Sungava": {
+            "Urban Panorama Room": "Spacious room offering expansive city views, featuring contemporary design and local urban art installations",
+            "Business Connectivity Suite": "Comprehensive suite designed for professional travelers, with integrated workspace, conference facilities, and city landscape views",
+            "Local Culture Insight Room": "Room celebrating Dharan's cultural diversity, featuring local artworks, cultural resources, and interactive city experience displays"
+          },
+          "Hotel City Plaza": {
+            "Urban Explorer's Compact Room": "Efficiently designed room for city travelers, offering essential amenities and local city exploration resources",
+            "Business Traveler's Central Suite": "Comprehensive suite providing central location advantages, with integrated workspace and city connectivity features",
+            "Local Experience Room": "Room designed to connect guests with Dharan's local culture, featuring city guides, local art, and cultural interaction spaces"
+          },
+          "Testing": {
+            "Pokhara Taal": "Very good hotel to be truth. Capacity: 2 Adults"
+          }
+
+   
+      },
+        "login": "Login",
+        "register": "Register",
+        "firstName": "First Name",
+        "enterFirstName": "Enter your first name",
+        "lastName": "Last Name",
+        "enterLastName": "Enter your last name",
+        "country": "Country",
+        "mobileNumber": "Mobile Number",
+        "enterMobileNumber": "Enter your mobile number",
+        "email": "Email",
+        "enterEmail": "Enter your email",
+        "password": "Password",
+        "enterPassword": "Enter your password",
+        "confirmPassword": "Confirm Password",
+        "enterConfirmPassword": "Confirm your password",
+        "submit": "Submit",
+        "alreadyHaveAccount": "Already have an account?",
+        "dontHaveAccount": "Don't have an account?",
+        "loginHere": "Login here",
+        "registerHere": "Register here",
+        "orContinueWith": "Or continue with",
+        "googleLogin": "Login with Google",
+        "forgotPassword": "Forgot Password?",
+  "signUpWith": "Sign up with",
+  "selectedFlag": "Selected Flag",
+  "nepal": "Nepal",
+  "searchCountry": "Search for a country",
+    "passwordsDoNotMatch": "Passwords do not match!",
+    "enterValidEmail": "Please enter a valid email address.",
+    "passwordRequirements": "Password must be at least 8 characters long and contain at least one letter and one number.",
+    "mobileNumberRequirements": "Mobile number must be exactly 10 digits.",
+      "resetPasswordError": "An error occurred.",
+      "forgotPasswordTitle": "Forgot Password",
+      "forgotPasswordSubtitle": "Enter your email to reset password",
+      "emailPlaceholder": "Enter your email address",
+      "resetPasswordButton": "Reset Password",
+      "invalidToken": "Invalid token.",
+      "passwordChangeSuccess": "Password changed successfully. Redirecting to login...",
+        "changePassword": "Change Password",
+        "enterNewPassword": "Enter your new password",
+        "newPassword": "New Password",
+        "enterNewPasswordPlaceholder": "Enter new password",
+        "confirmNewPasswordPlaceholder": "Confirm new password",
+        "successfully": "successfully",
+          "pleaseLoginToBook": "Please login to make a booking",
+          "failedToCreateBooking": "Failed to create booking",
+          "bookingConfirmed": "Booking confirmed successfully!",
+          "bookingError": "Booking error",
+          "failedToCreateBookingTryAgain": "Failed to create booking. Please try again.",
+          "enterYourDetails": "Enter your details",
+          "bookingDetails": "Booking Details",
+          "roomTypes": "Room Types",
+          "rooms": "Rooms",
+          "totalPrice": "Total Price",
+          "loyaltyDiscountApplied": "20% loyalty discount applied",
   
-  }
+            "form": {
+              "checkInDate": "Check-in Date",
+              "checkOutDate": "Check-out Date",
+              "guestInformation": "Guest Information",
+              "firstName": "First Name",
+              "lastName": "Last Name",
+              "email": "Email Address",
+              "phone": "Enter your phone number",
+              "bookingFor": "Who are you booking for? (optional)",
+              "mainGuest": "I'm the main guest",
+              "searchCountry": "Search for a country",
+              "bookingForSomeoneElse": "I'm booking for someone else",
+    "travelingForWork": "Are you traveling for work? (optional)",
+    "yes": "Yes",
+    "no": "No", "processing": "Processing...",
+    "confirmBooking": "Confirm Booking",
+    "cancel": "Cancel"
+          },
+            "profile": {
+              "imageSizeError": "Image size must be less than 5MB",
+              "invalidFileType": "Invalid file type. Please upload JPEG, PNG, GIF, or WebP.",
+              "uploadSuccess": "Profile picture updated successfully!",
+              "uploadError": "Failed to upload profile picture",
+              "nameUpdateSuccess": "Name updated successfully!",
+              "nameUpdateError": "Failed to update name",
+              "passwordMismatch": "New passwords do not match",
+              "passwordRequirements": "Password must be at least 8 characters long and contain at least one letter and one number",
+              "passwordChangeError": "Failed to change password",
+              "generalError": "An error occurred while changing password",
+              "personalDetails": "Personal Details",
+              "viewInfoText": "View your info and discover its uses.",
+              "name": "Name",
+    "edit": "Edit",
+    "email": "Email",
+    "verified": "Verified",
+    "mobileNumber": "Mobile Number",
+    "notProvided": "Not provided",
+    "country": "Country",
+    "password": "Password",
+    "changePassword": "Change Password"
+  },
+  "modal": {
+    "editName": "Edit Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "save": "Save"
+  },
+  
+  
+   
+    "passwordModal": {
+      "title": "Change Password",
+      "currentPassword": "Current Password:",
+      "newPassword": "New Password:",
+      "confirmPassword": "Confirm New Password:",
+      "enterCurrent": "Enter current password",
+      "enterNew": "Enter new password",
+      "confirmNew": "Confirm new password",
+      "changePassword": "Change Password"
+    },
+
+      "favourites1": {
+        "loading": "Loading your favorites...",
+        "title": "My Favorites",
+        "empty": "No favorites added yet",
+        "viewDetails": "View Details",
+        "loadError": "Failed to load favorites"
+    },
+      "reservation1": {
+        "loginRequired": "Please log in to view your bookings",
+        "loadError": "Failed to load bookings",
+        "cancelError": "Failed to cancel booking",
+        "cancelSuccess": "Booking cancelled successfully",
+        "hotelDetailsError": "Hotel details not available",
+        "loading": "Loading...",
+        "myBookings": "My Bookings",
+        "recent": "Recent",
+        "past": "Past",
+            "roomType": "Room Type",
+            "numberOfRooms": "Number of Rooms",
+            "checkIn": "Check-in",
+            "checkOut": "Check-out",
+            "totalPrice": "Total Price",
+            "status": "Status",
+            "viewHotel": "View Hotel",
+            "cancelBooking": "Cancel Booking",
+            "noRecentBookings": "No recent bookings found.",
+            "noPastBookings": "No past bookings found.",
+            "currency": "NPR"
+      },
+      "bookingStatus": {
+    "Confirmed": "Confirmed",
+    "Cancelled": "Cancelled",
+    "Completed": "Completed"
+  },   
+   "common": {
+    "getXOff": "Get {{percent}}% off",
+  "cancelledPoints": "-{{points}} (Cancelled)",
+  "earnedPoints": "+{{points}} (Earned)",
+  "redeemedPoints": "-{{points}} (Redeemed)"
+
+  },
+  
+    "loyaltyPoints1": {
+      "pointsNeeded": "You need {{points}} points to redeem this deal. Earn points by making bookings!",
+      "redeemSuccess": "Successfully redeemed {{points}} points for {{hotel}}! Your discount will be valid for 7 days.",
+      "redeemError": "Failed to redeem points. Please try again.",
+      "loading": "Loading weekly deals...",
+      "weeklyDealsTitle": "This Week's Special Hotel Deals",
+      "dealsDescription": "Please check back later for exclusive discounts at our selected hotels.",
+      "redeemButton": "Redeem Points",
+      "greeting": "Hi, {{name}}",
+      "loyaltyPoints": "Loyalty Points",
+      "faqTitle": "Frequently Asked Questions",
+      "rewards": "Rewards",
+        "faqs": "FAQs",
+  
+      "bookingPoints": {
+        "cancelled": -100,
+        "redeemed": -500,
+        "earned": 100
+      },
+      "pointTypes": {
+        "redeemed": "redeemed",
+        "earned": "earned"
+        
+      },
+      "tabs": {
+        "all": "All",
+        "earned": "Earned", 
+        "redeemed": "Redeemed",
+        "loyaltyPoints": "Loyalty Points",
+        "rewards": "Rewards",
+        "faqs": "FAQs"
+    },
+    "emptyState": {
+        "redeemed": "No points redeemed yet",
+        "earned": "Start booking to earn points",
+        "general": "No points history available"
+    }
+  },
+  "faq": {
+  "earnQuestion": "How do I earn Loyalty points?",
+  "earnAnswer": "For every hotel booking you make, you'll earn 100 points which can be used to redeem hotel discounts.",
+  "redeemQuestion": "How can I redeem Loyalty points?",
+  "redeemAnswer": "You can redeem points through the Rewards section where you'll see available offers to redeem for hotel discounts.",
+  "whenQuestion": "When can I redeem Loyalty points?",
+  "whenAnswer": "You can redeem points once you have at least 500 points in your account."
+},
+
+"bookingPoints": {
+  "cancelled": "Cancelled Booking (-{{points}} Points)",
+  "earned": "Earned {{points}} Points",
+  "redeemed": "Redeemed {{points}} Points"
+},
+"chatbot": {
+  "title": "ChatBot",
+  "welcomeMessage": "Great to see you here!<br/>What information are you looking for? Please use the search below or ask me anything about Heavenhub.__ ✨",
+  "inputPlaceholder": "Write a message...",
+  "sendButton": "Send"
+},
+
+"notificationPanel": {
+  "title": "All Notifications",
+  "closeButton": "Close"
+}
+}
