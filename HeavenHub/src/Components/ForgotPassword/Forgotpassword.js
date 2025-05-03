@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import styles from "./Forgotpassword.module.css"; // Updated styles for ForgotPassword
 import { FaEnvelope } from "react-icons/fa"; // Email icon
 import forgot from "../Assets/forgot.png"; // Assuming this is an image or asset path
+import { useTranslation } from 'react-i18next';
 
 const ForgotPassword = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
@@ -13,7 +15,7 @@ const ForgotPassword = () => {
     // Improved email validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      setMessage("Please enter a valid email.");
+      setMessage(t('enterValidEmail'));
       return;
     }
 
@@ -28,10 +30,10 @@ const ForgotPassword = () => {
       if (response.ok) {
         setMessage(data.message); // Success message
       } else {
-        setMessage(data.error || "An error occurred.");
+        setMessage(data.error || t('resetPasswordError'));
       }
     } catch (error) {
-      setMessage("An error occurred: " + error.message);
+      setMessage(t('resetPasswordError'));
     }
   };
 
@@ -46,21 +48,21 @@ const ForgotPassword = () => {
               <img src={forgot} alt="Forgot Password" />
             </div>
             <div className={styles.formContent}>
-              <h2 className="font-bold text-2xl">Forgot Password!</h2>
-              <p className="text-gray-600 mt-2">Enter your registered email</p>
+            <h2>{t('forgotPasswordTitle')}</h2>
+            <p>{t('forgotPasswordSubtitle')}</p>
               <form
                 onSubmit={handleSubmit}
                 className={styles.forgotPasswordForm}
               >
                 <div className={styles.forgotPasswordInputGroup}>
-                  <label htmlFor="email">Email</label>
+                <label htmlFor="email">{t('email')}</label>
                   <div className={styles.forgotPasswordInputWrapper}>
                     <FaEnvelope className={styles.forgotPasswordIcon} />
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="Enter your email"
+                      placeholder={t('emailPlaceholder')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -71,7 +73,7 @@ const ForgotPassword = () => {
                   type="submit"
                   className={styles.forgotPasswordSubmitButton}
                 >
-                  Reset Password
+                  {t('resetPasswordButton')}
                 </button>
               </form>
               {message && (
