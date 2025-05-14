@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./Reservation.module.css";
 import { useTranslation } from 'react-i18next';
+import { useNotification } from '../../context/NotificationContext';
 
 // Add formatDate function
 const formatDate = (dateString) => {
@@ -12,6 +13,7 @@ const formatDate = (dateString) => {
 
 const Reservation = () => {
   const { t } = useTranslation();
+  const { addNotification } = useNotification();
   const [activeTab, setActiveTab] = useState("recent");
   const [recentBookings, setRecentBookings] = useState([]);
   const [pastBookings, setPastBookings] = useState([]);
@@ -100,6 +102,45 @@ const Reservation = () => {
           { ...cancelledBooking, status: 'Cancelled' },
           ...prevBookings
         ]);
+        addNotification({
+          type: 'booking',
+          messageKey: 'bookingCancelled',
+          messageParams: { 
+            hotelName: cancelledBooking.hotelName,
+            roomType: cancelledBooking.roomType,
+            checkInDate: formatDate
+            (cancelledBooking.checkInDate),
+            checkOutDate: formatDate(cancelledBooking.checkOutDate)
+          },
+          message: t('bookingCancelled', { 
+            hotelName: t(`hotel.${cancelledBooking.hotelName}`) || cancelledBooking.hotelName,
+            roomType: t(`roomType.${cancelledBooking.hotelName}.${cancelledBooking.roomType}`) || cancelledBooking.roomType,
+            checkInDate: formatDate(cancelledBooking.checkInDate),
+            checkOutDate: formatDate(cancelledBooking.checkOutDate)
+          }),
+          time: new Date().toLocaleTimeString()
+        });
+
+        const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+        localStorage.setItem('adminNotifications', JSON.stringify([
+          {
+            id: Date.now(),
+            type: 'booking_cancelled',
+            message: `Booking cancelled for ${cancelledBooking.hotelName} - ${cancelledBooking.roomCount}
+            ${cancelledBooking.roomType} room(s)`,
+      time: new Date().toLocaleTimeString(),
+      timestamp: Date.now(),
+      read: false
+    }, ...existingAdminNotifications
+  ]));
+
+        addNotification({
+          type: 'hotelError',
+          message: t('pointsLost', {
+            points: 100, hotelName: cancelledBooking.hotelName
+          }), time: new Date().toLocaleTimeString()
+  });
+            
       }
   
       toast.success(data.message || t('reservation1.cancelSuccess'));
@@ -108,6 +149,43 @@ const Reservation = () => {
       toast.error(error.message || t('reservation1.cancelError'));
     }
   };
+
+  useEffect(() => {
+    const checkCompletedBookings = () => {
+      const currentDate = new Date();
+      recentBookings.forEach(booking => {
+        const checkOutDate = new Date(booking.checkOutDate);
+        if (checkOutDate < currentDate) {
+          // Move to past bookings
+          setRecentBookings(prev => prev.filter(b => b._id !== booking._id));
+          setPastBookings(prev => [{ ...booking, status: 'Completed' }, ...prev]);
+
+          // Add notification for completion
+          addNotification({
+            type: 'booking',
+            messageKey: 'bookingCompleted',
+            messageParams: { 
+              hotelName: booking.hotelName,
+              roomType: booking.roomType,
+              checkInDate: formatDate(booking.checkInDate),
+              checkOutDate: formatDate(booking.checkOutDate)
+            },
+            message: t('bookingCompleted', { 
+              hotelName: t(`hotel.${booking.hotelName}`) || booking.hotelName,
+              roomType: t(`roomType.${booking.hotelName}.${booking.roomType}`),
+              checkInDate: formatDate(booking.checkInDate),
+              checkOutDate: formatDate(booking.checkOutDate)
+            }),
+            time: new Date().toLocaleTimeString()
+          });
+        }
+      });
+    };
+
+    const intervalId = setInterval(checkCompletedBookings, 60000); // Check every minute
+    return () => clearInterval(intervalId);
+  }, [recentBookings, addNotification, t]);
+
 
   const handleViewDetails = (booking) => {
     // In handleViewDetails function

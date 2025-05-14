@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 import styles from "./TopRatedProperties.module.css";
 import { FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
+import { useNotification } from '../../context/NotificationContext';
 
 const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
   const { t } = useTranslation();
+  const { addNotification } = useNotification();
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef(null);
@@ -51,7 +53,7 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
 
       // Check if user is logged in
       if (!token) {
-        toast.warning("Please log in to save properties to favorites");
+        toast.warning(t('loginToFavorite'));
         return;
       }
 
@@ -91,7 +93,18 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
         const { [property.id]: removed, ...rest } = savedProperties;
         setSavedProperties(rest);
         localStorage.setItem("savedProperties", JSON.stringify(rest));
-        toast.success("Property removed from favorites");
+        toast.success(t('removedFromFavorites'));
+        await addNotification({
+          type: 'favorite',
+          messageKey: 'removedFromFavorites1',
+          messageParams: { 
+            hotelName: property.name
+          },
+          message: t('removedFromFavorites1', { 
+            hotelName: t(`hotel.${property.name}`) || property.name
+          }),
+          time: new Date().toLocaleTimeString()
+        });
       } else {
         const updatedProperties = {
           ...savedProperties,
@@ -103,11 +116,22 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
         };
         setSavedProperties(updatedProperties);
         localStorage.setItem("savedProperties", JSON.stringify(updatedProperties));
-        toast.success("Property added to favorites");
+        toast.success(t("addedToFavorites"));
+        await addNotification({
+          type: 'favorite',
+          messageKey: 'addedToFavorites1',
+          messageParams: {
+            hotelName: property.name
+          },
+          message: t('addedToFavorites1', {
+            hotelName: t(`hotel.${property.name}`) || property.name
+          }),
+          time: new Date().toLocaleTimeString()
+        });
       }
     } catch (error) {
       console.error("Error updating favorites:", error);
-      toast.error("Failed to update favorites");
+      toast.error(t('failedToUpdateFavorites'));
     }
   };
 

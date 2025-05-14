@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useOutletContext } from 'react-router-dom';
 import styles from "./AdminRoom.module.css";
+import { useNotification } from "../../context/NotificationContext";
 
 const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange, cities, hotels, onCityChange, onHotelChange }) => {
   return (
@@ -108,6 +109,7 @@ const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange, citi
 const AdminRoom = () => {
   // Change roomsPerPage from 7 to 5
   const [currentPage, setCurrentPage] = useState(1);
+  const { addNotification } = useNotification();
   const [roomsPerPage] = useState(5); // Changed from 7 to 5
   const [showAddPopup, setShowAddPopup] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -123,6 +125,7 @@ const AdminRoom = () => {
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [hotels, setHotels] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [selectedHotel, setSelectedHotel] = useState(''); // Correct declaration
 
   const [formData, setFormData] = useState({
@@ -228,6 +231,7 @@ const handleRoomSelect = (room) => {
   
   // First set the city to trigger hotel list update
   setSelectedCity(room.cityName);
+  setSelectedHotel(room.hotelId);
   
   // Set form data
   setFormData({
@@ -250,7 +254,6 @@ const handleRoomSelect = (room) => {
     setHotels(hotelsWithIds);
   }
   
-  setSelectedHotel(room.hotelId);
   setShowEditPopup(true);
 };
 
@@ -285,9 +288,10 @@ const handleRoomSelect = (room) => {
       });
   
       if (!response.ok) throw new Error("Failed to add room");
-  
       const newRoom = await response.json();
-      
+      const hotelName = hotels.find(h => h._id === formData.hotelId)?.name;
+  
+    
       // Create a complete room object with all necessary data
       const completeNewRoom = {
         ...newRoom,
@@ -302,12 +306,34 @@ const handleRoomSelect = (room) => {
         description: formData.description
       };
   
-      // Update rooms state immediately
       setRooms(prevRooms => [...prevRooms, completeNewRoom]);
+      
+      addNotification({
+        type: 'success',
+        message: `Room "${formData.type}" has been successfully added to ${hotelName}`, messageKey: 'roomAdded',
+        messageParams: { roomType: formData.type, hotelName }
+      });
+      
+      // Add to admin notifications
+const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+localStorage.setItem('adminNotifications', JSON.stringify([{
+  id: Date.now(),
+  type: 'room_added',
+  message: `Room "${formData.type}" has been successfully added to ${hotelName}`, time: new Date().toLocaleTimeString(),
+  read: false
+},  ...existingAdminNotifications
+]));
+    
       setShowAddPopup(false);
       resetForm();
     } catch (error) {
       console.error("Error adding room:", error);
+      addNotification({
+        type: 'error',
+        message: `Failed to add room: ${error.message}`,
+        messageKey: 'roomAddError',
+        messageParams: { error: error.message }
+      });
       setError(error.message);
     }
   };
@@ -358,6 +384,21 @@ const handleRoomSelect = (room) => {
           room.id === selectedRoom.id ? completeUpdatedRoom : room
         )
       );
+
+      addNotification({
+        type: 'success1',
+        message: `Room "${formData.type}" has been successfully updated in ${selectedRoom.hotelName}`,messageKey: 'roomUpdated',
+        messageParams: { roomType: formData.type, hotelName: selectedRoom.hotelName }
+      });
+
+      const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+      localStorage.setItem('adminNotifications', JSON.stringify([{
+       id: Date.now(),
+       type: 'room_updated',
+       message: `Room "${formData.type}" has been successfully updated in ${selectedRoom.hotelName}`, time: new Date().toLocaleTimeString(),
+       read: false
+      },  ...existingAdminNotifications
+      ]));
       
       setShowEditPopup(false);
       setSelectedRoom(null);
@@ -365,6 +406,11 @@ const handleRoomSelect = (room) => {
       setIsEditMode(false);
     } catch (error) {
       console.error("Error updating room:", error);
+      addNotification({
+        type: 'error',
+        message: `Failed to update room: ${error.message}`, messageKey: 'roomUpdateError',
+        messageParams: { error: error.message }
+      });
       setError(error.message);
     }
   };
@@ -380,8 +426,9 @@ const handleRoomSelect = (room) => {
     try {
       if (selectedForDelete.length === 0) return;
 
-      // Get the first selected room to get city and hotel info
-      const roomToDelete = rooms.find(room => room.id === selectedForDelete[0]);
+      const roomsToDelete = rooms.filter(room => selectedForDelete.includes(room.id));
+      const roomDetails = roomsToDelete.map(room => `${room.type} (${room.hotelName})`).join(', ');
+      const roomToDelete = roomsToDelete[0];
       if (!roomToDelete) return;
   
       const response = await fetch("http://localhost:4000/api/cities/rooms", {
@@ -405,10 +452,37 @@ const handleRoomSelect = (room) => {
       setRooms(prev => 
         prev.filter(room => !selectedForDelete.includes(room.id))
       );
+      addNotification({
+        type: 'success2',
+        message: selectedForDelete.length === 1 ? `Room ${roomDetails} has been successfully deleted`
+        : `Rooms ${roomDetails} have been successfully deleted`, messageKey: 'roomsDeleted',
+        messageParams: { 
+          count: selectedForDelete.length,roomDetails
+        }
+      });
+
+      const existingAdminNotifications = JSON.parse(localStorage.getItem
+        ('adminNotifications') || '[]');
+      localStorage.setItem('adminNotifications', JSON.stringify([{
+  id: Date.now(),
+  type: 'room_deleted',
+  message: selectedForDelete.length === 1 ? `Room ${roomDetails} has been successfully deleted`
+  : `Rooms ${roomDetails} have been successfully deleted`,
+time: new Date().toLocaleTimeString(),
+read: false
+},  ...existingAdminNotifications
+]));
+
       setSelectedForDelete([]);
       setIsDeleteMode(false);
     } catch (error) {
       console.error("Deletion error:", error);
+      addNotification({
+        type: 'error',
+        message: `Failed to delete rooms: ${error.message}`,
+        messageKey: 'roomsDeleteError',
+        messageParams: { error: error.message }
+      });
       setError(error.message);
     }
   };

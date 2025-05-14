@@ -12,7 +12,8 @@ import {
   Legend
 } from 'chart.js';
 import styles from './AdminDashboard.module.css';
-import { FaUsers, FaHotel, FaCalendarCheck, FaBell, FaExclamationTriangle, FaCheck, FaTrash } from 'react-icons/fa';
+import { FaUsers, FaHotel, FaCalendarCheck, FaBell, FaCheck, FaTrash, FaCalendarAlt, FaUserShield, FaPlus, FaPencilAlt } from 'react-icons/fa';
+
 
 // Register ChartJS components
 ChartJS.register(
@@ -33,8 +34,63 @@ const AdminDashboard = () => {
     totalHotels: 0
   });
 
-  // Keep notifications state but without backend fetch
-  const [notifications, setNotifications] = useState([]);
+  // Initialize notifications from localStorage
+  const [notifications, setNotifications] = useState(() => {
+    const savedNotifications = localStorage.getItem('adminNotifications');
+    return savedNotifications ? JSON.parse(savedNotifications) : [];
+  });
+
+  // Save notifications to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('adminNotifications', JSON.stringify(notifications));
+  }, [notifications]);
+
+  const markAsRead = (id) => {
+    setNotifications(prev => prev.map(notification => 
+      notification.id === id ? { ...notification, read: true } : notification
+    ));
+  };
+
+  // Remove the fetchNotifications and WebSocket useEffect
+
+  useEffect(() => {
+    const adminToken = localStorage.getItem('adminToken');
+    if (!adminToken) {
+      navigate('/admin');
+    }
+  }, [navigate]);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const adminToken = localStorage.getItem('adminToken');
+        const headers = {
+          'Authorization': `Bearer ${adminToken}`
+        };
+
+        const [bookingsRes, usersRes, hotelsRes] = await Promise.all([
+          fetch('http://localhost:4000/api/bookings/count', { headers }),
+          fetch('http://localhost:4000/api/users/count', { headers }),
+          fetch('http://localhost:4000/api/hotels/count', { headers })
+        ]);
+
+        const bookingsData = await bookingsRes.json();
+        const usersData = await usersRes.json();
+        const hotelsData = await hotelsRes.json();
+
+        setStats({
+          totalBookings: bookingsData.count || 0,
+          totalUsers: usersData.count || 0,
+          totalHotels: hotelsData.count || 0
+        });
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   const [bookingData] = useState({
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [
@@ -243,10 +299,7 @@ const AdminDashboard = () => {
     setNotifications([]);
   };
 
-  // Remove the notification fetch useEffect
-  // Remove WebSocket connection
-
-  // Replace the recentActivity section in the return statement
+  
   return (
     <div className={styles.mainContent}>
       <div className={styles.dashboardHeader}>
@@ -304,54 +357,104 @@ const AdminDashboard = () => {
 
         <div className={styles.notifications}>
           <div className={styles.sectionHeader}>
-            <h2>Notifications</h2>
-            <div className={styles.notificationActions}>
-              {notifications.length > 0 && (
-                <>
-                  <button onClick={markAllAsRead} className={styles.actionButton}>
-                    <FaCheck /> Mark all read
-                  </button>
-                  <button onClick={clearAllNotifications} className={styles.actionButton}>
-                    <FaTrash /> Clear all
-                  </button>
-                </>
+            <div className={styles.notificationTitleContainer}>
+              <h2>Notifications</h2>
+              {notifications.filter(n => !n.read).length > 0 && (
+                <span className={styles.notificationCount}>
+                  {notifications.filter(n => !n.read).length}
+                </span>
               )}
-              <div className={styles.notificationIcon}>
-                <FaBell />
-                {notifications.filter(n => !n.read).length > 0 && (
-                  <span className={styles.notificationBadge}>
-                    {notifications.filter(n => !n.read).length}
-                  </span>
-                )}
-              </div>
+            </div>
+            <div className={styles.notificationActions}>
+              <button 
+                onClick={markAllAsRead} 
+                className={styles.notificationActionButton}
+                disabled={!notifications.some(n => !n.read)}
+              >
+                <FaCheck /> Mark all read
+              </button>
+              <button 
+                onClick={clearAllNotifications} 
+                className={styles.notificationActionButton}
+                disabled={notifications.length === 0}
+              >
+                <FaTrash /> Clear all
+              </button>
             </div>
           </div>
-          <div className={styles.notificationList}>
-            {notifications.length > 0 ? (
-              <ul className={styles.notificationItems}>
-                {notifications.map(notification => (
-                  <li 
-                    key={notification._id} 
-                    className={`${styles.notificationItem} ${styles[notification.type]} ${notification.read ? styles.read : ''}`}
+          
+          <div className={styles.notificationContainer}>
+            <div className={styles.notificationList}>
+              {notifications.length > 0 ? (
+                notifications.map(notification => (
+                  <div 
+                    key={notification.id}
+                    className={`${styles.notificationItem} ${notification.read ? styles.read : ''}`}
+                    onClick={() => markAsRead(notification.id)}
                   >
-                    <div className={`${styles.notificationIcon} ${styles[notification.type]}`}>
-                      {notification.type === 'login' && <FaUsers />}
-                      {notification.type === 'booking' && <FaCalendarCheck />}
-                      {notification.type === 'hotel' && <FaHotel />}
-                      {notification.type === 'system' && <FaExclamationTriangle />}
+                    <div className={styles.notificationIcon}>
+                      {notification.type === 'admin_login' && (
+                        <FaUserShield className={styles.loginIcon} />
+                      )}
+                      {notification.type === 'booking_new' && (
+                        <FaCalendarAlt className={`${styles.bookingIcon} ${styles.new}`} />
+                      )}
+                      {notification.type === 'booking_cancelled' && (
+                        <FaCalendarAlt className={`${styles.bookingIcon} ${styles.cancelled}`} />
+                      )}
+                      {notification.type === 'room_added' && (
+                        <FaPlus className={styles.addIcon} />
+                      )}
+                       {notification.type === 'room_updated' && (
+                        <FaPencilAlt className={styles.updateIcon} />
+                      )}
+                       {notification.type === 'room_deleted' && (
+                        <FaTrash className={styles.deleteIcon} />
+                      )}
+                       {notification.type === 'hotel_added' && (
+                        <FaPlus className={styles.addIcon} />
+                      )}
+                       {notification.type === 'hotel_updated' && (
+                        <FaPencilAlt className={styles.updateIcon} />
+                      )}
+                       {notification.type === 'hotel_deleted' && (
+                        <FaTrash className={styles.deleteIcon} />
+                      )}
+                      {notification.type === 'user_added' && (
+                        <FaPlus className={styles.userAddIcon} />
+                      )}
+                      {notification.type === 'user_updated' && (
+                        <FaPencilAlt className={styles.userEditIcon} />
+                      )}
+                      {notification.type === 'user_deleted' && (
+                        <FaTrash className={styles.userDeleteIcon} />
+
+                      )}
                     </div>
                     <div className={styles.notificationContent}>
                       <p>{notification.message}</p>
-                      <span className={styles.notificationTime}>
-                        {new Date(notification.createdAt).toLocaleTimeString()}
-                      </span>
+                      <span className={styles.notificationTime}>{notification.time}</span>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className={styles.noNotifications}>No new notifications</p>
-            )}
+                    {!notification.read && (
+                      <button 
+                        className={styles.markAsReadButton}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          markAsRead(notification.id);
+                        }}
+                      >
+                        <FaCheck />
+                      </button>
+                    )}
+                  </div>
+                ))
+              ) : (
+                <div className={styles.noNotifications}>
+                  <FaBell className={styles.noNotificationsIcon} />
+                  <p>No notifications</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

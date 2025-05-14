@@ -224,3 +224,15 @@
   color: white;
   text-decoration: none;
 }
+
+.notificationBadge {
+    background-color: #ff4757;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 8px;
+    min-width: 20px;
+    text-align: center;
+}

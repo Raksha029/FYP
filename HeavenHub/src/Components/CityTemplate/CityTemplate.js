@@ -8,6 +8,7 @@ import styles from "./CityTemplate.module.css";
 import L from "leaflet";
 import { FaHeart } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
+import { useNotification } from '../../context/NotificationContext';
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371;
@@ -49,6 +50,7 @@ const calculateHotelScore = (hotel) => {
 
 const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
   const { t, i18n } = useTranslation();
+  const { addNotification } = useNotification();
   const { name, referencePoint } = cityData; // Remove centerName from destructuring
   const [searchTerm, setSearchTerm] = useState("");
   const [allHotels, setAllHotels] = useState([]);
@@ -215,7 +217,7 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
       const currentUser = JSON.parse(localStorage.getItem("userData"));
 
       if (!token) {
-        toast.error("Please log in to add favorites");
+        toast.error(t('loginToFavorite'));
         return;
       }
 
@@ -265,12 +267,34 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
         const newSavedProperties = { ...prev };
         if (method === "DELETE") {
           delete newSavedProperties[hotel.id];
+          addNotification({
+            type: 'favorite',
+            messageKey:'removedFromFavorites1',
+            messageParams: {
+              hotelName: hotel.name
+            },
+            message: t('removedFromFavorites1', {
+              hotelName: t(`hotel.${hotel.name}`) || hotel.name
+            }),
+            time: new Date().toLocaleTimeString()
+          });
         } else {
           newSavedProperties[hotel.id] = {
             ...hotel,
             city: name.toLowerCase(),
             isFavorite: true,
           };
+          addNotification({
+            type: 'favorite',
+            messageKey:'addedToFavorites1',
+            messageParams: {
+              hotelName: hotel.name
+            },
+            message: t('addedToFavorites1', {
+              hotelName: t(`hotel.${hotel.name}`) || hotel.name
+            }),
+            time: new Date().toLocaleTimeString()
+          });
         }
 
         // Save to localStorage for the current user
@@ -286,12 +310,12 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
 
       toast.success(
         method === "DELETE"
-          ? `${hotel.name} removed from favorites`
-          : `${hotel.name} added to favorites`
+          ? t('removedFromFavorites', { hotelName: t(`hotel.${hotel.name}`) })
+          : t('addedToFavorites', { hotelName: t(`hotel.${hotel.name}`) })
       );
     } catch (error) {
       console.error("Detailed Error updating favorites:", error);
-      toast.error(`Failed to update favorites: ${error.message}`);
+      toast.error(t('failedToUpdateFavorites'));
     }
   };
 
@@ -506,7 +530,7 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                               distance: new Intl.NumberFormat(i18n.language).format(distance)
                             })}</p>
                           <div className={styles.hotelReviews}>
-                            <p>{hotel.reviews?.length || 0} reviews</p>
+                            <p>{t('reviews', { count: hotel.reviews?.length || 0 })}</p>
                           </div>
                           <Link
                             to={`/hotel-details/${name.toLowerCase()}/${hotel.id}`}
@@ -526,8 +550,8 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                   })
                 ) : (
                   <div className={styles.noResults}>
-                    No hotels found matching "{searchTerm}"
-                  </div>
+                      {t('noHotelsFound', { searchTerm: searchTerm })}
+                    </div>
                 )}
               </>
             )}
@@ -551,9 +575,9 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   />
                   <Marker position={selectedHotel.coords}>
-                    <Popup>
-                      <h3>{selectedHotel.name}</h3>
-                      <p>{selectedHotel.location}</p>
+                  <Popup>
+                      <h3>{t(`hotel.${selectedHotel.name}`)}</h3>
+                      <p>{t(`location.${selectedHotel.location}`)}</p>
                     </Popup>
                   </Marker>
                 </MapContainer>

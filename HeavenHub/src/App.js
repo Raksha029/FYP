@@ -39,16 +39,15 @@ import AdminBooking from "./Admin/AdminBooking/AdminBooking";
 import ProtectedRoute from './Components/ProtectedRoute';
 import { LanguageProvider } from './context/LanguageContext';
 import './i18n'; // Add this line
+import { NotificationProvider } from './context/NotificationContext';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [, setCurrentUser] = useState(null);
-  const [notifications, setNotifications] = useState([
-    { message: "Successfully booking", date: "12 Mar 2021" },
-    { message: "Shared successfully", date: "12 Mar 2021" },
-    { message: "Get discount offer", date: "12 Mar 2021" },
-  ]);
+
+  const [notifications, setNotifications] = useState([]);
+
   const [savedProperties, setSavedProperties] = useState({});
 
   const handleClose = (index) => {
@@ -116,6 +115,7 @@ const App = () => {
 
   return (
     <Router>
+      <NotificationProvider>
       <LanguageProvider>
         <Content
           isLoggedIn={isLoggedIn}
@@ -128,6 +128,7 @@ const App = () => {
         />
         <ToastContainer />
       </LanguageProvider>
+      </NotificationProvider>
     </Router>
   );
 };
@@ -143,6 +144,8 @@ const Content = ({
 }) => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
+
+
 
   return (
     <>
@@ -228,4 +231,3 @@ const Content = ({
 
 export default App;
 
-// Remove the duplicate Routes component at the bottom

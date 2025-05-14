@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import styles from "./AdminHotel.module.css";
 import { useOutletContext } from "react-router-dom";
+import { useNotification } from "../../context//NotificationContext";
+import { toast } from "react-toastify";
 
 // Move PopupForm component definition here, before AdminHotel
 const PopupForm = React.memo(
@@ -215,6 +217,7 @@ const PopupForm = React.memo(
 );
 const AdminHotel = () => {
   const [cities, setCities] = useState([]);
+  const { addNotification } = useNotification();
 
   // Add useEffect for fetching cities
   useEffect(() => {
@@ -357,8 +360,6 @@ const AdminHotel = () => {
     }));
   }, []);
   
-  // Add to your existing functions:
-  // Add this function after handleSubmit and before handleEditClick
   const handleAddSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -400,7 +401,24 @@ const AdminHotel = () => {
 
       const result = await response.json();
       console.log('Hotel added successfully:', result);
+
+      addNotification({
+        type: 'success',
+        message: `Hotel "${formData.name}" has been successfully added`, messageKey: 'hotelAdded',
+        messageParams: { hotelName: formData.name }
+      });
       
+      const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+      localStorage.setItem('adminNotifications', JSON.stringify([ {
+        id: Date.now(),
+        type: 'hotel_added',
+        message: `Hotel "${formData.name}" has been successfully added to ${formData.cityName}`,
+        time: new Date().toLocaleTimeString(),
+        read: false
+      },
+      ...existingAdminNotifications
+]));
+
       // Refresh the hotels list and reset form
       await fetchHotels();
       setShowAddPopup(false);
@@ -408,7 +426,12 @@ const AdminHotel = () => {
       
     } catch (error) {
       console.error('Error adding hotel:', error);
-      alert('Failed to add hotel: ' + error.message);
+      toast('Failed to add hotel: ' + error.message);
+      addNotification({
+        type: 'error',
+        message: `Failed to add hotel: ${error.message}`, messageKey: 'hotelAddError',
+        messageParams: { error: error.message }
+      });
     }
   };
 
@@ -466,6 +489,11 @@ const AdminHotel = () => {
 
   const handleDeleteConfirm = async () => {
     try {
+      // Get hotels to delete before the deletion process
+      const hotelsToDelete = selectedForDelete.map(id => 
+        hotels.find(h => h.id === id)
+      ).filter(Boolean);
+
       await Promise.all(
         selectedForDelete.map(async (hotelId) => {
           const hotel = hotels.find((h) => h.id === hotelId);
@@ -492,11 +520,41 @@ const AdminHotel = () => {
       setHotels(prevHotels => 
         prevHotels.filter(hotel => !selectedForDelete.includes(hotel.id))
       );
+      
+      const hotelNames = hotelsToDelete.map(hotel => hotel.name).join(', ');
+      addNotification({
+        type: 'success2',
+        message: selectedForDelete.length === 1 
+          ? `Successfully deleted hotel: ${hotelNames}`
+          : `Successfully deleted hotels: ${hotelNames}`,
+        messageKey: 'hotelsDeleted',
+        messageParams: { 
+          count: selectedForDelete.length,
+          hotelNames: hotelNames
+        }
+      });
+
+      const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+      localStorage.setItem('adminNotifications', JSON.stringify([{
+        id: Date.now(),
+        type: 'hotel_deleted',
+        message: selectedForDelete.length === 1  ? `Hotel ${hotelNames} has been successfully deleted`
+        : `Hotels ${hotelNames} have been successfully deleted`,
+      time: new Date().toLocaleTimeString(),
+      read: false
+    }, ...existingAdminNotifications
+  ]));
+      
       setSelectedForDelete([]);
       setIsDeleteMode(false);
     } catch (error) {
       console.error("Error deleting hotels:", error);
-      alert("Error deleting hotels: " + error.message);
+      addNotification({
+        type: 'error',
+        message: `Failed to delete hotels: ${error.message}`,
+        messageKey: 'hotelsDeleteError',
+        messageParams: { error: error.message }
+      });
     }
   };
 
@@ -530,6 +588,7 @@ const AdminHotel = () => {
   
       const response = await fetch(
         `http://localhost:4000/api/cities/${formData.cityName}/hotels/${selectedHotel.id}`,
+        
         {
           method: 'PUT',
           body: formDataToSend
@@ -551,12 +610,33 @@ const AdminHotel = () => {
             : hotel
         )
       );
+
+      addNotification({
+        type: 'success1',
+        message: `Hotel "${formData.name}" has been successfully updated`, messageKey: 'hotelUpdated',
+        messageParams: { hotelName: formData.name }
+      });
+
+      const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+      localStorage.setItem('adminNotifications', JSON.stringify([{
+        id: Date.now(),
+        type: 'hotel_updated',
+        message: `Hotel "${formData.name}" has been successfully updated in ${formData.cityName}`,
+        time: new Date().toLocaleTimeString(),
+        read: false
+      }, ...existingAdminNotifications
+    ]));
   
       setShowEditPopup(false);
       resetForm();
       setSelectedHotel(null);
     } catch (error) {
       console.error('Error updating hotel:', error);
+      addNotification({
+        type: 'error',
+        message: `Failed to update hotel: ${error.message}`, messageKey: 'hotelUpdateError',
+        messageParams: { error: error.message }
+      });
       setError(error.message);
     }
   };

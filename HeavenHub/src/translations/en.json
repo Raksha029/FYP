@@ -1519,7 +1519,27 @@
 },
 
 "notificationPanel": {
-  "title": "All Notifications",
-  "closeButton": "Close"
-}
+    "title": "Notifications",
+    "clearAll": "Clear All",
+    "noNotifications": "No notifications to display",
+    "closeButton": "Close"
+  },
+  "bookingStarted": "Successfully booking for {{roomType}} at {{hotelName}}",
+  "addedToFavorites1": "{{hotelName}} added to favorites",
+  "removedFromFavorites1": "{{hotelName}} removed from favorites",
+  "hotelShared": "{{hotelName}} has been shared",
+  "hotelLinkCopied": "Link copied for {{hotelName}}",
+  "bookingCancelled": "Booking cancelled for {{roomType}} at {{hotelName}} ({{checkInDate}} - {{checkOutDate}})",
+  "bookingCompleted": "Your stay at {{hotelName}} ({{roomType}}) has been completed ({{checkInDate}} - {{checkOutDate}})",
+  "reviewSubmitted": "Review submitted for {{hotelName}} with {{rating}} stars",
+  "pointsEarned": "Earned {{points}} loyalty points for booking at {{hotelName}}",
+  "pointsLost": "Lost {{points}} loyalty points for cancelling booking at {{hotelName}}",
+   "pointsRedeemed": "Redeemed {{points}} points for discount at {{hotelName}}",
+  
+    "loginSuccess": "Welcome back, {{firstName}}!",
+    "loginError": "Failed to log in. Please try again.",
+      "contactSubmitSuccess": "Thank you {{name}}! Your message has been sent successfully.",
+      "contactSubmitError": "Failed to send message. Please try again.",
+      "serverError": "Server error occurred. Please try again later.",
+      "networkError": "Network error. Please check your connection and try again."
 }

@@ -1,117 +1,174 @@
 .mainContent {
   flex: 1;
-  padding: 2rem;
-  background-color: #f8f9fa;
+  padding: 2.5rem;
+  background-color: #f8fafc;
+  min-height: 100vh;
 }
 
 .dashboardHeader {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .dashboardHeader h1 {
-  font-size: 2.25rem;
-  color: #2c3e50;
+  font-size: 2rem;
+  color: #1e293b;
   margin-bottom: 0.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
-  text-transform: uppercase;
 }
 
 .welcomeText {
-  color: #6c757d;
+  color: #64748b;
   font-size: 1.1rem;
   font-weight: 500;
 }
 
+/* Stats Cards */
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
 }
 
 .statCard {
   background: white;
-  padding: 1.5rem;
+  padding: 1.75rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-left: 4px solid;
 }
 
 .statCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .statContent {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+  align-items: center;
 }
 
 .statInfo h3 {
-  color: #6c757d;
-  font-size: 1rem;
+  color: #64748b;
+  font-size: 0.9375rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .statNumber {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2c3e50;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1e293b;
 }
 
 .statIcon {
-  font-size: 2rem;
+  font-size: 1.75rem;
   padding: 1rem;
-  border-radius: 50%;
+  border-radius: 12px;
   color: white;
+  background: linear-gradient(135deg, currentColor 0%, rgba(0,0,0,0.2) 100%);
 }
 
-.bookings .statIcon {
-  background-color: #4CAF50;
-}
-
-.users .statIcon {
-  background-color: #2196F3;
-}
-
-.hotels .statIcon {
-  background-color: #9C27B0;
-}
-
-
+/* Dashboard Grid Layout */
 .dashboardGrid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 2rem;
 }
 
-.recentActivity,
+/* Chart Section */
+.chartContainer {
+  background: white;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  height: 400px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader h2 {
+  font-size: 1.375rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Enhanced Notifications Section */
+/* Notification Section */
 .notifications {
-  .bookingChart {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  }
-  
-  .chartContainer {
-    height: 400px;
-    position: relative;
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-  .sectionHeader h2 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   height: 100%;
+}
+
+.notificationTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.notificationCount {
+  background: #3b82f6;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+}
+
+.notificationActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.notificationActionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.notificationActionButton:hover {
+  background: #e2e8f0;
+}
+
+.notificationActionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.notificationActionButton svg {
+  font-size: 0.875rem;
+}
+
+.notificationContainer {
+  margin-top: 1.5rem;
+}
+
+.notificationList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .notificationItem {
@@ -119,139 +176,110 @@
   align-items: center;
   padding: 1rem;
   border-radius: 12px;
-  margin-bottom: 0.75rem;
-  background-color: white;
-  transition: all 0.3s ease;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
 }
 
 .notificationItem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  background: #f1f5f9;
+}
+
+.notificationItem.read {
+  opacity: 0.7;
 }
 
 .notificationIcon {
-  position: relative;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  font-size: 1.25rem;
-  color: #6c757d;
-  background-color: #f8f9fa;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.notificationIcon:hover {
-  background-color: #e9ecef;
-}
-
-.notificationBadge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #dc3545;
+  border-radius: 10px;
   color: white;
-  font-size: 0.75rem;
-  min-width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  padding: 0 6px;
-  font-weight: 600;
-  border: 2px solid white;
-}
-
-.notificationItem.login .notificationIcon {
-  background-color: #2196F3;
-}
-
-.notificationItem.booking .notificationIcon {
-  background-color: #4CAF50;
-}
-
-.notificationItem.hotel .notificationIcon {
-  background-color: #9C27B0;
-}
-
-.notificationItem.system .notificationIcon {
-  background-color: #f57c00;
+  margin-right: 1rem;
+  flex-shrink: 0;
 }
 
 .notificationContent {
-  margin-left: 1rem;
   flex: 1;
 }
 
 .notificationContent p {
   margin: 0;
-  color: #2c3e50;
-  font-size: 1rem;
+  color: #1e293b;
+  font-size: 0.9375rem;
   font-weight: 500;
-  line-height: 1.4;
 }
 
 .notificationTime {
   display: block;
-  font-size: 0.813rem;
-  color: #6c757d;
+  font-size: 0.8125rem;
+  color: #64748b;
   margin-top: 0.25rem;
 }
 
-.notificationActions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.actionButton {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1rem;
+.markAsReadButton {
+  background: none;
   border: none;
-  border-radius: 10px;
-  background-color: white;
-  color: #2c3e50;
+  color: #64748b;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border: 1px solid #e9ecef;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s;
 }
 
-.actionButton:hover {
-  background-color: #f8f9fa;
-  border-color: #dee2e6;
+.markAsReadButton:hover {
+  background: #e2e8f0;
+  color: #3b82f6;
 }
 
-.notificationBadge {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background-color: #dc3545;
-  color: white;
-  font-size: 0.75rem;
-  min-width: 18px;
-  height: 18px;
+.noNotifications {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 9px;
-  padding: 0 6px;
-  font-weight: 600;
+  padding: 2rem;
+  color: #64748b;
+  text-align: center;
 }
 
-.notificationItem.read {
-  opacity: 0.8;
-  background-color: #f8f9fa;
+.noNotificationsIcon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #cbd5e1;
+}
+
+/* Notification type colors */
+.notificationItem.booking .notificationIcon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notificationItem.login .notificationIcon {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.notificationItem.hotel .notificationIcon {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.notificationItem.system .notificationIcon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.clearButton:hover {
+  color: #3b82f6;
 }
 
 .notificationList {
@@ -260,26 +288,348 @@
   padding-right: 0.5rem;
 }
 
+.notificationItem {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.notificationItem.unread {
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.notificationItem.unread::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+}
+
+.notificationItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.notificationIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  color: white;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.notificationContent {
+  flex: 1;
+}
+
+.notificationContent p {
+  margin: 0;
+  color: #1e293b;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.notificationTime {
+  display: block;
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+.notificationAction {
+  margin-left: 1rem;
+  color: #3b82f6;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.notificationItem:hover .notificationAction {
+  opacity: 1;
+}
+
+/* Notification Types */
+.notificationItem.booking .notificationIcon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notificationItem.login .notificationIcon {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.notificationItem.hotel .notificationIcon {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.notificationItem.system .notificationIcon {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* Scrollbar */
 .notificationList::-webkit-scrollbar {
   width: 6px;
 }
 
 .notificationList::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
   border-radius: 3px;
 }
 
 .notificationList::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 .notificationList::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #94a3b8;
 }
 
-.sectionHeader h2 {
-  font-size: 1.375rem;
-  color: #2c3e50;
-  font-weight: 600;
+/* Color Variants */
+.bookings .statCard,
+.notificationItem.booking {
+  border-left-color: #10b981;
+}
+
+.bookings .statIcon,
+.notificationItem.booking .notificationIcon {
+  background-color: #10b981;
+}
+
+.users .statCard,
+.notificationItem.login {
+  border-left-color: #3b82f6;
+}
+
+.users .statIcon,
+.notificationItem.login .notificationIcon {
+  background-color: #3b82f6;
+}
+
+.hotels .statCard,
+.notificationItem.hotel {
+  border-left-color: #8b5cf6;
+}
+
+.hotels .statIcon,
+.notificationItem.hotel .notificationIcon {
+  background-color: #8b5cf6;
+}
+
+.system .statCard,
+.notificationItem.system {
+  border-left-color: #f59e0b;
+}
+
+.system .statIcon,
+.notificationItem.system .notificationIcon {
+  background-color: #f59e0b;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mainContent {
+    padding: 1.5rem;
+  }
+}
+
+.loginIcon {
+  color: #4CAF50;
+}
+
+.bookingIcon {
+  color: #2196F3;
+}
+
+.notificationItem {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.notificationItem:hover {
+  background-color: #f5f5f5;
+}
+
+.notificationItem.read {
+  opacity: 0.7;
+}
+
+.notificationIcon {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.notificationContent {
+  flex: 1;
+}
+
+.notificationTime {
+  font-size: 12px;
+  color: #666;
+}
+
+.markAsReadButton {
+  padding: 5px;
+  background: none;
+  border: none;
+  color: #4CAF50;
+  cursor: pointer;
+}
+
+.markAsReadButton:hover {
+  color: #45a049;
+}
+
+/* Add these with your other notification type colors */
+.notificationItem[data-type="booking_cancelled"] {
+  border-left-color: #ef4444;
+}
+
+.notificationItem[data-type="booking_cancelled"] .notificationIcon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Booking notification styles */
+.notificationItem[data-type="booking_new"] {
+  border-left: 4px solid #10b981;
+}
+
+.notificationItem[data-type="booking_new"] .notificationIcon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notificationItem[data-type="booking_cancelled"] {
+  border-left: 4px solid #ef4444;
+}
+
+.notificationItem[data-type="booking_cancelled"] .notificationIcon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Icon colors for booking notifications */
+.bookingIcon.new {
+  color: #10b981;
+}
+
+.bookingIcon.cancelled {
+  color: #ef4444;
+}
+
+.notificationItem[data-type^="room_"] .notificationIcon {
+  background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+}
+
+/* Color variants for room operations */
+.notificationItem[data-type="room_added"] .notificationIcon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notificationItem[data-type="room_updated"] .notificationIcon {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.notificationItem[data-type="room_deleted"] .notificationIcon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Room stat card (if you have one) */
+.rooms .statCard,
+.notificationItem.room {
+  border-left-color: #ec4899;
+}
+
+.rooms .statIcon,
+.notificationItem.room .notificationIcon {
+  background-color: #ec4899;
+}
+
+/* User notification variants */
+.notificationItem[data-type^="user_"] .notificationIcon {
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+}
+
+/* Color variants for user operations */
+/* User operation notifications */
+.notificationItem[data-type="user_added"] {
+  border-left-color: #10b981;
+}
+
+.notificationItem[data-type="user_added"] .notificationIcon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notificationItem[data-type="user_updated"] {
+  border-left-color: #3b82f6;
+}
+
+.notificationItem[data-type="user_updated"] .notificationIcon {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.notificationItem[data-type="user_deleted"] {
+  border-left-color: #ef4444;
+}
+
+.notificationItem[data-type="user_deleted"] .notificationIcon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* User stat card and general user notifications */
+.users .statCard,
+.notificationItem.user {
+  border-left-color: #14b8a6;
+}
+
+.users .statIcon,
+.notificationItem.user .notificationIcon {
+  background-color: #14b8a6;
+}
+
+/* User operation icon colors */
+.userAddIcon {
+  color: #10b981;
+}
+
+.userEditIcon {
+  color: #3b82f6;
+}
+
+.userDeleteIcon {
+  color: #ef4444;
 }

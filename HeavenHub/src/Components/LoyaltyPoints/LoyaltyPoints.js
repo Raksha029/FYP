@@ -4,9 +4,11 @@ import { toast } from "react-toastify";
 import styles from "./LoyaltyPoints.module.css";
 import chestbox from "../Assets/Chestboxs.png";
 import { useTranslation } from 'react-i18next';
+import { useNotification } from '../../context/NotificationContext';
 
 // Add WeeklyHotelDeals component
 const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
+  const { addNotification } = useNotification();
   const { t } = useTranslation();
   const [weeklyDeals, setWeeklyDeals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,6 +75,13 @@ const WeeklyHotelDeals = ({ points, setUserData, setPointsHistory }) => {
       }
   
       const data = await response.json();
+
+      addNotification({
+        type: 'success2',
+        message: t('pointsRedeemed', {  points: deal.pointsRequired,
+          hotelName: deal.hotelName
+        }), time: new Date().toLocaleTimeString()
+      });
       
       // Store the discount information with specific hotel details
       localStorage.setItem('loyaltyDiscount', JSON.stringify({

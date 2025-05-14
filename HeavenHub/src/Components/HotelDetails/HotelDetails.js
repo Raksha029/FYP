@@ -7,7 +7,7 @@ import L from "leaflet"; // Import Leaflet for marker icon
 import Reserve from "../Reserve/Reserve"; // Import the new Reserve component
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
-
+import { useNotification } from '../../context/NotificationContext';
 
 
 // Fix default marker icon issue
@@ -21,6 +21,7 @@ L.Icon.Default.mergeOptions({
 
 
 function HotelDetails({ savedProperties, setSavedProperties }) {
+  const { addNotification } = useNotification();
   const { t} = useTranslation();
   const { city, id } = useParams();
   const [hotel, setHotel] = useState(null);
@@ -65,6 +66,11 @@ const handleShare = async () => {
   if (navigator.share) {
     try {
       await navigator.share(shareData);
+      addNotification({
+        type: 'share',
+        message: t('hotelShared', { hotelName: hotel.name }),
+        time: new Date().toLocaleTimeString()
+        });
       toast.success(t('linkCreatedSuccess'));
     } catch (err) {
       console.error("Share failed:", err);
@@ -74,6 +80,11 @@ const handleShare = async () => {
     // Fallback to clipboard copy
     try {
       await navigator.clipboard.writeText(shareData.url);
+      addNotification({
+        type: 'share',
+        message: t('hotelLinkCopied', { hotelName: hotel.name }),
+        time: new Date().toLocaleTimeString()
+      });
       toast.success(t('linkCopiedSuccess'));
     } catch (err) {
       toast.error(t('copyLinkFailed'));
@@ -229,11 +240,41 @@ const handleShare = async () => {
     });
 
     setShowReservationForm(true);
+    addNotification({
+      type: 'booking',
+      messageKey: 
+      'bookingStarted',
+  messageParams: { 
+    hotelName: hotel.name,
+    roomType: room.type 
+  },
+  message: t('bookingStarted', { 
+    hotelName: hotel.name,
+    roomType: room.type 
+  }),
+  time: new Date().toLocaleTimeString()
+});
+
+addNotification({
+  type: 'success',
+  message: t('pointsEarned', {
+    points: 100, hotelName: hotel.name
+  }),
+  time: new Date().toLocaleTimeString()
+});
+
+const existingAdminNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+localStorage.setItem('adminNotifications', JSON.stringify([{
+  id: Date.now(),
+  type: 'booking_new',
+  message: `New booking at ${hotel.name} - ${count} ${room.type} room(s)`,
+  time: new Date().toLocaleTimeString(),
+  timestamp: Date.now(),
+  read: false
+}, ...existingAdminNotifications]));
+
   };
 
-  // Remove the unused handleSubmit function since we're using Reserve component now
-
-  // Add handleBookingComplete function
   const handleBookingComplete = (roomType, bookedCount) => {
     setHotel(prevHotel => {
       if (!prevHotel) return prevHotel;
@@ -293,6 +334,13 @@ const handleShare = async () => {
         const { [id]: removed, ...rest } = savedProperties;
         setSavedProperties(rest);
         setIsFavorited(false);
+        addNotification({
+          type: 'favorite',
+          messageKey: 'removedFromFavorites1',
+          messageParams: { hotelName: hotel.name },
+          message: t('removedFromFavorites1', { hotelName: hotel.name }),
+          time: new Date().toLocaleTimeString()
+});
       } else {
         setSavedProperties({
           ...savedProperties,
@@ -304,6 +352,13 @@ const handleShare = async () => {
           },
         });
         setIsFavorited(true);
+        addNotification({
+          type: 'favorite',
+          messageKey: 'addedToFavorites1',
+          messageParams: { hotelName: hotel.name },
+          message: t('addedToFavorites1', { hotelName: hotel.name }),
+          time: new Date().toLocaleTimeString()
+});
       }
 
       toast.success(
@@ -392,6 +447,15 @@ const handleShare = async () => {
   
       // Update the hotel state with transformed data
       setHotel(transformedData);
+
+      addNotification({type: 'review',
+        messageKey: 'reviewSubmitted',
+        messageParams: { hotelName: hotel.name,
+          rating: newReview.rating},
+        message: t('reviewSubmitted', { hotelName: hotel.name,
+          rating: newReview.rating}),
+        time: new Date().toLocaleTimeString()});
+
   
       // Reset the review form
       setNewReview({

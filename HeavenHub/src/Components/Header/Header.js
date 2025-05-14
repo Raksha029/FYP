@@ -7,9 +7,11 @@ import Language from "../Language/Language";
 import Currency from "../Currency/Currency";
 import Chatbot from "../Chatbot/Chatbot";
 import { useTranslation } from 'react-i18next';
+import { useNotification } from '../../context/NotificationContext';
 
 // Remove the logo import and replace the img tag with this in the return statement:
 const Header = ({ setIsLoggedIn, isLoggedIn }) => {
+  const { unreadCount } = useNotification();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -194,7 +196,11 @@ const Header = ({ setIsLoggedIn, isLoggedIn }) => {
             {showDropdown && (
               <div className={styles.dropdownMenu}>
                 <button className={styles.dropdownItem} onClick={handleNotificationClick}>
-                  {t('notifications')}
+                  {t('notifications')}{unreadCount > 0 && (
+            <span className={styles.notificationBadge}>
+              {unreadCount}
+            </span>
+          )}
                 </button>
                 <button className={styles.dropdownItem} onClick={handleFavouritesClick}>
                   {t('favourites')}

@@ -46,35 +46,36 @@ const AdminLogin = () => {
       if (response.ok) {
           localStorage.setItem('adminToken', data.token);
           localStorage.setItem('adminData', JSON.stringify(data.admin));
-          
-          // Create login notification
-          try {
-              await fetch('http://localhost:4000/api/notifications/login', {
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': `Bearer ${data.token}`
-                  },
-                  body: JSON.stringify({
-                      userId: data.admin._id
-                  })
-              });
-          } catch (error) {
-              console.error('Error creating login notification:', error);
-          }
 
-          navigate('/admin/dashboard');
-          toast.success('Login successful');
-      }
-      else {
+        const newNotification = {
+          id: Date.now(),
+          type: 'admin_login',
+          message: `Admin ${data.admin.username || 'Administrator'} logged in successfully`,
+          time: new Date().toLocaleTimeString(),
+          read: false
+        };
+        
+        const existingNotifications = JSON.parse(localStorage.getItem('adminNotifications') || '[]');
+        localStorage.setItem('adminNotifications', JSON.stringify([newNotification, ...existingNotifications]));
+
+        toast.success('Login successful');
+        navigate('/admin/dashboard');
+      } else {
+        if (response.status === 423) {
+          // Account locked message
+          toast.error(data.message);
+        }
         setError(data.message || 'Login failed');
       }
     } catch (error) {
-      setError('Network error occurred');
+      console.error('Login error:', error);
+      setError('Network error. Please try again later.');
+      toast.error('Connection failed');
     } finally {
       setIsLoading(false);
     }
-};
+  };
+          
 
   return (
     <div className={styles.adminLoginContainer}>

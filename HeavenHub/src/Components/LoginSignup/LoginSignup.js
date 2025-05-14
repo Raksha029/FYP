@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import styles from "./LoginSignup.module.css"; // Import CSS for styling
 import google from "../Assets/google.png";
 import { useTranslation } from 'react-i18next'; 
+import { useNotification } from '../../context/NotificationContext';
 
 const LoginSignup = ({ onClose, onLoginSuccess }) => {
+  const { addNotification } = useNotification();
   const {t} = useTranslation();
   const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
   const [formData, setFormData] = useState({
@@ -107,6 +109,16 @@ const LoginSignup = ({ onClose, onLoginSuccess }) => {
                   firstName: data.user.firstName,
                 })
               );
+              addNotification({
+                type: 'login',
+                messageKey: 'loginSuccess',
+                messageParams: { 
+                  firstName: data.user.firstName  },
+                  message: t('loginSuccess', { 
+                    firstName: data.user.firstName 
+                  }),
+                  time: new Date().toLocaleTimeString()
+              });
             }
           }
 
