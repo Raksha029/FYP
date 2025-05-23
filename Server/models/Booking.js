@@ -42,6 +42,12 @@ const bookingSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  currency: {
+    type: String,
+    enum: ['NPR', 'USD'],
+    default: 'NPR',
+    required: true
+  },
   bookingDate: {
     type: Date,
     required: true,
@@ -68,6 +74,16 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     enum: ["booking", "redemption"],
     default: "booking"
+  },
+  purchase_order_id: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  transactionId: {
+    type: String,
+    unique: true,
+    sparse: true
   }
 });
 

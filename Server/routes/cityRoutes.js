@@ -67,10 +67,11 @@ router.get("/:cityName", async (req, res) => {
     }
 
     // Reset and calculate current availability
+    // Update the room availability calculation
     city.hotels.forEach(hotel => {
       hotel.rooms.forEach(room => {
-        // Reset to default availability first
-        room.available = 5; // Default room count
+        // Start with current availability from database
+        let currentAvailable = room.available;
         
         // Reduce availability based on active bookings
         const roomBookings = activeBookings.filter(booking => 
@@ -79,7 +80,7 @@ router.get("/:cityName", async (req, res) => {
         
         if (roomBookings.length > 0) {
           const bookedCount = roomBookings.reduce((total, booking) => total + booking.roomCount, 0);
-          room.available = Math.max(5 - bookedCount, 0);
+          room.available = Math.max(currentAvailable - bookedCount, 0);
         }
       });
     });
@@ -301,7 +302,18 @@ router.post("/:cityName/hotels", async (req, res) => {
       distance: parseFloat(req.body.distance),
       description: req.body.description || '',
       coords: [coords.lat, coords.lng],
-      reviews: { count: 0, average: 0 },
+      rating: 0, // Default rating
+  policies: {
+    checkIn: req.body.policies?.checkIn || "From 3:00 PM",
+    checkOut: req.body.policies?.checkOut || "Until 11:00 AM",
+    cancellation: req.body.policies?.cancellation || "Free cancellation up to 48 hours before check-in",
+    payment: req.body.policies?.payment || "Khalti digital payment only"
+  },
+  reviews: {
+    count: 0,
+    average: 0,
+    ratings: []
+  },
       image: mainImagePath ? [mainImagePath] : [],
       detailsImage: detailImagePaths,
       rooms: []
@@ -332,6 +344,7 @@ router.post("/:cityName/hotels", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 // Update hotel route
 router.put("/:cityName/hotels/:hotelId", async (req, res) => {

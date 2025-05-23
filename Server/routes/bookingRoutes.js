@@ -4,6 +4,7 @@ const Booking = require("../models/Booking");
 const City = require("../models/City");
 const { authenticateToken } = require("../middleware/authMiddleware");
 const User = require("../models/User");
+const nodemailer = require("nodemailer");
 // Remove the moment import from here as it's now available globally
 
 // Create a new booking
@@ -11,6 +12,14 @@ router.post("/", authenticateToken, async (req, res) => {
   try {
     const userId = req.user._id;
     
+    // Check for existing booking with same transaction ID
+    if (req.body.transactionId) {
+      const existingBooking = await Booking.findOne({ transactionId: req.body.transactionId });
+      if (existingBooking) {
+        return res.status(200).json({ message: "Booking already exists", booking: existingBooking });
+      }
+    }
+
     // Validate required fields
     const requiredFields = ['hotelId', 'hotelName', 'roomType', 'checkInDate', 'checkOutDate', 'totalPrice'];
     for (const field of requiredFields) {
@@ -77,12 +86,44 @@ router.post("/", authenticateToken, async (req, res) => {
       guestDetails: req.body.guestDetails,
       roomCount: req.body.roomCount || 1,
       totalPrice: req.body.totalPrice,
+      currency: req.body.currency || 'NPR',
       status: "Confirmed",
       discountCode: req.body.discountCode,
       discountPercentage: req.body.discountPercentage
     });
 
     await booking.save();
+
+    // Add email notification
+const transporter = nodemailer.createTransport({service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
+// Get user email
+const user = await User.findById(userId);
+const mailOptions = {
+  from: process.env.EMAIL,
+  to: user.email,subject: 'Hotel Booking Confirmation',
+  html: ` <h2>Your Booking is Confirmed!</h2>
+    <p>Thank you for choosing our hotel. Here are your booking details:</p>
+    details:</p>
+    <div style="padding: 20px; background-color: #f5f5f5; border-radius: 5px;">
+    <p><strong>Hotel:</strong> ${req.body.hotelName}</p>
+      <p><strong>Room Type:</strong> ${req.body.roomType}</p>
+      </p>
+      <p><strong>Number of Rooms:</strong> ${req.body.roomCount || 1}</p>
+      <p><strong>Check-in Date:</strong> ${new Date(req.body.checkInDate).toLocaleDateString()}</p>
+      <p><strong>Check-out Date:</strong> ${new Date(req.body.checkOutDate).toLocaleDateString()}</p>
+        <p><strong>Total Price:</strong> ${booking.currency === 'USD' ? '$' : '₨'} ${booking.totalPrice.toLocaleString()}</p>
+      </div>
+    <p>We look forward to welcoming you!</p>
+  `
+};
+
+await transporter.sendMail(mailOptions);
 
     // Update room availability
     room.available -= (req.body.roomCount || 1);
@@ -195,6 +236,8 @@ router.post("/:bookingId/cancel", authenticateToken, async (req, res) => {
     booking.status = "Cancelled";
     await booking.save();
 
+
+
     // Update user points (deduct cancellation penalty)
     const user = await User.findByIdAndUpdate(
       req.user._id,
@@ -202,24 +245,50 @@ router.post("/:bookingId/cancel", authenticateToken, async (req, res) => {
       { new: true }
     );
 
+    const transporter = nodemailer.createTransport({ service: 'gmail',
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PASSWORD
+      }});
+
+      // In the cancel booking route, update the mailOptions template
+      const mailOptions = {
+        from: process.env.EMAIL,
+        to: user.email,
+        subject: 'Booking Cancellation Confirmation',
+        html: `<h2>Booking Cancellation Confirmation</h2>
+          <p>Your booking has been cancelled successfully.</p>
+          <div style="padding: 20px; background-color: #f5f5f5; border-radius: 5px;">
+            <p><strong>Hotel:</strong> ${booking.hotelName}</p>
+            <p><strong>Room Type:</strong> ${booking.roomType}</p>
+            <p><strong>Number of Rooms:</strong> ${booking.roomCount}</p>
+            <p><strong>Check-in Date:</strong> ${new Date(booking.checkInDate).toLocaleDateString()}</p>
+            <p><strong>Check-out Date:</strong> ${new Date(booking.checkOutDate).toLocaleDateString()}</p>
+            <p><strong>Total Price:</strong> ${booking.currency === 'USD' ? '$' : '₨'} ${booking.totalPrice}</p>
+          </div>
+          <p>We hope to serve you again in the future!</p>
+        `
+      };
+await transporter.sendMail(mailOptions);
+
+
     res.json({
       message: "Booking cancelled successfully",
       newPoints: user.loyaltyPoints,
       roomsReturned: booking.roomCount
     });
 
+ 
   } catch (error) {
     console.error("Error in booking cancellation:", error);
     res.status(500).json({ message: "Failed to cancel booking", error: error.message });
   }
 });
 
-// Add this new endpoint for weekly deals
-// Add this after your existing imports
+
 const moment = require('moment');
 
-// Add weekly deals endpoint
-// Weekly deals endpoint
+
 router.get("/weekly-deals", authenticateToken, async (req, res) => {
   try {
     const currentWeek = moment().week();
@@ -472,3 +541,16 @@ router.post("/update-points", authenticateToken, async (req, res) => {
   }
 });
 module.exports = router;
+
+// Add this new route
+router.get('/check/:orderId', authenticateToken, async (req, res) => {
+  try {
+    const booking = await Booking.findOne({ 
+      purchase_order_id: req.params.orderId 
+    });
+    res.json({ exists: !!booking });
+  } catch (error) {
+    console.error('Error checking booking:', error);
+    res.status(500).json({ error: 'Failed to check booking' });
+  }
+});

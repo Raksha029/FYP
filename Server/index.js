@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const cron = require('node-cron');  // Add this at the top with other imports
+const Booking = require('./models/Booking');  // Add model imports
+const City = require('./models/City');
 const moment = require('moment'); // Add moment here at the top level
 const authRoutes = require("./routes/authRoutes");
 const chatbotRoutes = require("./routes/chatbotRoutes");
@@ -18,6 +21,7 @@ const jwt = require("jsonwebtoken");
 const cloudinary = require("cloudinary").v2;
 const path = require("path");
 const fileUpload = require('express-fileupload');
+const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
 
@@ -51,7 +55,43 @@ app.use(passport.session());
 // Connect to MongoDB Atlas
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB Atlas"))
+  .then(() => {
+    console.log("Connected to MongoDB Atlas");
+    
+    // Add cron job after successful DB connection
+    // Fix the cron job implementation
+    cron.schedule('0 3 * * *', async () => {
+      try {
+        const completedBookings = await Booking.find({
+          checkOutDate: { $lt: new Date() },
+          status: "Confirmed"
+        });
+    
+        for (const booking of completedBookings) {
+          // Restore room availability
+          const cityWithHotel = await City.findOne({ "hotels.id": booking.hotelId });
+          if (cityWithHotel) {
+            const hotel = cityWithHotel.hotels.find(h => h.id === booking.hotelId);
+            if (hotel) {
+              const room = hotel.rooms.find(r => r.type === booking.roomType);
+              if (room) {
+                room.available += booking.roomCount;
+                await cityWithHotel.save();
+              }
+            }
+          }
+          
+          // Update booking status
+          booking.status = "Completed";
+          await booking.save();
+        }
+    
+        console.log(`Processed ${completedBookings.length} completed bookings`);
+      } catch (err) {
+        console.error('Error processing completed bookings:', err);
+      }
+    });
+  })
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // Cloudinary Configuration
@@ -84,7 +124,7 @@ app.use("/api/favorites", favoriteRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/contact", contactRoutes);
-
+app.use("/api/payments", paymentRoutes);
 
 // Routes
 const cityRoutes = require("./routes/cityRoutes");

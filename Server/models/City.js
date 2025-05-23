@@ -14,6 +14,13 @@ const reviewSchema = new mongoose.Schema({
   comment: String,
 });
 
+const policiesSchema = new mongoose.Schema({
+  checkIn: String,
+  checkOut: String,
+  cancellation: String,
+  payment: String
+});
+
 const hotelSchema = new mongoose.Schema({
   id: String,
   name: String,
@@ -30,6 +37,7 @@ const hotelSchema = new mongoose.Schema({
   },
   rooms: [roomSchema],
   reviews: [reviewSchema],
+  policies: policiesSchema
 });
 
 const citySchema = new mongoose.Schema({
