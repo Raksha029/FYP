@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaUserCircle, FaHotel } from "react-icons/fa"; // Add FaHotel icon
+import { FaUserCircle } from "react-icons/fa"; // Add FaHotel icon
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import LoginSignup from "../LoginSignup/LoginSignup";

@@ -5,6 +5,7 @@ import styles from "./Reservation.module.css";
 import { useTranslation } from 'react-i18next';
 import { useNotification } from '../../context/NotificationContext';
 
+
 // Add formatDate function
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -127,7 +128,7 @@ const Reservation = () => {
             id: Date.now(),
             type: 'booking_cancelled',
             message: `Booking cancelled for ${cancelledBooking.hotelName} - ${cancelledBooking.roomCount}
-            ${cancelledBooking.roomType} room(s)`,
+            {cancelledBooking.roomType} room(s)`,
       time: new Date().toLocaleTimeString(),
       timestamp: Date.now(),
       read: false
@@ -249,7 +250,7 @@ const Reservation = () => {
                         <p>{t('reservation1.numberOfRooms')}: {booking.roomCount}</p>
                         <p>{t('reservation1.checkIn')}: {formatDate(booking.checkInDate)}</p>
                         <p>{t('reservation1.checkOut')}: {formatDate(booking.checkOutDate)}</p>
-                        <p>{t('reservation1.totalPrice')}: {t('reservation1.currency')} {booking.totalPrice}</p>
+                        <p>{t('reservation1.totalPrice')}: {booking.currency === 'USD' ? '$' : '₨'} {booking.totalPrice.toLocaleString()}</p>
                         <p>{t('reservation1.status')}: {t(`bookingStatus.${booking.status}`)}</p>
                       </div>
                       <div className={styles.bookingActions}>
@@ -282,7 +283,7 @@ const Reservation = () => {
                         <p>{t('reservation1.numberOfRooms')}: {booking.roomCount}</p>
                         <p>{t('reservation1.checkIn')}: {formatDate(booking.checkInDate)}</p>
                         <p>{t('reservation1.checkOut')}: {formatDate(booking.checkOutDate)}</p>
-                        <p>{t('reservation1.totalPrice')}: {t('reservation1.currency')} {booking.totalPrice}</p>
+                        <p>{t('reservation1.totalPrice')}: {booking.currency === 'USD' ? '$' : '₨'} {booking.totalPrice.toLocaleString()}</p>
                         <p>{t('reservation1.status')}: {t(`bookingStatus.${booking.status}`)}</p>
                       </div>
                       <div className={styles.bookingActions}>

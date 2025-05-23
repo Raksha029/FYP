@@ -107,32 +107,53 @@
 
 /* Notification type-specific colors */
 .favorite .notificationIcon {
-    color: #ff4757;
+    color: #ff4757; /* Red for favorites */
 }
 
 .booking .notificationIcon {
-    color: #2ecc71;
+    color: #4a90e2; /* Blue for bookings */
 }
 
 .review .notificationIcon {
-    color: #f1c40f;
+    color: #f1c40f; /* Yellow for reviews */
 }
 
 .contact .notificationIcon {
-    color: #9b59b6;
+    color: #9b59b6; /* Purple for contacts */
 }
 
-.success .notificationIcon,
-.success1 .notificationIcon,
-.success2 .notificationIcon {
-    color: #27ae60;
+/* Action-specific colors */
+.success .notificationIcon { /* Add */
+    color: #2ecc71; /* Green for add */
 }
 
+.success1 .notificationIcon { /* Update */
+    color: #3498db; /* Blue for modify */
+}
+
+.success2 .notificationIcon, /* Delete */
 .hotelError .notificationIcon {
-    color: #e74c3c;
+    color: #e74c3c; /* Red for delete/error */
 }
 
-/* Add these new styles */
+.login .notificationIcon {
+    color: #8b5cf6; /* Purple for login */
+}
+
+/* Add specific colors for other actions */
+.delete-action .notificationIcon {
+    color: #e74c3c; /* Red for delete */
+}
+
+.update-action .notificationIcon {
+    color: #3498db; /* Blue for update */
+}
+
+.add-action .notificationIcon {
+    color: #2ecc71; /* Green for add */
+}
+
+
 .headerButtons {
     display: flex;
     gap: 10px;

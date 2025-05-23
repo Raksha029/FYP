@@ -102,7 +102,7 @@ const AdminBooking = () => {
                 <td>{booking.roomType}</td>
                 <td>{new Date(booking.checkInDate).toLocaleDateString()}</td>
                 <td>{new Date(booking.checkOutDate).toLocaleDateString()}</td>
-                <td>${booking.totalPrice}</td>
+                <td>NPR {booking.totalPrice.toLocaleString()}</td>
                 <td>{booking.status}</td>
               </tr>
             ))}

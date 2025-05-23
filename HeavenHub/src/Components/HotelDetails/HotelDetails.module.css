@@ -1,15 +1,23 @@
 .pageContainer {
   @apply flex flex-col min-h-screen;
   font-family: 'Poppins', sans-serif;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;
-  padding-top: 10px;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
 }
 
 .content {
-  @apply flex-grow mx-4 sm:mx-16 md:mx-24 lg:mx-60;
+  @apply flex-grow;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 32px;
 }
+
 
 .topSection {
   @apply flex gap-6 mb-6 pt-20;
@@ -46,7 +54,7 @@
 }
 
 .header {
-  @apply mb-4 mt-16;
+  @apply mb-4 mt-10;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -1157,5 +1165,52 @@
   cursor: not-allowed;
 }
 
+.policiesSection {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-/* ... existing styles ... */
+.policiesTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.policiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.policyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.policyIcon {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.policyContent {
+  flex: 1;
+}
+
+.policyName {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.policyDescription {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+

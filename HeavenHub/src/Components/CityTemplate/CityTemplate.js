@@ -9,6 +9,7 @@ import L from "leaflet";
 import { FaHeart } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 import { useNotification } from '../../context/NotificationContext';
+import { useCurrency } from '../../context/CurrencyContext';
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371;
@@ -51,6 +52,8 @@ const calculateHotelScore = (hotel) => {
 const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
   const { t, i18n } = useTranslation();
   const { addNotification } = useNotification();
+  // Add currency context
+  const { currency, convertPrice } = useCurrency();
   const { name, referencePoint } = cityData; // Remove centerName from destructuring
   const [searchTerm, setSearchTerm] = useState("");
   const [allHotels, setAllHotels] = useState([]);
@@ -516,7 +519,7 @@ const CityTemplate = ({ cityData, savedProperties, setSavedProperties }) => {
                           <h3 className={styles.hotelName}>{t(`hotel.${hotel.name}`)}</h3>
                           <p className={styles.hotelLocation}>{t(`location.${hotel.location}`)}</p>
                           <p className={styles.hotelPrice}>
-                            {t('currency')} {new Intl.NumberFormat(i18n.language).format(hotel.price)} {t('perNight')}
+                            {currency.symbol} {convertPrice(hotel.price)} {t('perNight')}
                           </p>
                           <p className={styles.hotelRating}>
                             {t('rating')}: <span>{new Intl.NumberFormat(i18n.language).format(hotel.rating)} ★</span>

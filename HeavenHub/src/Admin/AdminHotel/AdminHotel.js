@@ -66,27 +66,19 @@ const PopupForm = React.memo(
           </div>
 
           <div className={styles.formRow}>
-            <input
-              type="number"
-              name="price"
-              placeholder="Price per night"
-              value={formData.price}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="number"
-              name="rating"
-              placeholder="Rating (0-5)"
-              min="0"
-              max="5"
-              step="0.1"
-              value={formData.rating}
-              onChange={handleInputChange}
-              required
-            />
+            
+            <div className={styles.formRow}>
+              <input
+                type="number"
+                name="price"
+                placeholder="Price per night"
+                value={formData.price}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
-
+          
           <div className={styles.formRow}>
             <input
               type="number"

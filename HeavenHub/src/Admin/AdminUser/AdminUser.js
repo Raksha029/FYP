@@ -4,97 +4,23 @@ import styles from "./AdminUser.module.css";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-// Update the PopupForm component to ensure inputs are always controlled
-const PopupForm = ({ onSubmit, title, onClose, formData, handleInputChange }) => (
-  <div className={styles.popupOverlay} onClick={(e) => {
-    if (e.target === e.currentTarget) onClose();
-  }}>
-    <div className={styles.popup} onClick={(e) => e.stopPropagation()}>
-      <div className={styles.popupHeader}>
-        <h2>{title}</h2>
-        <button className={styles.closeButton} onClick={onClose}>×</button>
-      </div>
-      <div className={styles.formContainer}>
-        <form onSubmit={onSubmit} autoComplete="off">
-          <div className={styles.formRow}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email || ''}
-              onChange={handleInputChange}
-            />
-            <input
-              type="text"
-              name="city"
-              placeholder="City"
-              value={formData.city || ''}
-              onChange={handleInputChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password || ''}
-              onChange={handleInputChange}
-              autoComplete="new-password"
-            />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username || ''}
-              onChange={handleInputChange}
-            />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone || ''}
-              onChange={handleInputChange}
-              pattern="[0-9]{10}"
-            />
-          </div>
-          <button type="submit" className={styles.addBtn}>
-            {title}
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-);
-
 const AdminUser = () => {
   const navigate = useNavigate();
-  // Add pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(7);
-  const [showAddPopup, setShowAddPopup] = useState(false);
-  const [showEditPopup, setShowEditPopup] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
-  const [selectedUserToEdit, setSelectedUserToEdit] = useState(null);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const [formData, setFormData] = useState({
-    email: "",
-    city: "",
-    password: "",
-    username: "",
-    phone: "",
-  });
-
-  // Fetch users data
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const adminToken = localStorage.getItem('adminToken');
         
         if (!adminToken) {
-          navigate('/admin/login'); // Use navigate here
+          navigate('/admin/login'); 
           return;
         }
 
@@ -142,23 +68,12 @@ const AdminUser = () => {
     };
 
     fetchUsers();
-  }, [navigate]); // Add navigate to dependency array
+  }, [navigate]);
 
-  const handleInputChange = ({ target: { name, value } }) => {
-    setFormData((prevData) => {
-      if (prevData[name] === value) {
-        return prevData; // Avoid state update if the value hasn't changed
-      }
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
-  };
 
   const handleDeleteClick = () => {
     setIsDeleteMode(!isDeleteMode);
-    setSelectedUsers([]); // Clear selections when toggling delete mode
+    setSelectedUsers([]); 
   };
 
   const handleCheckboxChange = (userId) => {
@@ -196,136 +111,6 @@ const AdminUser = () => {
     }
   };
 
-  // In the handleAddSubmit function, modify the request body and state update
-  const handleAddSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const adminToken = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:4000/api/admin/users/create', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${adminToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-          firstName: formData.username.split(' ')[0],
-          lastName: formData.username.split(' ')[1] || '',
-          mobileNumber: formData.phone,
-          country: formData.city,
-          verified: true  // Set verified to true for admin-created users
-        })
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to create user');
-      }
-  
-      const newUser = await response.json();
-      setUsers([...users, {
-        id: newUser._id,
-        name: `${newUser.firstName} ${newUser.lastName}`,
-        email: newUser.email,
-        phone: newUser.mobileNumber,
-        country: newUser.country,
-        verified: 'Yes'  // Always set to 'Yes' for new users
-      }]);
-  
-      setShowAddPopup(false);
-      resetForm();
-      toast.success('User created successfully');
-    } catch (error) {
-      console.error('Error creating user:', error);
-      toast.error('Failed to create user');
-    }
-  };
-
-  const handleEditClick = () => {
-    setIsEditMode(!isEditMode);
-    setSelectedUserToEdit(null);
-    setShowEditPopup(false);
-  };
-
-  const handleUserSelect = (user) => {
-    if (isEditMode) {
-      setSelectedUserToEdit(user);
-      setFormData({
-        email: user.email,
-        city: user.country, // Changed from user.city to user.country
-        password: '', // Password is empty for security
-        username: user.name, // Changed from user.username to user.name
-        phone: user.phone
-      });
-      setShowEditPopup(true);
-      setIsEditMode(false);
-    }
-  };
-
-  const handleEditSubmit = async (e) => {
-    e.preventDefault();
-    if (selectedUserToEdit) {
-      try {
-        const adminToken = localStorage.getItem('adminToken');
-        const response = await fetch(`http://localhost:4000/api/admin/users/${selectedUserToEdit.id}`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `Bearer ${adminToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password,
-            firstName: formData.username.split(' ')[0],
-            lastName: formData.username.split(' ')[1] || '',
-            mobileNumber: formData.phone,
-            country: formData.city
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to update user');
-        }
-
-        setUsers(users.map(user =>
-          user.id === selectedUserToEdit.id
-            ? {
-                ...user,
-                name: formData.username,
-                email: formData.email,
-                phone: formData.phone,
-                country: formData.city
-              }
-            : user
-        ));
-
-        setShowEditPopup(false);
-        setSelectedUserToEdit(null);
-        resetForm();
-        toast.success('User updated successfully');
-      } catch (error) {
-        console.error('Error updating user:', error);
-        toast.error('Failed to update user');
-      }
-    }
-  };
-
-  // Update the resetForm function
-  const resetForm = () => {
-    setFormData({
-      email: "",
-      city: "",
-      password: "",
-      username: "",
-      phone: "",
-    });
-  };
-  
-  // Modify the handleAddClick function
-  const handleAddClick = () => {
-    resetForm(); // Reset form data before showing popup
-    setShowAddPopup(true);
-  };
 
   // Calculate pagination indexes
   const { searchQuery } = useOutletContext();
@@ -357,23 +142,8 @@ const AdminUser = () => {
         <h2>User Management</h2>
         <div className={styles.actions}>
           <button
-            className={styles.addButton}
-            onClick={handleAddClick}
-            disabled={isEditMode || isDeleteMode}
-          >
-            Add User
-          </button>
-          <button
-            className={`${styles.modifyButton} ${isEditMode ? styles.activeEdit : ''}`}
-            onClick={handleEditClick}
-            disabled={isDeleteMode}
-          >
-            {isEditMode ? "Cancel Modify" : "Modify User"}
-          </button>
-          <button
             className={`${styles.deleteButton} ${isDeleteMode ? styles.activeDelete : ''}`}
             onClick={handleDeleteClick}
-            disabled={isEditMode}
           >
             {isDeleteMode ? "Cancel Delete" : "Delete User"}
           </button>
@@ -399,11 +169,7 @@ const AdminUser = () => {
             </thead>
             <tbody>
               {currentUsers.map((user) => (
-                <tr 
-                  key={user.id} 
-                  onClick={() => isEditMode && handleUserSelect(user)}
-                  className={isEditMode ? styles.editableRow : ''}
-                >
+                <tr key={user.id}>
                   {isDeleteMode && (
                     <td>
                       <input
@@ -450,43 +216,11 @@ const AdminUser = () => {
         </div>
       )}
 
-      {showAddPopup && (
-        <PopupForm
-          onSubmit={handleAddSubmit}
-          title="Add User"
-          onClose={() => {
-            setShowAddPopup(false);
-            resetForm(); // Reset form when closing
-          }}
-          formData={formData}
-          handleInputChange={handleInputChange}
-        />
-      )}
-
-      {showEditPopup && selectedUserToEdit && (
-        <PopupForm
-          onSubmit={handleEditSubmit}
-          title="Edit User"
-          onClose={() => {
-            setShowEditPopup(false);
-            setSelectedUserToEdit(null);
-          }}
-          formData={formData}
-          handleInputChange={handleInputChange}
-        />
-      )}
-
       {isDeleteMode && selectedUsers.length > 0 && (
         <div className={styles.deleteConfirm}>
-          <button onClick={handleDeleteConfirm} className={styles.deleteButton}>
+          <button onClick={handleDeleteConfirm} className={styles.deleteConfirmButton}>
             Delete Selected ({selectedUsers.length})
           </button>
-        </div>
-      )}
-
-      {isEditMode && (
-        <div className={styles.editPrompt}>
-          Click on a user to edit their information
         </div>
       )}
     </div>

@@ -1,293 +1,258 @@
 .landingContainer {
     display: flex;
     justify-content: center;
-    padding: 70px 30px; /* Added padding for responsiveness */
+    padding: 40px;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+    min-height: 100vh;
+    margin-top: 80px;
 }
 
 .profileContainer {
-    width: 100%; /* Full width within the container */
-    max-width: 100px; /* Increased max-width for better readability */
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     padding: 40px;
-    margin-top: 50px; /* Adjusted margin-top */
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    position: relative;
 }
 
 .profileTitle {
     font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
+    font-weight: 800;
+    color: #1a1a1a;
     margin-bottom: 15px;
+    letter-spacing: -0.5px;
+    text-align: center;
 }
 
 .infoText {
-    color: #666;
+    color: #64748b;
     text-align: center;
-    margin-bottom: 20px;
-}
-
-.profilePicture {
-    position: relative;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    max-width: 600px;
 }
 
 .profilePictureWrapper {
     position: relative;
     display: inline-block;
+    margin-bottom: 30px;
 }
 
 .profileImage {
-    width: 150px; /* Increased size */
-    height: 150px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #007bff;
+    border: 4px solid white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profileImage:hover {
+    transform: scale(1.02);
 }
 
 .editIcon {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: white;
+    bottom: 10px;
+    right: 10px;
+    background: white;
     border-radius: 50%;
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
-    transform: translate(-10px, -10px);
-    width: 30px;  /* Increased width */
-    height: 30px; /* Increased height */
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optional: adds a subtle shadow */
-    border: 1px solid #e0e0e0; /* Optional: adds a light border */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.editIcon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .detailsContainer {
-    border-top: 1px solid #e0e0e0;
-    padding-top: 20px;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 30px;
+    margin-top: 20px;
 }
 
 .detailRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #e0e0e0;
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.detailRow:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.detailRow:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
 }
 
 .detailValue {
     display: flex;
     align-items: center;
+    gap: 12px;
+    color: #1e293b;
+    font-weight: 500;
 }
 
 .verified {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-left: 10px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.editButton, .changeButton {
-    background-color: transparent;
+.editButton, 
+.changeButton {
+    background: transparent;
     border: none;
-    color: #007bff;
+    color: #3b82f6;
     cursor: pointer;
-    font-weight: bold;
-    margin-left: 10px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
-.editButton:hover, .changeButton:hover {
-    text-decoration: underline;
+.editButton:hover, 
+.changeButton:hover {
+    background: #eff6ff;
+    color: #2563eb;
 }
 
-input {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    margin-left: 10px;
-}
-
+/* Modal styles */
 .modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .modalContent {
-    position: relative;
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     width: 100%;
-    margin: auto;
+    max-width: 500px;
+    position: relative;
 }
 
-.modalContent button {
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
-    cursor: pointer;
-    margin-right: 10px; /* Space between buttons */
-    transition: background-color 0.3s;
-}
-
-/* Add this to your Profile.module.css */
 .modalContent input {
-    display: block;
-    margin-bottom: 10px; /* Space between inputs */
-    width: 100%; /* Full width */
-    padding: 8px; /* Padding for input */
-    border: 1px solid #ccc; /* Border for input */
-    border-radius: 4px; /* Rounded corners */
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.modalContent input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
 }
 
 .submitButton {
-    background-color: #dc3545; /* Red color for submit */
-    font-weight: bold;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     color: white;
     border: none;
-    border-radius: 4px;
-    padding: 15px 20px; /* Increased padding for a bigger button */
+    border-radius: 10px;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    margin-top: 10px; /* Space above the button */
-    width: 100%; /* Full width for the button */
-    font-size: 16px; /* Increased font size */
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
 .submitButton:hover {
-    background-color: #c82333; /* Darker red on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
 }
 
 .closeIcon {
     position: absolute;
-    top: 15px; /* Position from the top */
-    right: 15px; /* Position from the right */
-    cursor: pointer; /* Change cursor to pointer */
-    font-size: 20px; /* Size of the icon */
-    color: #080707; /* Color of the icon */
-    z-index: 10; /* Ensure it appears above other elements */
-}
-
-.inputWithIcon {
-    position: relative; /* Position relative for absolute positioning of the icon */
-}
-
-.icon {
-    position: absolute;
-    left: 20px; /* Position the icon inside the input */
-    top: 50%; /* Center the icon vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    color: #aaa; /* Icon color */
-}
-
-.inputGroup input {
-    padding-left: 30px; /* Add padding to the left for the icon */
-}
-
-/*edit button*/
-
-.modalContent2 {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative; /* For positioning the close button */
-}
-
-.closeButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
     font-size: 24px;
-    cursor: pointer;
+    color: #64748b;
+    transition: color 0.3s ease;
 }
 
-.saveButton {
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 20px; /* Padding for the button */
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-    margin-left: 10px;
+.closeIcon:hover {
+    color: #1e293b;
 }
 
-.saveButton:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-.profileContainer {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.profileHeader {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.userInfo {
-    flex-grow: 1;
-}
-
-.infoRow {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.toggleButton, 
-.changePasswordButton {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .profileContainer {
-        width: 95%;
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .landingContainer {
         padding: 20px;
-        margin-top: 30px;
+    }
+
+    .profileContainer {
+        padding: 30px 20px;
+    }
+
+    .profileTitle {
+        font-size: 2rem;
     }
 
     .detailRow {
         flex-direction: column;
         align-items: flex-start;
+        gap: 10px;
     }
 
     .detailValue {
         width: 100%;
-        display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
+    }
+
+    .modalContent {
+        margin: 20px;
+        padding: 20px;
     }
 }

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./Reserve.module.css";
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
+import { useCurrency } from '../../context/CurrencyContext';
 
-const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBookingComplete }) => {
+const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom }) => {
   const { t } = useTranslation();
+  const { currency} = useCurrency();
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryOptions, setCountryOptions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -24,7 +26,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
       }
   
       const loyaltyDiscount = JSON.parse(loyaltyDiscountStr);
-      
+
       // Check if discount is valid for this specific hotel and not expired
       if (loyaltyDiscount && 
           loyaltyDiscount.hotelId === selectedRoom?.hotelId && 
@@ -52,15 +54,8 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
   
     try {
       const token = localStorage.getItem('token');
-      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-      // Check if user is logged in first
-      if (!isLoggedIn || !token) {
-        toast.error(t('pleaseLoginToBook'));
-        setIsSubmitting(false);
-        return;
-      }
-      
+      const transactionId = `TRANS-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  
       // Prepare booking data
       const bookingData = {
         hotelId: selectedRoom.hotelId,
@@ -70,42 +65,82 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
         checkOutDate: document.getElementById('checkOutDate').value,
         guestDetails: userDetails,
         roomCount: selectedRoom.count || 1,
-        totalPrice: totalPrice
+        totalPrice: totalPrice,
+        currency: currency.code,
+        transactionId: transactionId // Add this line
       };
   
-      // Only add discount if it's valid
+      // Store booking data with transaction ID
+      localStorage.setItem('pendingBooking', JSON.stringify({
+        ...bookingData,
+        transactionId
+      }));
+  
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  
+      if (!isLoggedIn || !token) {
+        toast.error(t('pleaseLoginToBook'));
+        setIsSubmitting(false);
+        return;
+      }
+  
+  
       if (appliedDiscount) {
         bookingData.discountCode = appliedDiscount.discountCode;
         bookingData.discountPercentage = 20;
       }
   
-      const response = await fetch('http://localhost:4000/api/bookings', {
+      // Store booking data for later use
+      localStorage.setItem('pendingBooking', JSON.stringify(bookingData));
+  
+      // Prepare payment data
+      const paymentData = {
+        amount: totalPrice * 100,
+        purchase_order_id: `BOOK-${Date.now()}`,
+        purchase_order_name: `${selectedRoom.hotelName} - ${selectedRoom.type}`,
+        customer_info: {
+          name: `${userDetails.firstName} ${userDetails.lastName}`,
+          email: userDetails.email,
+          phone: userDetails.phone
+        },
+        amount_breakdown: [
+          {
+            label: "Room Charge",
+            amount: totalPrice * 100
+          }
+        ],
+        product_details: [
+          {
+            identity: selectedRoom.hotelId,
+            name: `${selectedRoom.hotelName} - ${selectedRoom.type}`,
+            total_price: totalPrice * 100,
+            quantity: selectedRoom.count || 1,
+            unit_price: (totalPrice / (selectedRoom.count || 1)) * 100
+          }
+        ]
+      };
+  
+      // Initiate payment
+      const response = await fetch('http://localhost:4000/api/payments/initiate', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(bookingData)
+        body: JSON.stringify(paymentData)
       });
   
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || t('failedToCreateBooking'));
+      const data = await response.json();
+  
+      if (data.payment_url) {
+        window.location.href = data.payment_url;
+      } else {
+        throw new Error('Failed to initiate payment');
       }
   
-      
-      // Clear the loyalty discount after successful booking
-      if (appliedDiscount) {
-        localStorage.removeItem('loyaltyDiscount');
-      }
-  
-      toast.success(t('bookingConfirmed'));
-      onBookingComplete(selectedRoom.hotelId, selectedRoom.type, selectedRoom.count || 1);
-      onClose();
     } catch (error) {
       console.error(t('bookingError'), error);
       toast.error(error.message || t('failedToCreateBookingTryAgain'));
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -176,7 +211,7 @@ const Reserve = ({ userDetails, setUserDetails, onClose, selectedRoom, onBooking
                 <strong>{t('rooms')}:</strong> {selectedRoom.count}
               </p>
               <p>
-                <strong>{t('totalPrice')}:</strong> {t('currency')} {totalPrice}
+                <strong>{t('totalPrice')}:</strong> {currency.symbol} {totalPrice}
                 {appliedDiscount && (
                   <span className={styles.discountLabel}> ({t('loyaltyDiscountApplied')})</span>
                 )}

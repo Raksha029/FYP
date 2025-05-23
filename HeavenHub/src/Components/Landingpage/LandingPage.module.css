@@ -1,109 +1,357 @@
 .landingContainer {
   min-height: 100vh;
   font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
 }
 
 /* Hero Section */
 .heroSection {
-  @apply relative w-full h-screen flex items-center justify-center;
-}
-
-.heroImage {
-  @apply w-full h-full relative;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.slideImage {
+.heroImage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.heroBackgroundImage {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.activeImage {
-  opacity: 1;
-}
-
-.imageDots {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 20;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.activeDot {
-  background-color: white;
-  transform: scale(1.2);
+  object-position: center;
+  filter: brightness(0.9);
+  transform: scale(1.02);
+  transition: transform 0.3s ease-out;
 }
 
 .heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.3),
-    rgba(0, 0, 0, 0.6)
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.7)
   );
-}
-
-.heroImage img {
-  @apply object-cover w-full h-full;
-}
-
-.heroOverlay {
-  @apply absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-white text-center p-6 z-10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  color: white;
 }
 
 .heroOverlay h2 {
-  @apply text-4xl font-bold mb-4;
-  display: inline-block;
-  overflow: hidden;
-  border-right: 3px solid white;
-  white-space: nowrap;
-  margin: 0 auto;
-  letter-spacing: 2px;
-  width: 0;
-  animation: 
-    typing 3.5s steps(25, end) forwards,
-    blink-caret 0.75s step-end infinite;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 1s ease-out;
 }
 
-@keyframes typing {
-  from { 
-    width: 0;
-  }
-  to { 
-    width: 485px; /* Fixed width to match text length */
-  }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: white }
-}
-
-/* For the subtitle animation */
 .heroOverlay p {
-  @apply text-xl mb-6;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease forwards;
-  animation-delay: 3.5s; /* Start after typing animation */
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+/* Search Container and Form Enhancements */
+.searchContainer {
+  width: 90%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Search Container and Form Enhancements */
+.searchForm {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 1s ease-out 1s both;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.searchInputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.guestInputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+.select {
+  width: 100%;
+  padding: 1rem 2.5rem 1rem 1rem;
+  height: 60px;
+}
+
+.searchInput {
+  width: 100%;
+  height: 50px;
+}
+
+.searchButton {
+  width: 100%;
+  height: 50px; /* Match other elements height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .searchForm {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .guestInputs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .guestInputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3rem;
+  border: 2px solid #e1e1e1;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  background: white;
+  transition: all 0.3s ease;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>');
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+  background-size: 1.2rem;
+}
+
+.searchInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+  outline: none;
+}
+
+/* Update the suggestions list styling */
+.suggestionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.suggestionItem {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.suggestionItem:last-child {
+  border-bottom: none;
+}
+
+.suggestionItem:hover {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.suggestionItem::before {
+  content: '📍';
+  font-size: 1rem;
+}
+
+/* Update the search container to ensure proper stacking */
+.searchInputContainer {
+  flex: 2;
+  position: relative;
+  z-index: 1001; /* Ensure suggestions appear above other elements */
+}
+
+/* Scrollbar styling for suggestions list */
+.suggestionsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggestionsList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.suggestionsList::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.suggestionsList::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Guest Inputs Enhancement */
+.guestInputs {
+  flex: 3;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+}
+
+.select {
+  padding: 1rem 2.5rem 1rem 1rem;
+  border: 2px solid #e1e1e1;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.select:hover, .select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.searchButton {
+  padding: 1rem 2.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.searchButton:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .searchForm {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  
+  .searchInputContainer,
+  .guestInputs {
+    width: 100%;
+  }
+  
+  .guestInputs {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .select {
+    flex: 1 1 calc(33.333% - 0.67rem);
+    min-width: 120px;
+  }
+  
+  .searchButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .guestInputs {
+    flex-direction: column;
+  }
+  
+  .select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .guestInputs {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .guestInputs {
+    flex-direction: column;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
@@ -117,172 +365,157 @@
   }
 }
 
-/* Search Form */
-
-.searchForm {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.guestInputs {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  flex: 3;
-}
-
-.select {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #000;
-  font-size: 16px;
-  font-weight: 500;
-  height: 50px;
-}
-
-.searchInput {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: #000;
-  font-weight: 500;
-}
-
-.searchInput::placeholder {
-  color: #666;
-}
-
-.searchButton {
-  flex: 1;
-  padding: 12px 24px;
-  height: 50px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  font-weight: 600;
-}
-
-.searchButton:hover {
-  background-color: #0056b3;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .searchForm {
-    flex-direction: column;
-    gap: 15px;
-    width: 90%;
-    padding: 15px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-
-  .guestInputs {
-    flex-direction: column;
-  }
-
-  .searchInput,
-  .select,
-  .searchButton {
-    width: 100%;
+  to {
+    opacity: 1;
   }
 }
 
 /* Why Choose Us Section */
 .whyChooseUsSection {
-  padding: 2rem 23rem; /* Default padding for larger screens */
-  background-color: #eaf4fc;
+  padding: 6rem 2rem;
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
   position: relative;
 }
 
+.whyChooseUsHeading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  position: relative;
+}
+
+.whyChooseUsHeading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #007bff;
+  border-radius: 2px;
+}
+
+.whyChooseUsDescription {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  line-height: 1.8;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #007bff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.cardIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 50%;
+  background: #f8f9fa;
+  color: #007bff;
+  transition: all 0.3s ease;
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.1);
+  background: #007bff;
+  color: white;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
 @media (max-width: 1200px) {
-  .whyChooseUsSection {
-    padding: 2rem 2rem; /* Adjust padding for medium screens */
+  .cardsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
   .whyChooseUsSection {
-    padding: 2rem 2rem; /* Adjust padding for small screens */
+    padding: 4rem 1rem;
+  }
+
+  .whyChooseUsHeading {
+    font-size: 2rem;
+  }
+
+  .whyChooseUsDescription {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .card {
+    padding: 1.5rem;
   }
 }
 
-.whyChooseUsHeading {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #2c3e50; /* Dark blue color */
-}
+@media (max-width: 480px) {
+  .whyChooseUsHeading {
+    font-size: 1.75rem;
+  }
 
-.whyChooseUsDescription {
-  text-align: center;
-  font-size: 1.25rem;
-  color: #666;
-  margin-bottom: 2rem;
-}
-
-.cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  width: calc(33.333% - 1rem); /* Three cards per row */
-  min-width: 250px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.cardIcon {
-  font-size: 2rem;
-  color: #007bff; /* Blue color for icons */
-  margin-bottom: 1rem;
-}
-
-.cardTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.cardDescription {
-  font-size: 1rem;
-  color: #666;
-}
-
-.textContainer {
-  flex: 1; /* Make the text section take equal space */
-  text-align: left;
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
 }
 .floatingChatIcon {
   position: fixed;

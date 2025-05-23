@@ -5,10 +5,14 @@ import styles from "./TopRatedProperties.module.css";
 import { FaHeart, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 import { useNotification } from '../../context/NotificationContext';
+// Add this import at the top
+import { useCurrency } from '../../context/CurrencyContext';
 
 const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
   const { t } = useTranslation();
   const { addNotification } = useNotification();
+  // Add this line to get currency context
+  const { currency, convertPrice } = useCurrency();
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef(null);
@@ -179,10 +183,10 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
                 </button>
               </div>
               <div className={styles.propertyInfo}>
-               <h3>{t(`hotel.${hotel.name}`)}</h3>
+                <h3>{t(`hotel.${hotel.name}`)}</h3>
                 <p className={styles.location}>{t(`location.${hotel.location}`)}</p>
                 <p className={styles.price}>
-                  {t('currency')} {hotel.price} {t('perNight')}
+                  {currency.symbol} {convertPrice(hotel.price)} {t('perNight')}
                 </p>
                 <p className={styles.rating}>{t('rating')}: {hotel.rating} ★</p>
               </div>
@@ -192,6 +196,7 @@ const TopRatedProperties = ({ savedProperties, setSavedProperties }) => {
         <button
           className={`${styles.scrollButton} ${styles.rightButton}`}
           onClick={() => handleScroll("right")}
+          
         >
           <FaChevronRight />
         </button>

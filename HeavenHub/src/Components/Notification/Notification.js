@@ -86,8 +86,12 @@ const Notification = () => {
         ) : (
           notifications.map((notification) => (
             <div 
-              key={notification.id} 
-              className={`${styles.notificationItem} ${notification.read ? styles.read : styles.unread}`}
+              key={`${notification.id}-${Math.random().toString(36).substr(2, 9)}`}
+              className={`${styles.notificationItem} ${styles[notification.type]} ${
+                notification.type.includes('delete') ? styles['delete-action'] : 
+                notification.type.includes('update') ? styles['update-action'] :
+                notification.type.includes('add') ? styles['add-action'] : ''
+              } ${notification.read ? styles.read : styles.unread}`}
               onClick={() => markAsRead(notification.id)}
             >
               {getNotificationIcon(notification.type)}

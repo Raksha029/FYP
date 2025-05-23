@@ -40,6 +40,8 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import { LanguageProvider } from './context/LanguageContext';
 import './i18n'; // Add this line
 import { NotificationProvider } from './context/NotificationContext';
+import { CurrencyProvider } from "./context/CurrencyContext";
+import PaymentVerification from './Components/Payment/PaymentVerification';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -117,6 +119,7 @@ const App = () => {
     <Router>
       <NotificationProvider>
       <LanguageProvider>
+      <CurrencyProvider>
         <Content
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
@@ -127,6 +130,7 @@ const App = () => {
           handleClose={handleClose}
         />
         <ToastContainer />
+        </CurrencyProvider>
       </LanguageProvider>
       </NotificationProvider>
     </Router>
@@ -145,8 +149,6 @@ const Content = ({
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
 
-
-
   return (
     <>
       {!isAdminRoute && (
@@ -158,12 +160,22 @@ const Content = ({
       )}
       <div style={{ flex: 1 }}>
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={
             <>
               <LandingPage savedProperties={savedProperties} setSavedProperties={setSavedProperties} />
             </>
           } />
           
+          {/* Protected Routes */}
+          <Route path="/payment/verify" element={
+            <ProtectedRoute>
+              <PaymentVerification />
+            </ProtectedRoute>
+          } />
+
+          
+
           {/* City Routes */}
           <Route path="/kathmandu" element={<Kathmandu savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
           <Route path="/pokhara" element={<Pokhara savedProperties={savedProperties} setSavedProperties={setSavedProperties} />} />
@@ -230,4 +242,3 @@ const Content = ({
 };
 
 export default App;
-

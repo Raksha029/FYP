@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./HotelDetails.module.css";
-import { FaHeart, FaShareAlt } from "react-icons/fa"; // Import icons
+import { FaHeart, FaShareAlt, FaClock, FaRegCreditCard,FaMoneyBill } from "react-icons/fa";
 import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 import L from "leaflet"; // Import Leaflet for marker icon
 import Reserve from "../Reserve/Reserve"; // Import the new Reserve component
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
 import { useNotification } from '../../context/NotificationContext';
-
+import { useCurrency } from '../../context/CurrencyContext';
 
 // Fix default marker icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -18,10 +18,9 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-
-
 function HotelDetails({ savedProperties, setSavedProperties }) {
   const { addNotification } = useNotification();
+  const { currency, convertPrice } = useCurrency();
   const { t} = useTranslation();
   const { city, id } = useParams();
   const [hotel, setHotel] = useState(null);
@@ -200,13 +199,12 @@ const handleShare = async () => {
 
   // Calculate dynamic price based on availability
   const calculateDynamicPrice = (basePrice, available) => {
-    // Apply dynamic pricing - increase price as availability decreases
-    if (available <= 2) {
-      return Math.round(basePrice * 1.3); // 30% markup for high demand
+    let price = basePrice;
+    if (available <= 2) { price = Math.round(basePrice * 1.3);
     } else if (available <= 5) {
-      return Math.round(basePrice * 1.15); // 15% markup for medium demand
+      price = Math.round(basePrice * 1.15);
     }
-    return basePrice; // Normal price for good availability
+    return price; // Return raw price, conversion will be done at display time
   };
 
   // Handle room count change
@@ -226,17 +224,19 @@ const handleShare = async () => {
 
     // Get the selected count for this room (default to 1 if not set)
     const count = roomCounts[room.type] || 1;
-
-    // Calculate the total price
-    const price = calculateDynamicPrice(room.price, room.available) * count;
+    const basePrice = calculateDynamicPrice(room.price, room.available);
+    const totalPrice = convertPrice(basePrice * count);
 
     // Save the selected room with count and total price
     setSelectedRoom({
       ...room,
       count: count,
-      totalPrice: price,
+      totalPrice: totalPrice,
       hotelId: id,
       hotelName: hotel.name,
+      currency: currency.code,
+      currencySymbol: currency.symbol,
+      basePrice: convertPrice(basePrice)
     });
 
     setShowReservationForm(true);
@@ -574,6 +574,51 @@ localStorage.setItem('adminNotifications', JSON.stringify([{
               {!coords && <p>{t('mapNotAvailable')}</p>}
             </section>
 
+            <section className={styles.policiesSection}>
+    <h2 className={styles.policiesTitle}>{t('hotelPolicies')}</h2>
+    <div className={styles.policiesGrid}>
+      {hotel?.policies?.checkIn && (
+        <div className={styles.policyItem}>
+          <FaClock className={styles.policyIcon} />
+          <div className={styles.policyContent}>
+            <h3 className={styles.policyName}>{t('checkInTime')}</h3>
+            <p className={styles.policyDescription}>{hotel.policies.checkIn}</p>
+          </div>
+        </div>
+      )}
+      
+      {hotel?.policies?.checkOut && (
+        <div className={styles.policyItem}>
+          <FaClock className={styles.policyIcon} />
+          <div className={styles.policyContent}>
+            <h3 className={styles.policyName}>{t('checkOutTime')}</h3>
+            <p className={styles.policyDescription}>{hotel.policies.checkOut}</p>
+          </div>
+        </div>
+      )}
+      
+      {hotel?.policies?.cancellation && (
+        <div className={styles.policyItem}>
+          <FaMoneyBill className={styles.policyIcon} />
+          <div className={styles.policyContent}>
+            <h3 className={styles.policyName}>{t('cancellationPolicy')}</h3>
+            <p className={styles.policyDescription}>{hotel.policies.cancellation}</p>
+          </div>
+        </div>
+      )}
+      
+      {hotel?.policies?.payment && (
+        <div className={styles.policyItem}>
+          <FaRegCreditCard className={styles.policyIcon} />
+          <div className={styles.policyContent}>
+            <h3 className={styles.policyName}>{t('paymentPolicy')}</h3>
+            <p className={styles.policyDescription}>{hotel.policies.payment}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
             {/* Reviews */}
             <section className={styles.section}>
               <h2>{t('guestReviews')}</h2>
@@ -648,19 +693,18 @@ localStorage.setItem('adminNotifications', JSON.stringify([{
             <div className={styles.bookingCard}>
               <div className={styles.priceSection}>
                 <span className={styles.priceLabel}>{t('startingFrom')}</span>
-                <h2 className={styles.price}>{t('currency')} {price}</h2>
+                <h2 className={styles.price}>
+          {currency.symbol} {convertPrice(price)}
+        </h2>
                 <span className={styles.perNight}>{t('perNight')}</span>
               </div>
 
               <div className={styles.roomsSection}>
                 <h3>{t('availableRooms')}</h3>
                 {rooms.map((room, index) => {
-                  const dynamicPrice = calculateDynamicPrice(
-                    room.price,
-                    room.available
-                  );
+                  const basePrice = calculateDynamicPrice(room.price, room.available);
                   const count = roomCounts[room.type] || 1;
-                  const totalPrice = dynamicPrice * count;
+                  const totalPrice = basePrice * count;
 
                   return (
                     <div key={index} className={styles.roomCard}>
@@ -669,8 +713,8 @@ localStorage.setItem('adminNotifications', JSON.stringify([{
                         <p>{t(`roomDescription.${hotel.name}.${room.type}`)}</p>
                         <p>{t('capacity')} {room.capacity}</p>
                         <p className={styles.roomPrice}>
-                          {t('currency')} {dynamicPrice.toLocaleString('en-NP')}/night
-                          {dynamicPrice > room.price && (
+                  {currency.symbol} {convertPrice (basePrice)} {t('perNight')}
+                  {basePrice > room.price && (
                             <span className={styles.priceSurge}>
                               {" "}
                               ({t('limitedAvailabilityPricing')})
@@ -705,7 +749,7 @@ localStorage.setItem('adminNotifications', JSON.stringify([{
                               ))}
                             </select>
                             <p className={styles.totalPrice}>
-                              {t('total')} {totalPrice}
+                            {t('total')} {currency.symbol} {convertPrice(totalPrice)}
                             </p>
                           </div>
                         )}
@@ -735,6 +779,8 @@ localStorage.setItem('adminNotifications', JSON.stringify([{
           onClose={() => setShowReservationForm(false)}
           selectedRoom={selectedRoom}
           onBookingComplete={handleBookingComplete}
+          currency={currency}
+          convertPrice={convertPrice}
         />
       )}
     </div>

@@ -9,6 +9,7 @@ import Chatbot from "../Chatbot/Chatbot";
 import { citiesData } from "../data/citiesData";
 import { useTranslation } from 'react-i18next';
 import * as stringSimilarity from 'string-similarity';
+import { FaSearch } from 'react-icons/fa';
 
 const LandingPage = ({ savedProperties, setSavedProperties }) => {
   const { t} = useTranslation();
@@ -145,57 +146,27 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
     setShowChatbot((prev) => !prev);
   };
 
-   // Add this near your other imports
-   const [currentImageIndex, setCurrentImageIndex] = useState(0);
         
-   // Add this array of hotel images from Unsplash
-   const hotelImages = [
+   const heroImage = 
      {
        url: "https://images.unsplash.com/photo-1455587734955-081b22074882?q=80&w=1470&auto=format&fit=crop",
        alt: "Luxury Hotel Suite"
-     },
-     {
-       url: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1470&auto=format&fit=crop",
-       alt: "Hotel Infinity Pool"
-     },
-     {
-       url: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1349&auto=format&fit=crop",
-       alt: "Modern Hotel Room"
-     },
-     {
-       url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1470&auto=format&fit=crop",
-       alt: "Luxury Hotel Exterior"
-     }
-   ];
-   
-   // Add this useEffect for auto-rotation
-   useEffect(() => {
-     const timer = setInterval(() => {
-       setCurrentImageIndex((prevIndex) => 
-         prevIndex === hotelImages.length - 1 ? 0 : prevIndex + 1
-       );
-     }, 5000); // Change image every 5 seconds
-   
-     return () => clearInterval(timer);
-   }, [hotelImages.length]); // Add hotelImages.length to the dependency array
+     };
+     
 
 
   return (
     <div className={`${styles.landingContainer} min-h-screen`}>
       {/* Hero Section */}
       <section className={styles.heroSection}>
-        <div className={styles.heroImage}>
-          {hotelImages.map((image, index) => (
-            <img
-              key={index}
-              src={image.url}
-              alt={image.alt}
-              className={`${styles.slideImage} ${
-                index === currentImageIndex ? styles.activeImage : ''
-              }`}
-            />
-          ))}
-          <div className={styles.heroOverlay}>
+      <div className={styles.heroImage}>
+  <img
+    src={heroImage.url}
+    alt={heroImage.alt}
+    className={styles.heroBackgroundImage}
+  />
+  <div className={styles.heroOverlay}>
+
           <h2>{t('welcomeMessage')}</h2>
           <p>{t('tagline')}</p>
             {/* Search Box */}
@@ -284,7 +255,8 @@ const LandingPage = ({ savedProperties, setSavedProperties }) => {
                 </div>
 
                 <button type="submit" className={styles.searchButton}>
-                {t('searchButton')}
+                  <FaSearch />
+                  {t('searchButton')}
                 </button>
               </form>
             </div>
